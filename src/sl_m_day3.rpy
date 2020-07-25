@@ -372,6 +372,7 @@ label slavyana_mod__day3:
     with dissolve
     "И только теперь они, судя по всему, таки приступили к мирным переговорам. Из-за того, что они выдохлись, не было слышно ни слова."
     stop music fadeout 3
+    play ambience ambience_dining_hall_full fadein 5
     show mt angry pioneer far at center with dissolve
     "Сзади к ним подошла Ольга Дмитриевна."
     stop ambience fadeout 1
@@ -400,7 +401,6 @@ label slavyana_mod__day3:
     us "Вот и да!"
     show mt angry pioneer far at center with dspr
     mt "Я не собираюсь разбираться в этих глупостях!"
-    play ambience ambience_dining_hall_full fadein 5
     mt "Семён, иди возьми швабру, совочек, тряпку и так далее в кладовке, а ты!!!"
     hide pi
     show mt rage pioneer far at center 
@@ -1080,8 +1080,8 @@ label slavyana_mod__day3:
     sl "Да, пожалуй, ты прав. Тогда…"
     "на меня нахлынула сонливость. Я потянулась и зевнула."
     sl "Пойдём спать! Утро вечера мудренее!"
-    th "Убираться поздно, а вот спать рано? Да, Семёна иногда действительно трудно понять."
     me "А не рано…"
+    th "Убираться поздно, а вот спать рано? Да, Семёна иногда действительно трудно понять."
     sl "Не рано! Весь день потом проспишь."
     me "Тогда расскажи мне сказку на ночь!"
     "Третий раз за этот вечер он умудрялся удивлять меня."
