@@ -13,14 +13,10 @@
     
 label uliana_mod_day1:
     scene black with dissolve
-    $ sl_m_try = "makenkn"
-    call sl_m_try
-    $ sl_m_try = None
+    #$ make_names_known()
     pause(3)
     $ backdrop = "days"
-    $ sl_m_try = "savenameul"
-    call sl_m_try
-    $ sl_m_try = None
+    $ save_name = (u'Ульяна. День первый')
 
     $ day_time()
     $ persistent.sprite_time = "day"

@@ -8,9 +8,7 @@ label slavyana_mod__day2:
     pause (3)
     $ backdrop = "days"
     $ new_chapter(2, u"Славя. День второй")
-    $ sl_m_try = "savename2"
-    call sl_m_try
-    $ sl_m_try = None
+    $ save_name = (u'Славя. День второй')
     $ day_time()
     $ persistent.sprite_time = "day"
     

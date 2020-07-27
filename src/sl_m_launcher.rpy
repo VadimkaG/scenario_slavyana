@@ -33,8 +33,6 @@ init:
 
     $ sl_m_Full = False
     $ sl_m_l_day = 0
-
-    $ sl_m_try = None
     
     $ m_back = None
     $ m_back_hover = None
@@ -63,9 +61,9 @@ label slavyana_mod__launcher:
 
 label slavyana_mod__launcher0:
     $ reload_names()
-    $ sl_m_try = "savename"
-    call sl_m_try
-    $ sl_m_try = None
+    #$ sl_m_try = "savename"
+    #call sl_m_try
+    #$ sl_m_try = None
     if hour in [22,23,24,0,1,2,3,4,5,6]:
         play music music_list["forest_maiden"] fadein 1
     elif hour in [20,21]:
@@ -117,9 +115,7 @@ label slavyana_mod_launcher2:
         scene black with dissolve
         stop music fadeout 2
         $ sl_m_Full = True
-        $ sl_m_try = "makenkn"
-        call sl_m_try
-        $ sl_m_try = None
+        #$ make_names_known()
         jump slavyana_mod__day1
     elif result == "days":
         jump slavyana_mod__days
@@ -191,9 +187,7 @@ label slavyana_mod__days2:
     ])
     
     if result == "day1":
-        $ sl_m_try = "makenkn"
-        call sl_m_try
-        $ sl_m_try = None
+        #$ make_names_known()
         $ sl_m_l_day = 1
         jump slavyana_mod__l_finish
     elif result == "day2":
@@ -222,9 +216,7 @@ label slavyana_mod__l_choice:
         scene bg int_house_of_sl_day with dissolve
         $ day_time()
     $ sl_m_Full = False
-    $ sl_m_try = "makenkn"
-    call sl_m_try
-    $ sl_m_try = None
+    #$ make_names_known()
     $ sl_m_counter = 0
     window show
     if sl_m_l_day == 2:
@@ -362,9 +354,7 @@ label slavyana_mod__l_finish:
                 $ sl_m_Full = False
         window show
     elif sl_m_l_day > 1:
-        $ sl_m_try = "meetmt"
-        call sl_m_try
-        $ sl_m_try = None
+        $ sl_m_meet('mt','Оля')
     "Нажмите, чтобы продолжить..."
     window hide
     scene black with dissolve

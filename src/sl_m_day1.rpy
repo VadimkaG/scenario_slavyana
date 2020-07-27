@@ -21,9 +21,7 @@ label slavyana_mod__day1:
     pause(3)
     $ backdrop = "days"
     $ new_chapter(1, u"Славя. День первый")
-    $ sl_m_try = "savename1"
-    call sl_m_try
-    $ sl_m_try = None
+    $ save_name = (u'Славя. День первый')
     $ day_time()
     $ persistent.sprite_time = "day"
 
@@ -459,9 +457,7 @@ label slavyana_mod__day1:
     "Доплыв почти до самых буйков, Ольга Дмитриевна остановилась."
     show mt normal swim at center with dspr
     mt "Слушай, Славя...{w} Может, ну его, этот официоз? Называй меня просто Олей и обращайся на «ты». Но не при посторонних, конечно же."
-    $ sl_m_try = "meetmt"
-    call sl_m_try
-    $ sl_m_try = None
+    $ sl_m_meet('mt','Оля')
     sl "Хорошо, Ольга... Оля."
     show mt smile swim at center with dspr
     mt "Вот и замечательно!{w} Смотри, там ещё кто-то пришёл!"
@@ -645,9 +641,7 @@ label slavyana_mod__day1:
     with dissolve
     "К счастью, ждать его не пришлось. Он уже собирался сам войти в лагерь, но застыл на месте при виде меня.{w} Я подошла поближе и улыбнулась."
     sl "Привет, ты, наверное, только что приехал?"
-    $ sl_m_try = "meetme1"
-    call sl_m_try
-    $ sl_m_try = None
+    $ sl_m_meet('me','Новенький')
     $ sl_m_sp1 = renpy.random.choice(['talk', 'mute'])
     if sl_m_sp1 == 'mute':
         "Но он не отвечал."
@@ -718,9 +712,7 @@ label slavyana_mod__day1:
     me "А… да…"
     sl "А тебя?"
     me "А… я… да… Семён…"
-    $ sl_m_try = "meetme2"
-    call sl_m_try
-    $ sl_m_try = None
+    $ sl_m_meet('me','Семён')
     "Казалось, что он всё время витает в облаках.{w} Либо очень шокирован чем-то, но чем? Вроде как и нечем, чего уж здесь-то может быть необычного?"
     sl "Очень приятно, Семён."
     th "Эх, ладно, как-нибудь потом постараюсь сплавать. А пока помогу Семёну, сейчас это важнее."

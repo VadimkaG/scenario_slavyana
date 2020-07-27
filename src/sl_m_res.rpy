@@ -1,9 +1,10 @@
 ﻿init python:
-    def sl_m_set_name(who,name):
-        gl = globals()
-        gl[who+"_name"] = name
-    def sl_m_meet(who, name):
-        sl_m_set_name(who,name)
+    def sl_m_meet(who,name):
+        try:
+            meet(who,name)
+        except NameError:
+            gl = globals()
+            gl[who+"_name"] = name
 
 init -10:
     python:
@@ -576,54 +577,5 @@ init -410 python:
                 "camp_entrance": {"position":[271,432,424,567],"default_bg":bg_tmp_image(u"Ворота в лагерь")},
                 "forest":        {"position":[550,60,697,199],"default_bg":bg_tmp_image(u"Лес")},
         }
-    
-label sl_m_try:
-    python:
-        if sl_m_try == "savenamel":
-            try:
-                save_name = ('Славя-мод')
-            except NameError:
-                pass
-        elif sl_m_try == "savename1":
-            try:
-                save_name = ('Славя. День первый')
-            except NameError:
-                pass
-        elif sl_m_try == "savename2":
-            try:
-                save_name = ('Славя. День второй')
-            except NameError:
-                pass
-        elif sl_m_try == "savename3":
-            try:
-                save_name = ('Славя. День третий')
-            except NameError:
-                pass
-        elif sl_m_try == "savenameul":
-            try:
-                save_name = ('Ульяна. День первый')
-            except NameError:
-                pass
-        elif sl_m_try == "makenkn":
-            try:
-                make_names_known()
-            except NameError:
-                pass
-        elif sl_m_try == "meetmt":
-            try:
-                meet('mt',u'Оля')
-            except NameError:
-                sl_m_meet('mt','Оля')
-        elif sl_m_try == "meetme1":
-            try:
-                meet('me',u'Новенький')
-            except NameError:
-                sl_m_meet('me','Новенький')
-        elif sl_m_try == "meetme2":
-            try:
-                meet('me',u'Семён')
-            except NameError:
-                sl_m_meet('me','Семён')
-    return
 
 #Сделано FireBoTer'ом
