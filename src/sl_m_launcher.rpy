@@ -183,6 +183,7 @@ label slavyana_mod__days2:
     (833, 208, 1077, 274, "day1"),
     (833, 381, 1082, 447, "day2"),
     (833, 554, 1083, 620, "day3"),
+    (833, 700, 1083, 780, "epilogue"),
     (126, 859, 548, 1043, "back_days")
     ])
     
@@ -202,6 +203,15 @@ label slavyana_mod__days2:
             jump slavyana_mod__l_choice
         else:
             jump slavyana_mod__days2
+    elif result == "epilogue":
+        menu:
+          "Плохая концовка":
+            $ words_red = True
+          "Хорошая концовка":
+            $ words_green = True
+          "Альтернативная концовка":
+            $ words_blue = True
+        jump slavyana_mod__epilogue
     elif result == "back_days":
         jump slavyana_mod_launcher1_1
 

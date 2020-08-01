@@ -99,6 +99,9 @@ init:
     #рукоделие!
     image bg int_house_of_sl_night_light = "scenario_slavyana/res/images/bg/int_house_of_sl_night_light.jpg"
 
+    image bg town_snow = im.Scale("scenario_slavyana/res/images/bg/town_snow.jpg", 1920, 1440)
+    image bg ext_camp_upview_snow = im.Scale("scenario_slavyana/res/images/bg/ext_camp_upview_snow.jpg", 1920, 1440)
+
     #спрайты
     #Семён, close
     image pi angry pioneer close = ConditionSwitch(
@@ -537,9 +540,9 @@ init:
     transform sl_m_ending_transform:
         xalign 0.5
         ypos 1.3
-        linear 87.0ypos -1.55
-    $ credits_sl_m_text = "{size=80}Славя-мод{/size}\n\n\nРазработчик: FireBoTer.\n\n\nПомощь в тестировании: Xent2121.\n\n\nПомощь с дизайном главного меню: Nenver Kradovich\n\n\nРесурсы: IIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n\n\nОтдельное спасибо всем, кто играет в этот мод и тем, кто помогает исправлять его!\n"
-
+        linear 87.0 ypos -1.9
+    #$ credits_sl_m_text = "{size=80}Славя-мод{/size}\n\n\nРазработчик: FireBoTer.\n\n\nПомощь в тестировании: Xent2121.\n\n\nПомощь с дизайном главного меню: Nenver Kradovich\n\n\nРесурсы: IIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n\n\nОтдельное спасибо всем, кто играет в этот мод и тем, кто помогает исправлять его!\n"
+    $ credits_sl_m_text = "{size=80}Славя-мод: Допил{/size}\n\n\nСпасибо за прохождение нашей модификции!\n\nМы очень старались для вас!\n Проект был начат ещё в 2017, но затем был заброшен.\nНо благодаря энтузиазму мы смогли доделать этот мод и надеемся,\n что он вам очень понравился.\nОбязательно оцените его в мастерской,\n пусть остальные тоже его пройдут.\n\n\nБлагодарность FireBoTer за положеные основы модификации.\n\n\nЭтузиасты, благодаря которым мод был доделан:\n\nАндрей «dredyi» Челдышов\nНикита «nvkalashnikov2» Калашников\nАлександр «Glopente» Петров\nВадим Голубев ( DS:Vadimka#0788 )\nВладимир «VlDM» Пичугин\n\n\nОсобая благодарность:\n\nКириллу «PepeUE» Бутуханову\nРуслану «名誉HiroツOnoda名誉» Магомедову\nИлье «Господин Амбар» Бескровному\nАндриану Катаеву\nДаниилу «Дыня» Тихонову\nВладимиру «VlDM» Пичугину\nNenver Kradovich - Помощь с дизайном главного меню\n\n\nА также вечная любовь команде SovietGames(2chErogeTeam) За такую потрясающую игру, как «Бесконечное Лето»\n\n\nВ моде были использованы материалы:\nIIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n«Славя-мод»(от FireBoTer’a)\n«7 Дней Лета»\n«Альтернативная концовка Слави»\n«Мику-рут глазами Лены»\n«Возвращение в Совёнок»\nСлавя-мод\n\n\nОтдельное спасибо:\nnickrandom – за оригинальную идею модов от лица девушек.\n名誉HiroツOnoda名誉– за тестирование.\nPepeUE – за тестирование.\nXent2121 - помощь в тестировании оригинального мода\nВладимиру «VlDM» Пичугину - за тестирование и корректировку текста.\nА также BAaD и Сергею Ейбогу за лучшие в мире саундтреки."
 init 55 python:
     colors['fbt'] = {'night': (0, 20, 137, 255), 'sunset': (0, 20, 137, 255), 'day': (0, 20, 137, 255), 'prolog': (0, 20, 137, 255)}
     store.names_list.append('fbt')
@@ -579,3 +582,14 @@ init -410 python:
         }
 
 #Сделано FireBoTer'ом
+
+label pomehi:
+    show anim random:
+        choice:
+            "anim prologue_1"
+        choice:
+            "anim prologue_2"
+        choice:
+            "anim prologue_3"
+        pause(0.1)
+        repeat
