@@ -8,6 +8,7 @@ init python:
 
 label slavyana_mod__epilogue:
   stop music
+  stop sound
   $ backdrop = "epilogue"
   $ new_chapter(7, u"Славя. Эпилог")
   $ save_name = (u'Славя. "Эпилог"')
@@ -281,9 +282,12 @@ label slavyana_mod__epilogue:
     me "Пойдём?"
     sl "Давай всё же ещё немного подождём, вдруг приедет?"
     me "Хорошо."
+    scene black with dissolve
     "…"
     #*Снова фон зимняя остановка*
-    scene bg bus_stop with dissolve
+    scene bg bus_stop
+    show pi normal coat
+    with dissolve
     sl "А чем ты занимаешься?"
     me "Я… Ну… {w} Работаю на дому, так скажем."
     "Мне показалось это лучшей работой на свете."

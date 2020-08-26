@@ -95,6 +95,7 @@ init:
     image cg d3_sl_library_2_an = "scenario_slavyana/res/images/cg/d3_sl_library_2.jpg"
     image cg d3_sl_bathhouse_hk_alt = im.Scale("scenario_slavyana/res/images/cg/d3_sl_bathhouse_hk_alt.jpg", 1920, 1440)
     image cg d3_sl_dance_an = "scenario_slavyana/res/images/cg/d3_sl_dance.jpg"
+    image cg d3_sl_evening_alt = im.Scale("scenario_slavyana/res/images/cg/d3_sl_evening.jpg", 1920, 1440)
 
     #рукоделие!
     image bg int_house_of_sl_night_light = "scenario_slavyana/res/images/bg/int_house_of_sl_night_light.jpg"

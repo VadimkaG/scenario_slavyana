@@ -993,7 +993,7 @@ label slavyana_mod__day3:
     scene bg ext_beach_night with dissolve
     "Но вот на пляже я заметила чью-то тень.{w} И точно, это был Семён, сидящий на песке и смотрящий на водную гладь."
     stop ambience fadeout 2
-    scene cg d3_sl_evening with dissolve
+    scene cg d3_sl_evening_alt with dissolve
     play music music_list["forest_maiden"] fadein 2
     sl "Вот ты где!"
     "Воскликнула я, смотря на него сверху."

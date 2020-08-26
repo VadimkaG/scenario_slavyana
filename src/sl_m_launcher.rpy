@@ -180,10 +180,11 @@ label slavyana_mod__days2:
         $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd2_hover.png"
 
     $ result = renpy.imagemap(d_back, d_back_hover, [
-    (833, 208, 1077, 274, "day1"),
-    (833, 381, 1082, 447, "day2"),
-    (833, 554, 1083, 620, "day3"),
-    (833, 700, 1083, 780, "epilogue"),
+    (360, 130, 610, 200, "day1"),
+    (360, 300, 610, 370, "day2"),
+    (360, 480, 610, 540, "day3"),
+    (1300, 485, 1550, 545, "day7"),
+    (1294, 650, 1590, 720, "epilogue"),
     (126, 859, 548, 1043, "back_days")
     ])
     
@@ -203,6 +204,15 @@ label slavyana_mod__days2:
             jump slavyana_mod__l_choice
         else:
             jump slavyana_mod__days2
+    elif result == "day7":
+        menu:
+          "Плохая концовка":
+            $ words_red = True
+          "Хорошая концовка":
+            $ words_green = True
+          "Альтернативная концовка":
+            $ words_blue = True
+        jump slavyana_mod__day7
     elif result == "epilogue":
         menu:
           "Плохая концовка":
