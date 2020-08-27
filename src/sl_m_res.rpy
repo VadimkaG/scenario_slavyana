@@ -103,7 +103,19 @@ init:
     image bg town_snow = im.Scale("scenario_slavyana/res/images/bg/town_snow.jpg", 1920, 1440)
     image bg ext_camp_upview_snow = im.Scale("scenario_slavyana/res/images/bg/ext_camp_upview_snow.jpg", 1920, 1440)
 
+
+    #Толик
+    define tl = Character(u"Толик", color=(173, 173, 173, 255))
+
+    #Борис
+    define bor = Character(u"Борис", color="#33ccff")
+
     #спрайты
+
+    #Толик
+    image tl pioneer normal = "scenario_slavyana/res/images/sprites/normal/tl/tl_1_pioneer.png"
+    image tl pioneer far = "scenario_slavyana/res/images/sprites/far/tl/tl_1_pioneer.png"
+
     #Семён, close
     image pi angry pioneer close = ConditionSwitch(
     "persistent.sprite_time=='sunset'",im.MatrixColor( im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/pi/pi_2_pioneer.png", (0,0), "scenario_slavyana/res/images/sprites/close/pi/pi_2_angry.png"), im.matrix.tint(0.94, 0.82, 1.0) ),
@@ -544,6 +556,7 @@ init:
         linear 87.0 ypos -1.9
     #$ credits_sl_m_text = "{size=80}Славя-мод{/size}\n\n\nРазработчик: FireBoTer.\n\n\nПомощь в тестировании: Xent2121.\n\n\nПомощь с дизайном главного меню: Nenver Kradovich\n\n\nРесурсы: IIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n\n\nОтдельное спасибо всем, кто играет в этот мод и тем, кто помогает исправлять его!\n"
     $ credits_sl_m_text = "{size=80}Славя-мод: Допил{/size}\n\n\nСпасибо за прохождение нашей модификции!\n\nМы очень старались для вас!\n Проект был начат ещё в 2017, но затем был заброшен.\nНо благодаря энтузиазму мы смогли доделать этот мод и надеемся,\n что он вам очень понравился.\nОбязательно оцените его в мастерской,\n пусть остальные тоже его пройдут.\n\n\nБлагодарность FireBoTer за положеные основы модификации.\n\n\nЭтузиасты, благодаря которым мод был доделан:\n\nАндрей «dredyi» Челдышов\nНикита «nvkalashnikov2» Калашников\nАлександр «Glopente» Петров\nВадим Голубев ( DS:Vadimka#0788 )\nВладимир «VlDM» Пичугин\n\n\nОсобая благодарность:\n\nКириллу «PepeUE» Бутуханову\nРуслану «名誉HiroツOnoda名誉» Магомедову\nИлье «Господин Амбар» Бескровному\nАндриану Катаеву\nДаниилу «Дыня» Тихонову\nВладимиру «VlDM» Пичугину\nNenver Kradovich - Помощь с дизайном главного меню\n\n\nА также вечная любовь команде SovietGames(2chErogeTeam) За такую потрясающую игру, как «Бесконечное Лето»\n\n\nВ моде были использованы материалы:\nIIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n«Славя-мод»(от FireBoTer’a)\n«7 Дней Лета»\n«Альтернативная концовка Слави»\n«Мику-рут глазами Лены»\n«Возвращение в Совёнок»\nСлавя-мод\n\n\nОтдельное спасибо:\nnickrandom – за оригинальную идею модов от лица девушек.\n名誉HiroツOnoda名誉– за тестирование.\nPepeUE – за тестирование.\nXent2121 - помощь в тестировании оригинального мода\nВладимиру «VlDM» Пичугину - за тестирование и корректировку текста.\nА также BAaD и Сергею Ейбогу за лучшие в мире саундтреки."
+
 init 55 python:
     colors['fbt'] = {'night': (0, 20, 137, 255), 'sunset': (0, 20, 137, 255), 'day': (0, 20, 137, 255), 'prolog': (0, 20, 137, 255)}
     store.names_list.append('fbt')
@@ -582,15 +595,37 @@ init -410 python:
                 "forest":        {"position":[550,60,697,199],"default_bg":bg_tmp_image(u"Лес")},
         }
 
-#Сделано FireBoTer'ом
-
 label pomehi:
-    show anim random:
-        choice:
-            "anim prologue_1"
-        choice:
-            "anim prologue_2"
-        choice:
-            "anim prologue_3"
+    show anim:
+        "prologue_1"
+        pause(0.1)
+        "prologue_2"
+        pause(0.1)
+        "prologue_3"
         pause(0.1)
         repeat
+
+init python:
+    notebooks_lines = -1;
+    def nb_show():
+        global notebooks_lines
+        if notebooks_lines < 0:
+            renpy.show("bknt_clear",at_list = [ truecenter ])
+            notebooks_lines = 0
+    def nb_hide():
+        global notebooks_lines
+        if notebooks_lines >= 0:
+            renpy.hide("bknt_clear")
+            notebooks_lines = -1
+    def notebok_getLinePoition(lineNumber):
+        if lineNumber < 25:
+            y = 0.339 + (0.014 * lineNumber)
+            return Position(xpos=.438, ypos=y,xmaximum=250,text_align=.0)
+        else:
+            y = 0.339 + (0.014 * (lineNumber-25))
+            return Position(xpos=.56, ypos=y,xmaximum=250,text_align=.0)
+    def nb(text, **kwargs):
+        global notebooks_lines
+        if notebooks_lines >= 0:
+            renpy.show("nb_line_"+str(notebooks_lines),[notebok_getLinePoition(notebooks_lines)],what=Text("{color=#0400ff}{size=-8}{font=scenario_slavyana/res/Fonts/ofont_ru_Elzevir.ttf}"+text+"{/font}{/size}{/color}"))
+            notebooks_lines += 1

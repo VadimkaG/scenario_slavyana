@@ -1378,5 +1378,40 @@ label slavyana_mod__day2_cnt3:
     if sl_m_Full:
         jump slavyana_mod__day3
     jump slavyana_mod__launcher0
-    
+
 #Сделано FireBoTer'ом
+    
+#Быстрый выбор
+label slavyana_mod__day2_fast_choice:
+
+    scene cg d2_slavya_forest with dissolve
+    $ night_time()
+    window show
+    "Второй день."
+    window hide
+
+    $ day_time()
+    $ persistent.sprite_time = "day"
+    scene bg ext_dining_hall_near_sunset
+    show el normal pioneer at left 
+    show mt normal pioneer at center 
+    show pi normal pioneer at right 
+    with dissolve
+    window show
+    "Вечером у столовой."
+    window hide
+    menu:
+        "Пойти с Семёном":
+            $ sl_m_lp += 2
+            $ sl_m_day2_go_with_sp = True
+        "Остаться":
+            scene bg ext_dining_hall_near_sunset with dissolve
+            window show
+            "Вторая попытка."
+            window hide
+            menu:
+                "Пойти за Семёном":
+                    $ sl_m_lp += 1
+                    $ sl_m_day2_sp_keys = True
+                "Остаться":
+                    pass

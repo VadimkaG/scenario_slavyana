@@ -199,7 +199,7 @@ label slavyana_mod__epilogue:
     voice "Не знаю, уже привык."
     sl "А вот мне кажется, что человек везде может быть счастливым."
     voice "Наверное…"
-    voice "Ну сами посудите! {w} Люди ведь и в Антарктиде живут… на станциях, я имею в виду. {w} И в пустыне Сахара! И много где ещё. Главное ведь – это люди!"
+    sl "Ну сами посудите! {w} Люди ведь и в Антарктиде живут… на станциях, я имею в виду. {w} И в пустыне Сахара! И много где ещё. Главное ведь – это люди!"
     voice "С вами сложно не согласиться."
     "В его голосе была слышна ирония."
     sl "Мне кажется, вы неискренни."
@@ -209,7 +209,7 @@ label slavyana_mod__epilogue:
     "Я развернулась, чтобы посмотреть на своего собеседника."
     #*Иллюстрация Славя в капюшоне*
     scene cg epilogue_sl with dissolve
-    pause(2)
+    pause(1)
     #*Иллюстрация Славя в капюшоне развернулась*
     scene cg epilogue_sl_2 with dissolve
     pause(2)
@@ -341,3 +341,5 @@ label slavyana_mod__credits:
   $ renpy.show('credits_sl_m credits_sl_m_text', [sl_m_ending_transform], layer='widgetoverlay')
   $ renpy.pause(90, hard=True)
   $ renpy.hide('credits_sl_m credits_sl_m_text', layer='widgetoverlay')
+
+  jump slavyana_mod__launcher0

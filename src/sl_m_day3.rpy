@@ -1286,3 +1286,28 @@ label slavyana_mod__day3:
     jump slavyana_mod__launcher0
     
 #Сделано FireBoTer'ом
+    
+#Быстрый выбор
+label slavyana_mod__day3_fast_choice:
+    window hide
+    scene bg ext_dining_hall_away_day with dissolve
+    $ night_time()
+    window show
+    "Третий день."
+    window hide
+
+    $ day_time()
+    $ persistent.sprite_time = "day"
+    scene bg int_dining_hall_people_day
+    show us dontlike sport far at left
+    show mt angry pioneer far at center
+    with dissolve
+    window show
+    "Семён убежал, после стыка в столовой с Ульяной."
+    window hide
+    menu:
+        "Пойти за Семёном":
+            $ sl_m_lp += 2
+            $ sl_m_day3_help = True
+        "Остаться на месте":
+            pass

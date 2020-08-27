@@ -99,7 +99,6 @@ label slavyana_mod_launcher2:
         $ persistent.sprite_time = "day"
 
     $ result = renpy.imagemap(m_back, m_back_hover, [
-    (637, 32, 1285, 237, "logo"),
     (833, 350, 1087, 401, "play"),
     (765, 521, 1153, 587, "days"),
     (34, 886, 194, 1055, "gallery"),
@@ -119,8 +118,6 @@ label slavyana_mod_launcher2:
         jump slavyana_mod__day1
     elif result == "days":
         jump slavyana_mod__days
-    elif result == "logo":
-        jump slavyana_mod__surprise
     elif result == "settings":
         jump slavyana_mod__settings
     elif result == "steam":
@@ -169,20 +166,23 @@ label slavyana_mod__days:
         scene bg days_day with dissolve
 
 label slavyana_mod__days2:
-    if persistent.sl_m_day2:
-        $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full.png"
-        $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full_hover.png"
-    elif persistent.sl_m_day1:
-        $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd3.png"
-        $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd3_hover.png"
-    else:
-        $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd2.png"
-        $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd2_hover.png"
+    $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full.png"
+    $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full_hover.png"
+    #if persistent.sl_m_day2:
+    #    $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full.png"
+    #    $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full_hover.png"
+    #elif persistent.sl_m_day1:
+    #    $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd3.png"
+    #    $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd3_hover.png"
+    #else:
+    #    $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd2.png"
+    #    $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd2_hover.png"
 
     $ result = renpy.imagemap(d_back, d_back_hover, [
     (360, 130, 610, 200, "day1"),
     (360, 300, 610, 370, "day2"),
     (360, 480, 610, 540, "day3"),
+    (1300, 130, 1550, 200, "day5"),
     (1300, 485, 1550, 545, "day7"),
     (1294, 650, 1590, 720, "epilogue"),
     (126, 859, 548, 1043, "back_days")
@@ -191,19 +191,31 @@ label slavyana_mod__days2:
     if result == "day1":
         #$ make_names_known()
         $ sl_m_l_day = 1
-        jump slavyana_mod__l_finish
+        call slavyana_mod__l_finish
+        jump slavyana_mod__day1
     elif result == "day2":
         if persistent.sl_m_day1:
             $ sl_m_l_day = 2
-            jump slavyana_mod__l_choice
+            call slavyana_mod__l_choice
+            jump slavyana_mod__day2
         else:
             jump slavyana_mod__days2
     elif result == "day3":
         if persistent.sl_m_day2:
             $ sl_m_l_day = 3
-            jump slavyana_mod__l_choice
+            call slavyana_mod__l_choice
+            jump slavyana_mod__day3
         else:
             jump slavyana_mod__days2
+    elif result == "day5":
+        $ sl_m_l_day = 5
+        call slavyana_mod__l_choice
+        menu:
+          "Сходила за шуриком":
+            $ go_to_sh = True
+          "Не сходила":
+            $ go_to_sh = False
+        jump slavyana_mod__day5
     elif result == "day7":
         menu:
           "Плохая концовка":
@@ -249,106 +261,26 @@ label slavyana_mod__l_choice:
         window show
         "Первый день."
         window hide
-    $ day_time()
-    $ persistent.sprite_time = "day"
-    scene bg ext_washstand_day
-    show us normal sport at cleft
-    show mt normal pioneer at cright
-    with dissolve
-    window show
-    "После забега."
-    window hide
-    menu:
-        "Помочь Ольге Дмитриевне":
-            $ sl_m_day1_help_od = True
-        "Помочь Ульяне":
-            pass
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
-    scene bg ext_square_sunset with dissolve
-    window show
-    "Поиски Семёна. Вначале идём..."
-    window hide
+    call slavyana_mod__day1_fast_choice
 
-label slavyana_mod__l_d1_map:
-    $ disable_all_zones()
-    $ set_zone("forest","slavyana_mod__l_day1_forest")
-    $ set_zone("me_mt_house","slavyana_mod__l_day1_od")
-    $ set_zone("medic_house","slavyana_mod__l_day1_mh")
-    $ set_zone("dv_us_house","slavyana_mod__l_day1_ul")
-
-label slavyana_mod__l_d1_map2:
-    $ sl_m_counter += 1
-    $ show_map()
-    
-label slavyana_mod__d1_map_text:
-    window show
-    if sl_m_counter == 1:
-        "Затем…"
-    elif sl_m_counter == 2:
-        "Далее…"
-    else:
-        "Финальный выбор."
-    window hide
-    $ disable_current_zone()
-    jump slavyana_mod__l_d1_map2
-    
-label slavyana_mod__l_day1_od:
-    scene bg ext_house_of_mt_sunset 
-    show mt normal pioneer at center
-    with dissolve
-    pause (2)
-    jump slavyana_mod__d1_map_text
-
-label slavyana_mod__l_day1_mh:
-    scene bg int_aidpost_day with dissolve
-    pause (2)
-    jump slavyana_mod__d1_map_text
-
-label slavyana_mod__l_day1_ul:
-    scene bg ext_house_of_dv_day with dissolve
-    pause (2)
-    jump slavyana_mod__d1_map_text
-
-label slavyana_mod__l_day1_forest:
-    if sl_m_counter == 1:
-        $ sl_m_lp += 1
-    scene bg ext_square_sunset with dissolve
-    pause (2)
     if sl_m_l_day == 2:
-        jump slavyana_mod__l_finish
-    scene cg d2_slavya_forest with dissolve
-    $ night_time()
-    window show
-    "Второй день."
-    window hide
-    $ day_time()
-    $ persistent.sprite_time = "day"
-    scene bg ext_dining_hall_near_sunset
-    show el normal pioneer at left 
-    show mt normal pioneer at center 
-    show pi normal pioneer at right 
-    with dissolve
-    window show
-    "Вечером у столовой."
-    window hide
-    menu:
-        "Пойти с Семёном":
-            $ sl_m_lp += 2
-            $ sl_m_day2_go_with_sp = True
-        "Остаться":
-            scene bg ext_dining_hall_near_sunset with dissolve
-            window show
-            "Вторая попытка."
-            window hide
-            menu:
-                "Пойти за Семёном":
-                    $ sl_m_lp += 1
-                    $ sl_m_day2_sp_keys = True
-                "Остаться":
-                    pass
+        call slavyana_mod__l_finish
+        return
+
+    call slavyana_mod__day2_fast_choice
+
     if sl_m_l_day == 3:
-        jump slavyana_mod__l_finish
+        call slavyana_mod__l_finish
+        return
+
+    call slavyana_mod__day3_fast_choice
+
+    if sl_m_l_day == 4:
+        call slavyana_mod__l_finish
+        return
+
+    call slavyana_mod__l_finish
+    return
 
 label slavyana_mod__l_finish:
     if hour in [22,23,24,0,1,2,3,4,5,6]:
@@ -379,43 +311,7 @@ label slavyana_mod__l_finish:
     window hide
     scene black with dissolve
     stop music fadeout 2
-    if sl_m_l_day == 1:
-        jump slavyana_mod__day1
-    elif sl_m_l_day == 2:
-        jump slavyana_mod__day2
-    elif sl_m_l_day == 3:
-        jump slavyana_mod__day3
-
-label slavyana_mod__surprise:
-    if hour in [22,23,24,0,1,2,3,4,5,6]:
-        scene bg ext_square_night with dissolve
-    elif hour in [20,21] or hour in [7,8]:
-        scene bg ext_square_sunset with dissolve
-    else:
-        scene bg ext_square_day with dissolve
-    $ persistent.sl_m_hidden = True
-    if persistent.sl_m_not_fst_hidden:
-        menu:
-            "Прочитать ещё раз":
-                pass
-            "Перейти к Ульяна-моду":
-                stop music fadeout 2
-                jump uliana_mod_day1
-            "Вернуться":
-                jump slavyana_mod_launcher2
-    window show
-    fbt "Ого, я смотрю, ты нашёл секретный раздел! Поздравляю!"
-    fbt "Теперь тебе, наверное, хочется узнать, что же здесь такое, не правда ли?"
-    fbt "Ну что ж, я покажу тебе...{w} Но сначала немного предыстории."
-    fbt "Данный фрагмент был разработан в конце 2015 года и был предложен мне для проверки и помощи в разработке."
-    fbt "Но потом человек, разрабатывавший это перестал выходить на связь. Поискав по Летосфере, я нашёл его в составе одной, некогда почившей, но к тому моменту уже живой команды мододелов. Собственно, где-то после развала он и пришёл ко мне со своей идеей."
-    fbt "Итак, мод был заморожен. Но некоторое время спустя, он ушёл из этой команды, но на связь не выходил. Если он и разрабатывает этот мод, то теперь без меня."
-    fbt "Я же решил показать вам всё, что есть у меня по данному моду. Да, возможно, я поступаю весьма нечестно и нехорошо, но увы, я не собираюсь менять своего решения. Я заранее извиняюсь перед всеми моралфагами и перед тем разработчиком за использование сего материала."
-    fbt "Итак, я представляю вам...{w} Ульяна-мод. День первый, часть первая."
-    window hide
-    stop music fadeout 2
-    $ persistent.sl_m_not_fst_hidden = True
-    jump uliana_mod_day1
+    return
 
 label slavyana_mod__settings0:
     if hour in [22,23,24,0,1,2,3,4,5,6]:
