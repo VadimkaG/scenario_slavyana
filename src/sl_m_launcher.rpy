@@ -210,29 +210,12 @@ label slavyana_mod__days2:
     elif result == "day5":
         $ sl_m_l_day = 5
         call slavyana_mod__l_choice
-        menu:
-          "Сходила за шуриком":
-            $ go_to_sh = True
-          "Не сходила":
-            $ go_to_sh = False
         jump slavyana_mod__day5
     elif result == "day7":
-        menu:
-          "Плохая концовка":
-            $ words_red = True
-          "Хорошая концовка":
-            $ words_green = True
-          "Альтернативная концовка":
-            $ words_blue = True
+        call slavyana_mod__l_choice
         jump slavyana_mod__day7
     elif result == "epilogue":
-        menu:
-          "Плохая концовка":
-            $ words_red = True
-          "Хорошая концовка":
-            $ words_green = True
-          "Альтернативная концовка":
-            $ words_blue = True
+        call slavyana_mod__l_choice
         jump slavyana_mod__epilogue
     elif result == "back_days":
         jump slavyana_mod_launcher1_1
@@ -279,6 +262,40 @@ label slavyana_mod__l_choice:
         call slavyana_mod__l_finish
         return
 
+    # Тут будет проверка 4-го дня
+
+    # Временное условие, пока не готов 4-ый день
+    scene black with dissolve
+    menu:
+      "Сходила за шуриком":
+        $ go_to_sh = True
+      "Не сходила":
+        $ go_to_sh = False
+    # Конец временного условия
+
+    if sl_m_l_day == 5:
+        call slavyana_mod__l_finish
+        return
+
+    # Тут будет проверка 5-го дня
+
+    if sl_m_l_day == 6:
+        call slavyana_mod__l_finish
+        return
+
+    # Тут будет проверка 6-го дня
+
+    # Временное условие, в будующем нужно убрать
+    if not ending_locked:
+        menu:
+          "Плохая концовка":
+            $ setEndRed()
+          "Хорошая концовка":
+            $ setEndGreen()
+          "Альтернативная концовка":
+            $ setEndBlue()
+    # Конец временного условия
+
     call slavyana_mod__l_finish
     return
 
@@ -293,7 +310,7 @@ label slavyana_mod__l_finish:
         scene bg int_house_of_sl_day with dissolve
         $ day_time()
     window show
-    if sl_m_l_day <= 2:
+    if sl_m_l_day <= 7:
         if sl_m_l_day == 1:
             "Запускать ли следующие дни после окончания выбранного?"
         else:

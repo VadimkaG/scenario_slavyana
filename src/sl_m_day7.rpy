@@ -337,9 +337,9 @@ label slavyana_mod__day7:
     "Он вышел, оставив меня наедине с моими мыслями."
 
 
+  stop music fadeout 3
+  play sound ambience_int_cabin_day loop fadein 3
   if words_green:
-    stop music fadeout 3
-    play sound ambience_int_cabin_day loop fadein 3
     th "Семён ведёт себя как маленький ребёнок."
     "Да, мне тоже не хочется расставаться, и мне очень грустно, что смена заканчивается, но нельзя же в погоне за мной увязываться в другой город."
     "Тем более как он говорит, в родном городе его никто не ждёт . Ну как такое может быть?"
@@ -384,7 +384,7 @@ label slavyana_mod__day7:
     sl "Давай."
 
   play sound sfx_bus_interior_moving loop fadein 3
-  scene bg int_bus_night with dissolve
+  scene bg int_bus_people_night with dissolve
   "Автобус мчался вперёд. Пейзажи сменяли друг друга."
 
   if words_green:
@@ -437,4 +437,6 @@ label slavyana_mod__day7:
   stop music fadeout 1
   "…"
 
-  jump slavyana_mod__epilogue
+  if sl_m_Full:
+      jump slavyana_mod__epilogue
+  jump slavyana_mod__launcher0
