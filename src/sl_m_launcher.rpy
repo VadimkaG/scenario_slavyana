@@ -212,9 +212,11 @@ label slavyana_mod__days2:
         call slavyana_mod__l_choice
         jump slavyana_mod__day5
     elif result == "day7":
+        $ sl_m_l_day = 7
         call slavyana_mod__l_choice
         jump slavyana_mod__day7
     elif result == "epilogue":
+        $ sl_m_l_day = 8
         call slavyana_mod__l_choice
         jump slavyana_mod__epilogue
     elif result == "back_days":
@@ -277,7 +279,7 @@ label slavyana_mod__l_choice:
         call slavyana_mod__l_finish
         return
 
-    # Тут будет проверка 5-го дня
+    call slavyana_mod__day5_fast_choice
 
     if sl_m_l_day == 6:
         call slavyana_mod__l_finish
@@ -286,7 +288,7 @@ label slavyana_mod__l_choice:
     # Тут будет проверка 6-го дня
 
     # Временное условие, в будующем нужно убрать
-    if not ending_locked:
+    if not sl_m_ending_locked:
         menu:
           "Плохая концовка":
             $ setEndRed()
@@ -322,7 +324,7 @@ label slavyana_mod__l_finish:
             "Нет":
                 $ sl_m_Full = False
         window show
-    elif sl_m_l_day > 1:
+    if sl_m_l_day > 1:
         $ sl_m_meet('mt','Оля')
     "Нажмите, чтобы продолжить..."
     window hide

@@ -5,26 +5,26 @@ init python:
   words_red = False
   words_green = False
   words_blue = False
-  ending_locked = False
+  sl_m_ending_locked = False
   # Плохая концовка. Если force, то остальные концовки получить нельзя
   def setEndRed(forse = False):
-    global words_red, words_green, words_blue , ending_locked
+    global words_red, words_green, words_blue , sl_m_ending_locked
     words_red = True
     words_green = False
     words_blue = False
     if forse:
-      ending_locked = True
+      sl_m_ending_locked = True
   # Альтернативная концовка
   def setEndBlue():
-    global words_red, words_green, words_blue, ending_locked
-    if ending_locked:
+    global words_red, words_green, words_blue, sl_m_ending_locked
+    if not sl_m_ending_locked:
       words_red = False
       words_green = False
       words_blue = True
   # Хорошая концовка
   def setEndGreen():
-    global words_red, words_green, words_blue, ending_locked
-    if ending_locked:
+    global words_red, words_green, words_blue, sl_m_ending_locked
+    if not sl_m_ending_locked:
       words_red = False
       words_green = True
       words_blue = False
@@ -32,6 +32,7 @@ init python:
 label slavyana_mod__epilogue:
   stop music
   stop sound
+  stop ambience
   $ backdrop = "epilogue"
   $ new_chapter(7, u"Славя. Эпилог")
   $ save_name = (u'Славя. "Эпилог"')

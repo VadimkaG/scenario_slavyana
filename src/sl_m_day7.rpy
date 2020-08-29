@@ -1,6 +1,7 @@
 label slavyana_mod__day7:
   stop music
   stop sound
+  stop ambience
   $ backdrop = "days"
   $ new_chapter(7, u"Славя. День седьмой")
   $ save_name = (u'Славя. День седьмой')
@@ -37,7 +38,7 @@ label slavyana_mod__day7:
   scene bg int_dining_hall_day
   show pi normal pioneer at center
   with dissolve
-  play sound ambience_dining_hall_empty loop fadein 3
+  play ambience ambience_dining_hall_empty loop fadein 3
   "Мы оказались сегодня первыми посетителями столовой."
   "Завтрак был довольно простой, но что делать, если приходится кормить сразу несколько отрядов?"
   me "Знаешь, мне здесь еда никогда не нравилась."
@@ -67,13 +68,14 @@ label slavyana_mod__day7:
   "И как можно невинней улыбнулась."
   mt "Да, утро… утро… {w} Ладно, вы, главное, не забудьте собраться."
   sl "Не забудем!"
-  stop sound
-  play sound ambience_ext_road_day loop fadein 3
+  stop ambience fadeout 2
   scene bg ext_dining_hall_away_day
   show pi normal pioneer at center
   with dissolve
+  play ambience ambience_ext_road_day loop fadein 3
   me "А что она имела в виду? Опять какой-то поход?"
   sl "Да нет же! {w} Сегодня последний день, ты разве забыл?"
+  stop ambience
   play music music_list["meet_me_there"] fadein 3
   me "Последний день чего?"
   sl "Последний день смены!"
@@ -95,22 +97,22 @@ label slavyana_mod__day7:
   sl "На обеде увидимся!"
   "Я поцеловала его в щёчку и поспешила, чтобы всё успеть до обеда."
   stop music fadeout 3
-  play sound ambience_ext_road_day loop fadein 3
+  play ambience ambience_ext_road_day loop fadein 3
   scene bg ext_houses_day with dissolve
   pause 2
   scene bg ext_house_of_sl_day with dissolve
   pause 2
-  stop sound  
-  queue sound sfx_open_door_1
+  stop ambience fadeout 1
+  play sound sfx_open_door_1
   scene bg int_house_of_sl_day with dissolve
-  queue sound ambience_int_cabin_day loop
+  play ambience ambience_int_cabin_day loop fadein 3
   "Внутри домика было пусто. Скорее всего, Женя ушла к себе в библиотеку."
   "Во-первых, надо бы сходить помыться."
   "Я взяла с собой полотенце и направилась в баню."
   scene black with dissolve
-  stop sound fadeout 1
+  stop ambience fadeout 1
   "…"
-  play sound ambience_int_cabin_day loop fadein 3
+  play ambience ambience_int_cabin_day loop fadein 3
   scene bg int_house_of_sl_day with dissolve2
   "Вернувшись, я переоделась в новую форму, хоть до отъезда оставалось меньше 6 часов."
   "До обеда оставалось около 10 минут, так что я решила сделать заметку в своём дневнике, т.к. не успела за эти два дня."
@@ -124,26 +126,27 @@ label slavyana_mod__day7:
 
   play sound sfx_dinner_horn_processed
   "Пора на обед."
+  stop ambience fadeout 1
   scene black with dissolve
   "…"
   scene bg ext_dining_hall_away_day with dissolve
-  queue sound ambience_ext_road_day loop
+  play ambience ambience_ext_road_day loop fadein 3
   show un normal pioneer at right with dissolve
   "Дойдя до столовой, я встретила Лену, которая сидела на лавочке."
   "Я поздоровалась с ней и зашла в столовую."
-  stop sound
+  stop ambience fadeout 1
   scene bg int_dining_hall_people_day
   show pi normal pioneer at cright
   show us normal pioneer at cleft
   with dissolve
-  play music music_list["i_want_to_play"]
+  play music music_list["i_want_to_play"] fadein 1
   "За одним столом с Семёном сидела Ульяна."
   "Я взяла свой поднос с едой и подошла к ним."
   sl "Можно к вам?"
   us "Ладно, я уже ухожу."
   "Ульянка вскочила и убежала в другой конец столовой."
   stop music fadeout 3
-  play sound ambience_dining_hall_full loop fadein 3
+  play ambience ambience_dining_hall_full loop fadein 3
   hide us with dissolve
   sl "О чём разговаривали?"
   me "Ну, ты же её знаешь, о чём с ней можно разговаривать?"
@@ -154,14 +157,14 @@ label slavyana_mod__day7:
   sl "Ну, тогда можешь помочь собраться мне."
   me "Хорошо."
   "Вскоре мы закончили и отправились к моему домику."
-  stop sound fadeout 1
+  stop ambience fadeout 1
   scene black with dissolve
   pause 1
-  queue sound sfx_open_door_1
+  play sound sfx_open_door_1
   scene bg int_house_of_sl_day
   show pi normal pioneer at cright
   with dissolve
-  queue sound ambience_int_cabin_day loop
+  play ambience ambience_int_cabin_day loop fadein 3
   "Я достала сумку."
   "У меня было очень много вещей с собой."
   "Я открыла шкаф и принялась собирать вещи в сумку."
@@ -174,7 +177,8 @@ label slavyana_mod__day7:
   me "Я? Ну, наверное, тоже."
   me "Хотя… Мне не очень хочется возвращаться в родной город."
   sl "Почему?"
-  play music music_list["trapped_in_dreams"]
+  stop ambience
+  play music music_list["trapped_in_dreams"] fadein 3
   me "Потому что… Потому что там нечего делать, там ничего нет, и там меня никто не ждёт."
   sl "А родители?"
   me "Ну, родители… {w} Понимаешь ли… Их как бы сейчас нет."
@@ -294,6 +298,7 @@ label slavyana_mod__day7:
     "Рассмеялась я."
     me "Да мне собирать-то…"
     stop music fadeout 3
+    play ambience ambience_int_cabin_day loop fadein 3
     play sound sfx_close_door_1
     hide pi with dissolve
     "Он выскочил из домика."
@@ -335,10 +340,9 @@ label slavyana_mod__day7:
     play sound sfx_close_door_1 
     hide pi with dissolve
     "Он вышел, оставив меня наедине с моими мыслями."
+    stop music fadeout 3
+    play ambience ambience_int_cabin_day loop fadein 3
 
-
-  stop music fadeout 3
-  play sound ambience_int_cabin_day loop fadein 3
   if words_green:
     th "Семён ведёт себя как маленький ребёнок."
     "Да, мне тоже не хочется расставаться, и мне очень грустно, что смена заканчивается, но нельзя же в погоне за мной увязываться в другой город."
@@ -354,7 +358,7 @@ label slavyana_mod__day7:
     "Эх, надо уже что-то решать… {w} И я решила!"
     "Я собрала сумку, вышла из домика и направилась к остановке, предварительно заперев его."
 
-  play sound ambience_ext_road_day loop fadein 3
+  play ambience ambience_ext_road_day loop fadein 3
   scene ext_bus with dissolve
   "На остановке уже собрались пионеры и приехал автобус."
   "Но нигде не было видно вожатой, а Семён скоро должен был подойти."
@@ -362,8 +366,8 @@ label slavyana_mod__day7:
   "…"
   "Наконец они пришли."
   scene cg d7_pioneers_leaving with dissolve
-  stop sound
-  play music music_list["memories"]
+  stop ambience
+  play music music_list["memories"] fadein 2
   mt "Все собрались?"
   "Начала Ольга Дмитриевна."
   mt "Сегодня вы покидаете наш лагерь, и на прощание мне хотелось бы вам кое-что сказать."
@@ -383,13 +387,14 @@ label slavyana_mod__day7:
     me "Давай сядем вместе."
     sl "Давай."
 
-  play sound sfx_bus_interior_moving loop fadein 3
+  play ambience sfx_bus_interior_moving loop fadein 2
   scene bg int_bus_people_night with dissolve
   "Автобус мчался вперёд. Пейзажи сменяли друг друга."
 
   if words_green:
     "Уже несколько часов мы сидели рядом, а попытки завязать разговор заканчивались односложными фразами."
-    play music music_list["a_promise_from_distant_days"]
+    stop ambience
+    play music music_list["a_promise_from_distant_days"] fadein 2
     me "Не бери в голову то, что я тогда сказал! Я не хочу оправдываться или говорить, что это неправда. {w} Просто для меня сейчас самое главное - это ты."
     sl "Я понимаю."
     me "Если я даже иногда веду себя не так, делаю и говорю глупости…{w} Всё равно для меня сейчас самое главное – быть с тобой! И всегда будет."
@@ -407,7 +412,8 @@ label slavyana_mod__day7:
 
   if words_red:
     "Я решила прервать наше с Семёном молчание."
-    play music music_list["farewell_to_the_past_edit"]
+    stop ambience
+    play music music_list["farewell_to_the_past_edit"] fadein 2
     sl "О чём думаешь?"
     me "О жизни."
     sl "И как думается?"
@@ -420,7 +426,8 @@ label slavyana_mod__day7:
     "Я положила голову ему на плечо."
   
   if words_blue:
-    play music music_list["a_promise_from_distant_days"]
+    stop ambience
+    play music music_list["a_promise_from_distant_days"] fadein 2
     me "Не бери в голову то, что я тогда сказал! Я не хочу оправдываться или говорить, что это неправда. {w} Просто для меня сейчас самое главное - это ты."
     sl "Я понимаю."
     me "Если я даже иногда веду себя не так, делаю и говорю глупости…{w} Всё равно для меня сейчас самое главное – быть с тобой! И всегда будет."
@@ -429,11 +436,11 @@ label slavyana_mod__day7:
     me "Да, теперь понимаю! {w} Но ради тебя я на всё готов."
     "Я поцеловала его в щёчку и положила голову ему на плечо."
   
-#*Эффект закрывания глаз*
   show blink
   pause 1
   scene black
   "А потом я тихо заснула."
+  stop ambience
   stop music fadeout 1
   "…"
 

@@ -100,6 +100,7 @@ init:
     #рукоделие!
     image bg int_house_of_sl_night_light = "scenario_slavyana/res/images/bg/int_house_of_sl_night_light.jpg"
 
+    image cg d5_cake_alt = "scenario_slavyana/res/images/cg/d5_cake.jpg"
     image bg town_snow = im.Scale("scenario_slavyana/res/images/bg/town_snow.jpg", 1920, 1440)
     image bg ext_camp_upview_snow = im.Scale("scenario_slavyana/res/images/bg/ext_camp_upview_snow.jpg", 1920, 1440)
 
