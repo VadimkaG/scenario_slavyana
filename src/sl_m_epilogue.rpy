@@ -5,29 +5,24 @@ init python:
   words_red = False
   words_green = False
   words_blue = False
-  sl_m_ending_locked = False
-  # Плохая концовка. Если force, то остальные концовки получить нельзя
-  def setEndRed(forse = False):
-    global words_red, words_green, words_blue , sl_m_ending_locked
+  # Плохая концовка
+  def setEndRed():
+    global words_red, words_green, words_blue
     words_red = True
     words_green = False
     words_blue = False
-    if forse:
-      sl_m_ending_locked = True
   # Альтернативная концовка
   def setEndBlue():
-    global words_red, words_green, words_blue, sl_m_ending_locked
-    if not sl_m_ending_locked:
-      words_red = False
-      words_green = False
-      words_blue = True
+    global words_red, words_green, words_blue
+    words_red = False
+    words_green = False
+    words_blue = True
   # Хорошая концовка
   def setEndGreen():
-    global words_red, words_green, words_blue, sl_m_ending_locked
-    if not sl_m_ending_locked:
-      words_red = False
-      words_green = True
-      words_blue = False
+    global words_red, words_green, words_blue
+    words_red = False
+    words_green = True
+    words_blue = False
 
 label slavyana_mod__epilogue:
   stop music
@@ -54,6 +49,7 @@ label slavyana_mod__epilogue:
     scene black with dissolve2
     play sound sfx_achievement
     #show achiv at achievement_trans
+    $ renpy.notify("Лучший Новый Год в жизни")
     with dspr
     $ renpy.pause(3, hard=True)
     #hide achiv
@@ -191,6 +187,8 @@ label slavyana_mod__epilogue:
     #*Ачивка «Домой!»*
     play sound sfx_achievement
     #show achiv at achievement_trans
+    $ persistent.slavyana_mod__bad_end = True
+    $ renpy.notify("Домой!")
     with dspr
     $ renpy.pause(3, hard=True)
     #hide achiv
@@ -341,6 +339,7 @@ label slavyana_mod__epilogue:
     #*Ачивка «Ты меня не потеряешь…»*
     play sound sfx_achievement
     #show achiv at achievement_trans
+    $ renpy.notify("Ты меня не потеряешь…")
     with dspr
     $ renpy.pause(3, hard=True)
     #hide achiv

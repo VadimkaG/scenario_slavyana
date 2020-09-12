@@ -1090,9 +1090,6 @@ label slavyana_mod__day1_map:
 label slavyana_mod__day1_forest:
     stop music fadeout 2
     $ persistent.sprite_time = "night"
-    
-    if not sl_m_day1_not_now:
-        $ sl_m_lp += 1
 
     if sl_m_day1_map_od:
         scene bg ext_houses_sunset with dissolve
@@ -1608,54 +1605,3 @@ label slavyana_mod__day1_fast_choice:
             $ sl_m_day1_help_od = True
         "Помочь Ульяне":
             pass
-    $ sunset_time()
-    $ persistent.sprite_time = "sunset"
-    scene bg ext_square_sunset with dissolve
-    window show
-    "Поиски Семёна. Вначале идём..."
-    window hide
-
-    $ disable_all_zones()
-    $ set_zone("forest","slavyana_mod__day1_fast_choice_forest")
-    $ set_zone("me_mt_house","slavyana_mod__day1_fast_choice_od")
-    $ set_zone("medic_house","slavyana_mod__day1_fast_choice_mh")
-    $ set_zone("dv_us_house","slavyana_mod__day1_fast_choice_ul")
-
-label slavyana_mod__day1_fast_choice_map2:
-    $ sl_m_counter += 1
-    $ show_map()
-    
-label slavyana_mod__day1_fast_choice_map_text:
-    window show
-    if sl_m_counter == 1:
-        "Затем…"
-    elif sl_m_counter == 2:
-        "Далее…"
-    else:
-        "Финальный выбор."
-    window hide
-    $ disable_current_zone()
-    jump slavyana_mod__day1_fast_choice_map2
-    
-label slavyana_mod__day1_fast_choice_od:
-    scene bg ext_house_of_mt_sunset 
-    show mt normal pioneer at center
-    with dissolve
-    pause (2)
-    jump slavyana_mod__day1_fast_choice_map_text
-
-label slavyana_mod__day1_fast_choice_mh:
-    scene bg int_aidpost_day with dissolve
-    pause (2)
-    jump slavyana_mod__day1_fast_choice_map_text
-
-label slavyana_mod__day1_fast_choice_ul:
-    scene bg ext_house_of_dv_day with dissolve
-    pause (2)
-    jump slavyana_mod__day1_fast_choice_map_text
-
-label slavyana_mod__day1_fast_choice_forest:
-    if sl_m_counter == 1:
-        $ sl_m_lp += 1
-    scene bg ext_square_sunset with dissolve
-    pause (2)

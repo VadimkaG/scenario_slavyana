@@ -3,6 +3,8 @@
   go_to_sh = False
   # Славя сказала правду лене, когда они очищали костер
   sl_m_day5_cleaning_told_truth = False
+  # В медпункте свалить вину на семена
+  sl_m_day5_make_semen_guilty = False
 
 label slavyana_mod__day5:
   stop music
@@ -478,7 +480,7 @@ label slavyana_mod__day5:
 
   menu:
     "Пойти с Семёном":
-      $ sl_m_lp += 2
+      $ sl_m_lp += 1
       me "Одна корзинка у меня, одна - у вас; всё очевидно."
       sl "Нет, давай я с тобой пойду!"
       "Я улыбнулась."
@@ -767,11 +769,6 @@ label slavyana_mod__day5_lena_true:
   jump slavyana_mod__day5_lena
 
 label slavyana_mod__day5_lena_lie:
-  if persistent.slavyana_mod__day5_bad_end:
-    $ setEndBlue()
-  else:
-    $ persistent.slavyana_mod__day5_bad_end = True
-    $ setEndRed(True)
   sl "Никак я на него не смотрю. С чего ты взяла?"
   un "Ну да, ты ещё врать будешь."
   sl "Нет."
@@ -913,10 +910,12 @@ label slavyana_mod__day5_lena:
   scene bg ext_house_of_sl_day with dissolve
   play sound sfx_close_door_1
   "Я закрыла домик и пошла на площадь."
-#*Фон площадь*
+  scene bg ext_square_day with dissolve
   "Вечерело."
-#трек Lightness
+  stop ambience fadeout 3
+  play music music_list["lightness"] fadein 3
   "На площади уже собралась приличная толпа пионеров. Почти что все были здесь{w}, разве что Ульянка не пришла."
+  show mt grin pioneer panama with dspr
   mt "Вроде все на месте… Отлично!"
   "Ольга Дмитриевна начала стандартную речь про поход, настоящих пионеров и взаимовыручку."
   "В прошлый раз было то же самое, так что я уже запомнила её речь."
@@ -934,35 +933,57 @@ label slavyana_mod__day5_lena:
   "Но потом ей выделили Семёна."
   mt "Вперёд!"
   "Скомандовала вожатая."
-#конец трека
-#*Фон лесная тропинка*
+  stop music fadeout 3
+  play ambience ambience_forest_day fadein 3 
+  scene bg ext_path_day with dissolve
   "Разговаривать было решительно не о чем. Но надо было хоть как-то скрасить прогулку до поляны."
   "Некоторое время мы просто прогуливались по кругу"
   "Через 10-20 минут мы всё-таки пришли в назначенное место."
-#*Фон поляна*
-  mt "Здесь сделаем привал."
-#трек Dance of fireflies
+  $ persistent.sprite_time = "sunset"
+  scene bg ext_polyana_sunset 
+  with dissolve
+  show mt normal pioneer at center with dissolve
+  hide mt with dissolve
+  play music music_list["dance_of_fireflies"] fadein 3
   "И всё-таки не зря вожатая водит пионеров именно сюда. Вечером здесь невероятно красиво."
   "Мальчиков отправили искать дрова для костра."
   "Я решила порасспрашивать своих знакомых из отряда."
+  show un normal pioneer with dissolve
   "Я подсела к Лене."
   sl "Привет. Нравится поход?"
   un "Да."
   sl "О чём поболтаем?"
   un "Ой, я, наверное, пойду, не до тебя сейчас. Ты только не обижайся."
+  hide un with dspr
   th "Видимо, не в настроении."
+  show mi normal pioneer with dissolve
   "Затем я подсела к Мику."
   sl "Привет. Как всё проходит?"
+  show mi dontlike pioneer
   mi "Никак. Я забыла гитару, а Ольга Дмитриевна не дала за ней сходить… Может быть, если бы я попросила тебя, она разрешила, а так не разрешает."
   sl "Жалко. Я бы обязательно послушала, как ты играешь."
-  mi "*улыбка* Спасибо. {w} *грусть* Но это слабое утешение."
+  show mi smile pioneer
+  mi "Спасибо. {w}{nw}"
+  show mi sad pioneer
+  extend "Но это слабое утешение."
+  show el normal pioneer at right with dspr
   "Ко мне подошёл Электроник."
   el "Славя, можешь у Алисы зажигалку попросить? Ольга Дмитриевна просила для костра, а мы спички не взяли."
   sl "Хорошо, сейчас."
+  hide mi
+  hide el
+  with dspr
+  scene black with dspr
+  pause 0.5
+  scene bg ext_polyana_sunset
+  show dv normal pioneer
+  with dspr
   sl "Слушай, у тебя зажигалки не будет?"
+  show dv smile pioneer with dspr
   dv "Прикурить дать?"
   th "Спасибо, но я, в отличие от тебя, не курю."
   sl "Нет, костёр развести. Шурик с Электроником забыли взять спички."
+  show dv normal pioneer with dspr
   dv "А почему она у меня должна быть?"
   "Она прищурилась."
   "Такой вопрос поставил меня в тупик."
@@ -981,57 +1002,91 @@ label slavyana_mod__day5_lena:
   sl "Что-то не похоже."
   me "Ну, от радости прыгать не готов, ты уж извини."
   "Похоже, Семён не в настроении. Наверное, лучше оставить его в покое."
-#конец трека
+  stop music fadeout 3
+  play ambience ambience_forest_day fadein 3 
   sl "Ладно, не буду тебе мешать."
   "Я ещё посидела недолго, но вскоре отправилась на пляж, осторожно скрывшись в кустах."
-#*Фон ночной лес*
+  $ persistent.sprite_time = "night"
+  $ night_time()
+  scene bg ext_path_night with dissolve
   "Я уже отошла на приличное расстояние, но всё ещё могла расслышать радостные голоса пионеров."
   "Похоже, кто-то действительно наслаждается походом. Рада за них."
   "Этот лес был мне знаком, однако пришлось чуток поплутать, прежде чем я вышла к лагерю."
-#*иллюстрация звёзды*
+  show anim stars_1 with dissolve
   "Какое сегодня прекрасное и чистое небо… Кажется, обычно было слегка облачно, но сегодня на небе ни облачка. {w} Да и луна полная."
   th "Романтика да и только."
-#фон тёмный экран
+  stop ambience fadeout 1
+  scene black with dissolve
   "…"
-#*Фон ночной пляж*
+  play ambience ambience_boat_station_night fadein 3
+  scene bg ext_beach_night with dissolve
   "Придя к пляжу, я сняла с себя форму и зашла в воду в купальнике, который заранее надела."
   "Люблю купаться."
-  "..."
-#*снова фон ночной пляж*
+  stop ambience fadeout 1
+  scene black with dissolve
+  "…"
+  play ambience ambience_boat_station_night fadein 3
+  scene bg ext_beach_night with dissolve
   "Когда я начала замерзать, пришлось выйти из воды."
   th "Кажется, я забыла взять из домика сумку, в которой лежало полотенце."
   "Прошло не больше 15 минут."
   th "Стоит ли ждать Семёна? Наверное, он остался там."
   th "Но может всё же подождать?"
 
-#Выбор (Подождать ещё/Сходить за сумкой)
+  menu:
+    "Подождать ещё":
+      $ sl_m_lp += 1
+      th "Ладно, подожду ещё, насмерть-то не замёрзну."
+      th "У меня крепкое здоровье."
+      stop ambience fadeout 1
+      scene black with dissolve
+      "…"
+      play ambience ambience_boat_station_night fadein 3
+      scene bg ext_beach_night with dissolve
+      "Чья-то фигура в галстуке стала приближаться к пляжу."
+      "Высокий, стройный, немного хилый, взъерошенный…"
+      show pi normal pioneer far with dspr
+      th "Семён!"
 
-#Если выбрали «подождать ещё» +1:
-  th "Ладно, подожду ещё, насмерть-то не замёрзну."
-  th "У меня крепкое здоровье."
-  "…"
-#*опять фон ночной пляж*
-  "Чья-то фигура в галстуке стала приближаться к пляжу."
-  "Высокий, стройный, немного хилый, взъерошенный…"
-  th "Семён!"
-
-#Если выбрали «сходить за сумкой»:
-  th "Скорее всего, Семён не придёт. Ну и ладно… Надеюсь, у них с Леной всё получится."
-  "Я вынула ключ из рубашки и отправилась к домику."
-#*Фон площадь*
-#*Фон напротив домика Слави*
-#*Фон внутри домика Слави*
-#*Фон напротив домика Слави*
-#*Фон площадь*
-#*Фон ночной пляж*
-  "Я уже подходила к пляжу, как заметила чью-то фигуру в белой рубашке с галстуком."
-  th "Семён?"
+    "Сходить за сумкой":
+      th "Скорее всего, Семён не придёт. Ну и ладно… Надеюсь, у них с Леной всё получится."
+      "Я вынула ключ из рубашки и отправилась к домику."
+      stop ambience fadeout 1
+      play ambience ambience_camp_center_night fadein 2
+      #*Фон площадь*
+      scene bg ext_square_day with dissolve
+      pause 1
+      #*Фон напротив домика Слави*
+      scene bg ext_house_of_sl_night with dissolve
+      pause 1
+      #*Фон внутри домика Слави*
+      stop ambience fadeout 1
+      play ambience ambience_int_cabin_night fadein 1
+      play sound sfx_open_door_1
+      scene bg int_house_of_sl_night with dissolve
+      pause 2
+      #*Фон напротив домика Слави*
+      stop ambience fadeout 1
+      play ambience ambience_camp_center_night fadein 2
+      scene bg ext_house_of_sl_night with dissolve
+      pause 1
+      #*Фон площадь*
+      scene bg ext_square_day with dissolve
+      stop ambience fadeout 1
+      pause 1
+      #*Фон ночной пляж*
+      play ambience ambience_boat_station_night fadein 3
+      scene bg ext_beach_night with dissolve
+      "Я уже подходила к пляжу, как заметила чью-то фигуру в белой рубашке с галстуком."
+      show pi normal pioneer far with dspr
+      th "Семён?"
 
   "Так получилось, что он был повёрнут ко мне спиной."
   "Я тихо подошла к нему."
   sl "Прогуливаешь поход?"
   me "…"
   sl "Я думала, что всё ещё в лесу."
+  show pi normal pioneer with dspr
   "Он обернулся."
   me "Извини, я помешал, наверное?"
   sl "Да ничего, я уже заканчивала."
@@ -1434,9 +1489,51 @@ label slavyana_mod__day5_lena:
 
 
 #При втором прохождении выбор «Соврать»(в выборе с Леной на поляне) даёт выход на альтернативную концовку, но очков для её получения должно быть >=9 на 7 дне, иначе плохая
-  #if sl_m_Full:
-      #jump slavyana_mod__day6
+  if sl_m_Full:
+      jump slavyana_mod__day6
   jump slavyana_mod__launcher0
 
 label slavyana_mod__day5_fast_choice:
-  pass
+  $ day_time()
+  $ persistent.sprite_time = "day"
+  scene bg ext_polyana_day with dissolve
+  "Пятый день."
+  scene bg ext_island_day
+  show un normal pioneer at cleft
+  show pi normal pioneer at right
+  with dissolve
+
+  "После обеда Славя с Леной отправились на остов за земляникой, прихватив с собой семена."
+  "Корзинки оказалось две и встал выбор как разбиться на группы."
+  menu:
+    "Пойти с Семёном":
+      $ sl_m_lp += 1
+    "Я и сама могу":
+      pass
+
+  scene bg ext_polyana_day
+  show un evil_smile pioneer far
+  with dissolve
+  "Во время уборки поляны перед костром, Лена заговорила об отношениях"
+  menu:
+    "Соврать":
+      $ sl_m_day5_cleaning_told_truth = False
+      if persistent.slavyana_mod__day5_bad_end:
+        $ setEndBlue()
+      else:
+        $ persistent.slavyana_mod__day5_bad_end = True
+        $ setEndRed(True)
+    "Сказать правду":
+      $ sl_m_day5_cleaning_told_truth = True
+
+  $ night_time()
+  $ persistent.sprite_time = "night"
+
+  scene bg ext_beach_night with dissolve
+  "После костра, Славя ушла купаться и забыла сумку. Славя Ждала Семёна, но он не появлялся."
+  menu:
+    "Подождать ещё":
+      $ sl_m_lp += 1
+    "Сходить за сумкой":
+      pass
+  return

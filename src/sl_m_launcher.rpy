@@ -180,9 +180,10 @@ label slavyana_mod__days2:
 
     $ result = renpy.imagemap(d_back, d_back_hover, [
     (360, 130, 610, 200, "day1"),
-    (360, 300, 610, 370, "day2"),
+    (360, 310, 610, 370, "day2"),
     (360, 480, 610, 540, "day3"),
     (1300, 130, 1550, 200, "day5"),
+    (1300, 310, 1550, 370, "day6"),
     (1300, 485, 1550, 545, "day7"),
     (1294, 650, 1590, 720, "epilogue"),
     (126, 859, 548, 1043, "back_days")
@@ -211,6 +212,10 @@ label slavyana_mod__days2:
         $ sl_m_l_day = 5
         call slavyana_mod__l_choice
         jump slavyana_mod__day5
+    elif result == "day6":
+        $ sl_m_l_day = 6
+        call slavyana_mod__l_choice
+        jump slavyana_mod__day6
     elif result == "day7":
         $ sl_m_l_day = 7
         call slavyana_mod__l_choice
@@ -268,12 +273,20 @@ label slavyana_mod__l_choice:
 
     # Временное условие, пока не готов 4-ый день
     scene black with dissolve
+    "Четвертый день. Поход за шуриком"
     menu:
-      "Сходила за шуриком":
-        $ go_to_sh = True
-      "Не сходила":
-        $ go_to_sh = False
+        "Сходила за шуриком":
+          $ go_to_sh = True
+        "Не сходила":
+          $ go_to_sh = False
     # Конец временного условия
+
+    "В 4-ом дне должна быть возможность получить 2 ЛП. Но 4-го дня нету, поэтому добавить?"
+    menu:
+        "Добавить 2 ЛП":
+            $ sl_m_lp += 2
+        "Ничего не добавлять":
+            pass
 
     if sl_m_l_day == 5:
         call slavyana_mod__l_finish
@@ -285,18 +298,7 @@ label slavyana_mod__l_choice:
         call slavyana_mod__l_finish
         return
 
-    # Тут будет проверка 6-го дня
-
-    # Временное условие, в будующем нужно убрать
-    if not sl_m_ending_locked:
-        menu:
-          "Плохая концовка":
-            $ setEndRed()
-          "Хорошая концовка":
-            $ setEndGreen()
-          "Альтернативная концовка":
-            $ setEndBlue()
-    # Конец временного условия
+    call slavyana_mod__day6_fast_choise
 
     call slavyana_mod__l_finish
     return
