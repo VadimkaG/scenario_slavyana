@@ -489,7 +489,7 @@ label slavyana_mod__day5:
       th "Мне показалось, или в его глазах мелькнула искра радости?"
       hide un with dspr
       "Лена не стала спорить и пошла одна."
-      stop ambience_forest_day fadeout 1
+      stop ambience fadeout 1
       scene black with dissolve
       "…"
       play music music_list["timid_girl"] fadein 3
