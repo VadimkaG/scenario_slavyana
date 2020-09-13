@@ -915,20 +915,25 @@ label slavyana_mod__day5_lena:
   stop ambience fadeout 3
   play music music_list["lightness"] fadein 3
   "На площади уже собралась приличная толпа пионеров. Почти что все были здесь{w}, разве что Ульянка не пришла."
-  show mt grin pioneer panama with dspr
+  show mt normal pioneer far with dspr
   mt "Вроде все на месте… Отлично!"
   "Ольга Дмитриевна начала стандартную речь про поход, настоящих пионеров и взаимовыручку."
   "В прошлый раз было то же самое, так что я уже запомнила её речь."
   mt "...Всему этому нам с вами предстоит научиться!"
   "По толпе пионеров прошёл недобрый шёпот."
+  show mt normal pioneer far
   mt "Идти будем парами. {w} Так что если вы ещё не выбрали себе партнёра, сейчас самое время!"
   "Пионеры начали быстро группироваться по двое."
+  show mt normal pioneer with dspr
   "Я подошла к вожатой, чтобы отпроситься."
   sl "Оля, я, пожалуй, в этот раз пропущу костёр. Можно?"
+  show mt surprise pioneer
   mt "Но почему? Это же общелагерное мероприятие."
   sl "Мне надо побыть одной сегодня, что-то голова слегка побаливает. Просто знайте: если что - я пойду к себе в домик отлежаться."
+  show mt normal pioneer
   mt "Ох, ну ладно. Я на тебя рассчитываю, как на образцового пионера."
   sl "Конечно, Ольга Дмитриевна."
+  show mt normal pioneer far with dspr
   "Пионеры уже разбились по парам. Чтобы не смущать Лену, я встала в начале строя с Ольгой, а вот моей соседке напарника не досталось."
   "Но потом ей выделили Семёна."
   mt "Вперёд!"
@@ -942,8 +947,8 @@ label slavyana_mod__day5_lena:
   $ persistent.sprite_time = "sunset"
   scene bg ext_polyana_sunset 
   with dissolve
-  show mt normal pioneer at center with dissolve
-  hide mt with dissolve
+  #show mt normal pioneer at center with dissolve
+  #hide mt with dissolve
   play music music_list["dance_of_fireflies"] fadein 3
   "И всё-таки не зря вожатая водит пионеров именно сюда. Вечером здесь невероятно красиво."
   "Мальчиков отправили искать дрова для костра."
@@ -993,21 +998,26 @@ label slavyana_mod__day5_lena:
   el "Всё-всё, мы нашли."
   "Раздались сбоку голоса кибернетиков."
   sl "А, всё, не надо."
+  hide dv with dspr
   "Я оставила её."  
   "Наконец, Ольга Дмитриевна разожгла костёр."
   "Огонь разгорался недолго: сначала вспыхнули газеты, а затем и брёвна, которые собрали мальчики."
   "Я подсела к Семёну."
+  show pi normal pioneer
   sl "О чём думаешь?"
   me "Да так, ни о чём… {w} Наслаждаюсь походом."
   sl "Что-то не похоже."
   me "Ну, от радости прыгать не готов, ты уж извини."
   "Похоже, Семён не в настроении. Наверное, лучше оставить его в покое."
-  stop music fadeout 3
-  play ambience ambience_forest_day fadein 3 
   sl "Ладно, не буду тебе мешать."
-  "Я ещё посидела недолго, но вскоре отправилась на пляж, осторожно скрывшись в кустах."
+  stop music fadeout 2
+  scene black with dissolve
+  pause 2
   $ persistent.sprite_time = "night"
   $ night_time()
+  play ambience ambience_forest_night fadein 3 
+  scene bg ext_polyana_night with dissolve
+  "Я ещё посидела недолго, но вскоре отправилась на пляж, осторожно скрывшись в кустах."
   scene bg ext_path_night with dissolve
   "Я уже отошла на приличное расстояние, но всё ещё могла расслышать радостные голоса пионеров."
   "Похоже, кто-то действительно наслаждается походом. Рада за них."
@@ -1054,7 +1064,7 @@ label slavyana_mod__day5_lena:
       stop ambience fadeout 1
       play ambience ambience_camp_center_night fadein 2
       #*Фон площадь*
-      scene bg ext_square_day with dissolve
+      scene bg ext_square_night with dissolve
       pause 1
       #*Фон напротив домика Слави*
       scene bg ext_house_of_sl_night with dissolve
@@ -1071,7 +1081,7 @@ label slavyana_mod__day5_lena:
       scene bg ext_house_of_sl_night with dissolve
       pause 1
       #*Фон площадь*
-      scene bg ext_square_day with dissolve
+      scene bg ext_square_night with dissolve
       stop ambience fadeout 1
       pause 1
       #*Фон ночной пляж*
@@ -1110,7 +1120,8 @@ label slavyana_mod__day5_lena:
   sl "Я же не робот всё-таки, чтобы постоянно действовать по заведённой программе."
   me "Да, точно…"
   "Он замолчал на некоторое время."
-#трек forest maiden
+  stop ambience fadeout 3
+  play music music_list["forest_maiden"] fadein 3
   me "А тебе не кажется всё это странным?"
   sl "Странным?"
   me "Всё, что здесь происходит. {w} Идеальная модель пионерлагеря."
@@ -1147,16 +1158,7 @@ label slavyana_mod__day5_lena:
   "Мы снова замолчали."
   "…"
 
-#Выбор без очков(Чихнуть/Не чихать)
-
-#Если выбрали «чихнуть»:
   "У меня защекотало в носу и…"
-  sl "А-апчхи!"
-
-#Если выбрали «не чихать»:
-  "У меня вдруг защекотало и захотелось чихнуть."
-  "Я сдерживалась изо всех сил, но исход битвы был предрешён изначально."
-  "Я уже довольно долго сидела на прохладном воздухе и, наверное, простудилась."
   sl "А-апчхи!"
 
   me "Будь здорова."
@@ -1182,11 +1184,16 @@ label slavyana_mod__day5_lena:
   sl "Спасибо!"
   "Я просунула в него голову и расправила на плечах. Потом взглянула на Семёна взглядом благодарности."
   me "Медпункт, так медпункт. Как скажете!"
-#конец трека
-#*Фон напротив ночного медпункта*
+  stop music fadeout 2
+  play ambience ambience_camp_center_night fadein 3
+  scene bg ext_aidpost_night with dissolve
   "Через пару минут мы подошли к медпункту, и я уже открывала его дверь."
-#*Фон внутри ночного медпункта*
+  stop ambience fadeout 2
+  play sound sfx_open_door_2
+  scene bg int_aidpost_night with dissolve
+  play ambience ambience_int_cabin_night fadein 3
   "Наконец я открыла дверь и облокотилась на его руку."
+  show pi normal pioneer with dspr
   sl "Голова немного кружится."
   "Я села на койку."
   me "Слушай, ну всё-таки! Ночью одной в медпункте…"
@@ -1207,13 +1214,17 @@ label slavyana_mod__day5_lena:
   me "В дурака?"
   th "Я не азартный игрок, но мы ведь только на интерес."
   sl "А давай."
+  stop ambience fadeout 2
+  scene black with dissolve
   "…"
-#*Опять фон внутри ночного медпункта*
+  play ambience ambience_int_cabin_night fadein 3
+  scene bg int_aidpost_night with dissolve
   "Играли мы долго."
   "Было уже много времени. Мы смеялись и болтали на разные темы."
   "Но мне уже не хотелось, чтобы он уходил."
   "В его компании мне и правда стало лучше."
   "Но вот на часах полночь…"
+  show pi normal pioneer with dspr
   sl "Пора спать."
   me "Пожалуй…"
   "Здесь практически не было места."
@@ -1223,20 +1234,26 @@ label slavyana_mod__day5_lena:
   "Я всё ждала, когда он уйдёт, но он так и продолжал стоять в задумчивости."
   th "Похоже, опять завис."
   sl "Спокойной ночи!"
+  hide pi with dspr
   "Сказала я и задёрнула занавеску."
   me "Спокойной."
   "Похоже, Семён уселся на стул и уснул на столе."
-  th "Вот глупыш, ну ведь рядом же стоит вторая кушетка."
+  stop ambience fadeout 2
+  scene black with dissolve
   "…"
-#*И снова фон внутри ночного медпункта*
+  play ambience ambience_int_cabin_night fadein 3
+  scene bg int_aidpost_night with dissolve
   "Никак не получалось заснуть. {w} То подушка слишком жёсткая, то в одеяле запуталась, то холодно, а в одежде вообще спать неудобно."
   "Похоже, этот везунчик уже заснул. {w} Но что-то кричал во сне…"
   me "Нет!.. Не бвам… овамусь, овамусь… она.."
   "И вдруг прекратил."
+  show pi normal pioneer with dspr
   "Я одёрнула шторку."
+  show pi smile pioneer
   me "Просто плохой сон…"
   "Он посмотрел на меня и глупо улыбнулся."
   sl "Ты кричал…"
+  show pi normal pioneer
   me "И что я кричал?"
   sl "Не знаю… {w} Неразборчиво."
   me "…"
@@ -1257,8 +1274,9 @@ label slavyana_mod__day5_lena:
   me "А ты уверена, что это… что… это нормально?"
   sl "Значит, нельзя?"
   me "Нет, почему…"
-#трек trapped in dreams
-#*Ремастеред иллюстрация со Славей с закрытыми глазами в кровати с Семёном*
+  stop ambience fadeout 2
+  play music music_list["trapped_in_dreams"] fadein 3
+  scene cg d5_sl_sleep with dissolve
   "Он снял ботинки и улёгся на краешке."
   "Я нежно обняла его и положила голову ему на грудь."
   "Я чувствовала его тепло."
@@ -1276,7 +1294,7 @@ label slavyana_mod__day5_lena:
   sl "Ты такой заботливый, внимательный."
   th "Но намёки немножечко не для тебя, буду знать."
   me "Стараюсь."
-#*ремастеред иллюстрация с открытыми глазами*
+  scene cg d5_sl_sleep_2 with dspr
   sl "Ты хороший друг."
   me "Друг? Ну, да, наверное…"
   "Я чем-то обидела его? {w} Его сердце забилось быстрее."
@@ -1297,7 +1315,7 @@ label slavyana_mod__day5_lena:
   "Я засмеялась."
   me "Выходит, что и незачем."
   "Наконец, его сердце перестало бешено биться."
-#*ремастеред Иллюстрация с закрытыми*
+  scene cg d5_sl_sleep with dspr
   sl "Вот и хорошо!"
   "Я ещё крепче прижалась к нему."
   me "Не холодно?"
@@ -1305,7 +1323,7 @@ label slavyana_mod__day5_lena:
   me "Ничего, нормально."
   sl "Как тогда, с лодкой?"
   me "Там совсем другое дело было же!"
-#*ремастеред иллюстрация с открытыми*
+  scene cg d5_sl_sleep_2 with dspr
   sl "Хорошо-хорошо."
   "Я лукаво улыбнулась и заглянула ему в глаза."
   sl "Значит, точно всё в порядке?"
@@ -1317,82 +1335,123 @@ label slavyana_mod__day5_lena:
   th "Оставлю его с расспросами."
   sl "Ну хорошо. Тогда спокойной ночи!"
   me "И тебе."
-#*ремастеред Иллюстрация с закрытыми*
+  scene cg d5_sl_sleep with dspr
   "Наконец я стала засыпать."
-#конец трека
-#Фон тёмный экран
+  stop music fadeout 2
+  scene black with dissolve
   "…"
-#трек Door to nightmare
-#*Фон напротив домика Слави с помехами*
+  play music music_list["door_to_nightmare"] fadein 3
+  scene bg ext_house_of_sl_day
+  call pomehi
+  with dissolve
 #*Надо спрайт кота, любого, чтоб у него были 2 эмоции: пассивный и злой*
+  show bor normal close with dspr
   dreamgirl "Приветствую, Славя."
-  dreamgirl "Ты не можешь говорить, пока я не разрешу."
+  show bor serious close with dspr
+  dreamgirl "Прости но лучше тебе молчать, пока я не разрешу, хорошо?"
   th "Что вообще происходит?"
+  show bor normal close with dspr
   dreamgirl "Тебя наверное беспокоит, что происходит и как меня зовут. {w} Сейчас ты во сне, а меня зовут Борис."
-  bor "Но позволь. Наверное, будет лучше, если мы не будем стоять на пороге."
-#*Фон внутри домика Слави с помехами*
+  bor "Но позволь... Наверное, будет лучше, если мы не будем стоять на пороге."
+  scene bg int_house_of_sl_day
+  call pomehi
+  with dissolve
   bor "Хотя, может, ты предпочитаешь вернуться туда, откуда ты сюда пришла?"
-#*Фон внутри ночного медпункта с помехами*
+  scene bg int_aidpost_night
+  call pomehi
+  with dissolve
   bor "Я разрешаю тебе задать мне 3 вопроса, которые больше всего тебя беспокоят, а дальше ты меня больше никогда не встретишь."
   sl "Зачем ты всё это делаешь?"
   bor "М-да. Всё для тебя, я хочу тебе помочь."
   sl "С чем помочь?"
   bor "Пожалуй мне было лучше молчать про помощь… {w} Я хочу помочь вашим с Семёном отношениям, ты ведь не против? Ой!"
   bor "Ну давай уже, спрашивай последний и я ухожу."
-  
-#Выбор без очков(Как помочь?/Любит ли меня Семён?/Почему он хочет уйти из лагеря?/С нами всё будет в порядке?)
 
-#Если выбрали «как помочь?»
-  bor "Чтобы вы воссоединились вместе. Ты и он."
-  sl "А как нам воссоединиться?"
+  $ bor_answed = False
 
-#Если выбрали «любит ли меня Семён?»
-  bor "По правде говоря, он ещё сам не уверен."
-  sl "Что значит «не уверен»? У нас было так много запоминающихся моментов!"
+  menu:
+    "Как помочь?":
+      if not bor_answed:
+        $ bor_answed = True
+        bor "Чтобы вы воссоединились вместе. Ты и он."
+        sl "А как нам воссоединиться?"
+        jump slavyana_mod__day5_after_bor
+    "Любит ли меня Семён?":
+      if not bor_answed:
+        $ bor_answed = True
+        bor "По правде говоря, он ещё сам не уверен."
+        sl "Что значит «не уверен»? У нас было так много запоминающихся моментов!"
+        jump slavyana_mod__day5_after_bor
+    "Почему он хочет уйти из лагеря?":
+      if not bor_answed:
+        $ bor_answed = True
+        bor "Он тебе уже сказал почему."
+        sl "Так почему?"
+        jump slavyana_mod__day5_after_bor
+    "С нами всё будет в порядке?":
+      if not bor_answed:
+        $ bor_answed = True
+        bor "Всё зависит от его дальнейших действий. Я предвижу множество вариантов развития событий."
+        sl "И во скольких всё сложится хорошо?"
+        jump slavyana_mod__day5_after_bor
 
-#Если выбрали «почему он хочет уйти из лагеря?»
-  bor "Он тебе уже сказал почему."
-  sl "Так почему?"
+  show bor serious close
+  bor "Ты задаешь слишком много вопросов, а я разрешил только один..."
 
-#Если выбрали «с нами всё будет в порядке?»
-  bor "Всё зависит от его дальнейших действий. Я предвижу множество вариантов развития событий."
-  sl "И во скольких всё сложится хорошо?"
-
+label slavyana_mod__day5_after_bor:
   "Кот уже собирался уходить, но тут он резко обернулся и на лице его был звериный оскал."
-#конец трека
+  stop music fadeout 3
   "В комнате загорелся свет, а кот превратился в кого-то {w} знакомого…"
-#*Фон в внутри ночного медпункта*
+  play ambience ambience_int_cabin_day fadein 3
+  scene bg int_aidpost_night
+  show pi normal pioneer at cleft
+  show mt angry pioneer at cright
+  with dspr
   mt "Семён…"
-#трек Awakening power
+  stop ambience fadeout 3
+  play music music_list["awakening_power"] fadein 3
+  show mt rage pioneer at cright
   mt "Я тебя везде ищу, а ты – смылся из леса раньше времени, не пришёл ночевать и развращаешь нашу лучшую пионерку!"
   sl "Ольга Дмитриевна! Это совсем не то, что вы думаете! Я просто заболела, и Семён проводил меня сюда."
   sl "А потом мне стало холодно и… {w} Я ему говорила, чтобы он шёл к себе!"
   mt "Да-да, конечно! Значит, заболела, говоришь?"
   sl "Да…"
+  show mt angry pioneer at cright
   mt "Так вот и лечись!"
+  show mt rage pioneer at cright
   mt "А ты! Быстро со мной!"
   "Она обратилась уже к Семёну."
+  hide pi with dspr
   "Он встал и вышел, даже не взглянув и не попрощавшись."
+  hide mt with dspr
   "За ним вышла и вожатая."
-#конец трека
+  stop music fadeout 3
+  play ambience ambience_int_cabin_day fadein 3
   "Я осталась одна."
   "Ожидание тянулось бесконечность."
   "Каждая секунда длилась час."
   "А я сидела и ждала…"
   th "Надо срочно придумать оправдание!"
 
-#Выбор(Свалить вину на Семёна/Сказать правду)
-#Этот выбор повлияет на сон в конце 5 дня и реплики в начале 6 дня.
-#Если выбрали «свалить вину на Семёна»: не получает очков
-#Если выбрали «сказать правду»: +2 очка
+  menu:
+    "Свалить вину на Семёна":
+      $ sl_m_day5_make_semen_guilty = True
+    "Сказать правду":
+      $ sl_m_day5_make_semen_guilty = False
+      $ sl_m_lp += 2
+
+  stop ambience fadeout 3
+  scene black with dissolve
   "…"
-#*Фон внутри ночного медпункта*
-  "…"
-#*Ещё раз фон внутри ночного медпункта*
-  "…"
-#*И ещё раз фон внутри ночного медпункта*
+  play ambience ambience_int_cabin_day fadein 3
+  scene bg int_aidpost_night with dissolve
   "Прошло уже больше получаса. {w} Но никто не возвращался."
   "Я слишком устала и легла спать."
+  stop ambience fadeout 4
+  show blink
+  if sl_m_Full:
+      jump slavyana_mod__day6
+  jump slavyana_mod__launcher0
 
 
 
@@ -1489,9 +1548,6 @@ label slavyana_mod__day5_lena:
 
 
 #При втором прохождении выбор «Соврать»(в выборе с Леной на поляне) даёт выход на альтернативную концовку, но очков для её получения должно быть >=9 на 7 дне, иначе плохая
-  if sl_m_Full:
-      jump slavyana_mod__day6
-  jump slavyana_mod__launcher0
 
 label slavyana_mod__day5_fast_choice:
   $ day_time()
@@ -1536,4 +1592,13 @@ label slavyana_mod__day5_fast_choice:
       $ sl_m_lp += 1
     "Сходить за сумкой":
       pass
+
+  scene bg int_aidpost_night with dissolve
+  "В конце дня после того, как Ольга увела Семёна Славя решила придумать оправдание"
+  menu:
+    "Свалить вину на Семёна":
+      $ sl_m_day5_make_semen_guilty = True
+    "Сказать правду":
+      $ sl_m_day5_make_semen_guilty = False
+      $ sl_m_lp += 2
   return

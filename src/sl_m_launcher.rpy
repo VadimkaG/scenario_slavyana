@@ -281,13 +281,6 @@ label slavyana_mod__l_choice:
           $ go_to_sh = False
     # Конец временного условия
 
-    "В 4-ом дне должна быть возможность получить 2 ЛП. Но 4-го дня нету, поэтому добавить?"
-    menu:
-        "Добавить 2 ЛП":
-            $ sl_m_lp += 2
-        "Ничего не добавлять":
-            pass
-
     if sl_m_l_day == 5:
         call slavyana_mod__l_finish
         return
