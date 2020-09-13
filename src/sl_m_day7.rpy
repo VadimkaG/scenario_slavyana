@@ -59,9 +59,9 @@ label slavyana_mod__day7:
     linear 1.0 xalign 0.255
   show mt normal pioneer at cright with dissolve
   "Но тут же встретились с Ольгой Дмитриевной."
-  show mt surprise pioneer at cright
+  show mt surprise pioneer at cright with dspr
   mt "А, это вы… {w} Ну, я не буду спрашивать, где вы ночевали… {w} В общем, это…"
-  show mt sad pioneer at cright
+  show mt sad pioneer at cright with dspr
   "Вожатая была явно смущена."
   "Она с нами даже не поздоровалась, и я решила ей об этом напомнить."
   sl "И вам доброе утро, Ольга Дмитриевна."
@@ -79,7 +79,7 @@ label slavyana_mod__day7:
   play music music_list["meet_me_there"] fadein 3
   me "Последний день чего?"
   sl "Последний день смены!"
-  show pi shocked pioneer at center
+  show pi shocked pioneer at center with dspr
   "Его глаза заметались."
   me "Как? Почему?.."
   sl "А что ты удивляешься? Ты разве не знал? На линейке же объявляли."
@@ -88,10 +88,10 @@ label slavyana_mod__day7:
   "Я улыбнулась."
   me "И что делать?.."
   sl "В смысле?"
-  show pi normal pioneer at center
+  show pi normal pioneer at center with dspr
   me "Да ладно, ничего… {w} И когда отъезд?"
   sl "Вечером, часов в пять-шесть."
-  show pi smile pioneer at center
+  show pi smile pioneer at center with dspr
   me "Ну, времени ещё полно!"
   sl "Да, но у меня дела кое-какие. {w} К тому же надо Женю найти, а то она, наверное, волновалась, что меня ночью не было."
   sl "На обеде увидимся!"
@@ -201,14 +201,14 @@ label slavyana_mod__day7:
   "Семён недоговорил, потому что в этот момент дверь распахнулась и в дом вошла Женя."
   mz "Ага, вот вы где."
   sl "Да, как раз собираемся."
-  show mz laugh glasses pioneer at cleft
+  show mz laugh glasses pioneer at cleft with dspr
   mz "Вижу-вижу… Хорошо, что я не пришла минут на десять попозже, а то могла бы помешать… «сборам»."
   "Моя соседка поставила меня в очень неловкое положение."
   "Я попыталась отвлечься запихиванием вещей в сумку, но они не умещались."
   mz "Ну что, герой-любовник?"
   me "Что?"
   "Абсолютно равнодушным тоном ответил ей Семён."
-  show mz normal glasses pioneer at cleft
+  show mz normal glasses pioneer at cleft with dspr
   mz "Да ничего…"
   mz "Смотри! Теперь от твоего выбора зависишь не только ты."
   play sound sfx_close_door_1
@@ -234,7 +234,7 @@ label slavyana_mod__day7:
   me "Может быть, я поеду с тобой?"
   th "Такой вопрос поставил меня в тупик."
   sl "И что ты там будешь делать? {w} Учёба, родители… {w} Да и что люди скажут?"
-  show pi angry pioneer at cright
+  show pi angry pioneer at cright with dspr
   me "Ну, всегда можно найти выход!"
   sl "Какой же?"
   me "Придумаем!"
@@ -252,7 +252,7 @@ label slavyana_mod__day7:
   "Я ничего не ответила и продолжала собирать вещи."
 
   if words_red:
-    show pi normal pioneer at cright
+    show pi normal pioneer at cright with dspr
     me "Слушай, я всё-таки не понимаю."
     sl "Чего?"
     me "Почему ты не хочешь…"
@@ -326,7 +326,7 @@ label slavyana_mod__day7:
     sl "Но это же… {w} Это звучит просто глупо…"
     me "Конечно! Я на твоём месте отреагировал бы точно так же."
     sl "И что ты от меня ждёшь?"
-    show pi normal pioneer at cright
+    show pi normal pioneer at cright with dspr
     me "Не знаю… {w} Я просто почувствовал необходимость признаться."
     sl "Я не говорю, что ты врёшь, и психом тебя не считаю, но пойми, я не могу в это вот так поверить."
     me "Да, понимаю… {w} Я думал просто, что это поможет тебе понять мою ситуацию и мотивацию моих поступков."

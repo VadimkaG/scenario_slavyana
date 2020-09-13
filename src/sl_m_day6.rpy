@@ -95,7 +95,7 @@ label slavyana_mod__day6:
   cs "Ты уже проспала линейку, но я не стала тебя будить.{w} Тебе нужно отоспаться, чтобы организм быстрее справился с болезнью.{w} Я принесла тебе завтрак из столовой, но обед ещё не готов.{w} Так что я отойду потом на некоторое время."
   sl "Доктор, а сколько времени?"
   cs "Около 9 часов."
-  show cs smile body
+  show cs smile body with dspr
   cs "Кстати, а расскажешь, почему Ольга заперла тебя и строго-настрого запретила видеться с Семёном?"
   "Она ехидно улыбнулась."
   "Мне было очень неловко."
@@ -107,7 +107,7 @@ label slavyana_mod__day6:
   th "Оставлять меня одну с ней была не лучшая идея."
   cs "Ладно, можешь не говорить… пионерка."
   "Да, сейчас…"
-  show cs normal body
+  show cs normal body with dspr
   "Она открыла ящик стола и стала что-то искать. Достав какую-то таблетку, она протянула мне её и стакан воды, чтобы запить."
   cs "Это чтобы голова не болела."
   "Медсестра подмигнула мне."
@@ -139,9 +139,9 @@ label slavyana_mod__day6:
   cs "Герой-любовник твой пришёл."
   th "Доктор Виола, вы опять?"
   sl "Он не мой …"
-  show cs smile body
+  show cs smile body with dspr
   cs "Да? А вроде всё слышит и понимает, даже общается."
-  show cs normal body
+  show cs normal body with dspr
   cs "Славь, если честно, то лично я не нахожу ничего запретного в вашем поведении. Это природа. Но так мне наказала Ольга Дмитриевна. {w}Если хочешь поскорее освободиться, советую прилечь и расслабиться, если к ужину температура будет нормальной - отпущу. Договорились?"
   sl "Хорошо."
   "Я послушалась её совета и легла в кровать."
@@ -150,7 +150,7 @@ label slavyana_mod__day6:
   pause 2
   "Заснуть никак не получалось."
   scene bg int_aidpost_day
-  show cs normal body
+  show cs normal body with dspr
   play ambience ambience_int_cabin_day fadein 3
   show unblink
   pause 2
@@ -165,16 +165,16 @@ label slavyana_mod__day6:
   sl "Да, но мне уже лучше."
   mt "Это хорошо, но стоит подождать до завтра. {w}Лучше всего до вечера."
   sl "Но мне же хотя бы ещё вещи собрать надо."
-  show mt smile panama pioneer at cright
+  show mt smile panama pioneer at cright with dspr
   mt " Успеешь. Ладно, я пойду, а то за этим товарищем не уследишь."
   "Она уже собиралась уходить, но вдруг что-то вспомнила."
-  show mt normal panama pioneer at cright
+  show mt normal panama pioneer at cright with dspr
   mt "Ключи."
   sl "Какие ключи?"
   mt "Твои ключи. Как вы медпункт иначе бы открыли?"
   sl "Да..."
   "Я отдала ей ключи."
-  show mt smile panama pioneer at cright
+  show mt smile panama pioneer at cright with dspr
   mt "Не расстраивайся. Завтра всё равно пришлось бы их сдавать и всё равно они тебе больше не понадобятся."
   hide mt with dspr
   cs "Прости Славя, сама всё видишь."
@@ -335,7 +335,7 @@ label slavyana_mod__day6:
   me "Что?!"
   sl "Ничего... {w}Просто я сейчас похожа на принцессу, которую прекрасный принц похитил из замка злой колдуньи."
   "Семён серьёзно посмотрел на меня."
-  show pi smile pioneer
+  show pi smile pioneer with dspr
   "И улыбнулся."
   me "Да... Аналогия {w}прослеживается."
   sl "И у принцесс обычно не бывает выбора в таких ситуациях."
@@ -351,7 +351,7 @@ label slavyana_mod__day6:
     "Хотела сказать я, но посчитала это слишком криповым."
     th "Криповым? Какое-то странное, выдуманное мной слово."
   
-  show pi normal pioneer
+  show pi normal pioneer with dspr
   me "Знаешь, возможно, я был неправ."
   "Я удивлённо посмотрела на него."
   me "Мы действительно ничего не добьёмся, сидя здесь. {w}Даже не так! Это просто глупо и по-детски, тут ты права."
@@ -374,7 +374,7 @@ label slavyana_mod__day6:
   "Сказала она злобно."
   mt "И есть тебе, что сказать в своё оправдание?"
   "Обратилась она к Семёну"
-  show pi serious pioneer at cright
+  show pi serious pioneer at cright with dspr
 
   # Если ЛП больше или равно 9 и не свалили вину на семена
   if sl_m_lp >= 9 and not sl_m_day5_make_semen_guilty:
@@ -395,37 +395,37 @@ label slavyana_mod__day6:
     me "Мы ничего такого не делали, чтобы перед вами оправдываться!"
     $ setEndRed();
 
-  show mt surprise pioneer at cleft
+  show mt surprise pioneer at cleft with dspr
   mt "Да? {w}Ну ладно. То есть ты считаешь это всё нормальным? Хорошо..."
   "Сейчас она глядела прямо на меня."
   mt "Иди к себе. {w}Я понимаю, что ты ни в чём не виновата."
   "Я опустила глаза и сжала руку Семёна."
-  show mt angry pioneer at cleft
+  show mt angry pioneer at cleft with dspr
   mt "Славя!"
   me "Как видите, она не хочет."
   mt "Чем ты её так охмурил?"
   me "Да ничем, боже мой!"
   "Семён явно начал заводиться."
   me "Почему вы считаете, что мы сделали что-то неправильное? {w}И вообще! Ничего мы не делали."
-  show mt grin pioneer at cleft
+  show mt grin pioneer at cleft with dspr
   mt "То-то я не видела!"
   th "А что она могла увидеть? Не выдумывает ли наша Оленька?"
   me "И что же вы видели?"
-  show mt normal pioneer at cleft
+  show mt normal pioneer at cleft with dspr
   "Она замялась, но почти сразу же ответила тем же тоном:"
   mt "Достаточно."
   me "Хорошо же вы выводы делаете. Вам бы в НКВД работать."
-  show mt rage pioneer at cleft
+  show mt rage pioneer at cleft with dspr
   mt "Не хами мне!"
   me "И не собирался даже."
-  show mt angry pioneer at cleft
+  show mt angry pioneer at cleft with dspr
   mt "В общем, я не желаю дальше вести бессмысленные споры. Ты наказан до конца смены."
   me "О, правда? И как же?"
   mt "Будешь сидеть под замком!"
   me "А если не соглашусь?"
-  show mt surprise pioneer at cleft
+  show mt surprise pioneer at cleft with dspr
   "Оля удавленно посмотрела на Семёна"
-  show mt angry pioneer at cleft
+  show mt angry pioneer at cleft with dspr
   mt "Что значит «не соглашусь»?"
   "Медленно произнесла вожатая."
   "Похоже, она не ожидала такого ответа."
@@ -433,29 +433,29 @@ label slavyana_mod__day6:
   mt "Но ты не можешь! Настоящий пионер..."
   me "Значит, я фальшивый!"
   "Ольга замолчала, совно собираясь с мыслями."
-  show mt surprise pioneer at cleft
+  show mt surprise pioneer at cleft with dspr
   mt "Думаешь, я не смогу тебя заставить?"
   th "Это начинает потихоньку надоедать."
-  show pi smile pioneer at cright
+  show pi smile pioneer at cright with dspr
   me "И каким же образом?"
   "Он рассмеялся."
-  show mt angry pioneer at cleft
+  show mt angry pioneer at cleft with dspr
   mt "Знаешь что!"
-  show pi normal pioneer at cright
+  show pi normal pioneer at cright with dspr
   me "Что?"
   mt "Я... {w}Я... {w}По месту учёбы на тебя характеристику пошлю! Да тебя в комсомол не примут! В партию не возьмут!"
   mt "Короче говоря, у тебя всё равно выбора нет!"
   th "Ну это уж слишком! Тем более ни за что!"
   sl "А почему вы изначально правы, Ольга Дмитриевна? Что, Семён всегда во всём виноват? Что такого произошло? Что он... что мы сделали не так? Вы хоть сами знаете, в чём нас обвиняете?"
   sl "А если бы на моём месте была другая, вы бы вели себя точно так же?"
-  show mt surprise pioneer at cleft
+  show mt surprise pioneer at cleft with dspr
   mt "Славя, ты же знаешь..."
   sl "В том-то и дело, что я знаю! Знаю вас, знаю, что Семён ни в чём не виноват. Знаю, что у вас к нему предвзятое отношение. Не понятно почему, кстати. А ведь он старается!"
   sl "Да, это иногда выглядит немного неуклюже, но я знаю, что он вкладывает все силы и всю душу. Что же тогда, вы будете его винить просто за то, что он такой?"
   sl "А почему вы вообще сразу решили, что я не виновата? Я что, вся такая правильная, а может быть вы чего-то не знаете обо мне?"
   sl "Ни один человек не идеален, но Семён хотя бы пытается исправиться, а вы только мешаете и наказываете его за глупые случайности. Он жертва обстоятельств. Как вы не понимаете?"
   "Наконец этот поток гнева прекратился."
-  show mt normal pioneer at cleft
+  show mt normal pioneer at cleft with dspr
   mt "Ладно, не знаю, что уж с вами и делать..."
   mt "Но не думайте, что я одобряю ваше поведение!"
   hide mt with dissolve
@@ -464,7 +464,7 @@ label slavyana_mod__day6:
   play ambience ambience_camp_center_day fadein 3
   "Только сейчас я заметила, что вокруг нас собрались пионеры."
   "А затем они стали расходиться."
-  show pi normal pioneer at cright
+  show pi normal pioneer at cright with dspr
   sl "Знаешь, по-моему, мы несколько переборщили."
   "Я улыбнулась"
   me "Нет, ты что! {w}Сам бы я с ней спорил и спорил до глубокой ночи, а ты так чётко и ясно всё расписала... {w}Я бы и за неделю таких слов не подобрал!"
@@ -480,7 +480,7 @@ label slavyana_mod__day6:
   me "А что если я предложу вернуться в лес?"
   th "Смысла в этом уже нет, но я не против."
   me "Ну понимаешь, просто иногда..."
-  show pi smile pioneer at cright
+  show pi smile pioneer at cright with dspr
   sl "Хорошо, пойдём!"
   "Семён усмехнулся"
   sl "Что?"

@@ -147,7 +147,7 @@ label slavyana_mod__day5:
       sl "Да, говорила."
       un "Тогда вместе пойдём, ты же не против?"
       sl "Конечно, я тебе вчера как раз предлагала погулять вместе."
-  show un smile pioneer
+  show un smile pioneer with dspr
   un "Хорошо."
   "Она улыбнулась, и мы вошли в столовую."
 
@@ -160,11 +160,11 @@ label slavyana_mod__day5:
   sl "Приятного аппетита."
   un "Спасибо."
   sl "Я тут подумала… Может, ещё позовём с собой Семёна?"
-  show un surprise pioneer
+  show un surprise pioneer with dspr
   un "Куда?"
   "Похоже, она очень удивилась."
   sl "За земляникой, конечно же."
-  show un shy pioneer
+  show un shy pioneer with dspr
   un "А… Н-ну да, можно."
   "Она покраснела."
   sl "Ладно, я тогда пойду. У меня ещё дела есть, а за земляникой после обеда пойдём. Как раз за корзинками схожу."
@@ -232,7 +232,7 @@ label slavyana_mod__day5:
     show mi normal pioneer
     with dissolve2
     sl "Привет Мику, помощь нужна?"
-    show mi smile pioneer
+    show mi smile pioneer with dspr
     mi "Привет. Славечка! Да я, вот, уже заканчиваю, но можешь помочь. Осталось помыть полы в подсобке и протереть инструменты. Я уже начала протирать, так что тебе остались струнные, барабаны и рояль. Подсобкой я займусь сама."
     mi "В углу стоит ведро, там же и тряпки."
     hide mi with dissolve
@@ -313,7 +313,7 @@ label slavyana_mod__day5:
     sl "Привет."
     un "Привет, а что, уже обед?"
     sl "Нет, но скоро будет. После него пойдём за земляникой."
-    show un smile sport far
+    show un smile sport far with dspr
     un "Хорошо."
     "Она улыбнулась, и мы договорились встретиться на площади."
     stop ambience fadeout 1
@@ -330,12 +330,12 @@ label slavyana_mod__day5:
   show dv normal pioneer2 with dissolve
   "Как ни странно, ко мне пожаловала сама Двачевская."
   sl "Привет. Что-то хотела?"
-  show dv laugh pioneer2
+  show dv laugh pioneer2 with dspr
   dv "Да. Тут такое дело…"
   "Она указала на спину своей рубашки."
   dv "Мне бы форму новую, старая в стирке."
   sl "Сейчас."
-  show dv normal pioneer2
+  show dv normal pioneer2 with dspr
   "Я улыбнулась. Хоть на этот раз у неё никаких злых намерений ко мне!"
   "Я открыла шкаф и принялась искать форму для Алисы."
   "Здесь было всё необходимое: юбки, шорты, рубашки, кумачовые галстуки, плащи на случай дождя, палатка на случай длительного похода (который не предполагается в последние дни). {w} И даже военный камуфляж от папы."
@@ -351,10 +351,10 @@ label slavyana_mod__day5:
   sl "Да не надо, мы сами справимся."
   th "Наверняка очередную проделку задумала и нам помешает."
   "Подумала я."
-  show dv smile pioneer2
+  show dv smile pioneer2 with dspr
   dv "Всё равно мне делать нечего. Да и на остров посмотреть хочу."
   "Она продолжала настаивать."
-  show dv normal pioneer2
+  show dv normal pioneer2 with dspr
   sl "Да не стоит, спасибо. Мы как-нибудь сами."
   "Но мой голос выдавал меня."
   "Вот чего я точно не хотела, так это видеть Двачевскую с нами на одном острове."
@@ -393,7 +393,7 @@ label slavyana_mod__day5:
   show un normal pioneer at cleft
   with dissolve
   "Зайдя в столовую, я обнаружила свободные места с Семёном."
-  show pi normal pioneer at cright
+  show pi normal pioneer at cright with dspr
   sl "Можно?"
   "Я улыбнулась."
   me "А? {w} Да, конечно!"
@@ -473,7 +473,7 @@ label slavyana_mod__day5:
   "Я протянула Семёну корзинку."
   sl "Нам бы надо разделиться, так быстрее управимся."
   me "Да, наверное."
-  show un surprise pioneer
+  show un surprise pioneer with dspr
   un "Но корзинки-то только две."
   sl "Да, точно, это я недоглядела!"
   un "И как мы разделимся?"
@@ -484,7 +484,7 @@ label slavyana_mod__day5:
       me "Одна корзинка у меня, одна - у вас; всё очевидно."
       sl "Нет, давай я с тобой пойду!"
       "Я улыбнулась."
-      show pi smile pioneer at right
+      show pi smile pioneer at right with dspr
       me "Давай…"
       th "Мне показалось, или в его глазах мелькнула искра радости?"
       hide un with dspr
@@ -589,15 +589,17 @@ label slavyana_mod__day5:
   show pi normal pioneer at right
   with dissolve
   "Путь обратно занял гораздо меньше времени."
+  show pi normal pioneer at right:
+    linear 1.0 ypos 1.0
   "Семён пришвартовал лодку и обессиленно рухнул на землю."
   "Мы склонились над ним."
+  hide pi
   sl "Если тебе было так тяжело, то сказал бы!"
   "У меня был некоторый навык гребли на лодке."
   un "Да…"
   me "Да нет, ничего… {w} Сейчас полежу и всё пройдёт…"
   sl "Ладно, тогда отнеси корзинки, пожалуйста, Ольге Дмитриевне, а то у нас ещё дела есть."
   me "Да, конечно."
-  hide pi with dissolve
   "Я поставила корзинки рядом с ним, и мы отправились вместе с Леной дальше."
   un "А у нас есть ещё какие-то дела?"
   "Спросила она меня пройдя некоторое расстояние"
@@ -615,9 +617,9 @@ label slavyana_mod__day5:
   with dissolve
   "На полпути к библиотеке, Лена вдруг решила уточнить у меня, откуда взялась мука в библиотеке."
   sl "Не знаю, но ты можешь спросить это у Жени, если тебе так интересно." 
-  show un laugh pioneer
+  show un laugh pioneer with dspr
   "Она рассмеялась."
-  show un smile pioneer
+  show un smile pioneer with dspr
   mt "Девочки!"
   show un smile pioneer:
     linear 1.0 xalign 0.255
@@ -625,16 +627,16 @@ label slavyana_mod__day5:
   "Внезапно нас окликнула Ольга Дмитриевна."
   mt "Спасибо вам, что собрали землянику. Семён передавал вам благодарность, за то, что выполнили за него всю работу."
   "Видимо она так шутит."
-  show mt smile pioneer panama at cright
+  show mt smile pioneer panama at cright with dspr
   mt "Шучу конечно, но Семён действительно благодарил вас. {w} И ещё, чуть не забыла. Раз он не слишком устал после сбора ягод, я направила его собирать ингредиенты для…"
-  show mt normal pioneer panama at cright
+  show mt normal pioneer panama at cright with dspr
   un "Ольга Дмитриевна, Славя мне уже сказала, зачем."
-  show mt grin pioneer panama at cright
+  show mt grin pioneer panama at cright with dspr
   mt "А, ты уже вкурсе. Ну ладно, тебе можно. В общем, я снимаю с вас поручение и перекладываю на вас новое."
   mt "Скоро ужин, а после него костёр. Надо, чтобы кто-нибудь убрался на поляне."
   mt "Ещё какие-нибудь вопросы?"
   sl "Ольга Дмитриевна, Семён действительно устал после гребли, может всё же кто-то другой займётся?"
-  show mt normal pioneer panama at cright
+  show mt normal pioneer panama at cright with dspr
   mt "А кто? Все заняты. Тем более пионер ведь всегда готов."
   sl "Ладно…"
   mt "Вот и хорошо, а у меня ещё дела. Торопитесь!"
@@ -685,7 +687,7 @@ label slavyana_mod__day5_change_clothes:
   sl "А что у тебя там?"
   me "А это…"
   "Он засмущался."
-  show pi smile pioneer
+  show pi smile pioneer with dspr
   me "Да так, ничего особенного…"
   "Он как-то странно захихикал."
   me "Мне пора…"
@@ -740,16 +742,16 @@ label slavyana_mod__day5_change_clothes_after:
 label slavyana_mod__day5_lena_true:
   $ sl_m_day5_cleaning_told_truth = True
   sl "Я ещё точно не знаю, не уверена, но… наверное. А почему ты интересуешься?"
-  show un shy pioneer
+  show un shy pioneer with dspr
   un "Да нет, просто…"
   "Она засмущалась.  Неожиданно."
   un "Просто я тоже люблю его и хотела узнать твоё к нему отношение."
   "Да, я конечно замечала, что Лена иногда ведёт себя необычно, но чтобы любовь..."
   un "Заметно, что Семён отвечает тебе взаимностью, поэтому не буду вам мешать. Мы же всё-таки подруги."
   play sound sfx_scary_sting
-  show un evil_smile pioneer
+  show un evil_smile pioneer with dspr
   un "{i}Пока{/i}."
-  show un normal pioneer
+  show un normal pioneer with dspr
   
   "Дальше мы шли молча."
   scene bg ext_path_day
@@ -760,7 +762,7 @@ label slavyana_mod__day5_lena_true:
   show un normal pioneer
   with dissolve
   un "Ладно, я пойду. Удачи тебе."
-  show un smile pioneer
+  show un smile pioneer with dspr
   un "Не бери себе в голову то, что я там наговорила. Давай останемся подругами."
   "Она улыбнулась."
   sl "Пустяки. Удачи тебе."
@@ -772,7 +774,7 @@ label slavyana_mod__day5_lena_lie:
   sl "Никак я на него не смотрю. С чего ты взяла?"
   un "Ну да, ты ещё врать будешь."
   sl "Нет."
-  show un rage pioneer
+  show un rage pioneer with dspr
   un "После этого ещё подругой называешься. Даже мне правду в глаза не можешь сказать!"
   sl "Леночка, успокойся."
   un "Я спокойна. Но помни, что я за вами слежу."
@@ -836,7 +838,7 @@ label slavyana_mod__day5_lena:
   sl "Это плохо."
   me "Ещё бы…"
   sl "Ты же помнишь, что после ужина мы все в поход идём? Уже собрался?"
-  show pi shocked pioneer at cleft
+  show pi shocked pioneer at cleft with dspr
   "Семён резко встрепенулся."
   me "Чего? Куда?"
   sl "Поход…"
@@ -921,16 +923,16 @@ label slavyana_mod__day5_lena:
   "В прошлый раз было то же самое, так что я уже запомнила её речь."
   mt "...Всему этому нам с вами предстоит научиться!"
   "По толпе пионеров прошёл недобрый шёпот."
-  show mt normal pioneer far
+  show mt normal pioneer far with dspr
   mt "Идти будем парами. {w} Так что если вы ещё не выбрали себе партнёра, сейчас самое время!"
   "Пионеры начали быстро группироваться по двое."
   show mt normal pioneer with dspr
   "Я подошла к вожатой, чтобы отпроситься."
   sl "Оля, я, пожалуй, в этот раз пропущу костёр. Можно?"
-  show mt surprise pioneer
+  show mt surprise pioneer with dspr
   mt "Но почему? Это же общелагерное мероприятие."
   sl "Мне надо побыть одной сегодня, что-то голова слегка побаливает. Просто знайте: если что - я пойду к себе в домик отлежаться."
-  show mt normal pioneer
+  show mt normal pioneer with dspr
   mt "Ох, ну ладно. Я на тебя рассчитываю, как на образцового пионера."
   sl "Конечно, Ольга Дмитриевна."
   show mt normal pioneer far with dspr
@@ -964,12 +966,12 @@ label slavyana_mod__day5_lena:
   show mi normal pioneer with dissolve
   "Затем я подсела к Мику."
   sl "Привет. Как всё проходит?"
-  show mi dontlike pioneer
+  show mi dontlike pioneer with dspr
   mi "Никак. Я забыла гитару, а Ольга Дмитриевна не дала за ней сходить… Может быть, если бы я попросила тебя, она разрешила, а так не разрешает."
   sl "Жалко. Я бы обязательно послушала, как ты играешь."
-  show mi smile pioneer
+  show mi smile pioneer with dspr
   mi "Спасибо. {w}{nw}"
-  show mi sad pioneer
+  show mi sad pioneer with dspr
   extend "Но это слабое утешение."
   show el normal pioneer at right with dspr
   "Ко мне подошёл Электроник."
@@ -1003,7 +1005,7 @@ label slavyana_mod__day5_lena:
   "Наконец, Ольга Дмитриевна разожгла костёр."
   "Огонь разгорался недолго: сначала вспыхнули газеты, а затем и брёвна, которые собрали мальчики."
   "Я подсела к Семёну."
-  show pi normal pioneer
+  show pi normal pioneer with dspr
   sl "О чём думаешь?"
   me "Да так, ни о чём… {w} Наслаждаюсь походом."
   sl "Что-то не похоже."
@@ -1249,11 +1251,11 @@ label slavyana_mod__day5_lena:
   "И вдруг прекратил."
   show pi normal pioneer with dspr
   "Я одёрнула шторку."
-  show pi smile pioneer
+  show pi smile pioneer with dspr
   me "Просто плохой сон…"
   "Он посмотрел на меня и глупо улыбнулся."
   sl "Ты кричал…"
-  show pi normal pioneer
+  show pi normal pioneer with dspr
   me "И что я кричал?"
   sl "Не знаю… {w} Неразборчиво."
   me "…"
@@ -1395,7 +1397,7 @@ label slavyana_mod__day5_lena:
         sl "И во скольких всё сложится хорошо?"
         jump slavyana_mod__day5_after_bor
 
-  show bor serious close
+  show bor serious close with dspr
   bor "Ты задаешь слишком много вопросов, а я разрешил только один..."
 
 label slavyana_mod__day5_after_bor:
@@ -1410,15 +1412,15 @@ label slavyana_mod__day5_after_bor:
   mt "Семён…"
   stop ambience fadeout 3
   play music music_list["awakening_power"] fadein 3
-  show mt rage pioneer at cright
+  show mt rage pioneer at cright with dspr
   mt "Я тебя везде ищу, а ты – смылся из леса раньше времени, не пришёл ночевать и развращаешь нашу лучшую пионерку!"
   sl "Ольга Дмитриевна! Это совсем не то, что вы думаете! Я просто заболела, и Семён проводил меня сюда."
   sl "А потом мне стало холодно и… {w} Я ему говорила, чтобы он шёл к себе!"
   mt "Да-да, конечно! Значит, заболела, говоришь?"
   sl "Да…"
-  show mt angry pioneer at cright
+  show mt angry pioneer at cright with dspr
   mt "Так вот и лечись!"
-  show mt rage pioneer at cright
+  show mt rage pioneer at cright with dspr
   mt "А ты! Быстро со мной!"
   "Она обратилась уже к Семёну."
   hide pi with dspr
