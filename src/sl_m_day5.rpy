@@ -1207,11 +1207,13 @@ label slavyana_mod__day5_lena:
   sl "Всё в порядке!"
   me "Я всё-таки…"
   sl "Не надо, говорю же!"
+  show pi smile pioneer with dspr
   me "Ты же меня не выгонишь."
   "Он лукаво улыбнулся."
   sl "Ладно, но если заразишься, пеняй на себя!"
   th "Страшная угроза…"
   sl "И чем займёмся?"
+  show pi normal pioneer with dspr
   "Он достал из ящика карты."
   me "В дурака?"
   th "Я не азартный игрок, но мы ведь только на интерес."
@@ -1356,10 +1358,12 @@ label slavyana_mod__day5_lena:
   dreamgirl "Тебя наверное беспокоит, что происходит и как меня зовут. {w} Сейчас ты во сне, а меня зовут Борис."
   bor "Но позволь... Наверное, будет лучше, если мы не будем стоять на пороге."
   scene bg int_house_of_sl_day
+  show bor normal close
   call pomehi
   with dissolve
   bor "Хотя, может, ты предпочитаешь вернуться туда, откуда ты сюда пришла?"
   scene bg int_aidpost_night
+  show bor normal close
   call pomehi
   with dissolve
   bor "Я разрешаю тебе задать мне 3 вопроса, которые больше всего тебя беспокоят, а дальше ты меня больше никогда не встретишь."
@@ -1369,38 +1373,20 @@ label slavyana_mod__day5_lena:
   bor "Пожалуй мне было лучше молчать про помощь… {w} Я хочу помочь вашим с Семёном отношениям, ты ведь не против? Ой!"
   bor "Ну давай уже, спрашивай последний и я ухожу."
 
-  $ bor_answed = False
-
   menu:
     "Как помочь?":
-      if not bor_answed:
-        $ bor_answed = True
-        bor "Чтобы вы воссоединились вместе. Ты и он."
-        sl "А как нам воссоединиться?"
-        jump slavyana_mod__day5_after_bor
+      bor "Чтобы вы воссоединились вместе. Ты и он."
+      sl "А как нам воссоединиться?"
     "Любит ли меня Семён?":
-      if not bor_answed:
-        $ bor_answed = True
-        bor "По правде говоря, он ещё сам не уверен."
-        sl "Что значит «не уверен»? У нас было так много запоминающихся моментов!"
-        jump slavyana_mod__day5_after_bor
+      bor "По правде говоря, он ещё сам не уверен."
+      sl "Что значит «не уверен»? У нас было так много запоминающихся моментов!"
     "Почему он хочет уйти из лагеря?":
-      if not bor_answed:
-        $ bor_answed = True
-        bor "Он тебе уже сказал почему."
-        sl "Так почему?"
-        jump slavyana_mod__day5_after_bor
+      bor "Он тебе уже сказал почему."
+      sl "Так почему?"
     "С нами всё будет в порядке?":
-      if not bor_answed:
-        $ bor_answed = True
-        bor "Всё зависит от его дальнейших действий. Я предвижу множество вариантов развития событий."
-        sl "И во скольких всё сложится хорошо?"
-        jump slavyana_mod__day5_after_bor
+      bor "Всё зависит от его дальнейших действий. Я предвижу множество вариантов развития событий."
+      sl "И во скольких всё сложится хорошо?"
 
-  show bor serious close with dspr
-  bor "Ты задаешь слишком много вопросов, а я разрешил только один..."
-
-label slavyana_mod__day5_after_bor:
   "Кот уже собирался уходить, но тут он резко обернулся и на лице его был звериный оскал."
   stop music fadeout 3
   "В комнате загорелся свет, а кот превратился в кого-то {w} знакомого…"
@@ -1438,6 +1424,7 @@ label slavyana_mod__day5_after_bor:
   menu:
     "Свалить вину на Семёна":
       $ sl_m_day5_make_semen_guilty = True
+      $ sl_m_lp -= 3
     "Сказать правду":
       $ sl_m_day5_make_semen_guilty = False
       $ sl_m_lp += 2
@@ -1573,16 +1560,14 @@ label slavyana_mod__day5_fast_choice:
   show un evil_smile pioneer far
   with dissolve
   "Во время уборки поляны перед костром, Лена заговорила об отношениях"
-  menu:
-    "Соврать":
-      $ sl_m_day5_cleaning_told_truth = False
-      if persistent.slavyana_mod__day5_bad_end:
-        $ setEndBlue()
-      else:
-        $ persistent.slavyana_mod__day5_bad_end = True
-        $ setEndRed(True)
-    "Сказать правду":
-      $ sl_m_day5_cleaning_told_truth = True
+  if sl_m_lp < 4:
+    $ sl_m_day5_cleaning_told_truth = False
+  else:
+    menu:
+      "Соврать":
+        $ sl_m_day5_cleaning_told_truth = False
+      "Сказать правду":
+        $ sl_m_day5_cleaning_told_truth = True
 
   $ night_time()
   $ persistent.sprite_time = "night"
@@ -1600,6 +1585,7 @@ label slavyana_mod__day5_fast_choice:
   menu:
     "Свалить вину на Семёна":
       $ sl_m_day5_make_semen_guilty = True
+      $ sl_m_lp -= 3
     "Сказать правду":
       $ sl_m_day5_make_semen_guilty = False
       $ sl_m_lp += 2

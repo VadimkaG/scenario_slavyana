@@ -106,7 +106,7 @@ label slavyana_mod__day6:
   cs "А откуда ты знаешь, что я могу о чём-то не том думать."
   th "Оставлять меня одну с ней была не лучшая идея."
   cs "Ладно, можешь не говорить… пионерка."
-  "Да, сейчас…"
+  cs "Да, сейчас…"
   show cs normal body with dspr
   "Она открыла ящик стола и стала что-то искать. Достав какую-то таблетку, она протянула мне её и стакан воды, чтобы запить."
   cs "Это чтобы голова не болела."
@@ -166,7 +166,7 @@ label slavyana_mod__day6:
   mt "Это хорошо, но стоит подождать до завтра. {w}Лучше всего до вечера."
   sl "Но мне же хотя бы ещё вещи собрать надо."
   show mt smile panama pioneer at cright with dspr
-  mt " Успеешь. Ладно, я пойду, а то за этим товарищем не уследишь."
+  mt "Успеешь. Ладно, я пойду, а то за этим товарищем не уследишь."
   "Она уже собиралась уходить, но вдруг что-то вспомнила."
   show mt normal panama pioneer at cright with dspr
   mt "Ключи."
@@ -269,13 +269,13 @@ label slavyana_mod__day6:
   th "Но абсолютно некомпетентный!"
   if words_red:
     th "А я, дура, доверилась ему."
+
+  if sl_m_lp < 8:
+    jump slavyana_mod__day6_not_worth_it
+
   menu:
     "Не стоило идти с ним":
-      "В любом случае, я уже пошла с ним, это будет бестактно: уйти, ничего не сказав."
-      "Может, он всё-таки исправится."
-      "Я хочу дать ему шанс."
-      stop ambience fadeout 1
-      scene bg black with dissolve
+      pass
     "Он милый, но не смекалистый":
       $ sl_m_lp += 1
       "Но всё-таки он хороший. И я не жалею ни о чём."
@@ -289,6 +289,15 @@ label slavyana_mod__day6:
         "Именно поэтому я не прогнала его в медпункте."
       "Именно {b}поэтому{/b} я сейчас нахожусь здесь и жду его. Ведь я не могу иначе. И он тоже не может."
       stop music fadeout 3
+      jump slavyana_mod__day6_not_worth_after
+
+label slavyana_mod__day6_not_worth_it:
+  "В любом случае, я уже пошла с ним, это будет бестактно: уйти, ничего не сказав."
+  "Может, он всё-таки исправится."
+  "Я хочу дать ему шанс."
+  stop ambience fadeout 1
+
+label slavyana_mod__day6_not_worth_after:
 
   scene bg black with dissolve
 
@@ -432,7 +441,7 @@ label slavyana_mod__day6:
   me "То и значит."
   mt "Но ты не можешь! Настоящий пионер..."
   me "Значит, я фальшивый!"
-  "Ольга замолчала, совно собираясь с мыслями."
+  "Ольга замолчала, словно собираясь с мыслями."
   show mt surprise pioneer at cleft with dspr
   mt "Думаешь, я не смогу тебя заставить?"
   th "Это начинает потихоньку надоедать."
@@ -715,7 +724,6 @@ label slavyana_mod__day6:
   scene bg ext_polyana_day with dissolve
   play ambience ambience_forest_day fadein 3
   sl "Это было чудесно!"
-  show pi normal pioneer with dissolve
   me "Да..."
   "Мы ещё некоторое время лежали рядом."
   sl "Что-то холодно."
@@ -759,11 +767,12 @@ label slavyana_mod__day6_fast_choise:
   scene bg ext_polyana_day with dissolve
   "День шестой."
   "На поляне семен ушел за едой. Славя осталась одна и размышляла."
-  menu:
-    "Не стоило идти с ним":
-      pass
-    "Он милый, но не смекалистый":
-      $ sl_m_lp += 1
+  if sl_m_lp >= 8:
+    menu:
+      "Не стоило идти с ним":
+        pass
+      "Он милый, но не смекалистый":
+        $ sl_m_lp += 1
 
   if sl_m_lp >= 9 and not sl_m_day5_make_semen_guilty:
     if sl_m_day5_cleaning_told_truth:

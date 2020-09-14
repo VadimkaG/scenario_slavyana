@@ -392,6 +392,7 @@ label slavyana_mod__settings2:
                 $ persistent.sl_m_day3 = False
                 $ persistent.sl_m_hidden = False
                 $ persistent.sl_m_not_fst_hidden = False
+                $ persistent.slavyana_mod__bad_end = False
                 $ sl_m_lp = 0
                 jump slavyana_mod__settings
             "Нет, постойте!":
@@ -427,13 +428,14 @@ label slavyana_mod__settings2:
         scene black with dissolve2
         $ renpy.pause(2, hard=True)
         play music music_list["a_promise_from_distant_days"] fadein 3
-        $ renpy.show('credits_sl_m credits_sl_m_text', [sl_m_ending_transform], layer='widgetoverlay')
-        show cg d1_sl_dinner_0 behind credits with dissolve2
-        $ renpy.pause(60, hard=True)  
-        stop music fadeout 3
-        scene black with dissolve2
-        $ renpy.hide('credits_sl_m credits_sl_m_text', layer='widgetoverlay')
-        jump slavyana_mod__settings0
+        jump slavyana_mod__credits
+        #$ renpy.show('credits_sl_m credits_sl_m_text', [sl_m_ending_transform], layer='widgetoverlay')
+        #show cg d1_sl_dinner_0 behind credits with dissolve2
+        #$ renpy.pause(60, hard=True)  
+        #stop music fadeout 3
+        #scene black with dissolve2
+        #$ renpy.hide('credits_sl_m credits_sl_m_text', layer='widgetoverlay')
+        #jump slavyana_mod__settings0
 
 #Сделано FireBoTer'ом
 #Дизайн - Nenver Kradovich, FireBoTer

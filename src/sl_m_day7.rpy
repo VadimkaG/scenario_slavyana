@@ -15,7 +15,7 @@ label slavyana_mod__day7:
   "Перед глазами пронеслись события прошлой но…"
   th "Так, стоп! Это было днём."
   if persistent.sl_m_hen_txt:
-    scene cg d7_sl_morning
+    scene cg d7_sl_morning_2 with dissolve
   else:
     show pi normal pioneer close at center with dissolve
   sl "Доброе утро!"

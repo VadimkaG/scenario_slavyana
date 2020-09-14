@@ -56,7 +56,8 @@ label slavyana_mod__epilogue:
     call slavyana_mod__ending
     #lk"Данная концовка основана на моде «Альтернативная концовка Слави»"
     #*Титры на фоне ворот Совёнка под трек «Everlastingsummer»*
-    play music music_list["everlasting_summer"]
+    play music music_list["everlasting_summer"] fadein 4
+    pause 1
     scene bg ext_camp_entrance_day behind credits with dissolve2
     jump slavyana_mod__credits
 
@@ -194,8 +195,9 @@ label slavyana_mod__epilogue:
     #hide achiv
     call slavyana_mod__ending
     #*Титры на фоне ночных ворот Совёнка под трек «410»*
+    play music music_list["410"] fadein 4
+    pause 1
     scene bg ext_camp_entrance_night with dissolve2
-    play music music_list["410"]
     jump slavyana_mod__credits
 
   if words_green:
@@ -345,8 +347,9 @@ label slavyana_mod__epilogue:
     #hide achiv
     call slavyana_mod__ending
     #*Титры на фоне заснеженного Совёнка под трек «Everlastingsummer»*
+    play music music_list["everlasting_summer"] fadein 4
+    pause 1
     scene bg ext_camp_upview_snow with dissolve2
-    play music music_list["everlasting_summer"]
     jump slavyana_mod__credits
 
 label slavyana_mod__ending:
@@ -364,5 +367,8 @@ label slavyana_mod__credits:
   $ renpy.show('credits_sl_m credits_sl_m_text', [sl_m_ending_transform], layer='widgetoverlay')
   $ renpy.pause(90, hard=True)
   $ renpy.hide('credits_sl_m credits_sl_m_text', layer='widgetoverlay')
+  stop music fadeout 4
+  scene black with dissolve2
+  pause 3
 
   jump slavyana_mod__launcher0
