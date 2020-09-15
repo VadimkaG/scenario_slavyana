@@ -85,17 +85,17 @@ label slavyana_mod__day6:
   pause 2
   play ambience ambience_int_cabin_day fadein 3
   scene bg int_aidpost_day
-  show cs normal body
+  show cs normal
   call pomehi
   with dissolve
   cs "Проснулась… пионерка?"
   scene bg int_aidpost_day
-  show cs normal body
+  show cs normal
   with dspr
   cs "Ты уже проспала линейку, но я не стала тебя будить.{w} Тебе нужно отоспаться, чтобы организм быстрее справился с болезнью.{w} Я принесла тебе завтрак из столовой, но обед ещё не готов.{w} Так что я отойду потом на некоторое время."
   sl "Доктор, а сколько времени?"
   cs "Около 9 часов."
-  show cs smile body with dspr
+  show cs smile with dspr
   cs "Кстати, а расскажешь, почему Ольга заперла тебя и строго-настрого запретила видеться с Семёном?"
   "Она ехидно улыбнулась."
   "Мне было очень неловко."
@@ -107,7 +107,7 @@ label slavyana_mod__day6:
   th "Оставлять меня одну с ней была не лучшая идея."
   cs "Ладно, можешь не говорить… пионерка."
   cs "Да, сейчас…"
-  show cs normal body with dspr
+  show cs normal with dspr
   "Она открыла ящик стола и стала что-то искать. Достав какую-то таблетку, она протянула мне её и стакан воды, чтобы запить."
   cs "Это чтобы голова не болела."
   "Медсестра подмигнула мне."
@@ -117,7 +117,7 @@ label slavyana_mod__day6:
   pause 2
   play ambience ambience_int_cabin_day fadein 2
   scene bg int_aidpost_day
-  show cs normal body
+  show cs normal
   with dspr
   "Уже прозвенел горн на завтрак."
   cs "Сегодня на завтрак каша, так что я не придумала для тебя ничего лучше, чем принести из запасов бутерброды, кусок омлета и чай."
@@ -133,15 +133,15 @@ label slavyana_mod__day6:
   play ambience ambience_int_cabin_day fadein 2
   play sound sfx_lock_close
   scene bg int_aidpost_day
-  show cs normal body
+  show cs normal
   with dspr
   "Медсестра вернулась и заперла дверь."
   cs "Герой-любовник твой пришёл."
   th "Доктор Виола, вы опять?"
   sl "Он не мой …"
-  show cs smile body with dspr
+  show cs smile with dspr
   cs "Да? А вроде всё слышит и понимает, даже общается."
-  show cs normal body with dspr
+  show cs normal with dspr
   cs "Славь, если честно, то лично я не нахожу ничего запретного в вашем поведении. Это природа. Но так мне наказала Ольга Дмитриевна. {w}Если хочешь поскорее освободиться, советую прилечь и расслабиться, если к ужину температура будет нормальной - отпущу. Договорились?"
   sl "Хорошо."
   "Я послушалась её совета и легла в кровать."
@@ -150,14 +150,14 @@ label slavyana_mod__day6:
   pause 2
   "Заснуть никак не получалось."
   scene bg int_aidpost_day
-  show cs normal body with dspr
+  show cs normal with dspr
   play ambience ambience_int_cabin_day fadein 3
   show unblink
   pause 2
   hide unblink
   pause 1
   play sound sfx_open_door_2
-  show cs normal body:
+  show cs normal:
     linear 1.0 xalign 0.255
   show mt normal panama pioneer at cright with dissolve
   "Вскоре пришла вожатая."
@@ -218,7 +218,7 @@ label slavyana_mod__day6:
   scene bg ext_polyana_day
   show pi normal pioneer
   with dissolve
-  "Через несколько минут ходьбы, я останосилась и всё же решила спросить его."
+  "Через несколько минут ходьбы, я остановилась и всё же решила спросить его."
   sl "Семён, что мы делаем?"
   me "А что такого? Ты считаешь, что всё это правильно?"
   sl "Нет, но так будет только хуже."
@@ -433,7 +433,7 @@ label slavyana_mod__day6_not_worth_after:
   mt "Будешь сидеть под замком!"
   me "А если не соглашусь?"
   show mt surprise pioneer at cleft with dspr
-  "Оля удавленно посмотрела на Семёна"
+  "Оля удивленно посмотрела на Семёна"
   show mt angry pioneer at cleft with dspr
   mt "Что значит «не соглашусь»?"
   "Медленно произнесла вожатая."

@@ -704,9 +704,13 @@ label slavyana_mod__day5_change_clothes_after:
   scene bg ext_path_day
   show un normal pioneer
   with dissolve
-  "По пути к костровой поляне, я встретила Лену, идущую туда."
-  sl "Не успела?"
-  un "Д-да."
+
+  if not cclothes_after_cleaning:
+    "По пути к костровой поляне, я встретила Лену, идущую туда."
+    sl "Не успела?"
+    un "Д-да."
+  else:
+    pause 2
   
   scene bg ext_polyana_day
   show un normal pioneer far

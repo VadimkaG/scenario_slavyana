@@ -105,6 +105,8 @@ init:
     image cg d6_sl_swim_alt = "scenario_slavyana/res/images/cg/d6_sl_swim.png"
     image cg d6_sl_after_swim = "scenario_slavyana/res/images/cg/d6_sl_after_swim.png"
     image cg d6_sl_hentai_1_alt = "scenario_slavyana/res/images/cg/d6_sl_hentai_1.png"
+    #image cg d5_sl_sleep_alt = "scenario_slavyana/res/images/cg/d5_sl_sleep.jpg"
+    #image cg d5_sl_sleep_2_alt = "scenario_slavyana/res/images/cg/d5_sl_sleep_2.png"
     image cg under_water = "scenario_slavyana/res/images/cg/under_water.jpg"
     image bg ext_polyana_mere_day = "scenario_slavyana/res/images/bg/ext_polyana_mere_day.png"
     image bg town_snow = "scenario_slavyana/res/images/bg/town_snow.jpg"

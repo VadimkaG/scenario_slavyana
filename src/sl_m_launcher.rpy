@@ -332,7 +332,7 @@ label slavyana_mod__settings0:
         play music music_list["forest_maiden"] fadein 1
     elif hour in [20,21]:
         play music music_list["silhouette_in_sunset"] fadein 1
-    elif hour in [7,8]:    
+    elif hour in [7,8]:
         play music music_list["lightness"] fadein 1
     else:
         play music music_list["a_promise_from_distant_days_v2"] fadein 1
