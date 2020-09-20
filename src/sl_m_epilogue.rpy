@@ -1,6 +1,3 @@
-init:
-  define stranger = Character(u"Незнакомец", color="#950036")
-
 init python:
   words_red = False
   words_green = False
@@ -42,8 +39,7 @@ label slavyana_mod__epilogue:
   "И какие бы препятствия не встретились на их пути, они всё преодолеют."
 
   if words_blue:
-    #Надо будет скачать мод "Альтернативная концовка Слави" и вставить его сюда, но с нормальным шрифтом.
-    #*Фон тёмный экран*
+    call slavyana_mod__epilogue_alt
     #*Ачивка «Лучший Новый Год в жизни»*
     stop music fadeout 3
     scene black with dissolve2
@@ -78,37 +74,37 @@ label slavyana_mod__epilogue:
     #*Фон поляна с Семёном*
     scene bg ext_polyana_day
     show pi normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Семён…"
     #*Фон площадь с Леной с помехами*
     scene bg ext_square_day
     show un normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Лена…"
     #*Фон домики с Алисой с помехами*
     scene bg ext_houses_day
     show dv normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Алиса…"
     #*Фон внутри музклуба с Мику с помехами*
     scene bg int_musclub_day
     show mi normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Мику…"
     #*Фон спортплощадка с Ульяной с помехами*
     scene bg ext_playground_day
     show us normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Ульяна…"
     #*Фон внутри домика ОД*
     scene bg int_house_of_mt_day
     show mt normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Ольга… Дмитриевна?.."
     scene bg intro_xx with dissolve
@@ -120,24 +116,24 @@ label slavyana_mod__epilogue:
     #*Фон площадь с Леной с помехами*
     scene bg ext_square_day
     show un normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Девочка с фиолетовыми волосами… {w} Один вопрос: почему?"
     #*Фон домики с Алисой с помехами*
     scene bg ext_houses_day
     show dv normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Девочка с рыжими волосами и чудной причёской."
     #*Фон поляна с Семёном с помехами*
     scene bg ext_polyana_day
     show pi normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     "Мальчик, который кажется знакомым."
     #*Иллюстрация линейки с помехами*
     scene cg d2_lineup
-    call pomehi
+    show prologue_dream
     with dissolve
     "Толпа пионеров и их вожатая. {w} И я стою в их строю."
     #*Иллюстрация окно автобуса*

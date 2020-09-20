@@ -20,7 +20,7 @@ label slavyana_mod__day5:
   scene black
   if go_to_sh:
     scene bg int_mine
-    call pomehi
+    show prologue_dream
     with dissolve
     play music music_list["sunny_day"] fadein 3
     "Я шла вдоль шахты. {w} В одиночку."
@@ -31,16 +31,16 @@ label slavyana_mod__day5:
     "Вдруг что-то пробежало мимо меня, и я посветила в ту сторону {w} но никого не было."
     "Я шла дальше, и мне казалось, что я слышу голоса. Но никого рядом не было."
     scene bg int_mine_crossroad
-    call pomehi
+    show prologue_dream
     with dissolve
     "Я дошла до развилок и пошла в левую сторону {w} но быстро дошла до тупика, заваленного камнями."
     scene cg d4_uv_1
-    call pomehi
+    show prologue_dream
     with dissolve
     "Луч фонаря бегло пробежался по стене и мне показалось, что я видела девочку… С хвостом!"
     "Однако она быстро убежала."
     scene bg int_mine_halt
-    call pomehi
+    show prologue_dream
     with dissolve
     "Я пошла назад."
     th"Это не может быть правдой! Похоже, что я сплю."
@@ -260,7 +260,7 @@ label slavyana_mod__day5:
     el "Привет, Славя, зачем пожаловала?"
     sl "Ольга Дмитриевна на линейке говорила вам про уборку."
     el "Ну да, ну ты разве не видишь, что мы немного другим заняты?"
-    sh "Тем более, это непростой беспорядок… {w} Это творческий беспорядок. Так нам лучше думается."
+    sh "Тем более, это не простой беспорядок… {w} Это творческий беспорядок. Так нам лучше думается."
     sl "Ребят, ну нельзя же работать в таком бардаке! Тем более - ваши же инструменты и детали разбросаны по всему столу. Вы их хотя бы рассортируйте. Да и полы бы не помешало помыть."
     sl "А уж что у вас на складе творится - это совсем кошмар."
     sl "Я и так пришла вам помочь."
@@ -1350,7 +1350,7 @@ label slavyana_mod__day5_lena:
   "…"
   play music music_list["door_to_nightmare"] fadein 3
   scene bg ext_house_of_sl_day
-  call pomehi
+  show prologue_dream
   with dissolve
 #*Надо спрайт кота, любого, чтоб у него были 2 эмоции: пассивный и злой*
   show bor normal close with dspr
@@ -1363,12 +1363,12 @@ label slavyana_mod__day5_lena:
   bor "Но позволь... Наверное, будет лучше, если мы не будем стоять на пороге."
   scene bg int_house_of_sl_day
   show bor normal close
-  call pomehi
+  show prologue_dream
   with dissolve
   bor "Хотя, может, ты предпочитаешь вернуться туда, откуда ты сюда пришла?"
   scene bg int_aidpost_night
   show bor normal close
-  call pomehi
+  show prologue_dream
   with dissolve
   bor "Я разрешаю тебе задать мне 3 вопроса, которые больше всего тебя беспокоят, а дальше ты меня больше никогда не встретишь."
   sl "Зачем ты всё это делаешь?"
