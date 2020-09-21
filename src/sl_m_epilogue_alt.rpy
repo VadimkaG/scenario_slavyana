@@ -295,5 +295,5 @@ label slavyana_mod__epilogue_alt:
   $ renpy.pause (1)
   window hide
   scene black  with dissolve
-  $ renpy.pause (1)
+  $ renpy.pause(1, hard=True)
   return

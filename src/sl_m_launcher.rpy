@@ -392,7 +392,9 @@ label slavyana_mod__settings2:
                 $ persistent.sl_m_day3 = False
                 $ persistent.sl_m_hidden = False
                 $ persistent.sl_m_not_fst_hidden = False
-                $ persistent.slavyana_mod__bad_end = False
+                $ persistent.endings["sl_m_green"] = False
+                $ persistent.endings["sl_m_red"] = False
+                $ persistent.endings["sl_m_blue"] = False
                 $ sl_m_lp = 0
                 jump slavyana_mod__settings
             "Нет, постойте!":

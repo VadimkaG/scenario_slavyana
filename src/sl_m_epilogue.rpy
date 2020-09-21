@@ -40,18 +40,19 @@ label slavyana_mod__epilogue:
 
   if words_blue:
     call slavyana_mod__epilogue_alt
+
     #*Ачивка «Лучший Новый Год в жизни»*
-    stop music fadeout 3
-    scene black with dissolve2
-    play sound sfx_achievement
-    #show achiv at achievement_trans
-    $ renpy.notify("Лучший Новый Год в жизни")
-    with dspr
-    $ renpy.pause(3, hard=True)
-    #hide achiv
+    if not persistent.endings["sl_m_blue"]:
+        $ persistent.endings["sl_m_blue"] = True
+        if persistent.show_achievements:
+            $ show_achievement("sl_m_blue")
+            $ achievement.grant("ACH_SL_M_BLUE")
+    #$ renpy.notify("Лучший Новый Год в жизни")
+
+    pause 2
+
     call slavyana_mod__ending
-    #lk"Данная концовка основана на моде «Альтернативная концовка Слави»"
-    #*Титры на фоне ворот Совёнка под трек «Everlastingsummer»*
+
     play music music_list["everlasting_summer"] fadein 4
     pause 1
     scene bg ext_camp_entrance_day behind credits with dissolve2
@@ -181,14 +182,18 @@ label slavyana_mod__epilogue:
     scene black with dissolve2
     scene bg black with dissolve
     #*Фон тёмный экран*
+
+    $ renpy.pause(2, hard=True)
+
     #*Ачивка «Домой!»*
-    play sound sfx_achievement
-    #show achiv at achievement_trans
-    $ persistent.slavyana_mod__bad_end = True
-    $ renpy.notify("Домой!")
-    with dspr
-    $ renpy.pause(3, hard=True)
-    #hide achiv
+    if not persistent.endings["sl_m_red"]:
+      $ persistent.endings["sl_m_red"] = True
+      if persistent.show_achievements:
+        $ show_achievement("sl_m_red")
+        $ achievement.grant("ACH_SL_M_RED")
+
+    pause 2
+
     call slavyana_mod__ending
     #*Титры на фоне ночных ворот Совёнка под трек «410»*
     play music music_list["410"] fadein 4
@@ -334,13 +339,17 @@ label slavyana_mod__epilogue:
     #*Фон тёмный экран*
     stop music fadeout 3
     scene black with dissolve2
+
+    $ renpy.pause(2, hard=True)
+
     #*Ачивка «Ты меня не потеряешь…»*
-    play sound sfx_achievement
-    #show achiv at achievement_trans
-    $ renpy.notify("Ты меня не потеряешь…")
-    with dspr
-    $ renpy.pause(3, hard=True)
-    #hide achiv
+    if not persistent.endings["sl_m_green"]:
+        $ persistent.endings["sl_m_green"] = True
+        if persistent.show_achievements:
+            $ show_achievement("sl_m_green")
+            $ achievement.grant("ACH_SL_M_GREEN")
+
+    pause 2
     call slavyana_mod__ending
     #*Титры на фоне заснеженного Совёнка под трек «Everlastingsummer»*
     play music music_list["everlasting_summer"] fadein 4

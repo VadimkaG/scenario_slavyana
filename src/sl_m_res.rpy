@@ -6,6 +6,45 @@
             gl = globals()
             gl[who+"_name"] = name
 
+init 6 python:
+    if persistent.endings["sl_m_green"] == None:
+        persistent.endings["sl_m_green"] = False
+    if persistent.endings["sl_m_red"] == None:
+        persistent.endings["sl_m_red"] = False
+    if persistent.endings["sl_m_blue"] == None:
+        persistent.endings["sl_m_blue"] = False
+
+    achievments["ACH_SL_M_GREEN"] = persistent.endings["sl_m_green"]
+    achievments["ACH_SL_M_RED"] = persistent.endings["sl_m_red"]
+    achievments["ACH_SL_M_BLUE"] = persistent.endings["sl_m_blue"]
+
+    ach_table["sl_m_green"] = {
+        None : "sl_m_green",
+        "english" : "sl_m_green",
+        "spanish" : "sl_m_green",
+        "italian" : "sl_m_green",
+        "chinese" : "sl_m_green",
+        "latvian" : "sl_m_green",
+        }
+
+    ach_table["sl_m_red"] = {
+        None : "sl_m_red",
+        "english" : "sl_m_red",
+        "spanish" : "sl_m_red",
+        "italian" : "sl_m_red",
+        "chinese" : "sl_m_red",
+        "latvian" : "sl_m_red",
+        }
+
+    ach_table["sl_m_blue"] = {
+        None : "sl_m_blue",
+        "english" : "sl_m_blue",
+        "spanish" : "sl_m_blue",
+        "italian" : "sl_m_blue",
+        "chinese" : "sl_m_blue",
+        "latvian" : "sl_m_blue",
+        }
+
 init -10:
     python:
         try:
@@ -112,6 +151,9 @@ init:
     image bg town_snow = "scenario_slavyana/res/images/bg/town_snow.jpg"
     image bg ext_camp_upview_snow = "scenario_slavyana/res/images/bg/ext_camp_upview_snow.png"
 
+    image sl_m_green = "scenario_slavyana/res/images/misc/ach/achievement_green.png"
+    image sl_m_red = "scenario_slavyana/res/images/misc/ach/achievement_red.png"
+    image sl_m_blue = "scenario_slavyana/res/images/misc/ach/achievement_blue.png"
 
     #Толик
     $ colors['tl'] = {'night': (173, 173, 173, 255), 'sunset': (173, 173, 173, 255), 'day': (173, 173, 173, 255), 'prolog': (173, 173, 173, 255)}

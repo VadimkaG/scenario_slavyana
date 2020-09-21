@@ -13,7 +13,7 @@ label slavyana_mod__day6:
   if words_red:
     play ambience sfx_head_heartbeat loop fadein 2
     scene bg ext_polyana_mere_day
-    call pomehi
+    show prologue_dream
     with dissolve
     "Я купалась в озере. Том самом, рядом с поляной."
     "Не знаю, как я до него добралась, и почему я пошла именно сюда {w}, но мне здесь нравится."
@@ -28,7 +28,7 @@ label slavyana_mod__day6:
     "Я гребла изо всех сил, пытаясь выпутаться. Но меня затягивало только сильнее."
     "Силы начали кончаться."
     scene cg under_water
-    call pomehi
+    show prologue_dream
     with dissolve
     play sound sfx_shoulder_dive_water
     "А потом оно утянуло меня вниз и я стала тонуть. Но никакой возможности выплыть не было."
@@ -40,7 +40,7 @@ label slavyana_mod__day6:
   elif words_green:
     play music music_list["sparkles"] fadein 1
     scene cg d6_sl_forest
-    call pomehi
+    show prologue_dream
     with dissolve
     me "Как отдохнула?"
     sl "Хорошо, спасибо."
@@ -52,7 +52,7 @@ label slavyana_mod__day6:
     sl "А… да."
     scene bg ext_polyana_day
     show pi normal pioneer
-    call pomehi
+    show prologue_dream
     with dissolve
     sl "Ладно, ты сиди пока что, я пойду и скоро вернусь."
     sl "Куда ты?"
@@ -67,8 +67,8 @@ label slavyana_mod__day6:
     play music music_list["sparkles"] fadein 1
     #*Иллюстрация с 2 девками сидящими в комнате вечером с помехами* из альтернативной концовки надо пикчу вынуть
     # TODO: Заменить на правильное изображение
-    scene bg semen_room
-    call pomehi
+    scene bg SlaviaRoom
+    show prologue_dream
     with dissolve
     "Мне снилось одно место…"
     "Одно очень знакомое место…"
@@ -76,7 +76,7 @@ label slavyana_mod__day6:
     "Две мои сестры (или не сестры) уже проснулись."
     "Умывшись, я оделась и вышла на улицу."
     scene bg town_snow
-    call pomehi
+    show prologue_dream
     with dissolve
     "На дворе была зима. Но я почему-то не удивилась этому."
 
@@ -86,7 +86,7 @@ label slavyana_mod__day6:
   play ambience ambience_int_cabin_day fadein 3
   scene bg int_aidpost_day
   show cs normal
-  call pomehi
+  show prologue_dream
   with dissolve
   cs "Проснулась… пионерка?"
   scene bg int_aidpost_day
@@ -392,7 +392,7 @@ label slavyana_mod__day6_not_worth_after:
       $ setEndGreen();
       me "Мне не в чем оправдываться."
     # Если солгали лене и плохая концовка получена
-    elif persistent.slavyana_mod__bad_end:
+    elif persistent.endings["sl_m_red"]:
       $ setEndBlue();
       me "Мне не в чем оправдываться."
     # Если солгали лене, но плохая концовка не получена
@@ -777,7 +777,7 @@ label slavyana_mod__day6_fast_choise:
   if sl_m_lp >= 9 and not sl_m_day5_make_semen_guilty:
     if sl_m_day5_cleaning_told_truth:
       $ setEndGreen();
-    elif persistent.slavyana_mod__bad_end:
+    elif persistent.endings["sl_m_red"]:
       $ setEndBlue();
     else:
       $ setEndRed();
