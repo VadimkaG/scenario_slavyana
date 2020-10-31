@@ -182,6 +182,7 @@ label slavyana_mod__days2:
     (360, 130, 610, 200, "day1"),
     (360, 310, 610, 370, "day2"),
     (360, 480, 610, 540, "day3"),
+    (360, 650, 610, 720, "day4"),
     (1300, 130, 1550, 200, "day5"),
     (1300, 310, 1550, 370, "day6"),
     (1300, 485, 1550, 545, "day7"),
@@ -208,6 +209,10 @@ label slavyana_mod__days2:
             jump slavyana_mod__day3
         else:
             jump slavyana_mod__days2
+    elif result == "day4":
+        $ sl_m_l_day = 4
+        call slavyana_mod__l_choice
+        jump slavyana_mod__day4
     elif result == "day5":
         $ sl_m_l_day = 5
         call slavyana_mod__l_choice
@@ -269,17 +274,7 @@ label slavyana_mod__l_choice:
         call slavyana_mod__l_finish
         return
 
-    # Тут будет проверка 4-го дня
-
-    # Временное условие, пока не готов 4-ый день
-    scene black with dissolve
-    "Четвертый день. Поход за шуриком"
-    menu:
-        "Сходила за шуриком":
-          $ go_to_sh = True
-        "Не сходила":
-          $ go_to_sh = False
-    # Конец временного условия
+    call slavyana_mod__day4_fast_choice
 
     if sl_m_l_day == 5:
         call slavyana_mod__l_finish

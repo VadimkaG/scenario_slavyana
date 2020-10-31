@@ -369,11 +369,78 @@ label slavyana_mod__ending:
   return
 
 label slavyana_mod__credits:
-  $ renpy.show('credits_sl_m credits_sl_m_text', [sl_m_ending_transform], layer='widgetoverlay')
-  $ renpy.pause(90, hard=True)
-  $ renpy.hide('credits_sl_m credits_sl_m_text', layer='widgetoverlay')
-  stop music fadeout 4
-  scene black with dissolve2
-  pause 3
+    transform sl_m_ending_transform:
+        xalign 0.5
+        ypos 1.1
+        linear 87.0 ypos -4.1
 
-  jump slavyana_mod__launcher0
+    $ credits_sl_m_text =  "{size=80}Славя-мод{/size}\n\n\n"
+    $ credits_sl_m_text += "Спасибо за прохождение нашей модификции!\n\n"
+    $ credits_sl_m_text += "Мы очень старались для вас!\n"
+    $ credits_sl_m_text += "Проект был начат ещё в 2017, но затем был заброшен.\n"
+    $ credits_sl_m_text += "Но благодаря энтузиазму мы смогли доделать этот мод и надеемся,\n"
+    $ credits_sl_m_text += "что он вам очень понравился.\n"
+    $ credits_sl_m_text += "Обязательно оцените его в мастерской,\n"
+    $ credits_sl_m_text += "пусть остальные тоже его пройдут.\n\n\n"
+
+    $ credits_sl_m_text += "Благодарность FireBoTer за положеные основы модификации\n"
+    $ credits_sl_m_text += "и вдохновение других людей на дописание мода.\n\n\n"
+
+    $ credits_sl_m_text += "Энтузиасты, благодаря которым мод был доделан:\n\n"
+    $ credits_sl_m_text += "Сценарист, тестировщик\n"
+    $ credits_sl_m_text += "Андрей «dredyi» Челдышов\n\n"
+    $ credits_sl_m_text += "Программист\n"
+    $ credits_sl_m_text += "Вадим Голубев ( DS:Vadimka#0788 )\n\n"
+    $ credits_sl_m_text += "Дизайнер\n"
+    $ credits_sl_m_text += "Владимир «VlDM» Пичугин\n\n\n"
+
+    $ credits_sl_m_text += "Особая благодарность:\n\n"
+    $ credits_sl_m_text += "Помощник программиста, тестировщик\n"
+    $ credits_sl_m_text += "Александрe «Glopente» Петровe\n\n"
+    $ credits_sl_m_text += "Помошник сценариста\n"
+    $ credits_sl_m_text += "Кириллу «PepeUE» Бутуханову\n\n"
+    $ credits_sl_m_text += "Помошник сценариста\n"
+    $ credits_sl_m_text += "Руслану «HiroOnoda» Магомедову\n\n"
+    $ credits_sl_m_text += "Помошник сценариста\n"
+    $ credits_sl_m_text += "Илье «Господин Амбар» Бескровному\n\n"
+    $ credits_sl_m_text += "Помошник сценариста\n"
+    $ credits_sl_m_text += "Андриану «20andrian04» Катаеву\n\n"
+    $ credits_sl_m_text += "Дизайнер, тестировщик\n"
+    $ credits_sl_m_text += "Владимиру «VlDM» Пичугину\n\n"
+    $ credits_sl_m_text += "Дизайнер\n"
+    $ credits_sl_m_text += "Владислав «Murash» Мурашко\n\n"
+    $ credits_sl_m_text += "Помощь с дизайном главного меню\n"
+    $ credits_sl_m_text += "Nenver Kradovich\n\n\n"
+
+    $ credits_sl_m_text += "А также вечная любовь команде SovietGames(2chErogeTeam)\n"
+    $ credits_sl_m_text += "За такую потрясающую игру, как «Бесконечное Лето»\n\n\n"
+
+    $ credits_sl_m_text += "В моде были использованы материалы:\n\n"
+    $ credits_sl_m_text += "2chErogeTeam(ныне Moonworks и Soviet Games), сообщество игры.\n"
+    $ credits_sl_m_text += "«Славя-мод»(от FireBoTer’a)\n"
+    $ credits_sl_m_text += "«7 Дней Лета»\n"
+    $ credits_sl_m_text += "«Альтернативная концовка Слави»\n"
+    $ credits_sl_m_text += "«Мику-рут глазами Лены»\n"
+    $ credits_sl_m_text += "«Возвращение в Совёнок»\n\n\n"
+
+    $ credits_sl_m_text += "Отдельное спасибо:\n\n"
+    $ credits_sl_m_text += "nickrandom\n"
+    $ credits_sl_m_text += "За оригинальную идею модов от лица девушек\n\n"
+    $ credits_sl_m_text += "HiroOnoda\n"
+    $ credits_sl_m_text += "За тестирование\n\n"
+    $ credits_sl_m_text += "PepeUE\n"
+    $ credits_sl_m_text += "За тестирование\n\n"
+    $ credits_sl_m_text += "Xent2121\n"
+    $ credits_sl_m_text += "Помощь в тестировании\n\n"
+    $ credits_sl_m_text += "Владимиру «VlDM» Пичугину\n"
+    $ credits_sl_m_text += "За тестирование и корректировку текста.\n\n"
+    $ credits_sl_m_text += "А также BAaD и Сергею Ейбогу за лучшие в мире саундтреки."
+
+    $ renpy.show('credits_sl_m credits_sl_m_text', [sl_m_ending_transform], layer='widgetoverlay')
+    $ renpy.pause(90, hard=True)
+    $ renpy.hide('credits_sl_m credits_sl_m_text', layer='widgetoverlay')
+    stop music fadeout 4
+    scene black with dissolve2
+    pause 3
+
+    jump slavyana_mod__launcher0

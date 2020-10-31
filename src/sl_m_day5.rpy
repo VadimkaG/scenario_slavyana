@@ -1,6 +1,4 @@
 ﻿init python:
-  # Условие, если славя ходила за шуриком
-  go_to_sh = False
   # Славя сказала правду лене, когда они очищали костер
   sl_m_day5_cleaning_told_truth = False
   # В медпункте свалить вину на семена
@@ -590,7 +588,7 @@ label slavyana_mod__day5:
   with dissolve
   "Путь обратно занял гораздо меньше времени."
   show pi normal pioneer at right:
-    linear 1.0 ypos 1.0
+    linear 1.0 ypos 2.0
   "Семён пришвартовал лодку и обессиленно рухнул на землю."
   "Мы склонились над ним."
   hide pi

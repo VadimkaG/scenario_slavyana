@@ -150,6 +150,8 @@ init:
     image bg ext_polyana_mere_day = "scenario_slavyana/res/images/bg/ext_polyana_mere_day.png"
     image bg town_snow = "scenario_slavyana/res/images/bg/town_snow.jpg"
     image bg ext_camp_upview_snow = "scenario_slavyana/res/images/bg/ext_camp_upview_snow.png"
+    image bg ext_admins_day = "scenario_slavyana/res/images/bg/ext_admins_day.jpg"
+    image bg ext_stage_big_sunset = "scenario_slavyana/res/images/bg/ext_stage_big_sunset.jpg"
 
     image sl_m_green = "scenario_slavyana/res/images/misc/ach/achievement_green.png"
     image sl_m_red = "scenario_slavyana/res/images/misc/ach/achievement_red.png"
@@ -613,12 +615,7 @@ init:
     $ style.credits_sl_m.text_align = 0.5
     $ style.credits_sl_m.xmaximum = 0.8
     image credits_sl_m = ParameterizedText(style='credits_sl_m', size=50)
-    transform sl_m_ending_transform:
-        xalign 0.5
-        ypos 1.1
-        linear 87.0 ypos -3.0
     #$ credits_sl_m_text = "{size=80}Славя-мод{/size}\n\n\nРазработчик: FireBoTer.\n\n\nПомощь в тестировании: Xent2121.\n\n\nПомощь с дизайном главного меню: Nenver Kradovich\n\n\nРесурсы: IIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n\n\nОтдельное спасибо всем, кто играет в этот мод и тем, кто помогает исправлять его!\n"
-    $ credits_sl_m_text = "{size=80}Славя-мод: Допил{/size}\n\n\nСпасибо за прохождение нашей модификции!\n\nМы очень старались для вас!\n Проект был начат ещё в 2017, но затем был заброшен.\nНо благодаря энтузиазму мы смогли доделать этот мод и надеемся,\n что он вам очень понравился.\nОбязательно оцените его в мастерской,\n пусть остальные тоже его пройдут.\n\n\nБлагодарность FireBoTer за положеные основы модификации.\n\n\nЭтузиасты, благодаря которым мод был доделан:\n\nАндрей «dredyi» Челдышов\nНикита «nvkalashnikov2» Калашников\nАлександр «Glopente» Петров\nВадим Голубев ( DS:Vadimka#0788 )\nВладимир «VlDM» Пичугин\n\n\nОсобая благодарность:\n\nКириллу «PepeUE» Бутуханову\nРуслану «HiroOnoda» Магомедову\nИлье «Господин Амбар» Бескровному\nАндриану Катаеву\nДаниилу «Дыня» Тихонову\nВладимиру «VlDM» Пичугину\nВладислав «Murash» Мурашко\nNenver Kradovich - Помощь с дизайном главного меню\n\n\nА также вечная любовь команде SovietGames(2chErogeTeam) За такую потрясающую игру, как «Бесконечное Лето»\n\n\nВ моде были использованы материалы:\nIIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n«Славя-мод»(от FireBoTer’a)\n«7 Дней Лета»\n«Альтернативная концовка Слави»\n«Мику-рут глазами Лены»\n«Возвращение в Совёнок»\nСлавя-мод\n\n\nОтдельное спасибо:\nnickrandom – за оригинальную идею модов от лица девушек.\nHiroOnoda– за тестирование.\nPepeUE – за тестирование.\nXent2121 - помощь в тестировании оригинального мода\nВладимиру «VlDM» Пичугину - за тестирование и корректировку текста.\nА также BAaD и Сергею Ейбогу за лучшие в мире саундтреки."
 
 init 55 python:
     colors['fbt'] = {'night': (0, 20, 137, 255), 'sunset': (0, 20, 137, 255), 'day': (0, 20, 137, 255), 'prolog': (0, 20, 137, 255)}
