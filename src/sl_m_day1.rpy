@@ -636,7 +636,7 @@ label slavyana_mod__day1:
 
     #и тут появляется Семён, весь такой офигевший!
     play ambience ambience_ext_road_day fadein 3
-    scene bg ext_camp_entrance_day
+    scene bg ext_bus
     show pi shocked coat at center
     with dissolve
     "К счастью, ждать его не пришлось. Он уже собирался сам войти в лагерь, но застыл на месте при виде меня.{w} Я подошла поближе и улыбнулась."
