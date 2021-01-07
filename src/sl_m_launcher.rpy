@@ -1,20 +1,13 @@
 ﻿init -5 python:
-    def sl_m_link1():
+    def sl_m_link_steam():
         import webbrowser
-        url = "http://goo.gl/7dSUFV"
-        webbrowser.open(url)
-    def sl_m_link2():
+        #webbrowser.open("")
+    def sl_m_link_vk():
         import webbrowser
-        url = "https://goo.gl/HD0Urv"
-        webbrowser.open(url)
-    def sl_m_link3():
+        webbrowser.open("https://vk.com/vadik_golubev")
+    def sl_m_link_dv():
         import webbrowser
-        url = "https://goo.gl/Ro288f"
-        webbrowser.open(url)
-    def sl_m_link4():
-        import webbrowser
-        url = "http://goo.gl/p6s3aF"
-        webbrowser.open(url)
+        webbrowser.open("http://goo.gl/p6s3aF")
 
 init python:
     from time import localtime, strftime
@@ -22,7 +15,7 @@ init python:
     hour, min, sec = t.split(":")
     hour = int(hour)
     
-    mods["slavyana_mod__launcher"] = u"Славя-мод"
+    mods["slavyana_mod__launcher"] = u"Славя-мод. Допил"
     try:
         mod_tags["slavyana_mod__launcher"] = ["gameplay:vn","length:days","protagonist:female","character:Семён","character:Славя","character:Алиса","character:Ульяна","character:Лена","character:Ольга Дмитриевна","character:Виола","character:Электроник","character:Шурик","character:Женя","special:TODO"]
     except NameError:
@@ -105,7 +98,6 @@ label slavyana_mod_launcher2:
     (214, 885, 397, 1055, "alisa"),
     (699, 885, 870, 1057, "vk"),
     (875, 885, 1046, 1057, "steam"),
-    (1049, 885, 1220, 1057, "ficbook"),
     (1539, 885, 1710, 1057, "settings"),
     (1751, 880, 1882, 1064, "exit")
     ])
@@ -121,13 +113,10 @@ label slavyana_mod_launcher2:
     elif result == "settings":
         jump slavyana_mod__settings
     elif result == "steam":
-        $ sl_m_link1()
-        jump slavyana_mod_launcher2
-    elif result == "ficbook":
-        $ sl_m_link2()
+        $ sl_m_link_steam()
         jump slavyana_mod_launcher2
     elif result == "vk":
-        $ sl_m_link3()
+        $ sl_m_link_vk()
         jump slavyana_mod_launcher2
     elif result == "gallery":
         jump slavyana_mod__bknt_gallery
@@ -148,7 +137,7 @@ label slavyana_mod_launcher2:
                 "Нет, остаться":
                     jump slavyana_mod_launcher1_1
         else:
-            $ sl_m_link4()
+            $ sl_m_link_dv()
         jump slavyana_mod_launcher2
     elif result == "exit":
         $ reload_names()
@@ -220,11 +209,19 @@ label slavyana_mod__days2:
     elif result == "day6":
         $ sl_m_l_day = 6
         call slavyana_mod__l_choice
-        jump slavyana_mod__day6
+        if sl_m_lp < 4:
+            jump slavyana_mod__day6_alt
+        else:
+            jump slavyana_mod__day6
     elif result == "day7":
         $ sl_m_l_day = 7
         call slavyana_mod__l_choice
-        jump slavyana_mod__day7
+        if sl_m_lp < 4:
+            "Этот день еще не готов"
+            jump slavyana_mod__launcher0
+            #jump slavyana_mod__day7_alt
+        else:
+            jump slavyana_mod__day7
     elif result == "epilogue":
         $ sl_m_l_day = 8
         call slavyana_mod__l_choice
@@ -269,13 +266,11 @@ label slavyana_mod__l_choice:
         return
 
     call slavyana_mod__day3_fast_choice
-
     if sl_m_l_day == 4:
         call slavyana_mod__l_finish
         return
 
     call slavyana_mod__day4_fast_choice
-
     if sl_m_l_day == 5:
         call slavyana_mod__l_finish
         return
@@ -286,7 +281,8 @@ label slavyana_mod__l_choice:
         call slavyana_mod__l_finish
         return
 
-    call slavyana_mod__day6_fast_choise
+    if sl_m_lp >= 4:
+        call slavyana_mod__day6_fast_choise
 
     call slavyana_mod__l_finish
     return

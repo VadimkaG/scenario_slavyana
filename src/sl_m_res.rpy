@@ -132,9 +132,9 @@ init:
     image cg d2_lineup_an = "scenario_slavyana/res/images/cg/d2_lineup.jpg"
     image cg d3_sl_library_an = "scenario_slavyana/res/images/cg/d3_sl_library.jpg"
     image cg d3_sl_library_2_an = "scenario_slavyana/res/images/cg/d3_sl_library_2.jpg"
-    image cg d3_sl_bathhouse_hk_alt = im.Scale("scenario_slavyana/res/images/cg/d3_sl_bathhouse_hk_alt.jpg", 1920, 1440)
+    image cg d3_sl_bathhouse_hk_alt = "scenario_slavyana/res/images/cg/d3_sl_bathhouse_hk_alt.jpg"
     image cg d3_sl_dance_an = "scenario_slavyana/res/images/cg/d3_sl_dance.jpg"
-    image cg d3_sl_evening_alt = im.Scale("scenario_slavyana/res/images/cg/d3_sl_evening.jpg", 1920, 1440)
+    image cg d3_sl_evening_alt = "scenario_slavyana/res/images/cg/d3_sl_evening.jpg"
 
     #рукоделие!
     image bg int_house_of_sl_night_light = "scenario_slavyana/res/images/bg/int_house_of_sl_night_light.jpg"
@@ -152,6 +152,11 @@ init:
     image bg ext_camp_upview_snow = "scenario_slavyana/res/images/bg/ext_camp_upview_snow.png"
     image bg ext_admins_day = "scenario_slavyana/res/images/bg/ext_admins_day.jpg"
     image bg ext_stage_big_sunset = "scenario_slavyana/res/images/bg/ext_stage_big_sunset.jpg"
+    image bg ext_dining_hall_back = "scenario_slavyana/res/images/bg/ext_dining_hall_back.jpg"
+    image bg ext_square_and_houses = "scenario_slavyana/res/images/bg/ext_square_and_houses.jpg"
+    image bg titles_sl_with_image = "scenario_slavyana/res/images/bg/titles_sl_with_image.jpg"
+    image bg ext_camp_entrance_fog = "scenario_slavyana/res/images/bg/ext_camp_entrance_fog.jpg"
+    image bg int_admins_day = "scenario_slavyana/res/images/bg/int_admins_day.png"
 
     image sl_m_green = "scenario_slavyana/res/images/misc/ach/achievement_green.png"
     image sl_m_red = "scenario_slavyana/res/images/misc/ach/achievement_red.png"

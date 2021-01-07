@@ -3,6 +3,8 @@
   sl_m_day5_cleaning_told_truth = False
   # В медпункте свалить вину на семена
   sl_m_day5_make_semen_guilty = False
+  # Если пошли с семёном
+  sl_m_day5_berries_go_with = False 
 
 label slavyana_mod__day5:
   stop music
@@ -46,11 +48,13 @@ label slavyana_mod__day5:
     stop music fadeout 2
 
   else:
+    play music music_list["sparkles"] fadein 3
     "Мне снился сон."
     "Очень яркий и насыщенный. Но хоть убей, не могу вспомнить."
     "Помню только, что было страшно и был огонь."
     "Я даже не помню, где это было."
     "От этого я резко проснулась."
+    stop music fadeout 3
 
   scene bg int_house_of_sl_day with dissolve
   play ambience ambience_int_cabin_day loop fadein 3
@@ -66,31 +70,38 @@ label slavyana_mod__day5:
     "Я надела спортивный костюм и вышла из домика."
 
     play sound sfx_close_door_1
-
-    scene bg ext_house_of_sl_day with dissolve
-    "Мой маршрут проходил от домика по площади, {w} затем вдоль пляжа до пристани, {w} от неё к административному корпусу {w} и далее к клубам с крюком к моему домику."
-    scene black with dissolve
     stop ambience fadeout 1
-    "…"
+    play music music_list["dance_of_fireflies"] fadein 3
+    scene bg ext_house_of_sl_day with dissolve
+    "Мой маршрут проходил от домика..."
+    scene bg ext_square_day with dissolve
+    "... по площади ..."
+    scene bg ext_boathouse_day with dissolve
+    "Затем вдоль пляжа до пристани"
+    scene bg ext_admins_day with dissolve
+    "От неё к административному корпусу"
+    scene bg ext_clubs_day with dissolve
+    "Далее к клубам с крюком к моему домику"
+    scene bg ext_house_of_sl_day with dissolve
+    pause 1
+    scene bg int_house_of_sl_day with dissolve
+    "Я взяла умывальные преднадлежности и побежала к умывальникам."
+    scene bg ext_house_of_sl_day with dissolve
+    pause 1
     scene ext_washstand_day with dissolve
-    play ambience ambience_camp_center_day loop fadein 3
     "Добежав до умывальников, я умылась и побежала дальше."
     scene bg ext_houses_day with dissolve
     pause 1
-    scene bg int_house_of_sl_day
+    play sound sfx_open_door_1
+    scene bg int_house_of_sl_day with dissolve
     show mz normal pioneer
     with dissolve
-    play sound sfx_open_door_1
-    play ambience ambience_int_cabin_day loop fadein 3
     "К этому моменту Женя уже проснулась, и надо было собираться на линейку."
     "Я быстро переоделась, и мы вместе направились к площади."
 
-  stop ambience
-  scene black with dissolve
   pause 1
 
   scene bg ext_square_day with dissolve
-  play ambience ambience_camp_center_day loop fadein 3
   "Бо́льшая часть пионеров уже собралась, пока остальные ещё подтягивались."
   "И вот, когда все собрались, я окинула взглядом пришедших."
 
@@ -101,8 +112,6 @@ label slavyana_mod__day5:
 
   th "Видимо, отсыпается после похода."
   scene cg d2_lineup with dissolve
-  stop ambience
-  play music music_list["my_daily_life"] fadein 3
   "Линейка началась с традиционного приветствия вожатой и наставлений на правильный, коммунистический путь."
   "Сегодняшний план включал в себя: уборку помещений, дежурство Мику в столовой и уборку на поляне перед вечерним костром."
   "В прошлый четверг тоже был костёр и ничего выдающегося он из себя не представлял: небольшая прогулка по лесу с остановкой на поляне."
@@ -111,8 +120,6 @@ label slavyana_mod__day5:
     "Я, конечно, тоже участвовала, но решила не напоминать ей об этом, тем более в присутствии других пионеров."
   mt "Линейка окончена."
   scene bg ext_square_day with dissolve
-  stop music fadeout 2
-  play ambience ambience_camp_center_day loop fadein 3
   "С этими словами пионеры направились в столовую."
   show mt normal pioneer with dissolve
   mt "Славя, можешь подойти на минуточку?"
@@ -121,9 +128,9 @@ label slavyana_mod__day5:
   mt "Можешь пойти с кем-нибудь вместе, чтобы тебе было удобней."
   th "Например с Семёном или Леной."
   sl "Хорошо."
-  stop ambience fadeout 1
+  stop music fadeout 3
   scene black with dissolve
-  pause 1
+  "..."
 
   scene bg ext_dining_hall_near_day
   show un normal pioneer
@@ -290,9 +297,10 @@ label slavyana_mod__day5:
     "Я забежала к себе домой и переоделась в спортивный костюм."
     stop ambience fadeout 1
     scene black with dissolve
-    pause 3
+    pause 2
+    play ambience ambience_camp_center_day loop fadein 3
     scene bg ext_square_day with dissolve
-    play ambience ambience_int_cabin_day loop fadein 3
+    pause 1
     scene bg ext_dining_hall_away_day with dissolve
     pause 1
     scene bg ext_playground_day with dissolve
@@ -302,7 +310,8 @@ label slavyana_mod__day5:
     stop ambience fadeout 1
     scene black with dissolve
     "…"
-    play ambience ambience_soccer_play_background loop fadein 3
+    play ambience ambience_camp_center_day loop fadein 3
+    play sound ambience_soccer_play_background loop fadein 3
     scene bg ext_playground_day with dissolve
     "Соперники играли довольно хорошо, но и наша команда старалась изо всех сил." 
     "Сыграв 1 раунд, мы, в конце концов, смогли свести игру практически в ничью, проигрывая всего на одно очко."
@@ -315,6 +324,7 @@ label slavyana_mod__day5:
     un "Хорошо."
     "Она улыбнулась, и мы договорились встретиться на площади."
     stop ambience fadeout 1
+    stop sound fadeout 1
     scene black with dissolve
     "…"
 
@@ -325,6 +335,7 @@ label slavyana_mod__day5:
   "Как вдруг в дверь кто-то постучал."
   sl "Войдите."
   play sound sfx_open_door_1
+  play music music_list["gentle_predator"] fadein 3
   show dv normal pioneer2 with dissolve
   "Как ни странно, ко мне пожаловала сама Двачевская."
   sl "Привет. Что-то хотела?"
@@ -338,7 +349,7 @@ label slavyana_mod__day5:
   "Я открыла шкаф и принялась искать форму для Алисы."
   "Здесь было всё необходимое: юбки, шорты, рубашки, кумачовые галстуки, плащи на случай дождя, палатка на случай длительного похода (который не предполагается в последние дни). {w} И даже военный камуфляж от папы."
   "Рубашку пришлось искать на глазок."
-  "Пока я искала, Алиса заметила корзинки и решила начать беседу."
+  "Пока я искала, Алиса взглянула корзинки."
   dv "За грибами собираешься?"
   sl "За ягодами поплывём на остров. Ольга Дмитриевна поручила собрать."
   dv "Ты не одна поедешь?"
@@ -364,6 +375,7 @@ label slavyana_mod__day5:
   sl "А старую форму?"
   dv "Потом занесу."
   hide dv with dspr
+  stop music fadeout 3
   play sound sfx_close_door_1
   "Сказала она и вышла на улицу."
   th "И не занесёт ведь…"
@@ -478,6 +490,7 @@ label slavyana_mod__day5:
 
   menu:
     "Пойти с Семёном":
+      $ sl_m_day5_berries_go_with = True
       $ sl_m_lp += 1
       me "Одна корзинка у меня, одна - у вас; всё очевидно."
       sl "Нет, давай я с тобой пойду!"
@@ -784,9 +797,11 @@ label slavyana_mod__day5_lena_lie:
   un "Да потому что я вижу, как вы часто бываете вместе. Я уже давно обо всём догадалась."
   if persistent.slavyana_mod__day5_bad_end:
     sl "Не нужно ссориться из-за одного мальчика, пусть он сам решит, с кем он хочет быть. Я как раз после костра собиралась на пляж сбежать."
+    hide un with dspr
     "Она не отвечала."
     sl "Лена?"
-  hide un with dspr
+  else:
+    hide un with dspr
 
 label slavyana_mod__day5_lena:
   stop music fadeout 2
@@ -804,7 +819,9 @@ label slavyana_mod__day5_lena:
   play sound sfx_open_door_1
   scene bg int_house_of_sl_day with dissolve
 
-#Дневник:
+# Дневник
+  $ set_mode_nvl()
+  "Дневник"
   if go_to_sh:
     "Двенадцатый день в Совёнке. Сегодня не произошло чего-то столь же масштабного, как поиски Шурика."
   else:
@@ -813,6 +830,8 @@ label slavyana_mod__day5_lena:
   "В честь его чудесного спасения Ольга Дмитриевна решила испечь торт (не сама, конечно же), для этого пришлось собрать земляники на острове Ближний, куда нас с Леной отвёз Семён. Остальные ингредиенты так же таскал Семён."
   "Ещё нам на линейке объявили об очередном костре. Я уже была на этом мероприятии в прошлый раз и ничего удивительного он из себя не представлял: пешая прогулка по лесу и остановка на заранее подготовленной поляне. Однако, каждый раз Оля говорила о взаимовыручке и о том, чему мы научимся в этом походе. В этот раз я постараюсь отпроситься, ну или, в крайнем случае, по-тихому исчезнуть. Осталось только собрать сумку." 
   "Также в лесу случился очень странный разговор с Леной. Как я поняла, она нашла во мне соперницу в отношениях с Семёном. Надеюсь, она не слишком обиделась. Её реакция поистине напугала меня."
+  nvl clear
+  $ set_mode_adv()
 #*Конец дневника*
 
   th "Когда вернусь, допишу."
@@ -906,7 +925,7 @@ label slavyana_mod__day5_lena:
   scene bg int_house_of_sl_day with dissolve
   "Собирать было ничего не нужно, но я оставила у себя в домике заранее заготовленную сумку с полотенцем, тапочками и прочим."
   
-  if not sl_m_day2_go_with_sp:
+  if not sl_m_day2_go_with_sp and not sl_m_day2_sp_keys:
     "Когда я собиралась закрыть домик, то взглянула на стол,{w} где лежали мои вожатские ключи."
     "Откуда они здесь взялись? Видимо принёс кто-то."
   
@@ -1043,6 +1062,8 @@ label slavyana_mod__day5_lena:
   scene bg ext_beach_night with dissolve
   "Когда я начала замерзать, пришлось выйти из воды."
   th "Кажется, я забыла взять из домика сумку, в которой лежало полотенце."
+  if sl_m_lp < 4:
+    jump slavyana_mod__day5_alt
   "Прошло не больше 15 минут."
   th "Стоит ли ждать Семёна? Наверное, он остался там."
   th "Но может всё же подождать?"
@@ -1554,6 +1575,7 @@ label slavyana_mod__day5_fast_choice:
   "Корзинки оказалось две и встал выбор как разбиться на группы."
   menu:
     "Пойти с Семёном":
+      $ sl_m_day5_berries_go_with = True
       $ sl_m_lp += 1
     "Я и сама могу":
       pass
@@ -1571,24 +1593,26 @@ label slavyana_mod__day5_fast_choice:
       "Сказать правду":
         $ sl_m_day5_cleaning_told_truth = True
 
-  $ night_time()
-  $ persistent.sprite_time = "night"
 
-  scene bg ext_beach_night with dissolve
-  "После костра, Славя ушла купаться и забыла сумку. Славя Ждала Семёна, но он не появлялся."
-  menu:
-    "Подождать ещё":
-      $ sl_m_lp += 1
-    "Сходить за сумкой":
-      pass
+  if sl_m_lp >= 4:
+    $ night_time()
+    $ persistent.sprite_time = "night"
 
-  scene bg int_aidpost_night with dissolve
-  "В конце дня после того, как Ольга увела Семёна Славя решила придумать оправдание"
-  menu:
-    "Свалить вину на Семёна":
-      $ sl_m_day5_make_semen_guilty = True
-      $ sl_m_lp -= 3
-    "Сказать правду":
-      $ sl_m_day5_make_semen_guilty = False
-      $ sl_m_lp += 2
+    scene bg ext_beach_night with dissolve
+    "После костра, Славя ушла купаться и забыла сумку. Славя Ждала Семёна, но он не появлялся."
+    menu:
+      "Подождать ещё":
+        $ sl_m_lp += 1
+      "Сходить за сумкой":
+        pass
+
+    scene bg int_aidpost_night with dissolve
+    "В конце дня после того, как Ольга увела Семёна Славя решила придумать оправдание"
+    menu:
+      "Свалить вину на Семёна":
+        $ sl_m_day5_make_semen_guilty = True
+        $ sl_m_lp -= 3
+      "Сказать правду":
+        $ sl_m_day5_make_semen_guilty = False
+        $ sl_m_lp += 2
   return

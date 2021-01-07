@@ -1600,6 +1600,7 @@ label slavyana_mod__day1_fast_choice:
     window show
     "После забега."
     window hide
+    $ day_time()
     menu:
         "Помочь Ольге Дмитриевне":
             $ sl_m_day1_help_od = True

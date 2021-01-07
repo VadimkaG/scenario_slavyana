@@ -1305,6 +1305,7 @@ label slavyana_mod__day3_fast_choice:
     window show
     "Семён убежал, после стыка в столовой с Ульяной."
     window hide
+    $ day_time()
     menu:
         "Пойти за Семёном":
             $ sl_m_lp += 2

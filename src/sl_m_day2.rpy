@@ -1392,6 +1392,16 @@ label slavyana_mod__day2_fast_choice:
 
     $ day_time()
     $ persistent.sprite_time = "day"
+
+    scene bg int_house_of_sl_day with dissolve
+    "После завтрака у слави осталось пол часа"
+    menu:
+        "Искать ключи":
+            $ sl_m_day2_find_keys = True
+        "Поискать занятие в домике":
+            pass
+
+
     scene bg ext_dining_hall_near_sunset
     show el normal pioneer at left 
     show mt normal pioneer at center 
@@ -1415,3 +1425,15 @@ label slavyana_mod__day2_fast_choice:
                     $ sl_m_day2_sp_keys = True
                 "Остаться":
                     pass
+
+    $ day_time()
+    scene bg int_dining_hall_sunset with dissolve
+    $ persistent.sprite_time = "day"
+    show mz bukal glasses pioneer at center with dissolve
+    "Игра в карты"
+    $ day_time()
+    menu:
+        "Победить":
+            $ sl_m_day2_you_win = True
+        "Проиграть":
+            pass
