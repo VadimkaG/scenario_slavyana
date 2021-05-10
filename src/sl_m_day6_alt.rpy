@@ -1,3 +1,9 @@
+init:
+    $ sl_m_end_dv = False
+    $ sl_m_end_un = False
+    $ sl_m_end_us = False
+    $ sl_m_end_sl = False
+
 label slavyana_mod__day6_alt:
     $ backdrop = "days"
     $ new_chapter(6, u"Славя. День шестой")
@@ -5,18 +11,7 @@ label slavyana_mod__day6_alt:
     $ persistent.sprite_time = "day"
     $ renpy.pause(3, hard=True)
 
-    $ sl_m_end_dv = False
-    $ sl_m_end_un = False
-    $ sl_m_end_us = False
-    $ sl_m_end_sl = False
-    if sl_m_day2_you_win:
-        $ sl_m_end_dv = True
-    elif sl_m_day5_berries_go_with:
-        $ sl_m_end_un = True
-    elif sl_m_day1_help_od:
-        $ sl_m_end_us = True
-    else:
-        $ sl_m_end_sl = True
+    call slavyana_mod__day6_alt_chending
 
     play ambience ambience_int_cabin_night fadein 3
     scene bg int_house_of_sl_day
@@ -1371,6 +1366,17 @@ label slavyana_mod__day6_alt:
     stop ambience fadeout 1
     pause 1
     if sl_m_Full:
-        "Продолжение следует..."
-    #    jump slavyana_mod__day7_alt
+        jump slavyana_mod__day7_alt
     jump slavyana_mod__launcher0
+
+# Выбор концовки
+label slavyana_mod__day6_alt_chending:
+    if sl_m_day2_you_win:
+        $ sl_m_end_dv = True
+    elif not sl_m_day5_berries_go_with:
+        $ sl_m_end_un = True
+    elif sl_m_day1_help_od:
+        $ sl_m_end_us = True
+    else:
+        $ sl_m_end_sl = True
+    return

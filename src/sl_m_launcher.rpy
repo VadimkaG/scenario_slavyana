@@ -217,9 +217,8 @@ label slavyana_mod__days2:
         $ sl_m_l_day = 7
         call slavyana_mod__l_choice
         if sl_m_lp < 4:
-            "Этот день еще не готов"
-            jump slavyana_mod__launcher0
-            #jump slavyana_mod__day7_alt
+            call slavyana_mod__day6_alt_chending
+            jump slavyana_mod__day7_alt
         else:
             jump slavyana_mod__day7
     elif result == "epilogue":

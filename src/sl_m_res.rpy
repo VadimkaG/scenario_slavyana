@@ -183,8 +183,8 @@ init:
     image tl pioneer normal = "scenario_slavyana/res/images/sprites/normal/tl/tl_1_pioneer.png"
     image tl pioneer far = "scenario_slavyana/res/images/sprites/far/tl/tl_1_pioneer.png"
 
-    image bor normal close = im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/bor/bor_1_body.jpg")
-    image bor serious close = im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/bor/bor_2_body.jpg")
+    image bor normal close = im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/bor/bor_1_body.png")
+    image bor serious close = im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/bor/bor_2_body.png")
 
     #Семён, close
     image pi angry pioneer close = ConditionSwitch(
