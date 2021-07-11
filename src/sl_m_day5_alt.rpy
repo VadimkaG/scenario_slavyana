@@ -1,9 +1,17 @@
+init:
+    $ sl_m_end_dv = False
+    $ sl_m_end_un = False
+    $ sl_m_end_us = False
+    $ sl_m_end_sl = False
+
 label slavyana_mod__day5_alt:
 
 # Рут Ульяны: sl_m_day1_help_od
 # Рут Лены: sl_m_day5_berries_go_with
 # Рут Алисы: sl_m_day6_alt_dv
 # Одиночный рут: sl_m_day1_help_od and not sl_m_day5_berries_go_with and not sl_m_day6_alt_dv
+
+  call slavyana_mod__day6_alt_chending
 
   "Я вынула ключ из рубашки и отправилась к домику."
   stop ambience fadeout 1
@@ -35,7 +43,7 @@ label slavyana_mod__day5_alt:
   scene bg ext_house_of_dv_night with dissolve
 
   play sound sfx_knock_door7_polite
-  if not sl_m_day1_help_od:
+  if sl_m_end_us:
     "Я несколько раз постучалась."
     "Но никто не ответил."
     th "Наверное спит уже."
@@ -118,18 +126,29 @@ label slavyana_mod__day5_alt:
   "Судя по часам на будильнике, время подхода приближалось к концу. Я расстелила кровать, включила свет и уселась писать дневник."
   
 # Дневник
-  $ set_mode_nvl()
-  "Дневник"
+  show bknt_clear at truecenter with dspr
+  play sound_loop pen_write
+  show bknt_w12_2 at truecenter with dissolve2
+  $ persistent.sl_m_bknt12_2 = True
   "...На ужине в честь чудесного спасения Шурика испекли торт, из ингредиентов, которые пришлось носить Семёну."
   "Но пакостливая Ульянка сразу набросилась на него и нам ничего не досталось."
   "Затем мы пошли в поход. Поблуждав немного по уже истоптанным тропинкам в лесу, мы вышли на поляну,которую мы сегодня убирали с Леной."
   "Я отпросилась с похода, предпочтя провести время купанием в речке. Я надеюсь Леночка призналась Семёну в чувствах."
+  hide bknt_w12_2
+  if not sl_m_day1_help_od:
+    show bknt_w12_3 at truecenter with dspr
+  else:
+    show bknt_w12_4 at truecenter with dspr
   "Насчёт наказания Ульяны я не уверена. Слишком уж строго вожатая к ней отнеслась. Она хоть и заслужила это, но всё-таки остаётся ребёнком."
   if not sl_m_day1_help_od:
     "Мы весело провели с ней время и я уложила её спать."
-  nvl clear
-  window hide
-  $ set_mode_adv()
+  stop sound_loop
+  hide bknt_clear
+  if not sl_m_day1_help_od:
+    hide bknt_w12_3
+  else:
+    hide bknt_w12_4
+  with dspr
 # Конец дневника
   
   th "Завтра будет новый день, завтра будут новые свершения!"
@@ -156,3 +175,15 @@ label slavyana_mod__day5_alt:
   if sl_m_Full:
     jump slavyana_mod__day6_alt
   jump slavyana_mod__launcher0
+
+# Выбор концовки
+label slavyana_mod__day6_alt_chending:
+    if sl_m_day2_you_win:
+        $ sl_m_end_dv = True
+    elif not sl_m_day5_berries_go_with:
+        $ sl_m_end_un = True
+    elif sl_m_day1_help_od:
+        $ sl_m_end_us = True
+    else:
+        $ sl_m_end_sl = True
+    return

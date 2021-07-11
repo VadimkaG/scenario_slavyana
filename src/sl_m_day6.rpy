@@ -374,7 +374,7 @@ label slavyana_mod__day6_not_worth_after:
   $ persistent.sprite_time = "sunset"
   $ sunset_time()
   play music music_list["afterword"] fadein 3
-  scene bg ext_square_sunset
+  scene bg ext_square_day with dissolve
   show pi normal pioneer at cright
   show mt angry pioneer at cleft
   with dissolve
@@ -740,6 +740,10 @@ label slavyana_mod__day6_not_worth_after:
   "Моё дыхание восстановилось. И я заснула."
   "Вокруг ветер тихо шелестел листьями, а рядом колыхалась трава."
   "..."
+
+  if (sl_m_lp < 9):
+    $ setEndRed();
+
   if sl_m_Full:
       jump slavyana_mod__day7
   jump slavyana_mod__launcher0
@@ -751,9 +755,14 @@ label slavyana_mod__day6_end_choise:
     # Если лене сказали правду
     if sl_m_day5_cleaning_told_truth:
       $ setEndGreen()
-    # Если лене соврали
+
+    # Если соврали, и уже получили плохую концовку
+    elif persistent.endings["sl_m_red"]:
+      $ setEndBlue();
+
+    # Если лене соврали или не получали плохую концовку
     else:
-      $ setEndBlue()
+      $ setEndRed()
   # Если ЛП меньше 8 или в медпункте солгали
   else:
     $ setEndRed()
@@ -762,25 +771,18 @@ label slavyana_mod__day6_end_choise:
 # Быстрый выбор
 label slavyana_mod__day6_fast_choise:
   call slavyana_mod__day6_end_choise
-  $ day_time()
-  $ persistent.sprite_time = "day"
-  scene bg ext_polyana_day with dissolve
-  "День шестой."
-  "На поляне семен ушел за едой. Славя осталась одна и размышляла."
   if sl_m_lp >= 8:
+    $ day_time()
+    $ persistent.sprite_time = "day"
+    scene bg ext_polyana_day with dissolve
+    "День шестой."
+    "На поляне семен ушел за едой. Славя осталась одна и размышляла."
     menu:
       "Не стоило идти с ним":
         pass
       "Он милый, но не смекалистый":
         $ sl_m_lp += 1
 
-  if sl_m_lp >= 9 and not sl_m_day5_make_semen_guilty:
-    if sl_m_day5_cleaning_told_truth:
-      $ setEndGreen();
-    elif persistent.endings["sl_m_red"]:
-      $ setEndBlue();
-    else:
-      $ setEndRed();
-  else:
+  if (sl_m_lp < 9):
     $ setEndRed();
   return

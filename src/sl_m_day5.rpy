@@ -112,6 +112,7 @@ label slavyana_mod__day5:
 
   th "Видимо, отсыпается после похода."
   scene cg d2_lineup with dissolve
+  play music music_list["went_fishing_caught_a_girl"] fadein 3
   "Линейка началась с традиционного приветствия вожатой и наставлений на правильный, коммунистический путь."
   "Сегодняшний план включал в себя: уборку помещений, дежурство Мику в столовой и уборку на поляне перед вечерним костром."
   "В прошлый четверг тоже был костёр и ничего выдающегося он из себя не представлял: небольшая прогулка по лесу с остановкой на поляне."
@@ -139,6 +140,8 @@ label slavyana_mod__day5:
   "У столовой я встретила Лену."
   sl "Привет."
   un "Привет."
+  sl "Чего стоишь? Ребята уже в столовой, кушают без нас"
+  un "Да так, просто задумалась немножко"
 
   menu:
     "Напомнить Лене":
@@ -160,7 +163,8 @@ label slavyana_mod__day5:
   scene bg int_dining_hall_people_day
   show un normal pioneer
   with dissolve
-  play ambience ambience_dining_hall_full loop fadein 3
+  play music music_list["so_good_to_be_careless"] fadein 3
+  #play ambience ambience_dining_hall_full loop fadein 3
   "Сегодняшний завтрак состоял из риса с мясом, пары булочек и чая."
   sl "Приятного аппетита."
   un "Спасибо."
@@ -172,6 +176,12 @@ label slavyana_mod__day5:
   show un shy pioneer with dspr
   un "А… Н-ну да, можно."
   "Она покраснела."
+  sl "А чего это ты так?"
+  un "Как?"
+  sl "Не знаю, покраснела и будто погрустнела"
+  show un serious pioner with dspr
+  un "Со мной всё в порядке"
+  show un normal pioner with dspr
   sl "Ладно, я тогда пойду. У меня ещё дела есть, а за земляникой после обеда пойдём. Как раз за корзинками схожу."
   "Я попрощалась с Леной и вышла из столовой."
 
@@ -236,6 +246,7 @@ label slavyana_mod__day5:
     scene bg int_musclub_day
     show mi normal pioneer
     with dissolve2
+    "Трусцой добежав до музыкального клуба, я постучалась и зашла внутрь."
     sl "Привет Мику, помощь нужна?"
     show mi smile pioneer with dspr
     mi "Привет. Славечка! Да я, вот, уже заканчиваю, но можешь помочь. Осталось помыть полы в подсобке и протереть инструменты. Я уже начала протирать, так что тебе остались струнные, барабаны и рояль. Подсобкой я займусь сама."
@@ -327,6 +338,9 @@ label slavyana_mod__day5:
     stop sound fadeout 1
     scene black with dissolve
     "…"
+
+  # TODO: Временный стоп музыки
+  stop music fadeout 3
 
   scene bg int_house_of_sl_day with dissolve
   play ambience ambience_int_cabin_day loop fadein 3
@@ -685,6 +699,7 @@ label slavyana_mod__day5_change_clothes:
   scene bg ext_square_day
   show pi normal pioneer far
   with dissolve
+  play music music_list["always_ready"] fadein 3
   "На площади я встретила Семёна."
   "Он был ко мне спиной, так что я позвала его."
   show pi normal pioneer with dspr
@@ -812,6 +827,7 @@ label slavyana_mod__day5_lena:
     "…"
     call slavyana_mod__day5_change_clothes
   "До ужина оставалось ещё некоторое время. Поэтому я решила зайти к себе в домик, чтобы записать в свой дневник сегодняшние события."
+  stop music fadeout 2
   stop ambience fadeout 1
   scene black with dissolve
   pause 1
@@ -820,18 +836,19 @@ label slavyana_mod__day5_lena:
   scene bg int_house_of_sl_day with dissolve
 
 # Дневник
-  $ set_mode_nvl()
-  "Дневник"
-  if go_to_sh:
-    "Двенадцатый день в Совёнке. Сегодня не произошло чего-то столь же масштабного, как поиски Шурика."
-  else:
-    "Двенадцатый день в Совёнке. Сегодня не произошло чего-то столь же масштабного, как пропажа Шурика." 
+  show bknt_clear at truecenter with dspr
+  play sound_loop pen_write
+  show bknt_w12 at truecenter with dissolve2
+  $ persistent.sl_m_bknt12 = True
+  th "Двенадцатый день в Совёнке. Сегодня не произошло чего-то столь же масштабного, как поиски Шурика."
   
-  "В честь его чудесного спасения Ольга Дмитриевна решила испечь торт (не сама, конечно же), для этого пришлось собрать земляники на острове Ближний, куда нас с Леной отвёз Семён. Остальные ингредиенты так же таскал Семён."
-  "Ещё нам на линейке объявили об очередном костре. Я уже была на этом мероприятии в прошлый раз и ничего удивительного он из себя не представлял: пешая прогулка по лесу и остановка на заранее подготовленной поляне. Однако, каждый раз Оля говорила о взаимовыручке и о том, чему мы научимся в этом походе. В этот раз я постараюсь отпроситься, ну или, в крайнем случае, по-тихому исчезнуть. Осталось только собрать сумку." 
-  "Также в лесу случился очень странный разговор с Леной. Как я поняла, она нашла во мне соперницу в отношениях с Семёном. Надеюсь, она не слишком обиделась. Её реакция поистине напугала меня."
-  nvl clear
-  $ set_mode_adv()
+  th "В честь его чудесного спасения Ольга Дмитриевна решила испечь торт (не сама, конечно же), для этого пришлось собрать земляники на острове Ближний, куда нас с Леной отвёз Семён. Остальные ингредиенты так же таскал Семён."
+  th "Ещё нам на линейке объявили об очередном костре. Я уже была на этом мероприятии в прошлый раз и ничего удивительного он из себя не представлял: пешая прогулка по лесу и остановка на заранее подготовленной поляне. Однако, каждый раз Оля говорила о взаимовыручке и о том, чему мы научимся в этом походе. В этот раз я постараюсь отпроситься, ну или, в крайнем случае, по-тихому исчезнуть. Осталось только собрать сумку." 
+  th "Также в лесу случился очень странный разговор с Леной. Как я поняла, она нашла во мне соперницу в отношениях с Семёном. Надеюсь, она не слишком обиделась. Её реакция поистине напугала меня."
+  stop sound_loop
+  hide bknt_clear
+  hide bknt_w12
+  with dspr
 #*Конец дневника*
 
   th "Когда вернусь, допишу."
@@ -917,23 +934,23 @@ label slavyana_mod__day5_lena:
   play ambience ambience_dining_hall_full fadein 3
   hide sh  with dissolve
   "Пионеры стали потихоньку расходиться."
-  play ambience ambience_camp_center_day fadein 3
-  scene bg ext_dining_hall_near_day with dissolve
+  play ambience ambience_camp_center_evening fadein 3
+  scene bg ext_dining_hall_near_sunset with dissolve
   "Я вышла из столовой и пошла собираться."
   play sound sfx_open_door_1
-  play ambience ambience_int_cabin_day fadein 3
-  scene bg int_house_of_sl_day with dissolve
+  play ambience ambience_int_cabin_evening fadein 3
+  scene bg int_house_of_sl_sunset with dissolve
   "Собирать было ничего не нужно, но я оставила у себя в домике заранее заготовленную сумку с полотенцем, тапочками и прочим."
   
   if not sl_m_day2_go_with_sp and not sl_m_day2_sp_keys:
     "Когда я собиралась закрыть домик, то взглянула на стол,{w} где лежали мои вожатские ключи."
     "Откуда они здесь взялись? Видимо принёс кто-то."
   
-  play ambience ambience_camp_center_day fadein 3
-  scene bg ext_house_of_sl_day with dissolve
+  play ambience ambience_camp_center_evening fadein 3
+  scene bg ext_house_of_sl_sunset with dissolve
   play sound sfx_close_door_1
   "Я закрыла домик и пошла на площадь."
-  scene bg ext_square_day with dissolve
+  scene bg ext_square_sunset with dissolve
   "Вечерело."
   stop ambience fadeout 3
   play music music_list["lightness"] fadein 3
@@ -963,7 +980,7 @@ label slavyana_mod__day5_lena:
   "Скомандовала вожатая."
   stop music fadeout 3
   play ambience ambience_forest_day fadein 3 
-  scene bg ext_path_day with dissolve
+  scene bg ext_path_sunset with dissolve
   "Разговаривать было решительно не о чем. Но надо было хоть как-то скрасить прогулку до поляны."
   "Некоторое время мы просто прогуливались по кругу"
   "Через 10-20 минут мы всё-таки пришли в назначенное место."
@@ -1303,7 +1320,7 @@ label slavyana_mod__day5_lena:
   me "Нет, почему…"
   stop ambience fadeout 2
   play music music_list["trapped_in_dreams"] fadein 3
-  scene cg d5_sl_sleep with dissolve
+  scene cg d5_sl_sleep_alt with dissolve
   "Он снял ботинки и улёгся на краешке."
   "Я нежно обняла его и положила голову ему на грудь."
   "Я чувствовала его тепло."
@@ -1321,7 +1338,7 @@ label slavyana_mod__day5_lena:
   sl "Ты такой заботливый, внимательный."
   th "Но намёки немножечко не для тебя, буду знать."
   me "Стараюсь."
-  scene cg d5_sl_sleep_2 with dspr
+  scene cg d5_sl_sleep_2_alt with dspr
   sl "Ты хороший друг."
   me "Друг? Ну, да, наверное…"
   "Я чем-то обидела его? {w} Его сердце забилось быстрее."
@@ -1342,7 +1359,7 @@ label slavyana_mod__day5_lena:
   "Я засмеялась."
   me "Выходит, что и незачем."
   "Наконец, его сердце перестало бешено биться."
-  scene cg d5_sl_sleep with dspr
+  scene cg d5_sl_sleep_alt with dspr
   sl "Вот и хорошо!"
   "Я ещё крепче прижалась к нему."
   me "Не холодно?"
@@ -1350,7 +1367,7 @@ label slavyana_mod__day5_lena:
   me "Ничего, нормально."
   sl "Как тогда, с лодкой?"
   me "Там совсем другое дело было же!"
-  scene cg d5_sl_sleep_2 with dspr
+  scene cg d5_sl_sleep_2_alt with dspr
   sl "Хорошо-хорошо."
   "Я лукаво улыбнулась и заглянула ему в глаза."
   sl "Значит, точно всё в порядке?"
@@ -1362,7 +1379,7 @@ label slavyana_mod__day5_lena:
   th "Оставлю его с расспросами."
   sl "Ну хорошо. Тогда спокойной ночи!"
   me "И тебе."
-  scene cg d5_sl_sleep with dspr
+  scene cg d5_sl_sleep_alt with dspr
   "Наконец я стала засыпать."
   stop music fadeout 2
   scene black with dissolve
@@ -1593,6 +1610,8 @@ label slavyana_mod__day5_fast_choice:
       "Сказать правду":
         $ sl_m_day5_cleaning_told_truth = True
 
+  if sl_m_lp < 4:
+    return
 
   if sl_m_lp >= 4:
     $ night_time()

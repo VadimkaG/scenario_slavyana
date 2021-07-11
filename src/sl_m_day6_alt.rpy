@@ -1,17 +1,9 @@
-init:
-    $ sl_m_end_dv = False
-    $ sl_m_end_un = False
-    $ sl_m_end_us = False
-    $ sl_m_end_sl = False
-
 label slavyana_mod__day6_alt:
     $ backdrop = "days"
     $ new_chapter(6, u"Славя. День шестой")
     $ day_time()
     $ persistent.sprite_time = "day"
     $ renpy.pause(3, hard=True)
-
-    call slavyana_mod__day6_alt_chending
 
     play ambience ambience_int_cabin_night fadein 3
     scene bg int_house_of_sl_day
@@ -580,7 +572,10 @@ label slavyana_mod__day6_alt:
         "Перед сном у меня ещё было время. Я решила записать в своём дневнике."
         
     # Дневник
-        $ set_mode_nvl()
+        show bknt_clear at truecenter with dspr
+        play sound_loop pen_write
+        show bknt_dv at truecenter with dissolve2
+        $ persistent.sl_m_bkntdv = True
         "Сегодня предпоследний день в «Совёнке», как жаль что смена вот-вот подойдёт к концу. Но я рада, что попала сюда, здесь я встретила много интересных людей."
         "Сегодня Электроник попросил меня сказать Семёну, чтобы доставил какую-то посылку."
         "Не знаю какую, но когда я сегодня пришла к Виоле, она мне сказала что именно у неё пропало."
@@ -589,7 +584,10 @@ label slavyana_mod__day6_alt:
         "В итоге мне пришлось доложить об этом Оле. Похоже, завтра нам придётся разобраться с этим."
         "Пожалуй, завтрашний день проведу с отдыхом от всего. Я хочу запомнить каждое дерево, каждый камушек этого прекрасного места. Взглянуть на всё это в последний раз."
         "Мы ещё увидимся, дорогой дневник."
-        $ set_mode_adv()
+        stop sound_loop
+        hide bknt_clear
+        hide bknt_dv
+        with dspr
     # Конец дневника
 
         scene bg int_house_of_sl_night
@@ -1368,15 +1366,3 @@ label slavyana_mod__day6_alt:
     if sl_m_Full:
         jump slavyana_mod__day7_alt
     jump slavyana_mod__launcher0
-
-# Выбор концовки
-label slavyana_mod__day6_alt_chending:
-    if sl_m_day2_you_win:
-        $ sl_m_end_dv = True
-    elif not sl_m_day5_berries_go_with:
-        $ sl_m_end_un = True
-    elif sl_m_day1_help_od:
-        $ sl_m_end_us = True
-    else:
-        $ sl_m_end_sl = True
-    return
