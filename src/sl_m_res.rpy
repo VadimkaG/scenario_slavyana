@@ -163,7 +163,7 @@ init:
     image bg ext_stage_big_sunset = "scenario_slavyana/res/images/bg/ext_stage_big_sunset.jpg"
     image bg ext_dining_hall_back = "scenario_slavyana/res/images/bg/ext_dining_hall_back.jpg"
     image bg ext_square_and_houses = "scenario_slavyana/res/images/bg/ext_square_and_houses.jpg"
-    image bg titles_sl_with_image = "scenario_slavyana/res/images/bg/titles_sl_with_image.jpg"
+    image cg titles_sl_with_image = "scenario_slavyana/res/images/cg/titles_sl_with_image.jpg"
     image bg ext_camp_entrance_fog = "scenario_slavyana/res/images/bg/ext_camp_entrance_fog.jpg"
     image bg int_admins_day = "scenario_slavyana/res/images/bg/int_admins_day.png"
 
