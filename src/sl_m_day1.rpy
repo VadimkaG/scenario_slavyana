@@ -1582,7 +1582,6 @@ label slavyana_mod__day1_end:
     scene black with dissolve
     hide blink
     pause (3)
-    $ persistent.sl_m_day1 = True
     if sl_m_Full:
         jump slavyana_mod__day2
     jump slavyana_mod__launcher0
@@ -1591,6 +1590,14 @@ label slavyana_mod__day1_end:
 
 #Быстрый выбор
 label slavyana_mod__day1_fast_choice:
+    "Проставьте выборы предыдущих дней."
+    window hide
+    scene cg d1_sl_dinner_0 with dspr
+    $ night_time()
+    window show
+    "Первый день."
+    window hide
+
     $ day_time()
     $ persistent.sprite_time = "day"
     scene bg ext_washstand_day
@@ -1606,3 +1613,4 @@ label slavyana_mod__day1_fast_choice:
             $ sl_m_day1_help_od = True
         "Помочь Ульяне":
             pass
+    jump slavyana_mod__day2_fast_choice

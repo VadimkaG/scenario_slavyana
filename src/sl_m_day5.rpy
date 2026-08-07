@@ -1579,6 +1579,11 @@ label slavyana_mod__day5_lena:
 #При втором прохождении выбор «Соврать»(в выборе с Леной на поляне) даёт выход на альтернативную концовку, но очков для её получения должно быть >=9 на 7 дне, иначе плохая
 
 label slavyana_mod__day5_fast_choice:
+
+  if sl_m_l_day == 5:
+      jump slavyana_mod__day5
+      return
+
   $ day_time()
   $ persistent.sprite_time = "day"
   scene bg ext_polyana_day with dissolve
@@ -1611,7 +1616,7 @@ label slavyana_mod__day5_fast_choice:
         $ sl_m_day5_cleaning_told_truth = True
 
   if sl_m_lp < 4:
-    return
+    jump slavyana_mod__day6_fast_choise
 
   if sl_m_lp >= 4:
     $ night_time()
@@ -1634,4 +1639,4 @@ label slavyana_mod__day5_fast_choice:
       "Сказать правду":
         $ sl_m_day5_make_semen_guilty = False
         $ sl_m_lp += 2
-  return
+  jump slavyana_mod__day6_fast_choise

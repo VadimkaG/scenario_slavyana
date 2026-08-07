@@ -104,25 +104,10 @@ init:
     image bknt_w12_3 = "scenario_slavyana/res/images/bknt/bknt12_3.jpg"
     image bknt_w12_4 = "scenario_slavyana/res/images/bknt/bknt12_4.jpg"
     image bknt_dv = "scenario_slavyana/res/images/bknt/bknt_dv.png"
-
-    image bg main_day = "scenario_slavyana/res/images/menu/bg/m_day.png"
-    image bg main_eve = "scenario_slavyana/res/images/menu/bg/m_eve.png"
-    image bg main_night = "scenario_slavyana/res/images/menu/bg/m_night.png"
     
     image bg days_day = "scenario_slavyana/res/images/menu/bg/d_day.png"
     image bg days_eve = "scenario_slavyana/res/images/menu/bg/d_eve.png"
     image bg days_night = "scenario_slavyana/res/images/menu/bg/d_night.png"
-    
-    image bg set_day_no = "scenario_slavyana/res/images/menu/bg/set_day_no.png"
-    image bg set_eve_no = "scenario_slavyana/res/images/menu/bg/set_eve_no.png"
-    image bg set_night_no = "scenario_slavyana/res/images/menu/bg/set_night_no.png"
-    image bg set_day_yes = "scenario_slavyana/res/images/menu/bg/set_day_yes.png"
-    image bg set_eve_yes = "scenario_slavyana/res/images/menu/bg/set_eve_yes.png"
-    image bg set_night_yes = "scenario_slavyana/res/images/menu/bg/set_night_yes.png"
-    
-    image bg gal_day = "scenario_slavyana/res/images/menu/bg/gal_day.png"
-    image bg gal_eve = "scenario_slavyana/res/images/menu/bg/gal_eve.png"
-    image bg gal_night = "scenario_slavyana/res/images/menu/bg/gal_night.png"
     
     image bg ext_aidpost_sunset = "scenario_slavyana/res/images/bg/ext_aidpost_sunset.jpg"
     image bg ext_shed_day = "scenario_slavyana/res/images/bg/ext_shed_day.jpg"

@@ -1397,6 +1397,11 @@ label slavyana_mod__day4__without_pi:
   jump slavyana_mod__launcher0
 
 label slavyana_mod__day4_fast_choice:
+
+  if sl_m_l_day == 4:
+      jump slavyana_mod__day4
+      return
+
   scene bg ext_square_day
   show mt normal pioneer at cright
   show pi normal pioneer at cleft
@@ -1408,4 +1413,5 @@ label slavyana_mod__day4_fast_choice:
         $ sl_m_lp += 2
       "Не обращать внимания":
         $ go_to_sh = False
-  return
+  
+  jump slavyana_mod__day5_fast_choice

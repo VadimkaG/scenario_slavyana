@@ -1374,7 +1374,6 @@ label slavyana_mod__day2_cnt3:
     hide blink
     pause (3)
     $ volume(1.0, "sound")
-    $ persistent.sl_m_day2 = True
     if sl_m_Full:
         jump slavyana_mod__day3
     jump slavyana_mod__launcher0
@@ -1383,6 +1382,10 @@ label slavyana_mod__day2_cnt3:
     
 #Быстрый выбор
 label slavyana_mod__day2_fast_choice:
+
+    if sl_m_l_day == 2:
+        jump slavyana_mod__day2
+        return
 
     scene cg d2_slavya_forest with dissolve
     $ night_time()
@@ -1437,3 +1440,5 @@ label slavyana_mod__day2_fast_choice:
             $ sl_m_day2_you_win = True
         "Проиграть":
             pass
+
+    jump slavyana_mod__day3_fast_choice

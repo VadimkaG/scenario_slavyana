@@ -1,15 +1,4 @@
-﻿init -5 python:
-    def sl_m_link_steam():
-        import webbrowser
-        #webbrowser.open("")
-    def sl_m_link_vk():
-        import webbrowser
-        webbrowser.open("https://vk.com/vadik_golubev")
-    def sl_m_link_dv():
-        import webbrowser
-        webbrowser.open("http://goo.gl/p6s3aF")
-
-init python:
+﻿init python:
     from time import localtime, strftime
     t = strftime("%H:%M:%S", localtime())
     hour, min, sec = t.split(":")
@@ -34,268 +23,223 @@ init:
     $ set_back = None
     $ set_back_hover = None
 
-    if persistent.sl_m_hen_txt == None:
-        $ persistent.sl_m_hen_txt = True
+    default persistent.sl_m_hen_txt = True
+    default slavyana_mod_menu_state = "main" 
 
     if persistent.sl_m_hidden == None:
         $ persistent.sl_m_hidden = False
     if persistent.sl_m_not_fst_hidden == None:
         $ persistent.sl_m_not_fst_hidden = False
 
-    if persistent.sl_m_day1 == None:
-        $ persistent.sl_m_day1 = False
-    if persistent.sl_m_day2 == None:
-        $ persistent.sl_m_day2 = False
-    if persistent.sl_m_day3 == None:
-        $ persistent.sl_m_day3 = False
+# Главное меню мода
+screen slavyana_mod_main_menu():
+    tag menu
+    modal True
 
+    if slavyana_mod_menu_state == "main":
+        add "scenario_slavyana/res/images/menu/bg/slavya-mod-title-screen.png"
+
+        text "Build: 07.08.2026":
+            xpos 0.0
+            ypos 1.0
+            xanchor 0.0
+            yanchor 1.0
+            xoffset 20
+            yoffset -20
+            size 16
+            color "#ffffff80"
+            outlines [ (1, "#000000a0", 0, 0) ]
+        imagebutton:
+            xalign 0.5
+            ypos 0.6
+            yanchor 1.0
+            yoffset -100
+            idle "scenario_slavyana/res/images/menu/buttons/play.png"
+            hover "scenario_slavyana/res/images/menu/buttons/play_hover.png"
+            action Return("play")
+        imagebutton:
+            xalign 0.5
+            ypos 0.6
+            yanchor 0.5
+            idle "scenario_slavyana/res/images/menu/buttons/select_day.png"
+            hover "scenario_slavyana/res/images/menu/buttons/select_day_hover.png"
+            action SetVariable("slavyana_mod_menu_state", "days") 
+        imagebutton:
+            xalign 0.5
+            ypos 0.6
+            yanchor 0.0
+            yoffset 100
+            idle "scenario_slavyana/res/images/menu/buttons/titles.png"
+            hover "scenario_slavyana/res/images/menu/buttons/titles_hover.png"
+            action Return("authors")
+        imagebutton:
+            xpos 1.0
+            xanchor 1.0
+            xoffset -20
+            ypos 1.0
+            yanchor 1.0
+            yoffset -20
+            idle "scenario_slavyana/res/images/menu/buttons/age_off.png"
+            hover "scenario_slavyana/res/images/menu/buttons/age_off_hover.png"
+            selected_idle "scenario_slavyana/res/images/menu/buttons/age_on.png"
+            selected_hover "scenario_slavyana/res/images/menu/buttons/age_on_hover.png"
+            selected persistent.sl_m_hen_txt
+            action ToggleVariable("persistent.sl_m_hen_txt")
+        imagebutton:
+            xpos 1.0
+            xanchor 1.0
+            xoffset -20
+            ypos 1.0
+            yanchor 1.0
+            yoffset -120
+            idle "scenario_slavyana/res/images/menu/buttons/basket.png"
+            hover "scenario_slavyana/res/images/menu/buttons/basket_hover.png"
+            action Return("wipe")
+    elif slavyana_mod_menu_state == "days":
+        add "scenario_slavyana/res/images/menu/bg/gal_eve.png"
+
+        grid 3 3:
+            xalign 0.5
+            yalign 0.4
+            spacing 30
+
+            imagebutton:
+                idle "scenario_slavyana/res/images/menu/day_buttons/day_1.png"
+                hover "scenario_slavyana/res/images/menu/day_buttons/day_1_hover.png"
+                action Return("day1")
+            imagebutton:
+                idle "scenario_slavyana/res/images/menu/day_buttons/day_2.png"
+                hover "scenario_slavyana/res/images/menu/day_buttons/day_2_hover.png"
+                action Return("day2")
+            imagebutton:
+                idle "scenario_slavyana/res/images/menu/day_buttons/day_3.png"
+                hover "scenario_slavyana/res/images/menu/day_buttons/day_3_hover.png"
+                action Return("day3")
+            imagebutton:
+                idle "scenario_slavyana/res/images/menu/day_buttons/day_4.png"
+                hover "scenario_slavyana/res/images/menu/day_buttons/day_4_hover.png"
+                action Return("day4")
+            imagebutton:
+                idle "scenario_slavyana/res/images/menu/day_buttons/day_5.png"
+                hover "scenario_slavyana/res/images/menu/day_buttons/day_5_hover.png"
+                action Return("day5")
+            imagebutton:
+                idle "scenario_slavyana/res/images/menu/day_buttons/day_6.png"
+                hover "scenario_slavyana/res/images/menu/day_buttons/day_6_hover.png"
+                action Return("day6")
+            imagebutton:
+                idle "scenario_slavyana/res/images/menu/day_buttons/day_7.png"
+                hover "scenario_slavyana/res/images/menu/day_buttons/day_7_hover.png"
+                action Return("day7")
+            imagebutton:
+                idle "scenario_slavyana/res/images/menu/day_buttons/epilogue.png"
+                hover "scenario_slavyana/res/images/menu/day_buttons/epilogue_hover.png"
+                action Return("epilogue")
+            null
+        imagebutton:
+            xpos 0.0
+            ypos 1.0
+            xanchor 0.0
+            yanchor 1.0
+            xoffset 40
+            yoffset -40
+            idle "scenario_slavyana/res/images/menu/day_buttons/arrow.png"
+            hover "scenario_slavyana/res/images/menu/day_buttons/arrow_active.png"
+            action SetVariable("slavyana_mod_menu_state", "main")
+    else:
+        imagebutton:
+            xpos 0.0
+            ypos 1.0
+            xanchor 0.0
+            yanchor 1.0
+            xoffset 40
+            yoffset -40
+            idle "scenario_slavyana/res/images/menu/day_buttons/arrow.png"
+            hover "scenario_slavyana/res/images/menu/day_buttons/arrow_active.png"
+            action SetVariable("slavyana_mod_menu_state", "main")
+
+
+# Точка входа в мод
 label slavyana_mod__launcher:
     $ new_chapter(0, u"Славя-мод")
 
+# Инициализировать главный экран
 label slavyana_mod__launcher0:
     $ reload_names()
-    #$ sl_m_try = "savename"
-    #call sl_m_try
-    #$ sl_m_try = None
-    if hour in [22,23,24,0,1,2,3,4,5,6]:
-        play music music_list["forest_maiden"] fadein 1
-    elif hour in [20,21]:
-        play music music_list["silhouette_in_sunset"] fadein 1
-    elif hour in [7,8]:    
-        play music music_list["lightness"] fadein 1
-    else:
-        play music music_list["a_promise_from_distant_days_v2"] fadein 1
+    scene black
+    play music music_list["forest_maiden"] fadein 1
+# Показать главный экран
+label slavyana_mod__mainscreen1:
+    call screen slavyana_mod_main_menu
 
-label slavyana_mod_launcher1_1:
-    if hour in [22,23,24,0,1,2,3,4,5,6]:
-        scene bg main_night with dissolve
-        $ m_back = "scenario_slavyana/res/images/menu/bg/m_night.png"
-        $ m_back_hover = "scenario_slavyana/res/images/menu/bg/m_night_hover.png"
-    elif hour in [20,21] or hour in [7,8]:
-        scene bg main_eve with dissolve
-        $ m_back = "scenario_slavyana/res/images/menu/bg/m_eve.png"
-        $ m_back_hover = "scenario_slavyana/res/images/menu/bg/m_eve_hover.png"
-    else:
-        scene bg main_day with dissolve
-        $ m_back = "scenario_slavyana/res/images/menu/bg/m_day.png"
-        $ m_back_hover = "scenario_slavyana/res/images/menu/bg/m_day_hover.png"
-    
-label slavyana_mod_launcher2:     
-    if hour in [22,23,24,0,1,2,3,4,5,6]:
-        $ night_time()
-        $ persistent.sprite_time = "night"
-    elif hour in [20,21] or hour in [7,8]:
-        $ sunset_time()
-        $ persistent.sprite_time = "sunset"
-    else:
-        $ day_time()
-        $ persistent.sprite_time = "day"
-
-    $ result = renpy.imagemap(m_back, m_back_hover, [
-    (833, 350, 1087, 401, "play"),
-    (765, 521, 1153, 587, "days"),
-    (34, 886, 194, 1055, "gallery"),
-    (214, 885, 397, 1055, "alisa"),
-    (699, 885, 870, 1057, "vk"),
-    (875, 885, 1046, 1057, "steam"),
-    (1539, 885, 1710, 1057, "settings"),
-    (1751, 880, 1882, 1064, "exit")
-    ])
-    
-    if result == "play":
-        scene black with dissolve
+    # Новая игра
+    if _return == "play":
         stop music fadeout 2
-        $ sl_m_Full = True
-        #$ make_names_known()
+        $ renpy.pause(2, hard=True)
         jump slavyana_mod__day1
-    elif result == "days":
-        jump slavyana_mod__days
-    elif result == "settings":
-        jump slavyana_mod__settings
-    elif result == "steam":
-        $ sl_m_link_steam()
-        jump slavyana_mod_launcher2
-    elif result == "vk":
-        $ sl_m_link_vk()
-        jump slavyana_mod_launcher2
-    elif result == "gallery":
-        jump slavyana_mod__bknt_gallery
-    elif result == "alisa":
-        if hour in [22,23,24,0,1,2,3,4,5,6]:
-            scene bg ext_square_night with dissolve
-        elif hour in [20,21] or hour in [7,8]:
-            scene bg ext_square_sunset with dissolve
-        else:
-            scene bg ext_square_day with dissolve
-        if "alisa_mod__launcher" in mods:
-            window show
-            "Вы действительно желаете перейти в \"Алиса-мод. Допил\"?"
-            window hide
-            menu:
-                "Да, перейти":
-                    jump alisa_mod__launcher
-                "Нет, остаться":
-                    jump slavyana_mod_launcher1_1
-        else:
-            $ sl_m_link_dv()
-        jump slavyana_mod_launcher2
-    elif result == "exit":
-        $ reload_names()
-        scene black with dissolve
-        stop music fadeout 3
-        pause (2)
-        return
-
-label slavyana_mod__days:
-    if hour in [22,23,24,0,1,2,3,4,5,6]:
-        scene bg days_night with dissolve
-    elif hour in [20,21] or hour in [7,8]:
-        scene bg days_eve with dissolve
-    else:
-        scene bg days_day with dissolve
-
-label slavyana_mod__days2:
-    $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full.png"
-    $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full_hover.png"
-    #if persistent.sl_m_day2:
-    #    $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full.png"
-    #    $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_full_hover.png"
-    #elif persistent.sl_m_day1:
-    #    $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd3.png"
-    #    $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd3_hover.png"
-    #else:
-    #    $ d_back = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd2.png"
-    #    $ d_back_hover = "scenario_slavyana/res/images/menu/day_buttons/d_buttons_wd2_hover.png"
-
-    $ result = renpy.imagemap(d_back, d_back_hover, [
-    (360, 130, 610, 200, "day1"),
-    (360, 310, 610, 370, "day2"),
-    (360, 480, 610, 540, "day3"),
-    (360, 650, 610, 720, "day4"),
-    (1300, 130, 1550, 200, "day5"),
-    (1300, 310, 1550, 370, "day6"),
-    (1300, 485, 1550, 545, "day7"),
-    (1294, 650, 1590, 720, "epilogue"),
-    (126, 859, 548, 1043, "back_days")
-    ])
-    
-    if result == "day1":
-        #$ make_names_known()
+    # Авторы
+    elif _return == "authors":
+        stop music fadeout 2
+        scene bg days_day with dissolve2
+        $ renpy.pause(2, hard=True)
+        play music music_list["a_promise_from_distant_days"] fadein 3
+        jump slavyana_mod__credits
+    # Вайп настроек мода
+    elif _return == "wipe":
+        scene bg ext_shed_sunset
+        window show
+        "Вы уверены, что хотите сбрость весь прогресс мода?"
+        window hide
+        menu:
+            "Уверен":
+                $ persistent.sl_m_hidden = False
+                $ persistent.sl_m_not_fst_hidden = False
+                $ persistent.endings["sl_m_green"] = False
+                $ persistent.endings["sl_m_red"] = False
+                $ persistent.endings["sl_m_blue"] = False
+                $ sl_m_lp = 0
+            "Нет, постойте!":
+                pass
+        jump slavyana_mod__mainscreen1
+    # Быстрый старт дней
+    elif _return == "day1":
         $ sl_m_l_day = 1
         call slavyana_mod__l_finish
         jump slavyana_mod__day1
-    elif result == "day2":
-        if persistent.sl_m_day1:
-            $ sl_m_l_day = 2
-            call slavyana_mod__l_choice
-            jump slavyana_mod__day2
-        else:
-            jump slavyana_mod__days2
-    elif result == "day3":
-        if persistent.sl_m_day2:
-            $ sl_m_l_day = 3
-            call slavyana_mod__l_choice
-            jump slavyana_mod__day3
-        else:
-            jump slavyana_mod__days2
-    elif result == "day4":
+    elif _return == "day2":
+        $ sl_m_l_day = 2
+        call slavyana_mod__l_finish
+        jump slavyana_mod__day1_fast_choice
+    elif _return == "day3":
+        $ sl_m_l_day = 3
+        call slavyana_mod__l_finish
+        jump slavyana_mod__day1_fast_choice
+    elif _return == "day4":
         $ sl_m_l_day = 4
-        call slavyana_mod__l_choice
-        jump slavyana_mod__day4
-    elif result == "day5":
+        call slavyana_mod__l_finish
+        jump slavyana_mod__day1_fast_choice
+    elif _return == "day5":
         $ sl_m_l_day = 5
-        call slavyana_mod__l_choice
-        jump slavyana_mod__day5
-    elif result == "day6":
+        call slavyana_mod__l_finish
+        jump slavyana_mod__day1_fast_choice
+    elif _return == "day6":
         $ sl_m_l_day = 6
-        call slavyana_mod__l_choice
-        if sl_m_lp < 4:
-            jump slavyana_mod__day6_alt
-        else:
-            jump slavyana_mod__day6
-    elif result == "day7":
+        call slavyana_mod__l_finish
+        jump slavyana_mod__day1_fast_choice
+    elif _return == "day7":
         $ sl_m_l_day = 7
-        call slavyana_mod__l_choice
-        if sl_m_lp < 4:
-            call slavyana_mod__day6_alt_chending
-            jump slavyana_mod__day7_alt
-        else:
-            jump slavyana_mod__day7
-    elif result == "epilogue":
+        call slavyana_mod__l_finish
+        jump slavyana_mod__day1_fast_choice
+    elif _return == "epilogue":
         $ sl_m_l_day = 8
-        call slavyana_mod__l_choice
-        jump slavyana_mod__epilogue
-    elif result == "back_days":
-        jump slavyana_mod_launcher1_1
-
-label slavyana_mod__l_choice:
-    if hour in [22,23,24,0,1,2,3,4,5,6]:
-        scene bg int_house_of_sl_night_light with dissolve
-        $ sunset_time()
-    elif hour in [20,21]:
-        scene bg int_house_of_sl_sunset with dissolve
-        $ sunset_time()
+        call slavyana_mod__l_finish
+        jump slavyana_mod__day1_fast_choice
     else:
-        scene bg int_house_of_sl_day with dissolve
-        $ day_time()
-    $ sl_m_Full = False
-    #$ make_names_known()
-    $ sl_m_counter = 0
-    window show
-    if sl_m_l_day == 2:
-        "Проставьте выборы предыдущего дня."
-    else:
-        "Проставьте выборы предыдущих дней."
-        window hide
-        scene cg d1_sl_dinner_0 with dspr
-        $ night_time()
-        window show
-        "Первый день."
-        window hide
-    call slavyana_mod__day1_fast_choice
-
-    if sl_m_l_day == 2:
-        call slavyana_mod__l_finish
-        return
-
-    call slavyana_mod__day2_fast_choice
-
-    if sl_m_l_day == 3:
-        call slavyana_mod__l_finish
-        return
-
-    call slavyana_mod__day3_fast_choice
-    if sl_m_l_day == 4:
-        call slavyana_mod__l_finish
-        return
-
-    call slavyana_mod__day4_fast_choice
-    if sl_m_l_day == 5:
-        call slavyana_mod__l_finish
-        return
-
-    call slavyana_mod__day5_fast_choice
-
-    if sl_m_l_day == 6:
-        call slavyana_mod__l_finish
-        return
-
-    if sl_m_lp >= 4:
-        call slavyana_mod__day6_fast_choise
-
-    call slavyana_mod__l_finish
+        jump slavyana_mod__mainscreen1
     return
 
 label slavyana_mod__l_finish:
-    if hour in [22,23,24,0,1,2,3,4,5,6]:
-        scene bg int_house_of_sl_night_light with dissolve
-        $ sunset_time()
-    elif hour in [20,21]:
-        scene bg int_house_of_sl_sunset with dissolve
-        $ sunset_time()
-    else:
-        scene bg int_house_of_sl_day with dissolve
-        $ day_time()
+    scene bg days_eve
     window show
     if sl_m_l_day <= 7:
         "Запускать ли следующие дни после окончания выбранного?"
@@ -308,123 +252,6 @@ label slavyana_mod__l_finish:
         window show
     if sl_m_l_day > 1:
         $ sl_m_meet('mt','Оля')
-    "Нажмите, чтобы продолжить..."
     window hide
-    scene black with dissolve
     stop music fadeout 2
     return
-
-label slavyana_mod__settings0:
-    if hour in [22,23,24,0,1,2,3,4,5,6]:
-        play music music_list["forest_maiden"] fadein 1
-    elif hour in [20,21]:
-        play music music_list["silhouette_in_sunset"] fadein 1
-    elif hour in [7,8]:
-        play music music_list["lightness"] fadein 1
-    else:
-        play music music_list["a_promise_from_distant_days_v2"] fadein 1
-
-label slavyana_mod__settings:
-    if persistent.sl_m_hen_txt:
-        if hour in [22,23,24,0,1,2,3,4,5,6]:
-            scene bg set_night_yes with dissolve
-            $ set_back = "scenario_slavyana/res/images/menu/bg/set_night_yes.png"
-            $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_night_yes_hover.png"
-        elif hour in [20,21] or hour in [7,8]:
-            scene bg set_eve_yes with dissolve
-            $ set_back = "scenario_slavyana/res/images/menu/bg/set_eve_yes.png"
-            $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_eve_yes_hover.png"
-        else:
-            scene bg set_day_yes with dissolve
-            $ set_back = "scenario_slavyana/res/images/menu/bg/set_day_yes.png"
-            $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_day_yes_hover.png"
-    else:
-        if hour in [22,23,24,0,1,2,3,4,5,6]:
-            scene bg set_night_no with dissolve
-            $ set_back = "scenario_slavyana/res/images/menu/bg/set_night_no.png"
-            $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_night_no_hover.png"
-        elif hour in [20,21] or hour in [7,8]:
-            scene bg set_eve_no with dissolve
-            $ set_back = "scenario_slavyana/res/images/menu/bg/set_eve_no.png"
-            $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_eve_no_hover.png"
-        else:
-            scene bg set_day_no with dissolve
-            $ set_back = "scenario_slavyana/res/images/menu/bg/set_day_no.png"
-            $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_day_no_hover.png"
-
-label slavyana_mod__settings2:
-    $ result = renpy.imagemap(set_back, set_back_hover, [
-    (615, 399, 1303, 475, "delete_all"),
-    (829, 573, 1084, 623, "autors"),
-    (1375, 833, 1579, 1037, "hen_txt_sel"),
-    (125, 857, 548, 1042, "back_set")
-    ])
-
-    if result == "back_set":
-        jump slavyana_mod_launcher1_1
-    elif result == "delete_all":
-        if hour in [22,23,24,0,1,2,3,4,5,6]:
-            scene bg ext_shed_night with dissolve
-        elif hour in [20,21] or hour in [7,8]:
-            scene bg ext_shed_sunset with dissolve
-        else:
-            scene bg ext_shed_day with dissolve
-        window show
-        "Вы уверены?"
-        window hide
-        menu:
-            "Уверен":
-                $ persistent.sl_m_day1 = False
-                $ persistent.sl_m_day2 = False
-                $ persistent.sl_m_day3 = False
-                $ persistent.sl_m_hidden = False
-                $ persistent.sl_m_not_fst_hidden = False
-                $ persistent.endings["sl_m_green"] = False
-                $ persistent.endings["sl_m_red"] = False
-                $ persistent.endings["sl_m_blue"] = False
-                $ sl_m_lp = 0
-                jump slavyana_mod__settings
-            "Нет, постойте!":
-                jump slavyana_mod__settings
-    elif result == "hen_txt_sel":
-        if persistent.sl_m_hen_txt:
-            $ persistent.sl_m_hen_txt = False
-            if hour in [22,23,24,0,1,2,3,4,5,6]:
-                $ set_back = "scenario_slavyana/res/images/menu/bg/set_night_no.png"
-                $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_night_no_hover.png"
-            elif hour in [20,21] or hour in [7,8]:
-                $ set_back = "scenario_slavyana/res/images/menu/bg/set_eve_no.png"
-                $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_eve_no_hover.png"
-            else:
-                $ set_back = "scenario_slavyana/res/images/menu/bg/set_day_no.png"
-                $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_day_no_hover.png"
-            jump slavyana_mod__settings2
-        else:
-            $ persistent.sl_m_hen_txt = True
-            if hour in [22,23,24,0,1,2,3,4,5,6]:
-                $ set_back = "scenario_slavyana/res/images/menu/bg/set_night_yes.png"
-                $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_night_yes_hover.png"
-            elif hour in [20,21] or hour in [7,8]:
-                $ set_back = "scenario_slavyana/res/images/menu/bg/set_eve_yes.png"
-                $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_eve_yes_hover.png"
-            else:
-                $ set_back = "scenario_slavyana/res/images/menu/bg/set_day_yes.png"
-                $ set_back_hover = "scenario_slavyana/res/images/menu/bg/set_day_yes_hover.png"
-            jump slavyana_mod__settings2
-    elif result == "autors":
-        stop music fadeout 2
-        #написать титры здесь, потом сделать нормальные и перекинуть в эпилог
-        scene black with dissolve2
-        $ renpy.pause(2, hard=True)
-        play music music_list["a_promise_from_distant_days"] fadein 3
-        jump slavyana_mod__credits
-        #$ renpy.show('credits_sl_m credits_sl_m_text', [sl_m_ending_transform], layer='widgetoverlay')
-        #show cg d1_sl_dinner_0 behind credits with dissolve2
-        #$ renpy.pause(60, hard=True)  
-        #stop music fadeout 3
-        #scene black with dissolve2
-        #$ renpy.hide('credits_sl_m credits_sl_m_text', layer='widgetoverlay')
-        #jump slavyana_mod__settings0
-
-#Сделано FireBoTer'ом
-#Дизайн - Nenver Kradovich, FireBoTer

@@ -520,39 +520,89 @@ label slavyana_mod__day7_alt:
     "..."
 
   #Рут Лены
-  #Если выбрали "Лена"
   elif sl_m_end_un:
     "Утро этого дня явно не задалось."
     "Вначале я проснулась не выспавшейся."
-  #посреди фразы эффект удара и трек
-    "А во вторых я проспала... *трек Scarytale* {w}ЛИНЕЙКУ!!!"
+    "А во вторых я проспала..."
+    play music music_list["awakening_power"] fadein 1
+    scene bg int_house_of_sl_day:
+        zoom 1.1
+        yalign 0.01
+        block:
+            linear 0.2 pos (0,5)
+            linear 0.2 pos (0,0)
+    scene bg int_house_of_sl_day
+    extend " ЛИНЕЙКУ!!!"
     th "Этого не может быть! Время уже без десяти одиннадцать, а я только проснулась!"
     "Я мигом собрала все силы в кулак, вскочила с постели и надела форму."
-  #фон домики
-  #эффект бега
+    scene bg ext_house_of_sl_day:
+        zoom 1.1
+        yalign 0.01
+        block:
+            linear 0.2 pos (0,5)
+            linear 0.2 pos (0,0)
+        repeat
     "На ходу я застёгивала нижние пуговицы и завязывала галстук."
-  #фон площадь
-  #фон далеко от столовой
-  #фон напротив столовой
-  #конец эффекта
-  #конец трека
+    window hide
+    scene bg ext_house_of_sl_day:
+        zoom 1.1
+        yalign 0.01
+        block:
+            linear 0.2 pos (0,5)
+            linear 0.2 pos (0,0)
+        repeat
+    pause 2
+    scene bg ext_square_day:
+        zoom 1.1
+        yalign 0.01
+        block:
+            linear 0.2 pos (0,5)
+            linear 0.2 pos (0,0)
+        repeat
+    window show
     "Когда я добежала, площадь была {w}конечно же пуста."
     "С чувством вины я направилась в столовую."
-  #фон внутри столовой
+    window hide
+    pause 2
+    scene bg ext_dining_hall_away_day:
+        zoom 1.1
+        yalign 0.01
+        block:
+            linear 0.2 pos (0,5)
+            linear 0.2 pos (0,0)
+        repeat
+    pause 2
+    scene bg ext_dining_hall_near_day:
+        zoom 1.1
+        yalign 0.01
+        block:
+            linear 0.2 pos (0,5)
+            linear 0.2 pos (0,0)
+        repeat
+    stop music fadeout 2
+    scene bg int_dining_hall_people_day
+    play ambience ambience_dining_hall_full fadein 2
+    window show
     "Столовая всё ещё была заполнена пионерами."
     "Я встала в очередь за своей порцией, издалека заприметив свободное место."
     "Получив порцию и дойдя до него, ко мне подсела Женя."
+    show mz normal pioner glasses with dspr
     mz "Что-то ты сегодня поздно. Ольга Дмитриевна была недовольна."
     sl "Странно что она не подняла весь лагерь на уши в моих поисках, я ведь никогда не пропускаю линейки."
     mz "Она всё списала на то, что у тебя была какая-то уважительная причина."
     sl "Надо будет извиниться перед ней."
+    show mz bukal pioner glasses with dspr
     mz "Да не стоит, лишний раз ей напоминать, лишняя болтовня. Разве тебе не хочется провести последний день с пользой или что-то вроде того?"
     mz "Ты хочешь чтобы он тебе запомнился ссорой с вожатой?"
     sl "Нет конечно."
+    show mz normal pioner glasses with dspr
     mz "Так что просто забудь. {w}Ладно, я пойду в библиотеку."
     "Я решила не напоминать ей про случай с Электроником."
+    hide mz with dspr
     "А просто доела свою порцию и вышла из-за стола."
-  #фон напротив домика Слави
+    pause 2
+
+    scene bg ext_house_of_sl_day with dissolve
     "Я решила не терять времени зря и выбежала на пробежку."
   #фон площадь
   #Фон напротив клубов
@@ -1397,6 +1447,7 @@ label slavyana_mod__day7_alt:
   #эффект закрывания глаз
     "..."
 
+label slavyana_mod__epilogue_alt:
 #День ...
 #Эпилог один на всех
 #эффект открывания глаз

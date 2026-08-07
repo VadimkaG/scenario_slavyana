@@ -770,6 +770,21 @@ label slavyana_mod__day6_end_choise:
 
 # Быстрый выбор
 label slavyana_mod__day6_fast_choise:
+
+  if sl_m_lp < 4:
+    if sl_m_l_day == 6:
+      jump slavyana_mod__day6_alt
+    elif sl_m_l_day == 7:
+      call slavyana_mod__day6_alt_chending
+      jump slavyana_mod__day7_alt
+    else:
+      jump slavyana_mod__epilogue_alt
+    return
+
+  if sl_m_l_day == 6:
+    jump slavyana_mod__day6
+    return
+
   call slavyana_mod__day6_end_choise
   if sl_m_lp >= 8:
     $ day_time()
@@ -785,4 +800,8 @@ label slavyana_mod__day6_fast_choise:
 
   if (sl_m_lp < 9):
     $ setEndRed();
-  return
+  
+  if sl_m_l_day == 7:
+    jump slavyana_mod__day7
+  else:
+    jump slavyana_mod__epilogue

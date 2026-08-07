@@ -1280,7 +1280,6 @@ label slavyana_mod__day3:
     hide blink
     $ volume(1.0, "sound")
     pause (3)
-    $ persistent.sl_m_day3 = True
     if sl_m_Full:
         jump slavyana_mod__day4
     jump slavyana_mod__launcher0
@@ -1289,6 +1288,11 @@ label slavyana_mod__day3:
     
 #Быстрый выбор
 label slavyana_mod__day3_fast_choice:
+
+    if sl_m_l_day == 3:
+        jump slavyana_mod__day3
+        return
+
     window hide
     scene bg ext_dining_hall_away_day with dissolve
     $ night_time()
@@ -1312,3 +1316,5 @@ label slavyana_mod__day3_fast_choice:
             $ sl_m_day3_help = True
         "Остаться на месте":
             pass
+
+    jump slavyana_mod__day4_fast_choice
