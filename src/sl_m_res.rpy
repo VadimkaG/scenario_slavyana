@@ -1,12 +1,4 @@
-﻿init python:
-    def sl_m_meet(who,name):
-        try:
-            meet(who,name)
-        except NameError:
-            gl = globals()
-            gl[who+"_name"] = name
-
-init 6 python:
+﻿init 6 python:
     if "sl_m_green" not in persistent.endings:
         persistent.endings["sl_m_green"] = False
     if "sl_m_red" not in persistent.endings:
@@ -107,7 +99,7 @@ init:
     
     image bg days_day = "scenario_slavyana/res/images/menu/bg/d_day.png"
     image bg days_eve = "scenario_slavyana/res/images/menu/bg/d_eve.png"
-    image bg days_night = "scenario_slavyana/res/images/menu/bg/d_night.png"
+    # image bg days_night = "scenario_slavyana/res/images/menu/bg/d_night.png"
     
     image bg ext_aidpost_sunset = "scenario_slavyana/res/images/bg/ext_aidpost_sunset.jpg"
     image bg ext_shed_day = "scenario_slavyana/res/images/bg/ext_shed_day.jpg"
@@ -121,7 +113,7 @@ init:
 
     image bg int_house_of_sl_night = "scenario_slavyana/res/images/bg/int_house_of_sl_night.jpg"
     image bg int_house_of_sl_sunset = "scenario_slavyana/res/images/bg/int_house_of_sl_sunset.jpg"
-    image bg int_library_sunset = "scenario_slavyana/res/images/bg/int_library_sunset.png"
+    # image bg int_library_sunset = "scenario_slavyana/res/images/bg/int_library_sunset.png"
     
     image cg d2_lineup_an = "scenario_slavyana/res/images/cg/d2_lineup.jpg"
     image cg d3_sl_library_an = "scenario_slavyana/res/images/cg/d3_sl_library.jpg"
@@ -130,7 +122,6 @@ init:
     image cg d3_sl_dance_an = "scenario_slavyana/res/images/cg/d3_sl_dance.jpg"
     image cg d3_sl_evening_alt = "scenario_slavyana/res/images/cg/d3_sl_evening.jpg"
 
-    #рукоделие!
     image bg int_house_of_sl_night_light = "scenario_slavyana/res/images/bg/int_house_of_sl_night_light.jpg"
 
     image cg d5_cake_alt = "scenario_slavyana/res/images/cg/d5_cake.jpg"
@@ -156,6 +147,8 @@ init:
     image sl_m_red = "scenario_slavyana/res/images/misc/ach/achievement_red.png"
     image sl_m_blue = "scenario_slavyana/res/images/misc/ach/achievement_blue.png"
 
+    #спрайты
+
     #Толик
     $ colors['tl'] = {'night': (173, 173, 173, 255), 'sunset': (173, 173, 173, 255), 'day': (173, 173, 173, 255), 'prolog': (173, 173, 173, 255)}
     $ names['tl'] = u"Толик"
@@ -170,8 +163,6 @@ init:
     $ colors['stranger'] = {'night': "#950036", 'sunset': "#950036", 'day': "#950036", 'prolog': "#950036"}
     $ names['stranger'] = u"Незнакомец"
     $ store.names_list.append('stranger')
-
-    #спрайты
 
     #Толик
     image tl pioneer normal = "scenario_slavyana/res/images/sprites/normal/tl/tl_1_pioneer.png"
@@ -616,17 +607,6 @@ init:
     image credits_sl_m = ParameterizedText(style='credits_sl_m', size=50)
     #$ credits_sl_m_text = "{size=80}Славя-мод{/size}\n\n\nРазработчик: FireBoTer.\n\n\nПомощь в тестировании: Xent2121.\n\n\nПомощь с дизайном главного меню: Nenver Kradovich\n\n\nРесурсы: IIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n\n\nОтдельное спасибо всем, кто играет в этот мод и тем, кто помогает исправлять его!\n"
 
-init 55 python:
-    colors['fbt'] = {'night': (0, 20, 137, 255), 'sunset': (0, 20, 137, 255), 'day': (0, 20, 137, 255), 'prolog': (0, 20, 137, 255)}
-    store.names_list.append('fbt')
-    if "scenario__alt_sevendl" in mods and config.version == "1.2":
-        names['fbt'] = u"Автор"
-    else:
-        try:
-            set_name('fbt', u"Автор")
-        except NameError:
-            names['fbt'] = u"Автор"
-
 init -410 python:
     store.map_zones = {
                 "un_mi_house":   {"position":[804,146,853,203],"default_bg":bg_tmp_image(u"Лена и Мику")},
@@ -654,27 +634,29 @@ init -410 python:
                 "forest":        {"position":[550,60,697,199],"default_bg":bg_tmp_image(u"Лес")},
         }
 
-init python:
-    notebooks_lines = -1;
-    def nb_show():
-        global notebooks_lines
-        if notebooks_lines < 0:
-            renpy.show("bknt_clear",at_list = [ truecenter ])
-            notebooks_lines = 0
-    def nb_hide():
-        global notebooks_lines
-        if notebooks_lines >= 0:
-            renpy.hide("bknt_clear")
-            notebooks_lines = -1
-    def notebok_getLinePoition(lineNumber):
-        if lineNumber < 25:
-            y = 0.339 + (0.014 * lineNumber)
-            return Position(xpos=.438, ypos=y,xmaximum=250,text_align=.0)
-        else:
-            y = 0.339 + (0.014 * (lineNumber-25))
-            return Position(xpos=.56, ypos=y,xmaximum=250,text_align=.0)
-    def nb(text, **kwargs):
-        global notebooks_lines
-        if notebooks_lines >= 0:
-            renpy.show("nb_line_"+str(notebooks_lines),[notebok_getLinePoition(notebooks_lines)],what=Text("{color=#0400ff}{size=-8}{font=scenario_slavyana/res/Fonts/ofont_ru_Elzevir.ttf}"+text+"{/font}{/size}{/color}"))
-            notebooks_lines += 1
+# Это я пытался имитировать картинки блокнота?
+# FIXME: Либо доделать, либо убрать, хз...
+# init python:
+#     notebooks_lines = -1;
+#     def nb_show():
+#         global notebooks_lines
+#         if notebooks_lines < 0:
+#             renpy.show("bknt_clear",at_list = [ truecenter ])
+#             notebooks_lines = 0
+#     def nb_hide():
+#         global notebooks_lines
+#         if notebooks_lines >= 0:
+#             renpy.hide("bknt_clear")
+#             notebooks_lines = -1
+#     def notebok_getLinePoition(lineNumber):
+#         if lineNumber < 25:
+#             y = 0.339 + (0.014 * lineNumber)
+#             return Position(xpos=.438, ypos=y,xmaximum=250,text_align=.0)
+#         else:
+#             y = 0.339 + (0.014 * (lineNumber-25))
+#             return Position(xpos=.56, ypos=y,xmaximum=250,text_align=.0)
+#     def nb(text, **kwargs):
+#         global notebooks_lines
+#         if notebooks_lines >= 0:
+#             renpy.show("nb_line_"+str(notebooks_lines),[notebok_getLinePoition(notebooks_lines)],what=Text("{color=#0400ff}{size=-8}{font=scenario_slavyana/res/Fonts/ofont_ru_Elzevir.ttf}"+text+"{/font}{/size}{/color}"))
+#             notebooks_lines += 1

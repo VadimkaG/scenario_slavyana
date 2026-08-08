@@ -1447,29 +1447,45 @@ label slavyana_mod__day7_alt:
   #эффект закрывания глаз
     "..."
 
-label slavyana_mod__epilogue_alt:
-#День ...
-#Эпилог один на всех
-#эффект открывания глаз
-#фон внутри дневного автобуса с пионерами
+label slavyana_mod__day7_epilogue_alt:
+  window hide
+  stop music
+  stop sound
+  stop ambience
+  $ backdrop = "epilogue"
+  $ new_chapter(7, u"Славя. День ...")
+  $ save_name = (u'Славя. День ...')
+  $ day_time()
+  $ persistent.sprite_time = "day"
+  $ renpy.pause(3, hard=True)
+  play sound_loop sfx_bus_interior_moving fadein 3 loop
+  scene bg int_bus_people_day
+  show unblink
+  window show
   "Автобус слегка потрясывало и подбрасывало на небольших кочках."
   th "Как это у меня удалось уснуть в автобусе?"
   "Я огляделась, все остальные только просыпались, кто то и не спал вовсе."
   "Рядом со мной по-прежнему сидела Ольга Дмитриевна."
   "Мы уже подъезжали к месту. Это было видно из окна."
-#ожидание 2 секунды
-#выключить эмбиент едущего автобуса(или включить звук приезда автобуса)
+  window hide
+  pause 2
+  stop sound_loop fadeout 1
+  play sound sfx_bus_stop fadein 1
+  scene black with dissolve
+  window show
   "Наконец автобус заехал на стоянку и остановился, раскрыв свои двери."
-#резко чёрный экран на 2 секунды, звук выхода из автобуса
-#медленно появляется фон ворота Совёнка(5 секунд)
+  window hide
+  scene bg ext_camp_entrance_day with dissolve2
+  window show
   th "Ну здравствуй, «Совёнок»! Эта смена будет самой незабываемой и самой неповторимой!"
   window hide
-#фон тёмный экран
-#ачивка "Сохранить девственность"
-  scene black
+  pause 2
+  scene black with dissolve2
+
+  # TODO: ачивка "Сохранить девственность"
+
   $ words_red = True
   call slavyana_mod__ending
-  #титры на фоне Слави которая смотрит картинку, под трек "Memories"
   play music music_list["memories"]
   pause 1
   scene cg titles_sl_with_image with dissolve

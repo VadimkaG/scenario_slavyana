@@ -1,35 +1,19 @@
 ﻿init python:
-    from time import localtime, strftime
-    t = strftime("%H:%M:%S", localtime())
-    hour, min, sec = t.split(":")
-    hour = int(hour)
-    
     mods["slavyana_mod__launcher"] = u"Славя-мод. Допил"
     try:
         mod_tags["slavyana_mod__launcher"] = ["gameplay:vn","length:days","protagonist:female","character:Семён","character:Славя","character:Алиса","character:Ульяна","character:Лена","character:Ольга Дмитриевна","character:Виола","character:Электроник","character:Шурик","character:Женя","special:TODO"]
     except NameError:
         pass
 
-init:  
+init:
+
+    $ sl_m_Full = True
+    $ sl_m_l_day = 0
+    $ slavyana_mod_menu_state = "main"
     $ sl_m_lp = 0
 
-    $ sl_m_Full = False
-    $ sl_m_l_day = 0
-    
-    $ m_back = None
-    $ m_back_hover = None
-    $ d_back = None
-    $ d_back_hover = None
-    $ set_back = None
-    $ set_back_hover = None
-
     default persistent.sl_m_hen_txt = True
-    default slavyana_mod_menu_state = "main" 
-
-    if persistent.sl_m_hidden == None:
-        $ persistent.sl_m_hidden = False
-    if persistent.sl_m_not_fst_hidden == None:
-        $ persistent.sl_m_not_fst_hidden = False
+    default persistent.sl_m_end_count = 0
 
 # Главное меню мода
 screen slavyana_mod_main_menu():
@@ -191,12 +175,11 @@ label slavyana_mod__mainscreen1:
         "Вы уверены, что хотите сбрость весь прогресс мода?"
         window hide
         menu:
-            "Уверен":
-                $ persistent.sl_m_hidden = False
-                $ persistent.sl_m_not_fst_hidden = False
+            "Уверен. С глаз долой, из сердца ВОООН!":
                 $ persistent.endings["sl_m_green"] = False
                 $ persistent.endings["sl_m_red"] = False
                 $ persistent.endings["sl_m_blue"] = False
+                $ persistent.sl_m_end_count = 0
                 $ sl_m_lp = 0
             "Нет, постойте!":
                 pass
@@ -242,16 +225,16 @@ label slavyana_mod__l_finish:
     scene bg days_eve
     window show
     if sl_m_l_day <= 7:
-        "Запускать ли следующие дни после окончания выбранного?"
+        "Вернуться в меню по окончанию дня?"
         window hide
         menu:
-            "Да":
+            "Играть до конца":
                 $ sl_m_Full = True
-            "Нет":
+            "После дня вернуться в меню":
                 $ sl_m_Full = False
         window show
     if sl_m_l_day > 1:
-        $ sl_m_meet('mt','Оля')
+        $ meet('mt','Оля')
     window hide
     stop music fadeout 2
     return

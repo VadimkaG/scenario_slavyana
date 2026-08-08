@@ -771,14 +771,14 @@ label slavyana_mod__day6_end_choise:
 # Быстрый выбор
 label slavyana_mod__day6_fast_choise:
 
-  if sl_m_lp < 4:
+  if persistent.sl_m_end_count > 0 and sl_m_lp < 4:
     if sl_m_l_day == 6:
       jump slavyana_mod__day6_alt
     elif sl_m_l_day == 7:
       call slavyana_mod__day6_alt_chending
       jump slavyana_mod__day7_alt
     else:
-      jump slavyana_mod__epilogue_alt
+      jump slavyana_mod__day7_epilogue_alt
     return
 
   if sl_m_l_day == 6:

@@ -358,6 +358,8 @@ label slavyana_mod__epilogue:
     jump slavyana_mod__credits
 
 label slavyana_mod__ending:
+  if persistent.sl_m_end_count < 1:
+    $ persistent.sl_m_end_count = 1
   "У каждой истории есть начало и конец."
   "У каждой истории есть своя канва, синопсис, содержание, ключевые моменты, прологи и эпилоги."
   "И нет такой книги, в которой при каждом новом прочтении не открывались бы вещи, на которые раньше не обращал внимания."

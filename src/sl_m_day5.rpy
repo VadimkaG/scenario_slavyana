@@ -1079,7 +1079,7 @@ label slavyana_mod__day5_lena:
   scene bg ext_beach_night with dissolve
   "Когда я начала замерзать, пришлось выйти из воды."
   th "Кажется, я забыла взять из домика сумку, в которой лежало полотенце."
-  if sl_m_lp < 4:
+  if persistent.sl_m_end_count > 0 and sl_m_lp < 4:
     jump slavyana_mod__day5_alt
   "Прошло не больше 15 минут."
   th "Стоит ли ждать Семёна? Наверное, он остался там."
@@ -1615,7 +1615,7 @@ label slavyana_mod__day5_fast_choice:
       "Сказать правду":
         $ sl_m_day5_cleaning_told_truth = True
 
-  if sl_m_lp < 4:
+  if persistent.sl_m_end_count > 0 and sl_m_lp < 4:
     jump slavyana_mod__day6_fast_choise
 
   if sl_m_lp >= 4:

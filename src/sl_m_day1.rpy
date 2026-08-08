@@ -457,7 +457,7 @@ label slavyana_mod__day1:
     "Доплыв почти до самых буйков, Ольга Дмитриевна остановилась."
     show mt normal swim at center with dspr
     mt "Слушай, Славя...{w} Может, ну его, этот официоз? Называй меня просто Олей и обращайся на «ты». Но не при посторонних, конечно же."
-    $ sl_m_meet('mt','Оля')
+    $ meet('mt','Оля')
     sl "Хорошо, Ольга... Оля."
     show mt smile swim at center with dspr
     mt "Вот и замечательно!{w} Смотри, там ещё кто-то пришёл!"
@@ -1571,11 +1571,6 @@ label slavyana_mod__day1_other:
     window hide
     $ disable_current_zone()
     jump slavyana_mod__day1_map
-
-    #временная концовка
-    #window show
-    #fbt "Продолжение следует..."
-    #window hide
 
 #кодо-концовка
 label slavyana_mod__day1_end:
