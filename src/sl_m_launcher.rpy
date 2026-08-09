@@ -159,6 +159,7 @@ label slavyana_mod__mainscreen1:
     if _return == "play":
         window hide
         stop music fadeout 2
+        play sound sfx_konami_on volume 0.1
         $ renpy.pause(1, hard=True)
         jump slavyana_mod__day1
     # Авторы

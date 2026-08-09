@@ -62,8 +62,7 @@ label slavyana_mod__day6_alt:
             repeat
         "Я решила завершить круг и побежала дальше."
         scene bg ext_dining_hall_back with dissolve
-        $ renpy.music.set_volume(0.3,channel=u"sound")
-        play sound music_list["dinner_horn_processed"]
+        play sound music_list["dinner_horn_processed"] volume 0.3
         "На удивление, чёрный ход на кухню был открыт."
         "И кто-то копошился внутри..."
         "Я пошла проверить."
@@ -72,7 +71,6 @@ label slavyana_mod__day6_alt:
         "Естественно я бросилась за ней."
         # Обязательно вернуть громкость звука в исходное положение!
         stop sound
-        $ renpy.music.set_volume(1,channel=u"sound")
         scene bg ext_path2_day:
             zoom 1.1
             yalign 0.01

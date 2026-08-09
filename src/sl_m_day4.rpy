@@ -865,7 +865,9 @@ label slavyana_mod__day4_after_map_choise:
   th "Сомнений нет, это точно Алиса с Ульяной."
   window hide
   stop ambience fadeout 2
-  scene bg ext_square_day with dissolve
+  $ sunset_time()
+  $ persistent.sprite_time = "sunset"
+  scene bg ext_square_sunset with dissolve
   play music music_list["you_won_t_let_me_down"] fadein 3
   window show
   "На площади уже собралась приличная толпа пионеров во главе с Ольгой Дмитриевной, которая отчитывала Алису."
@@ -943,7 +945,7 @@ label slavyana_mod__day4_after_map_choise:
       "Похоже, это всё на сегодня."
       "…"
       window hide
-      scene bg int_house_of_sl_day with dissolve
+      scene bg int_house_of_sl_sunset with dissolve
       play ambience ambience_int_cabin_day fadein 3
       window show
       "Я зашла в домик. До сна ещё было время, поэтому я заскочила, чтобы записать мысли в дневник."
@@ -1007,7 +1009,7 @@ label slavyana_mod__day4_after_map_choise:
   th "Уже темнеет, наверное стоит взять фонарик.{w} Да и в помещениях он явно пригодится"
   sl "Подожди минутку, я за фонариком сбегаю."
   window hide
-  scene bg ext_houses_day with dissolve
+  scene bg ext_houses_sunset with dissolve
   window show
   th "Мы пойдем ночью...{w} В заброшенный лагерь...{w} Вдвоем...{w} Надеюсь Семён знает на что согласился."
   th "Вдвоем всяко лучше, чем отпускать его одного."

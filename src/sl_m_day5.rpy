@@ -1050,6 +1050,9 @@ label slavyana_mod__day5_lena:
   play ambience ambience_dining_hall_full fadein 3
   hide sh  with dissolve
   "Пионеры стали потихоньку расходиться."
+
+  $ sunset_time()
+  $ persistent.sprite_time = "sunset"
   play ambience ambience_camp_center_evening fadein 3
   scene bg ext_dining_hall_near_sunset with dissolve
   "Я вышла из столовой и пошла собираться."
