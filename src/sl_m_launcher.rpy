@@ -14,6 +14,9 @@ init:
     default persistent.sl_m_hen_txt = True
     default persistent.sl_m_end_count = 0
 
+screen slavyana_mod_lp_counter():
+    text "ЛП: [sl_m_lp]" xalign 0.5 yalign 0.0 size 16
+
 # Главное меню мода
 screen slavyana_mod_main_menu():
     tag menu
@@ -151,16 +154,18 @@ label slavyana_mod__launcher0:
     $ reload_names()
     scene black
     play music music_list["forest_maiden"] fadein 1
+    show screen slavyana_mod_lp_counter
 # Показать главный экран
 label slavyana_mod__mainscreen1:
     call screen slavyana_mod_main_menu
 
     # Новая игра
     if _return == "play":
+        scene image "scenario_slavyana/res/images/menu/bg/slavya-mod-title-screen.png"
         window hide
         stop music fadeout 2
         play sound sfx_konami_on volume 0.1
-        $ renpy.pause(1, hard=True)
+        scene black with dissolve2
         jump slavyana_mod__day1
     # Авторы
     elif _return == "authors":
