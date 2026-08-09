@@ -1,4 +1,5 @@
 label slavyana_mod__day7_alt:
+  $ renpy.pause(2, hard=True)
   stop music
   stop sound
   stop ambience
@@ -521,6 +522,7 @@ label slavyana_mod__day7_alt:
 
   #Рут Лены
   elif sl_m_end_un:
+    scene black
     "Утро этого дня явно не задалось."
     "Вначале я проснулась не выспавшейся."
     "А во вторых я проспала..."

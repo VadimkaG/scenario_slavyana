@@ -22,9 +22,7 @@ init python:
     words_blue = False
 
 label slavyana_mod__epilogue:
-  stop music
-  stop sound
-  stop ambience
+  $ renpy.pause(2, hard=True)
   $ backdrop = "epilogue"
   $ new_chapter(7, u"Славя. Эпилог")
   $ save_name = (u'Славя. "Эпилог"')
@@ -34,6 +32,7 @@ label slavyana_mod__epilogue:
 
   play music music_list["farewell_to_the_past_edit"] fadein 3
   show anim prolog_1 with dissolve
+  window show
   "Наша история похожа на романтический рассказ."
   "Два пионера встретили друг друга в лагере и полюбили друг друга. Но вот, настал момент расставания, и им придётся что-то решать."
   "И какие бы препятствия не встретились на их пути, они всё преодолеют."
@@ -48,6 +47,7 @@ label slavyana_mod__epilogue:
             $ show_achievement("sl_m_blue")
             $ achievement.grant("ACH_SL_M_BLUE")
     #$ renpy.notify("Лучший Новый Год в жизни")
+    window hide
 
     pause 2
 
@@ -58,6 +58,7 @@ label slavyana_mod__epilogue:
     scene bg ext_camp_entrance_day behind credits with dissolve2
     jump slavyana_mod__credits
 
+  window show
   if words_red:
     "Кроме одного…"
 
@@ -72,41 +73,53 @@ label slavyana_mod__epilogue:
   "Я стала вспоминать свой сон."
 
   if words_red:
+    window hide
     #*Фон поляна с Семёном*
     scene bg ext_polyana_day
     show pi normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Семён…"
+    window hide
     #*Фон площадь с Леной с помехами*
     scene bg ext_square_day
     show un normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Лена…"
+    window hide
     #*Фон домики с Алисой с помехами*
     scene bg ext_houses_day
     show dv normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Алиса…"
+    window hide
     #*Фон внутри музклуба с Мику с помехами*
     scene bg int_musclub_day
     show mi normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Мику…"
+    window hide
     #*Фон спортплощадка с Ульяной с помехами*
     scene bg ext_playground_day
     show us normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Ульяна…"
+    window hide
     #*Фон внутри домика ОД*
     scene bg int_house_of_mt_day
     show mt normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Ольга… Дмитриевна?.."
     scene bg intro_xx with dissolve
     "Ну точно! Пионерлагерь «Совёнок»!"
@@ -114,28 +127,36 @@ label slavyana_mod__epilogue:
 
   if words_green:
     "Всплывали отдельные образы, не формирующие общей картины."
+    window hide
     #*Фон площадь с Леной с помехами*
     scene bg ext_square_day
     show un normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Девочка с фиолетовыми волосами… {w} Один вопрос: почему?"
+    window hide
     #*Фон домики с Алисой с помехами*
     scene bg ext_houses_day
     show dv normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Девочка с рыжими волосами и чудной причёской."
+    window hide
     #*Фон поляна с Семёном с помехами*
     scene bg ext_polyana_day
     show pi normal pioneer
     show prologue_dream
     with dissolve
+    window show
     "Мальчик, который кажется знакомым."
+    window hide
     #*Иллюстрация линейки с помехами*
     scene cg d2_lineup
     show prologue_dream
     with dissolve
+    window show
     "Толпа пионеров и их вожатая. {w} И я стою в их строю."
     #*Иллюстрация окно автобуса*
     scene bg intro_xx with dissolve
@@ -178,6 +199,7 @@ label slavyana_mod__epilogue:
     #*Иллюстрация с автобусом с горящей фарой*
     show anim intro_13 with dissolve
     th "Вези меня домой!"
+    window hide
     stop music fadeout 3
     scene black with dissolve2
     scene bg black with dissolve
@@ -232,6 +254,7 @@ label slavyana_mod__epilogue:
     "Я засмеялась в кулачок."
     sl "Я думаю, вы хороший человек!"
     "Я развернулась, чтобы посмотреть на своего собеседника."
+    window hide
     #*Иллюстрация Славя в капюшоне*
     scene cg epilogue_sl with dissolve
     pause(1)
@@ -242,6 +265,7 @@ label slavyana_mod__epilogue:
     scene bg bus_stop
     show pi normal coat
     with dissolve
+    window show
     stranger "А мы с вами нигде раньше не встречались?"
     "Я внимательно посмотрела на него, пытаясь узнать его."
     sl "Вряд ли… {w} Но ваше лицо почему-то кажется знакомым."
@@ -309,10 +333,12 @@ label slavyana_mod__epilogue:
     me "Хорошо."
     scene black with dissolve
     "…"
+    window hide
     #*Снова фон зимняя остановка*
     scene bg bus_stop
     show pi normal coat
     with dissolve
+    window show
     sl "А чем ты занимаешься?"
     me "Я… Ну… {w} Работаю на дому, так скажем."
     "Мне показалось это лучшей работой на свете."
@@ -336,6 +362,7 @@ label slavyana_mod__epilogue:
     "Я аккуратно взяла его под руку и заглянула ему в глаза."
     sl "Знаешь, я уверена, что в этом году всё будет лучше, чем в предыдущем!"
     "…"
+    window hide
     #*Фон тёмный экран*
     stop music fadeout 3
     scene black with dissolve2
@@ -360,6 +387,7 @@ label slavyana_mod__epilogue:
 label slavyana_mod__ending:
   if persistent.sl_m_end_count < 1:
     $ persistent.sl_m_end_count = 1
+  window show
   "У каждой истории есть начало и конец."
   "У каждой истории есть своя канва, синопсис, содержание, ключевые моменты, прологи и эпилоги."
   "И нет такой книги, в которой при каждом новом прочтении не открывались бы вещи, на которые раньше не обращал внимания."
@@ -368,6 +396,7 @@ label slavyana_mod__ending:
     "Почти у каждой…"
   else:
     "И даже у этой."
+  window hide
   return
 
 label slavyana_mod__credits:
@@ -392,7 +421,7 @@ label slavyana_mod__credits:
     $ credits_sl_m_text += "Сценарист, тестировщик\n"
     $ credits_sl_m_text += "Андрей «dredyi» Челдышов\n\n"
     $ credits_sl_m_text += "Программист\n"
-    $ credits_sl_m_text += "Вадим Голубев ( DS:Vadimka#0788 )\n\n"
+    $ credits_sl_m_text += "Вадим Голубев ( Vadimka )\n\n"
     $ credits_sl_m_text += "Дизайнер\n"
     $ credits_sl_m_text += "Владимир «VlDM» Пичугин\n\n\n"
 
@@ -439,10 +468,10 @@ label slavyana_mod__credits:
     $ credits_sl_m_text += "А также BAaD и Сергею Ейбогу за лучшие в мире саундтреки."
 
     $ renpy.show('credits_sl_m credits_sl_m_text', [sl_m_ending_transform], layer='widgetoverlay')
-    $ renpy.pause(90, hard=True)
+    $ renpy.pause(86, hard=True)
     $ renpy.hide('credits_sl_m credits_sl_m_text', layer='widgetoverlay')
     stop music fadeout 4
     scene black with dissolve2
-    pause 3
+    pause 4
 
     jump slavyana_mod__launcher0

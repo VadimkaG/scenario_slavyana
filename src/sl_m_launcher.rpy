@@ -1,12 +1,11 @@
 ﻿init python:
     mods["slavyana_mod__launcher"] = u"Славя-мод. Допил"
     try:
-        mod_tags["slavyana_mod__launcher"] = ["gameplay:vn","length:days","protagonist:female","character:Семён","character:Славя","character:Алиса","character:Ульяна","character:Лена","character:Ольга Дмитриевна","character:Виола","character:Электроник","character:Шурик","character:Женя","special:TODO"]
+        mod_tags["slavyana_mod__launcher"] = ["gameplay:vn","length:days","protagonist:female","character:Семён","character:Славя","character:Алиса","character:Ульяна","character:Лена","character:Ольга Дмитриевна","character:Виола","character:Электроник","character:Шурик","character:Женя"]
     except NameError:
         pass
 
 init:
-
     $ sl_m_Full = True
     $ sl_m_l_day = 0
     $ slavyana_mod_menu_state = "main"
@@ -23,7 +22,7 @@ screen slavyana_mod_main_menu():
     if slavyana_mod_menu_state == "main":
         add "scenario_slavyana/res/images/menu/bg/slavya-mod-title-screen.png"
 
-        text "Build: 07.08.2026":
+        text "Build: 09.08.2026":
             xpos 0.0
             ypos 1.0
             xanchor 0.0
@@ -158,15 +157,16 @@ label slavyana_mod__mainscreen1:
 
     # Новая игра
     if _return == "play":
+        window hide
         stop music fadeout 2
-        $ renpy.pause(2, hard=True)
+        $ renpy.pause(1, hard=True)
         jump slavyana_mod__day1
     # Авторы
     elif _return == "authors":
         stop music fadeout 2
-        scene bg days_day with dissolve2
+        scene bg days_day
         $ renpy.pause(2, hard=True)
-        play music music_list["a_promise_from_distant_days"] fadein 3
+        play music music_list["lightness_radio_bus"] fadein 3
         jump slavyana_mod__credits
     # Вайп настроек мода
     elif _return == "wipe":
@@ -235,6 +235,7 @@ label slavyana_mod__l_finish:
         window show
     if sl_m_l_day > 1:
         $ meet('mt','Оля')
+        $ meet('me','Семён')
     window hide
     stop music fadeout 2
     return

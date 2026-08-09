@@ -1,7 +1,5 @@
 label slavyana_mod__day6:
-  stop music
-  stop sound
-  stop ambience
+  $ renpy.pause(2, hard=True)
   $ backdrop = "days"
   $ new_chapter(6, u"Славя. День шестой")
   $ day_time()
@@ -15,6 +13,7 @@ label slavyana_mod__day6:
     scene bg ext_polyana_mere_day
     show prologue_dream
     with dissolve
+    window show
     "Я купалась в озере. Том самом, рядом с поляной."
     "Не знаю, как я до него добралась, и почему я пошла именно сюда {w}, но мне здесь нравится."
     "Вода была чистой, а в её отражении было видно небо."
@@ -42,6 +41,7 @@ label slavyana_mod__day6:
     scene cg d6_sl_forest
     show prologue_dream
     with dissolve
+    window show
     me "Как отдохнула?"
     sl "Хорошо, спасибо."
     me "Ну, чем займёмся?"
@@ -70,6 +70,7 @@ label slavyana_mod__day6:
     scene bg SlaviaRoom
     show prologue_dream
     with dissolve
+    window show
     "Мне снилось одно место…"
     "Одно очень знакомое место…"
     "Но почему, если я здесь не живу?.."
@@ -80,6 +81,7 @@ label slavyana_mod__day6:
     with dissolve
     "На дворе была зима. Но я почему-то не удивилась этому."
 
+  window hide
   stop music fadeout 2
   scene black with dissolve
   pause 2
@@ -88,6 +90,7 @@ label slavyana_mod__day6:
   show cs normal
   show prologue_dream
   with dissolve
+  window show
   cs "Проснулась… пионерка?"
   scene bg int_aidpost_day
   show cs normal
@@ -111,6 +114,7 @@ label slavyana_mod__day6:
   "Она открыла ящик стола и стала что-то искать. Достав какую-то таблетку, она протянула мне её и стакан воды, чтобы запить."
   cs "Это чтобы голова не болела."
   "Медсестра подмигнула мне."
+  window hide
   play sound sfx_dinner_horn_processed
   stop ambience fadeout 1
   scene black with dissolve
@@ -119,6 +123,7 @@ label slavyana_mod__day6:
   scene bg int_aidpost_day
   show cs normal
   with dspr
+  window show
   "Уже прозвенел горн на завтрак."
   cs "Сегодня на завтрак каша, так что я не придумала для тебя ничего лучше, чем принести из запасов бутерброды, кусок омлета и чай."
   sl "Спасибо."
@@ -127,6 +132,7 @@ label slavyana_mod__day6:
   cs "Сейчас-сейчас!"
   hide cs with dspr
   "Медсестра подошла к двери и начала с кем-то разговаривать."
+  window hide
   stop ambience fadeout 1
   scene black with dissolve
   pause 2
@@ -135,6 +141,7 @@ label slavyana_mod__day6:
   scene bg int_aidpost_day
   show cs normal
   with dspr
+  window show
   "Медсестра вернулась и заперла дверь."
   cs "Герой-любовник твой пришёл."
   th "Доктор Виола, вы опять?"
@@ -145,21 +152,25 @@ label slavyana_mod__day6:
   cs "Славь, если честно, то лично я не нахожу ничего запретного в вашем поведении. Это природа. Но так мне наказала Ольга Дмитриевна. {w}Если хочешь поскорее освободиться, советую прилечь и расслабиться, если к ужину температура будет нормальной - отпущу. Договорились?"
   sl "Хорошо."
   "Я послушалась её совета и легла в кровать."
+  window hide
   show blink
   stop ambience fadeout 1
   pause 2
+  scene black
+  window show
   "Заснуть никак не получалось."
+  window hide
   scene bg int_aidpost_day
-  show cs normal with dspr
-  play ambience ambience_int_cabin_day fadein 3
+  show cs normal
   show unblink
-  pause 2
+  with dissolve
+  pause 3
   hide unblink
-  pause 1
   play sound sfx_open_door_2
   show cs normal:
     linear 1.0 xalign 0.255
   show mt normal panama pioneer at cright with dissolve
+  window show
   "Вскоре пришла вожатая."
   mt "Славя, болеешь?"
   sl "Да, но мне уже лучше."
@@ -179,6 +190,7 @@ label slavyana_mod__day6:
   hide mt with dspr
   cs "Прости Славя, сама всё видишь."
   sl "Дa."
+  window hide
   show blink
   stop ambience fadeout 1
   pause 2
@@ -186,6 +198,7 @@ label slavyana_mod__day6:
   play ambience ambience_int_cabin_day fadein 2
   play sound sfx_dinner_horn_processed
   show unblink
+  window show
   "Меня разбудил горн, но я продолжала лежать в постели."
   "Вскоре Виола ушла."
   play sound2 sfx_knock_glass
@@ -203,12 +216,14 @@ label slavyana_mod__day6:
   "Испуганно спросила я."
   me "Вылезай! Потом всё расскажу!"
   th "Похоже у него есть какой-то план, а раз так, Семёну, я думаю, можно довериться. Всё равно отговаривать его буду дольше."
+  window hide
   play sound sfx_slavya_gets_out
   stop ambience
   scene bg ext_aidpost_day
   show pi normal pioneer
   with dissolve
   play ambience ambience_camp_center_day fadein 3
+  window show
   "Я распахнула окно и вылезла через него. Семён помог мне."
   sl "И что дальше?"
   me "Пойдём!"
@@ -265,7 +280,7 @@ label slavyana_mod__day6:
   "Семён встал и уверенным шагом ушёл с поляны, оставив меня одну."
   th "Зачем же всё-таки Семён это делает?"
   th "Может быть он просто за справедливость? Или я ему не безразлична."
-  th "Всё, что сделал Семён очень мило. Но что же всё-таки думаю о нём я? Он симпатичный мальчик, смелый {w}, добрый {w}, заботливый."
+  th "Всё, что сделал Семён очень мило. Но что же всё-таки думаю о нём я? Он симпатичный мальчик, смелый{w}, добрый{w}, заботливый."
   th "Но абсолютно некомпетентный!"
   if words_red:
     th "А я, дура, доверилась ему."
@@ -282,7 +297,7 @@ label slavyana_mod__day6:
       "Всё что он делает сейчас, это ради меня."
       stop ambience fadeout 2
       play music music_list["forest_maiden"] fadein 3
-      "Я готова идти с ним, потому что я верю ему... {w}И... {w}Я... {w}Да {w}, я люблю его. {w}Очень сильно. Я наконец-то это поняла."
+      "Я готова идти с ним, потому что я верю ему... {w}И... {w}Я... {w}Да{w}, я люблю его. {w}Очень сильно. Я наконец-то это поняла."
       if go_to_sh:
         "Именно поэтому я пошла с ним в старый лагерь."
       if not sl_m_day5_make_semen_guilty:
@@ -303,12 +318,15 @@ label slavyana_mod__day6_not_worth_after:
 
   if words_blue:
     "История, достойная фильма, или хотя бы книги. О любви двух пионеров, слишком поздно понявших это."
+    window hide
   else:
+    window hide
     pause 2
 
   play ambience ambience_forest_day fadein 2
   scene bg ext_polyana_day with dissolve
   show pi normal pioneer with dissolve
+  window show
   "Наконец, он вернулся."
   me "Вот..."
   sl "Как у тебя ловко получилось!"
@@ -368,16 +386,17 @@ label slavyana_mod__day6_not_worth_after:
   "Я серьёзно посмотрела на него."
   me "Пойдём!"
   "Мы встали, Семён взял меня за руку, и пошли обратно в лагерь."
+  window hide
   stop ambience fadeout 2
   scene black with dissolve
   pause 2
-  $ persistent.sprite_time = "sunset"
-  $ sunset_time()
+
   play music music_list["afterword"] fadein 3
   scene bg ext_square_day with dissolve
   show pi normal pioneer at cright
   show mt angry pioneer at cleft
   with dissolve
+  window show
   "Через некоторое время мы вышли на площадь, где уже стояла вожатая."
   mt "Явились не запылились!"
   "Сказала она злобно."
@@ -609,9 +628,11 @@ label slavyana_mod__day6_not_worth_after:
   stop sound_loop fadeout 2
   "И он быстро ушёл."
   "..."
+  window hide
   scene bg ext_polyana_mere_day with dissolve
   stop sound_loop fadeout 3
   play sound_loop2 sfx_forest_fireplace fadein 2
+  window show
   "Пока я купалась, Семён уже успел развести огонь, как я поняла по характерному трескающемуся звуку."
 
   "Я поспешила к нему."
@@ -652,11 +673,13 @@ label slavyana_mod__day6_not_worth_after:
   "А про себя усмехнулась."
   th "Надо ему намекнуть."
   sl "А ты что думаешь?"
-  me "Ну, я... {w} Ну, мне..."
+  me "Ну, я... {w}Ну, мне..."
   sl "Может, и не стоит сдерживаться?"
   "Семён резко выгнулся и развернулся."
+  window hide
 
   scene black with dissolve
+  play sound sfx_fall_grass
   stop sound_loop2 fadeout 2
   stop ambience fadeout 2
   stop sound_loop2 fadeout 2
@@ -665,7 +688,8 @@ label slavyana_mod__day6_not_worth_after:
   if persistent.sl_m_hen_txt:
     scene cg d6_sl_hentai_2 with dissolve
 
-  "А потом, {w}рывком прижал меня к земле так, что я лежала на спине, в одной лишь майке. А он навис надо мной, сжимая руки."
+  window show
+  "А потом, {w}рывком прижал меня к земле так, что я лежала на спине, в одной лишь рубашке. А он навис надо мной, сжимая руки."
   th "Как тогда в библиотеке."
   sl "Ай!"
   me "Больно?"
@@ -704,7 +728,7 @@ label slavyana_mod__day6_not_worth_after:
 
   if persistent.sl_m_hen_txt:
     "Он вздохнул, схватил меня за плечи и глубоко вошёл внутрь."
-    "Этот главный момент был непередаваем. Длился всего секунду {w}, но за этот миг я успела испытать и боль и блаженство одновременно."
+    "Этот главный момент был непередаваем. Длился всего секунду{w}, но за этот миг я успела испытать и боль и блаженство одновременно."
     "Его член оборвал меня."
     "Я закатила глаза от возбуждения и принялась подмахивать."
     "Этот первый раз мне уже нравился."
@@ -733,13 +757,16 @@ label slavyana_mod__day6_not_worth_after:
   "Я положила свою голову ему на плечо."
   sl "Не возражаешь, если я посплю немного, а то что-то устала?"
   me "Да, конечно..."
+  window hide
   show blink
   pause 1
   scene bg black
   stop ambience fadeout 2
+  window show
   "Моё дыхание восстановилось. И я заснула."
   "Вокруг ветер тихо шелестел листьями, а рядом колыхалась трава."
   "..."
+  window hide
 
   if (sl_m_lp < 9):
     $ setEndRed();

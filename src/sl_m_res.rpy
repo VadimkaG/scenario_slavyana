@@ -88,7 +88,7 @@ init:
     image bknt_w8 = "scenario_slavyana/res/images/bknt/bknt8.png"
     image bknt_w9 = "scenario_slavyana/res/images/bknt/bknt9.png"
 
-    image bknt_w10 = "scenario_slavyana/res/images/bknt/bknt10.jpg"
+    image bknt_w10 = "scenario_slavyana/res/images/bknt/bknt10.png"
     image bknt_w11 = "scenario_slavyana/res/images/bknt/bknt11.jpg"
     image bknt_w11_2 = "scenario_slavyana/res/images/bknt/bknt11_2.jpg"
     image bknt_w12 = "scenario_slavyana/res/images/bknt/bknt12.png"

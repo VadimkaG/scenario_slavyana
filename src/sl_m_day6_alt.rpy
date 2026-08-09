@@ -1,4 +1,5 @@
 label slavyana_mod__day6_alt:
+    $ renpy.pause(2, hard=True)
     $ backdrop = "days"
     $ new_chapter(6, u"Славя. День шестой")
     $ day_time()
@@ -8,10 +9,12 @@ label slavyana_mod__day6_alt:
     play ambience ambience_int_cabin_night fadein 3
     scene bg int_house_of_sl_day
     show unblink
+    window show
     "Я открыла глаза и увидела... {w}Потолок своего домика."
     th "Как странно... Я не могу ничего вспомнить из своего сна."
     "Я поднялась с кровати и взглянула на часы."
     "Было семь утра, поэтому я направилась на пробежку."
+    window hide
     stop ambience fadeout 2
 
     scene bg ext_house_of_sl_day with dissolve2
@@ -29,6 +32,7 @@ label slavyana_mod__day6_alt:
     #Алиса
     if sl_m_end_dv:
         scene bg ext_washstand_day with dissolve
+        window show
         "Я пробежалась до умывальников, умылась, и выбежала в лес."
         scene bg ext_path_day:
             zoom 1.1
@@ -87,7 +91,9 @@ label slavyana_mod__day6_alt:
         stop ambience fadeout 3
         scene black with dissolve
         "..."
+        window hide
         scene bg int_house_of_sl_day with dissolve
+        window show
         "Я вернулась в домик и переоделась."
         "К этому времени, уже должна была начаться линейка."
         "Поэтому я поспешила на площадь."
@@ -106,6 +112,7 @@ label slavyana_mod__day6_alt:
                 linear 0.2 pos (0,5)
                 linear 0.2 pos (0,0)
             repeat
+        window show
         "Я уже оббежала почти весь лагерь по периметру и возвращалась обратно."
         scene bg ext_square_sunset
         "Но не смогла не заметить, что площадь абсолютна не убрана!"
@@ -494,6 +501,7 @@ label slavyana_mod__day6_alt:
 
         scene bg ext_dining_hall_away_night with dissolve
         "У столовой я заметила их обоих и пошла с ними."
+        window hide
         stop ambience fadeout 1
 
         $ persistent.sprite_time = "day"
@@ -503,6 +511,7 @@ label slavyana_mod__day6_alt:
         show el normal pioneer at left
         show sh normal pioneer at right
         with dissolve
+        window show
         "Я села за один стол с ними."
         el "Приятного аппетита."
         sl "Спасибо."
@@ -520,17 +529,21 @@ label slavyana_mod__day6_alt:
         th "Остаётся проверить Семёна. Если это не он, то я даже не знаю кто ещё может быть."
         "Неожиданно Лена выбежала из столовой. {w}Вместе с ней Ульяна, а за ней погналась Алиса."
         th "Ульяна неисправимая проказница... Что только могло произойти сейчас?"
+        window hide
         stop ambience fadeout 1
 
         $ persistent.sprite_time = "night"
         $ night_time()
         scene bg ext_dining_hall_away_night with dissolve
         play ambience ambience_camp_center_night fadein 3
+        window show
         "Я ждала Семёна."
         "Но он не заходил и не выходил."
         "Я решила поискать его."
+        window hide
         stop ambience fadeout 3
         scene black with dissolve
+        window show
         "Походив по лагерю, заглянув на пляж и пристань, я пришла к выводу, что он пропустил ужин, потому что скорее всего спит."
         "Я скорее побежала к нему."
 
@@ -567,8 +580,10 @@ label slavyana_mod__day6_alt:
         stop ambience fadeout 3
         scene black with dissolve
         "..."
+        window hide
         play ambience ambience_int_cabin_night fadein 3
         scene bg int_house_of_sl_night_light with dissolve
+        window show
         "Перед сном у меня ещё было время. Я решила записать в своём дневнике."
         
     # Дневник
@@ -594,6 +609,7 @@ label slavyana_mod__day6_alt:
         "Я погасила свет и легла в кровать."
         "Последний день был уже скоро."
         "..."
+        window hide
 
     #Лена
     elif sl_m_end_un:
@@ -632,6 +648,7 @@ label slavyana_mod__day6_alt:
         stop ambience fadeout 3
         scene black with dissolve
         "..."
+        window hide
 
     #Ульяна
     elif sl_m_end_us:
@@ -739,13 +756,16 @@ label slavyana_mod__day6_alt:
         stop ambience fadeout 2
         scene black with dissolve
         "..."
+        window hide
 
         play ambience ambience_camp_center_day fadein 3
         scene bg ext_musclub_day with dissolve
+        window show
         "Я постучалась, но никто мне не ответил."
         "Поэтому я заглянула в большое окно клуба, и поняла что внутри никого нет."
         th "Даже и не представляю где можно искать Мику, кроме как в её клубе."
         "Мне пришлось прийти к зданию администрации одной."
+        window hide
 
     #Одиночка
     else:
@@ -834,10 +854,12 @@ label slavyana_mod__day6_alt:
         hide pi with dspr
         "Он встал из-за стола."
         "..."
+        window hide
         scene black with dissolve
         pause 1
         play ambience ambience_camp_center_day fadein 3
         scene bg ext_stage_big_sunset with dissolve
+        window show
         "После обеда мальчики вернулись шаманить с аппаратурой."
         "Я думала это не займёт много времени, но процесс меня поглотил."
         show el normal pioneer at right
@@ -854,17 +876,21 @@ label slavyana_mod__day6_alt:
         play sound sfx_broom_sweep fadein 3 loop
         "Естественно я не могла этого так оставить."
         "Но раз уж я захватила с собой метёлку со склада, то чтобы сэкономить время надо будет ещё в библиотеку заглянуть."
+        window hide
         stop sound fadeout 2
         stop ambience fadeout 2
         scene black with dissolve
         pause 1
+        window show
         "Когда я закончила на площади, то направилась к обиталищу Жени."
+        window hide
 
     #Лена или одиночка
     if sl_m_end_un or sl_m_end_sl:
         scene bg int_library_day with dissolve
         play ambience ambience_int_cabin_day fadein 3
         show mz angry pioneer glasses with dissolve
+        window show
         if sl_m_end_un:
           "Я решила заглянуть в библиотеку к своей соседке."
         else:
@@ -949,12 +975,14 @@ label slavyana_mod__day6_alt:
         stop ambience fadeout 2
         scene black with dissolve
         "..."
+        window hide
         stop sound fadeout 1
 
         $ persistent.sprite_time = "day"
         $ day_time()
         play ambience ambience_dining_hall_empty fadein 3
         scene bg int_dining_hall_day with dissolve
+        window show
         "К моменту когда я вошла в столовую, большая часть пионеров уже поела."
         "Мой ужин прошёл в одиночестве."
         "К моему удивлению, нигде не было видно Семёна."
@@ -1016,6 +1044,7 @@ label slavyana_mod__day6_alt:
         "Я взяла свою порцию и села за него."
         "Все ребята из моего отряда уже расселись вместе."
         "Поэтому обедала я в одиночестве и думала о том, что из себя представляет здание администрации, ведь я ещё никогда в нём не была."
+        window hide
         stop ambience fadeout 3
         scene black with dissolve
         pause 2
@@ -1156,6 +1185,7 @@ label slavyana_mod__day6_alt:
         play ambience ambience_int_cabin_night fadein 3
         window show
         "Я взяла свой дневник и принялась писать."
+        window hide
 
     # Дневник
         $ set_mode_nvl()
@@ -1167,6 +1197,7 @@ label slavyana_mod__day6_alt:
         $ set_mode_adv()
     # Конец дневника
 
+        window show
         "Я закрыла дневник, положила его под подушку и легла спать."
         show blink
         th "Утро вечера мудренее."
@@ -1181,12 +1212,14 @@ label slavyana_mod__day6_alt:
         sl "Пойдём вместе?"
         mi "Конечно."
         "Я поставила метлу к стене и мы направились в столовую."
+        window hide
         stop sound fadeout 1
         stop ambience fadeout 1
         scene bg ext_dining_hall_away_day with dissolve
         pause 1
         scene bg int_dining_hall_people_day with dissolve
         play ambience ambience_dining_hall_full fadein 3
+        window show
         "Мы выбрали столик недалеко от входа и принялись за еду."
         "Точнее я, а Мику постоянно о чём-то говорила."
         "К нам подсел расстроенный электроник."
@@ -1243,9 +1276,11 @@ label slavyana_mod__day6_alt:
         stop ambience fadeout 3
         scene black with dissolve
         "..."
+        window hide
 
         play ambience ambience_camp_center_day fadein 3
         scene bg ext_square_day with dissolve
+        window show
         "Когда всё было закончено, я пошла отнести метлу на склад."
         scene bg ext_shed_day with dissolve
         show mt normal pioneer with dissolve
@@ -1316,13 +1351,16 @@ label slavyana_mod__day6_alt:
         th "Ах, этот свежий воздух!"
         th "Каждый день деревья работают и в процессе фотосинтеза вырабатывают кислород, который смешивается с воздухом, пригодным для дыхания."
         th "Что-то я начала философствовать. Пойду лучше спать, насиделась я."
+        window hide
         stop ambience fadeout 1
 
         $ persistent.sprite_time = "day"
         $ day_time()
         scene bg int_house_of_sl_night_light with dissolve
         play ambience ambience_int_cabin_night fadein 3
+        window show
         "Я взяла свой дневник."
+        window hide
 
     # Дневник
         $ set_mode_nvl()
@@ -1337,6 +1375,7 @@ label slavyana_mod__day6_alt:
     if sl_m_end_us or sl_m_end_sl:
         play sound sfx_open_door_1
         show mz normal pioneer glasses with dissolve
+        window show
         "В домик вошла Женя."
         mz "Спать ещё не собираешься?"
         sl "Да вот, уже застелилась."

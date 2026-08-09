@@ -5,12 +5,13 @@
     $ sl_m_day2_you_win = False
     
 label slavyana_mod__day2:
-    pause (3)
+    $ renpy.pause(2, hard=True)
     $ backdrop = "days"
     $ new_chapter(2, u"Славя. День второй")
     $ save_name = (u'Славя. День второй')
     $ day_time()
     $ persistent.sprite_time = "day"
+    $ renpy.pause(3, hard=True)
     
     #сон
     play music music_list["sparkles"] fadein 3
@@ -694,7 +695,7 @@ label slavyana_mod__day2_cnt1:
     #поиск с Семёном
 label slavyana_mod__day2_go_with_sp:
     window show
-    th "Всё-таки он новенький, надо ему помочь ориентироваться.{w} Да и неуверенна я, что карты у Оли в домике..."
+    th "Всё-таки он новенький, надо ему помочь ориентироваться.{w} Да и не уверена я, что карты у Оли в домике..."
     me "Если ты не против…"
     "Неуверенно начал Семён."
     stop ambience fadeout 2
@@ -1384,6 +1385,7 @@ label slavyana_mod__day2_cnt3:
 label slavyana_mod__day2_fast_choice:
 
     if sl_m_l_day == 2:
+        window hide
         jump slavyana_mod__day2
         return
 

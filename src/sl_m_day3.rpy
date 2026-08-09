@@ -2,12 +2,13 @@
     $ sl_m_day3_help = False
     
 label slavyana_mod__day3:
-    pause (3)
+    $ renpy.pause(2, hard=True)
     $ backdrop = "days"
     $ new_chapter(3, u"Славя. День третий")
     $ save_name = (u'Славя. День третий')
     $ day_time()
     $ persistent.sprite_time = "day"
+    $ renpy.pause(3, hard=True)
     
 #утро
     show unblink
@@ -145,7 +146,7 @@ label slavyana_mod__day3:
     stop ambience fadeout 2
     show dv grin pioneer2 at center with dissolve
     "Я хотела передать им послание вожатой, но дверь отворилась и в помещение вошла Алиса.{w} Её взгляд упал на бутылку, явно выделяющуюся среди различного хлама, разбросанного по столу."
-    play music music_list["always_ready"] fadein 2 #?
+    play music music_list["gentle_predator"] fadein 2 #?
     dv "Ага, я смотрю, вы тут время даром не теряете."
     "Я невольно покраснела."
     show el surprise pioneer at cleft
@@ -278,7 +279,7 @@ label slavyana_mod__day3:
     show mt smile pioneer at center with dspr
     mt "Хорошо. Будь так добра, загляни после обеда ещё и в библиотеку. Там не хватает людей."
     hide mt with dissolve
-    "Зная характер Жени, для меня не было ни чего удивительного в том, что мало кто хочет работать в библиотеке. Согласившись кивком головы, я приступила к поиску свободных мест."
+    "Зная характер Жени, для меня не было ничего удивительного в том, что мало кто хочет работать в библиотеке. Согласившись кивком головы, я приступила к поиску свободных мест."
     show us laugh sport at center 
     show un normal pioneer at left 
     with dissolve
@@ -1142,9 +1143,7 @@ label slavyana_mod__day3:
     play music music_list["silhouette_in_sunset"] fadein 2
     if persistent.hentai:
         $ sunset_time()
-        scene cg d3_sl_bathhouse_hk_alt:
-            ypos -0.06
-        with dissolve
+        scene cg d3_sl_bathhouse_hk_alt with dissolve
     window show
     "К моему приходу баня уже была кем-то растоплена, мне оставалось только подкинуть пару дровишек."
     "Я неспешно помылась: ополоснула тело, голову, волосы..."
@@ -1290,6 +1289,7 @@ label slavyana_mod__day3:
 label slavyana_mod__day3_fast_choice:
 
     if sl_m_l_day == 3:
+        window hide
         jump slavyana_mod__day3
         return
 

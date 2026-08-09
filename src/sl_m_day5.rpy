@@ -7,9 +7,7 @@
   sl_m_day5_berries_go_with = False 
 
 label slavyana_mod__day5:
-  stop music
-  stop sound
-  stop ambience
+  $ renpy.pause(2, hard=True)
   $ backdrop = "days"
   $ new_chapter(5, u"Славя. День пятый")
   $ save_name = (u'Славя. День пятый')
@@ -23,6 +21,7 @@ label slavyana_mod__day5:
     show prologue_dream
     with dissolve
     play music music_list["sunny_day"] fadein 3
+    window show
     "Я шла вдоль шахты. {w} В одиночку."
     "У меня был фонарик, но он светил очень тускло, что я еле разбирала дорогу впереди."
     "Эта шахта была очень похожа на ту, в которую мы спустились с Семёном в поисках Шурика."
@@ -30,21 +29,28 @@ label slavyana_mod__day5:
     "В одиночку идти было очень страшно."
     "Вдруг что-то пробежало мимо меня, и я посветила в ту сторону {w} но никого не было."
     "Я шла дальше, и мне казалось, что я слышу голоса. Но никого рядом не было."
+    window hide
     scene bg int_mine_crossroad
     show prologue_dream
     with dissolve
+    window show
     "Я дошла до развилок и пошла в левую сторону {w} но быстро дошла до тупика, заваленного камнями."
+    window hide
     scene cg d4_uv_1
     show prologue_dream
     with dissolve
+    window show
     "Луч фонаря бегло пробежался по стене и мне показалось, что я видела девочку… С хвостом!"
     "Однако она быстро убежала."
+    window hide
     scene bg int_mine_halt
     show prologue_dream
     with dissolve
+    window show
     "Я пошла назад."
     th"Это не может быть правдой! Похоже, что я сплю."
     "Но вдруг мои ноги подкосились, и я упала. Чьи-то руки подхватили меня и осторожно положили."
+    window hide
     stop music fadeout 2
 
   else:
@@ -54,25 +60,30 @@ label slavyana_mod__day5:
     "Помню только, что было страшно и был огонь."
     "Я даже не помню, где это было."
     "От этого я резко проснулась."
+    window hide
     stop music fadeout 3
 
   scene bg int_house_of_sl_day with dissolve
   play ambience ambience_int_cabin_day loop fadein 3
+  window show
   "Так начался двенадцатый день моего пребывания в «Совёнке»."
   
   if go_to_sh:
     "Часы показывали половину восьмого."
     "Даже если бы я прямо сейчас вышла на пробежку, я бы, скорее всего, опоздала на линейку."
     "Поэтому я оделась в пионерскую в форму, завязала галстук на воротнике и пошла на площадь."
+    window hide
 
   else:
     "Время 6:30. Как раз хорошее время для пробежки!"
     "Я надела спортивный костюм и вышла из домика."
+    window hide
 
     play sound sfx_close_door_1
     stop ambience fadeout 1
     play music music_list["dance_of_fireflies"] fadein 3
     scene bg ext_house_of_sl_day with dissolve
+    window show
     "Мой маршрут проходил от домика..."
     scene bg ext_square_day with dissolve
     "... по площади ..."
@@ -98,10 +109,12 @@ label slavyana_mod__day5:
     with dissolve
     "К этому моменту Женя уже проснулась, и надо было собираться на линейку."
     "Я быстро переоделась, и мы вместе направились к площади."
+    window hide
 
   pause 1
 
   scene bg ext_square_day with dissolve
+  window show
   "Бо́льшая часть пионеров уже собралась, пока остальные ещё подтягивались."
   "И вот, когда все собрались, я окинула взглядом пришедших."
 
@@ -129,14 +142,18 @@ label slavyana_mod__day5:
   mt "Можешь пойти с кем-нибудь вместе, чтобы тебе было удобней."
   th "Например с Семёном или Леной."
   sl "Хорошо."
+  window hide
   stop music fadeout 3
   scene black with dissolve
+  window show
   "..."
+  window hide
 
   scene bg ext_dining_hall_near_day
   show un normal pioneer
   with dissolve
   play ambience ambience_camp_center_day loop fadein 3
+  window show
   "У столовой я встретила Лену."
   sl "Привет."
   un "Привет."
@@ -158,6 +175,7 @@ label slavyana_mod__day5:
   show un smile pioneer with dspr
   un "Хорошо."
   "Она улыбнулась, и мы вошли в столовую."
+  window hide
 
   stop ambience fadeout 1
   scene bg int_dining_hall_people_day
@@ -165,6 +183,7 @@ label slavyana_mod__day5:
   with dissolve
   play music music_list["so_good_to_be_careless"] fadein 3
   #play ambience ambience_dining_hall_full loop fadein 3
+  window show
   "Сегодняшний завтрак состоял из риса с мясом, пары булочек и чая."
   sl "Приятного аппетита."
   un "Спасибо."
@@ -179,32 +198,40 @@ label slavyana_mod__day5:
   sl "А чего это ты так?"
   un "Как?"
   sl "Не знаю, покраснела и будто погрустнела"
-  show un serious pioner with dspr
+  show un serious pioneer with dspr
   un "Со мной всё в порядке"
-  show un normal pioner with dspr
+  show un normal pioneer with dspr
   sl "Ладно, я тогда пойду. У меня ещё дела есть, а за земляникой после обеда пойдём. Как раз за корзинками схожу."
   "Я попрощалась с Леной и вышла из столовой."
+  window hide
 
   stop ambience fadeout 2
   scene bg ext_dining_hall_near_day with dissolve
   play ambience ambience_camp_center_day loop fadein 3
 
   if go_to_sh:
+    window show
     "Раз я не успела побегать до линейки, то займусь этим прямо сейчас."
     "По плану сейчас уборка в клубах, но если побегу сейчас, то не успею. Но если сократить маршрут, то успею помочь Мику."
     "Если, конечно, не появится новых поручений от вожатой."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
     pause 1
     scene bg ext_house_of_sl_day with dissolve
     play ambience ambience_camp_center_day loop fadein 3
+    window show
     "Переодевшись, я набросала себе в уме примерный маршрут: от моего домика в лес, затем мимо умывальников. Заскочу к Мику, помогу ей и вернусь к себе."
     "Как раз к обеду управлюсь."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
+    window show
     "…"
+    window hide
     scene bg ext_washstand_day with dissolve
     play ambience ambience_camp_center_day loop fadein 3
+    window show
     "Выбегая из леса, у умывальников я заметила опоздавшего на завтрак пионера, но не сразу определила, кто это."
     "Подбежав поближе, он обернулся и я узнала в нём…"
     show tl pioneer far with dissolve
@@ -213,6 +240,7 @@ label slavyana_mod__day5:
     tl "Проспал. Есть хочу."
     sl "Пойдём, я тебе столовую открою, обжора."
     tl "Хорошо."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
     pause 1
@@ -220,24 +248,30 @@ label slavyana_mod__day5:
     show tl pioneer far
     with dissolve
     play ambience ambience_camp_center_day loop fadein 3
+    window show
     th "Обычно Толя никогда не пропускал приём пищи."
+    window hide
     stop ambience fadeout 1
     scene bg int_dining_hall_day
     show tl pioneer normal
     with dissolve
     play ambience ambience_dining_hall_empty loop fadein 3
+    window show
     "Я открыла ему дверь и вошла в столовую вместе с ним."
     "Я зашла на кухню и принесла ему остатки от завтрака: пару булочек, треугольник кефира и что-то, напоминавшее творожную запеканку."
     sl "Вот, всё что осталось. Не опоздай на обед."
     sl "Тебя же и на линейке не было, ты в курсе, что сегодня опять будет костёр?"
     tl "Запеканка."
     sl "Точно."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
     pause 1
     scene bg ext_dining_hall_near_day with dissolve
     play ambience ambience_camp_center_day loop fadein 3
+    window show
     "Возня с Толиком заняла у меня слишком много времени, поэтому я бегом направилась в музыкальный кружок."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
     pause 1
@@ -246,6 +280,7 @@ label slavyana_mod__day5:
     scene bg int_musclub_day
     show mi normal pioneer
     with dissolve2
+    window show
     "Трусцой добежав до музыкального клуба, я постучалась и зашла внутрь."
     sl "Привет Мику, помощь нужна?"
     show mi smile pioneer with dspr
@@ -258,20 +293,25 @@ label slavyana_mod__day5:
     "Где-то через 20 минут я закончила и, отчитавшись Мику, в темпе отправилась домой."
 
   else:
+    window show
     "Сейчас по плану уборка в клубах, пойду помогу кибернетикам навести порядок в их «логове»."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
     pause 1
     scene bg ext_clubs_day with dspr
     play sound sfx_knock_door2
     play ambience ambience_camp_center_day loop fadein 3
+    window show
     "Подойдя к зданию клубов, я постучалась."
+    window hide
     play sound sfx_open_door_clubs
     play ambience ambience_clubs_inside_day loop fadein 3
     scene bg int_clubs_male_day
     show sh normal pioneer at cleft
     show el normal pioneer at cright
     with dissolve
+    window show
     "Зайдя внутрь, я заметила, что Саша и Серёжа даже не приступали к уборке."
     el "Привет, Славя, зачем пожаловала?"
     sl "Ольга Дмитриевна на линейке говорила вам про уборку."
@@ -285,27 +325,38 @@ label slavyana_mod__day5:
     "Шурик тут же отложил в сторону паяльник и стал сгребать детали в кучу."
     "Электроник взял из подсобки вёдра и отправился за водой, а я принесла швабры."
     "После этого Электроник принялся протирать полы в основном зале, а я в подсобке."
+    window hide
     scene bg int_clubs_male2_night with dissolve
+    window show
     "Пришлось поднять довольно много разного хлама, и не только хлама, чтобы навести чистоту на всём «складе». Шурик помог расставить всё по местам."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
     pause 1
     play ambience ambience_camp_center_day loop fadein 3
     scene bg ext_clubs_day with dissolve
+    window show
     "Наконец мы закончили и кибернетики снова вернулись к своему делу."
+    window hide
     scene bg ext_square_day
     show us normal pioneer far at left
     with dissolve
+    window show
     "Навстречу мне шла Ульяна. Она, не поздоровавшись, двигалась к клубам."
     hide us with dspr
     "А я решила сходить на волейбольную площадку."
     "Обожаю волейбол, жаль что времени для него часто нет."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
+    window show
     "…"
+    window hide
     scene bg int_house_of_sl_day with dissolve
     play ambience ambience_int_cabin_day loop fadein 3
+    window show
     "Я забежала к себе домой и переоделась в спортивный костюм."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
     pause 2
@@ -315,15 +366,20 @@ label slavyana_mod__day5:
     scene bg ext_dining_hall_away_day with dissolve
     pause 1
     scene bg ext_playground_day with dissolve
+    window show
     "На футбольном поле уже резвились малыши, а у волейбольной сетки какие-то неизвестные мне пионеры собирались для игры."
     "Я попала в команду к 2 мальчикам и 1 девочке."
     "Против нас играла команда, полностью состоящая из мальчиков."
+    window hide
     stop ambience fadeout 1
     scene black with dissolve
+    window show
     "…"
+    window hide
     play ambience ambience_camp_center_day loop fadein 3
     play sound ambience_soccer_play_background loop fadein 3
     scene bg ext_playground_day with dissolve
+    window show
     "Соперники играли довольно хорошо, но и наша команда старалась изо всех сил." 
     "Сыграв 1 раунд, мы, в конце концов, смогли свести игру практически в ничью, проигрывая всего на одно очко."
     show un normal sport far with dissolve
@@ -334,16 +390,20 @@ label slavyana_mod__day5:
     show un smile sport far with dspr
     un "Хорошо."
     "Она улыбнулась, и мы договорились встретиться на площади."
+    window hide
     stop ambience fadeout 1
     stop sound fadeout 1
     scene black with dissolve
+    window show
     "…"
+    window hide
 
   # TODO: Временный стоп музыки
   stop music fadeout 3
 
   scene bg int_house_of_sl_day with dissolve
   play ambience ambience_int_cabin_day loop fadein 3
+  window show
   "Забежав домой, я уже достала форму и корзинки..."
   play sound sfx_knock_door3_dull
   "Как вдруг в дверь кто-то постучал."
@@ -393,29 +453,37 @@ label slavyana_mod__day5:
   play sound sfx_close_door_1
   "Сказала она и вышла на улицу."
   th "И не занесёт ведь…"
+  window hide
   stop ambience fadeout 1
   scene black with dissolve
   pause 1
 
   play ambience ambience_camp_center_day loop fadein 3
   scene bg ext_houses_day with dissolve
+  window show
   "Переодевшись, я пошла в сторону площади. Скоро уже должен был начаться обед."
+  window hide
 
   scene bg ext_square_day
   show un normal pioneer far
   with dissolve
+  window show
   if go_to_sh:
     "Я подошла к Лене, и мы вместе направились в столовую."
   else:
     "На площади, как мы и условились, я встретила Лену."
+  window hide
 
   stop ambience fadeout 1
   scene black with dissolve
+  window show
   "…"
+  window hide
   play ambience ambience_dining_hall_full loop fadein 3
   scene bg int_dining_hall_people_day
   show un normal pioneer at cleft
   with dissolve
+  window show
   "Зайдя в столовую, я обнаружила свободные места с Семёном."
   show pi normal pioneer at cright with dspr
   sl "Можно?"
@@ -438,13 +506,16 @@ label slavyana_mod__day5:
   th "Знаю конечно, но пусть для Семёна это будет сюрпризом. {w} Был бы он на линейке, про всё бы знал."
   me "Да, пожалуй."
   "Я вытащила из под стола лукошки, и мы дружно отправились к пристани."
+  window hide
   play ambience ambience_camp_center_day loop fadein 3
   scene bg ext_dining_hall_away_day
   show un normal pioneer at cleft
   show pi normal pioneer far at right
   with dissolve
+  window show
   "Я шла вместе с Леной, а Семён традиционно для него витал в облаках."
   "Болтать было особо не о чем, так что до пристани мы дошли практически в тишине."
+  window hide
   scene bg ext_square_day
   show un normal pioneer at cleft
   show pi normal pioneer far at right
@@ -455,6 +526,7 @@ label slavyana_mod__day5:
   show un normal pioneer at cleft
   show pi normal pioneer at right
   with dissolve
+  window show
   "Через десять минут мы уже стояли на пристани."
   sl "Вот лодка. {w} Подожди, я сейчас за вёслами схожу."
   hide un
@@ -514,13 +586,17 @@ label slavyana_mod__day5:
       th "Мне показалось, или в его глазах мелькнула искра радости?"
       hide un with dspr
       "Лена не стала спорить и пошла одна."
+      window hide
       stop ambience fadeout 1
       scene black with dissolve
+      window show
       "…"
+      window hide
       play music music_list["timid_girl"] fadein 3
       scene bg ext_island_day
       show pi normal pioneer
       with dissolve
+      window show
       "Чтобы было удобнее, мы оба несли корзинку, по пути собирая ягоды."
       "Мы заглядывали под каждый кустик в поисках ягодок."
       "Правда Семён всё же часто их пропускал или втихую поедал."
@@ -552,13 +628,17 @@ label slavyana_mod__day5:
       sl "Нет, бери!"
       "Он ещё раз посмотрел на платочек и положил его себе в карман."
       me "Спасибо…"
+      window hide
       stop music fadeout 1
       scene black with dissolve
+      window show
       "…"
+      window hide
       play ambience ambience_boat_station_day loop fadein 3
       scene bg ext_island_day
       show pi normal pioneer
       with dissolve
+      window show
       "Через полчаса корзинка наполнилась до краёв."
       me "Ну, видимо, всё…"
       sl "Да. {w} Набрали немало, этого с запасом хватит."
@@ -586,11 +666,15 @@ label slavyana_mod__day5:
       un "Давай…"
       sl "Вот и славно!"
       "Я взяла вторую корзинку и пошла в дальнюю часть острова, чтобы на середине встретиться и вместе вернуться к лодке."
+      window hide
       stop ambience fadeout 1
       scene black with dissolve
+      window show
       "…"
+      window hide
       play ambience ambience_boat_station_day loop fadein 3
       scene bg ext_island_day with dissolve
+      window show
       "Мне не составило труда собрать корзину земляники."
       th "Как там дела у Семёна и Лены?"
       "Я решила позвать их."
@@ -604,6 +688,7 @@ label slavyana_mod__day5:
       sl "Что-то негусто…"
       sl "Ладно, нам и этого хватит! {w} Пора возвращаться!"
       "Мы направились к лодке."
+  window hide
 
   stop ambience fadeout 2
   scene black with dissolve
@@ -613,6 +698,7 @@ label slavyana_mod__day5:
   show un normal pioneer at cleft
   show pi normal pioneer at right
   with dissolve
+  window show
   "Путь обратно занял гораздо меньше времени."
   show pi normal pioneer at right:
     linear 1.0 ypos 2.0
@@ -633,13 +719,17 @@ label slavyana_mod__day5:
   un "Но неужели мы сами потащим этот мешок?"
   sl "Можно прикатить тележку со склада."
   "И мы отправились на склад."
+  window hide
   stop ambience fadeout 1
   scene black with dissolve
+  window show
   "…"
+  window hide
   play music music_list["sweet_darkness"] fadein 3
   scene bg ext_houses_day
   show un normal pioneer
   with dissolve
+  window show
   "На полпути к библиотеке, Лена вдруг решила уточнить у меня, откуда взялась мука в библиотеке."
   sl "Не знаю, но ты можешь спросить это у Жени, если тебе так интересно." 
   show un laugh pioneer with dspr
@@ -682,6 +772,7 @@ label slavyana_mod__day5:
       un "Хорошо."
       hide un with dspr
       "Лена ушла, и я поспешила в свой домик."
+      window hide
       scene bg int_house_of_sl_day with dissolve
       pause 2
       call slavyana_mod__day5_change_clothes
@@ -692,6 +783,7 @@ label slavyana_mod__day5:
 
 label slavyana_mod__day5_change_clothes:
   scene bg ext_house_of_sl_day with dissolve
+  window show
   if cclothes_after_cleaning:
     "Переодевшись, я вышла из домика."
   else:
@@ -718,13 +810,17 @@ label slavyana_mod__day5_change_clothes:
   "Он как-то странно захихикал."
   me "Мне пора…"
   hide pi with dspr
+  stop music fadeout 2
   "И он быстро куда-то улизнул в сторону домиков."
   th "Что это было?"
   return
 
 label slavyana_mod__day5_change_clothes_after:
+  window hide
   scene black with dissolve
+  window show
   "…"
+  window hide
   
   play ambience ambience_forest_day loop fadein 3
   scene bg ext_path_day
@@ -732,15 +828,18 @@ label slavyana_mod__day5_change_clothes_after:
   with dissolve
 
   if not cclothes_after_cleaning:
+    window show
     "По пути к костровой поляне, я встретила Лену, идущую туда."
     sl "Не успела?"
     un "Д-да."
+    window hide
   else:
     pause 2
   
   scene bg ext_polyana_day
   show un normal pioneer far
   with dissolve
+  window show
   "Придя на место, мы принялись расчищать кострище и собирать мусор, который набросали пионеры в прошлый раз."
   th "Настоящие пионеры так себя не ведут!"
   "Несмотря на большое количество хлама, мы довольно быстро закончили."
@@ -754,7 +853,7 @@ label slavyana_mod__day5_change_clothes_after:
   un "Ну вот в смысле твоего к него отношения.{w=0.5}{nw}"
   show un laugh pioneer with dspr
   play sound sfx_scary_sting
-  extend "{i}Нравится{/i} ли он тебе?"
+  extend " {i}Нравится{/i} ли он тебе?"
   sl "Лен, это личные вопросы…"
   un "А я так не думаю. {w=0.5}{nw}"
   show un evil_smile pioneer with dspr
@@ -777,6 +876,7 @@ label slavyana_mod__day5_lena_true:
   "Она засмущалась.  Неожиданно."
   un "Просто я тоже люблю его и хотела узнать твоё к нему отношение."
   "Да, я конечно замечала, что Лена иногда ведёт себя необычно, но чтобы любовь..."
+  stop music fadeout 2
   un "Заметно, что Семён отвечает тебе взаимностью, поэтому не буду вам мешать. Мы же всё-таки подруги."
   play sound sfx_scary_sting
   show un evil_smile pioneer with dspr
@@ -784,6 +884,7 @@ label slavyana_mod__day5_lena_true:
   show un normal pioneer with dspr
   
   "Дальше мы шли молча."
+  window hide
   scene bg ext_path_day
   show un normal pioneer
   with dissolve
@@ -791,6 +892,7 @@ label slavyana_mod__day5_lena_true:
   scene bg ext_square_day
   show un normal pioneer
   with dissolve
+  window show
   un "Ладно, я пойду. Удачи тебе."
   show un smile pioneer with dspr
   un "Не бери себе в голову то, что я там наговорила. Давай останемся подругами."
@@ -819,14 +921,18 @@ label slavyana_mod__day5_lena_lie:
     hide un with dspr
 
 label slavyana_mod__day5_lena:
+  window hide
   stop music fadeout 2
   play ambience ambience_camp_center_day loop fadein 3
 
   if cclothes_after_cleaning:
+    window hide
     scene black with dissolve
     "…"
     call slavyana_mod__day5_change_clothes
+  window show
   "До ужина оставалось ещё некоторое время. Поэтому я решила зайти к себе в домик, чтобы записать в свой дневник сегодняшние события."
+  window hide
   stop music fadeout 2
   stop ambience fadeout 1
   scene black with dissolve
@@ -840,33 +946,43 @@ label slavyana_mod__day5_lena:
   play sound_loop pen_write
   show bknt_w12 at truecenter with dissolve2
   $ persistent.sl_m_bknt12 = True
+  window show
   th "Двенадцатый день в Совёнке. Сегодня не произошло чего-то столь же масштабного, как поиски Шурика."
   
   th "В честь его чудесного спасения Ольга Дмитриевна решила испечь торт (не сама, конечно же), для этого пришлось собрать земляники на острове Ближний, куда нас с Леной отвёз Семён. Остальные ингредиенты так же таскал Семён."
-  th "Ещё нам на линейке объявили об очередном костре. Я уже была на этом мероприятии в прошлый раз и ничего удивительного он из себя не представлял: пешая прогулка по лесу и остановка на заранее подготовленной поляне. Однако, каждый раз Оля говорила о взаимовыручке и о том, чему мы научимся в этом походе. В этот раз я постараюсь отпроситься, ну или, в крайнем случае, по-тихому исчезнуть. Осталось только собрать сумку." 
+  th "Ещё нам на линейке объявили об очередном костре. Я уже была на этом мероприятии в прошлый раз и ничего удивительного он из себя не представлял: пешая прогулка по лесу и остановка на заранее подготовленной поляне." 
+  th "Однако, каждый раз Оля говорила о взаимовыручке и о том, чему мы научимся в этом походе. В этот раз я постараюсь отпроситься, ну или, в крайнем случае, по-тихому исчезнуть. Осталось только собрать сумку."
   th "Также в лесу случился очень странный разговор с Леной. Как я поняла, она нашла во мне соперницу в отношениях с Семёном. Надеюсь, она не слишком обиделась. Её реакция поистине напугала меня."
+  window hide
   stop sound_loop
   hide bknt_clear
   hide bknt_w12
   with dspr
 #*Конец дневника*
 
+  window show
   th "Когда вернусь, допишу."
+  window hide
   play sound sfx_dinner_horn_processed
   stop ambience fadeout 1
   scene black with dissolve
+  window show
   "…"
+  window hide
   play ambience ambience_camp_center_day fadein 3
   scene bg ext_square_day
   show un normal pioneer
   with dissolve
+  window show
   "На площади я встретила Лену, вместе с которой мы отправились на ужин."
+  window hide
   stop ambience fadeout 1
   play ambience ambience_dining_hall_full fadein 3
   scene bg int_dining_hall_people_day
   show pi normal pioneer at cleft
   show un normal pioneer at cright
   with dissolve
+  window show
   "Зайдя в столовую, я заметила Семёна, сидящего одного и прикрывшего голову руками."
   sl "Что с тобой?"
   me "Ничего…"
@@ -950,7 +1066,9 @@ label slavyana_mod__day5_lena:
   scene bg ext_house_of_sl_sunset with dissolve
   play sound sfx_close_door_1
   "Я закрыла домик и пошла на площадь."
+  window hide
   scene bg ext_square_sunset with dissolve
+  window show
   "Вечерело."
   stop ambience fadeout 3
   play music music_list["lightness"] fadein 3
@@ -978,18 +1096,22 @@ label slavyana_mod__day5_lena:
   "Но потом ей выделили Семёна."
   mt "Вперёд!"
   "Скомандовала вожатая."
+  window hide
   stop music fadeout 3
   play ambience ambience_forest_day fadein 3 
   scene bg ext_path_sunset with dissolve
+  window show
   "Разговаривать было решительно не о чем. Но надо было хоть как-то скрасить прогулку до поляны."
   "Некоторое время мы просто прогуливались по кругу"
   "Через 10-20 минут мы всё-таки пришли в назначенное место."
+  window hide
   $ persistent.sprite_time = "sunset"
   scene bg ext_polyana_sunset 
   with dissolve
   #show mt normal pioneer at center with dissolve
   #hide mt with dissolve
   play music music_list["dance_of_fireflies"] fadein 3
+  window show
   "И всё-таки не зря вожатая водит пионеров именно сюда. Вечером здесь невероятно красиво."
   "Мальчиков отправили искать дрова для костра."
   "Я решила порасспрашивать своих знакомых из отряда."
@@ -1015,6 +1137,7 @@ label slavyana_mod__day5_lena:
   "Ко мне подошёл Электроник."
   el "Славя, можешь у Алисы зажигалку попросить? Ольга Дмитриевна просила для костра, а мы спички не взяли."
   sl "Хорошо, сейчас."
+  window hide
   hide mi
   hide el
   with dspr
@@ -1023,6 +1146,7 @@ label slavyana_mod__day5_lena:
   scene bg ext_polyana_sunset
   show dv normal pioneer
   with dspr
+  window show
   sl "Слушай, у тебя зажигалки не будет?"
   show dv smile pioneer with dspr
   dv "Прикурить дать?"
@@ -1050,6 +1174,7 @@ label slavyana_mod__day5_lena:
   me "Ну, от радости прыгать не готов, ты уж извини."
   "Похоже, Семён не в настроении. Наверное, лучше оставить его в покое."
   sl "Ладно, не буду тебе мешать."
+  window hide
   stop music fadeout 2
   scene black with dissolve
   pause 2
@@ -1057,26 +1182,35 @@ label slavyana_mod__day5_lena:
   $ night_time()
   play ambience ambience_forest_night fadein 3 
   scene bg ext_polyana_night with dissolve
+  window show
   "Я ещё посидела недолго, но вскоре отправилась на пляж, осторожно скрывшись в кустах."
   scene bg ext_path_night with dissolve
   "Я уже отошла на приличное расстояние, но всё ещё могла расслышать радостные голоса пионеров."
   "Похоже, кто-то действительно наслаждается походом. Рада за них."
   "Этот лес был мне знаком, однако пришлось чуток поплутать, прежде чем я вышла к лагерю."
   show anim stars_1 with dissolve
-  "Какое сегодня прекрасное и чистое небо… Кажется, обычно было слегка облачно, но сегодня на небе ни облачка. {w} Да и луна полная."
+  "Какое сегодня прекрасное и чистое небо… Кажется, обычно было слегка облачно, но сегодня на небе ни облачка. {w}Да и Луна полная."
   th "Романтика да и только."
+  window hide
   stop ambience fadeout 1
   scene black with dissolve
+  window show
   "…"
+  window hide
   play ambience ambience_boat_station_night fadein 3
   scene bg ext_beach_night with dissolve
+  window show
   "Придя к пляжу, я сняла с себя форму и зашла в воду в купальнике, который заранее надела."
   "Люблю купаться."
+  window hide
   stop ambience fadeout 1
   scene black with dissolve
+  window show
   "…"
+  window hide
   play ambience ambience_boat_station_night fadein 3
   scene bg ext_beach_night with dissolve
+  window show
   "Когда я начала замерзать, пришлось выйти из воды."
   th "Кажется, я забыла взять из домика сумку, в которой лежало полотенце."
   if persistent.sl_m_end_count > 0 and sl_m_lp < 4:
@@ -1090,11 +1224,15 @@ label slavyana_mod__day5_lena:
       $ sl_m_lp += 1
       th "Ладно, подожду ещё, насмерть-то не замёрзну."
       th "У меня крепкое здоровье."
+      window hide
       stop ambience fadeout 1
       scene black with dissolve
+      window show
       "…"
+      window hide
       play ambience ambience_boat_station_night fadein 3
       scene bg ext_beach_night with dissolve
+      window show
       "Чья-то фигура в галстуке стала приближаться к пляжу."
       "Высокий, стройный, немного хилый, взъерошенный…"
       show pi normal pioneer far with dspr
@@ -1103,6 +1241,7 @@ label slavyana_mod__day5_lena:
     "Сходить за сумкой":
       th "Скорее всего, Семён не придёт. Ну и ладно… Надеюсь, у них с Леной всё получится."
       "Я вынула ключ из рубашки и отправилась к домику."
+      window hide
       stop ambience fadeout 1
       play ambience ambience_camp_center_night fadein 2
       #*Фон площадь*
@@ -1129,6 +1268,7 @@ label slavyana_mod__day5_lena:
       #*Фон ночной пляж*
       play ambience ambience_boat_station_night fadein 3
       scene bg ext_beach_night with dissolve
+      window show
       "Я уже подходила к пляжу, как заметила чью-то фигуру в белой рубашке с галстуком."
       show pi normal pioneer far with dspr
       th "Семён?"
@@ -1224,11 +1364,13 @@ label slavyana_mod__day5_lena:
   me "Не обижайся. {w} На, вот, накинь. Холодно ведь!"
   "Он предложил мне свой свитер."
   sl "Спасибо!"
-  "Я просунула в него голову и расправила на плечах. Потом взглянула на Семёна взглядом благодарности."
+  "Я просунула в него голову и расправила на плечах. Потом взглянула на Семёна взглядом полным благодарности."
   me "Медпункт, так медпункт. Как скажете!"
+  window hide
   stop music fadeout 2
   play ambience ambience_camp_center_night fadein 3
   scene bg ext_aidpost_night with dissolve
+  window show
   "Через пару минут мы подошли к медпункту, и я уже открывала его дверь."
   stop ambience fadeout 2
   play sound sfx_open_door_2
@@ -1258,11 +1400,15 @@ label slavyana_mod__day5_lena:
   me "В дурака?"
   th "Я не азартный игрок, но мы ведь только на интерес."
   sl "А давай."
+  window hide
   stop ambience fadeout 2
   scene black with dissolve
+  window show
   "…"
+  window hide
   play ambience ambience_int_cabin_night fadein 3
   scene bg int_aidpost_night with dissolve
+  window show
   "Играли мы долго."
   "Было уже много времени. Мы смеялись и болтали на разные темы."
   "Но мне уже не хотелось, чтобы он уходил."
@@ -1282,11 +1428,15 @@ label slavyana_mod__day5_lena:
   "Сказала я и задёрнула занавеску."
   me "Спокойной."
   "Похоже, Семён уселся на стул и уснул на столе."
+  window hide
   stop ambience fadeout 2
   scene black with dissolve
+  window show
   "…"
+  window hide
   play ambience ambience_int_cabin_night fadein 3
   scene bg int_aidpost_night with dissolve
+  window show
   "Никак не получалось заснуть. {w} То подушка слишком жёсткая, то в одеяле запуталась, то холодно, а в одежде вообще спать неудобно."
   "Похоже, этот везунчик уже заснул. {w} Но что-то кричал во сне…"
   me "Нет!.. Не бвам… овамусь, овамусь… она.."
@@ -1381,15 +1531,19 @@ label slavyana_mod__day5_lena:
   me "И тебе."
   scene cg d5_sl_sleep_alt with dspr
   "Наконец я стала засыпать."
+  window hide
   stop music fadeout 2
   scene black with dissolve
+  window show
   "…"
+  window hide
   play music music_list["door_to_nightmare"] fadein 3
   scene bg ext_house_of_sl_day
   show prologue_dream
   with dissolve
 #*Надо спрайт кота, любого, чтоб у него были 2 эмоции: пассивный и злой*
   show bor normal close with dspr
+  window show
   dreamgirl "Приветствую, Славя."
   show bor serious close with dspr
   dreamgirl "Прости но лучше тебе молчать, пока я не разрешу, хорошо?"
@@ -1468,14 +1622,19 @@ label slavyana_mod__day5_lena:
     "Сказать правду":
       $ sl_m_day5_make_semen_guilty = False
       $ sl_m_lp += 2
+  window hide
 
   stop ambience fadeout 3
   scene black with dissolve
+  window show
   "…"
+  window hide
   play ambience ambience_int_cabin_day fadein 3
   scene bg int_aidpost_night with dissolve
+  window show
   "Прошло уже больше получаса. {w} Но никто не возвращался."
   "Я слишком устала и легла спать."
+  window hide
   stop ambience fadeout 4
   show blink
   if sl_m_Full:
@@ -1483,106 +1642,14 @@ label slavyana_mod__day5_lena:
   jump slavyana_mod__launcher0
 
 
-
-#Ещё мы сделаем четвёртую, пасхальную концовку, для которой надо будет:
-#1) Набрать меньше 3 очков привязанности к Семёну
-#2) Во 2 дне пойти с Семёном за картами
-#3) В 4 дне в выборе на карте первым делом пойти в клуб Мику.
-#4) В 5 дне не напоминать Лене.
-#Таким образом, сценка после приплывания на лодке:
-
-#*Фон пристань*
-  "Путь обратно затратил гораздо меньше времени."
-  "Семён пришвартовал лодку и обессиленно рухнул на землю."
-  "Мы склонились над ним."
-  sl "Если тебе было так тяжело, то сказал бы!"
-  "У меня был некоторый навык гребли на лодке."
-  un "Да…"
-  me "Да нет, ничего… {w} Сейчас полежу и всё пройдёт…"
-  me "Ладно, тогда отнеси корзинки, пожалуйста, Ольге Дмитриевне, а то у нас ещё дела есть."
-  me "Да, конечно."
-  "Я поставила корзинки рядом с ним, и мы отправились вместе с Леной дальше."
-  "Когда мы отошли, Лена спросила:"
-  un "Славя, а у меня вообще-то свои дела ещё есть."
-  sl "Эх, ладно."
-#Фон тёмный экран
-  "…"
-#*Фон площадь*
-  "По пути в библиотеку я встретила Ольгу, которая поручила мне уборку поляны."
-  "После уборки я решила сходить к себе в домик переодеться."
-#*Фон внутри домика Слави*
-  th "Надо будет сказать Оле, чтобы она меня освободила от этого мероприятия. Мне надо побыть одной."
-  "Я решила прогуляться перед ужином."
-#*Фон площадь*
-  "Я уже несколько дней не убиралась на площади, надо бы это исправить."
-  "Но тут меня окликнула Лена."
-  un "Славя, помоги мне пожалуйста."
-  sl "Давай. {w} А что нужно?"
-  un "Я… я вчера где-то в лесу книжку потеряла… не могу найти."
-  sl "Ну, пойдём."
-#*Фон тропинка в лесу (обязательно утренняя)*
-  "Покинув площадь, мы шли через лесок."
-  "На душе было очень радостно, несмотря на то что сегодня последний день."
-  sl "А что за книжка? Небось, опять «Унесённые ветром»."
-  un "Конечно же нет."
-  un "Была в библиотеке и взяла первую попавшуюся. Даже названия не помню."
-  sl "А Женя знает, что ты её потеряла?"
-  un "Я ей не говорила, и надеюсь, что ты тоже не скажешь об этом."
-  sl "Не скажу, конечно."
-  "Мы шли довольно долго но вышли на какую-то полянку, к которой пришлось пробираться через кусты."
-#*Фон полянка (обязательно утренняя)*
-  "Славя: Да-а, далеко же мы отошли. Ты уверена, что она здесь?"
-  th "Как странно, уже вечер а ещё светло."
-  un "Думаю, надо чуть дальше. Нужно ведь поискать, уверена, вдвоём мы её точно найдём."
-  "Она улыбнулась."
-  "Мы искали под каждым деревом и кустиком, проверяя каждый уголок, где она могла по ошибке оставить книжку."
-  "Вскоре перед нами возникло дерево."
-  un "Вон, смотри!"
-  "Она указала на него."
-  un "Может быть, за ним?"
-  sl "Ну, давай посмотрим."
-#трек Orchid
-  "Чувство самосохранения отозвалось в глубине."
-  "Но я не предала этому значения. Тем не менее, ходить становилось тяжелее."
-  "Я дважды обошла дерево, но нигде не было книги."
-  sl "Нет, Лен, её здесь нет."
-  "Я продолжала осматривать, но как бы в оправдание повторила."
-#конец трека
-  sl "Нет, Лен, её здесь точно нет."
-#трек Pile
-  un "{b}НЕТ?! КОНЕЧНО ЖЕ ЕЁ ЗДЕСЬ НЕТ, НАИВНАЯ ДУРА!{/b}"
-  "Лена залилась каким-то нечеловеческим смехом."
-  "Вдруг она подскочила ко мне, схватила за голову и сильно ударила об дерево."
-#*Красный эффект удара*
-  "Славя: Ааааа!"
-  un "Э-э нет, спать ты не будешь."
-  "Она вынула из-за спины нож."
-  sl "Лена, что ты делаешь? Не надо, прошу, успокойся."
-  "Я попыталась успокоить её."
-  un "Что такое? Где твоя улыбка, Славя?!"
-  "Она прокручивала нож в руке."
-  un "Посмотри, какая хорошая погода, а какой красивый лес."
-  un "Ты ведь любишь природу, так ведь?! Любишь побыть одной в тихом лесу?!"
-#конец трека
-  "Она зажала меня своими ногами. {w} Взмахнула ножом и…"
-#*Красный эффект удара и звук удара как тогда во сне Семёна с кузнечиками*
-#*иллюстрация с растерзанной Славей*
-#Красный эффект удара
-#*Фон тёмный экран*
-  "А дальше всё было как в тумане…"
-  "…"
-#*Выскакивает ачивка «Game over, suka»*
-  voice "Данная концовка основана на моде «Мику-рут глазами Лены»"
-#*Титры на фоне иллюстрации расчленёнки под трек «Torture»*
-
-
 #При втором прохождении выбор «Соврать»(в выборе с Леной на поляне) даёт выход на альтернативную концовку, но очков для её получения должно быть >=9 на 7 дне, иначе плохая
 
 label slavyana_mod__day5_fast_choice:
 
   if sl_m_l_day == 5:
-      jump slavyana_mod__day5
-      return
+    window hide
+    jump slavyana_mod__day5
+    return
 
   $ day_time()
   $ persistent.sprite_time = "day"
