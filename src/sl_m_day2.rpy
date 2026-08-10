@@ -35,6 +35,7 @@ label slavyana_mod__day2:
     #домик
     play ambience ambience_int_cabin_day fadein 3
     scene bg int_house_of_sl_day 
+    show screen slavyana_mod__notebook_interface
     show mz normal pioneer close at center
     with dissolve
     window show
@@ -1230,128 +1231,47 @@ label slavyana_mod__day2_cnt3:
     play ambience ambience_camp_center_night fadein 2
     scene bg ext_house_of_sl_night with dissolve
     "Открыв блокнот на чистой странице, я продолжила свои записи:"
-    show bknt_clear at truecenter with dspr
+    show bknt at truecenter
+    hide screen slavyana_mod__notebook_interface
+    with dspr
     play sound_loop pen_write
-    show bknt_w4 at truecenter with dissolve2
-    $ persistent.sl_m_bknt4 = True
+    call slavyana_mod__day2_bknt1
+    show screen sl_m_nb() with dissolve2
     th "Сегодня, в свой девятый день в этом замечательном лагере я почти проспала завтрак. Спасибо Жене, что разбудила. Но день всё равно не задался с самого утра. Сначала я потеряла ключи."
 
+    hide bknt
+
     if sl_m_day2_find_keys:
-        show bknt_w4_1 at truecenter with dissolve2
-        $ persistent.sl_m_bknt4_1 = True
+        call slavyana_mod__day2_bknt_find_keys
+        show screen sl_m_nb() with dissolve2
         extend " Я искала их по всему лагерю, но так и не нашла."
 
     if sl_m_day2_sp_keys:
-        if sl_m_day2_find_keys:
-            show bknt_w4_2_1 at truecenter with dissolve2
-            $ persistent.sl_m_bknt4_2_1 = True
-        else:
-            show bknt_w4_2_2 at truecenter with dissolve2
-            $ persistent.sl_m_bknt4_2_2 = True
+        call slavyana_mod__day2_bknt_sp_keys
+        show screen sl_m_nb() with dissolve2
         extend " Благо, Семён мне их вечером отдал."
 
-    if sl_m_day2_sp_keys:
-        if sl_m_day2_find_keys:
-            show bknt_w5_1_1 at truecenter with dissolve2
-            $ persistent.sl_m_bknt5_1_1 = True
-        else:
-            show bknt_w5_1_2 at truecenter with dissolve2
-            $ persistent.sl_m_bknt5_1_2 = True
-    elif sl_m_day2_find_keys:
-        show bknt_w5_2 at truecenter with dissolve2
-        $ persistent.sl_m_bknt5_2 = True
-    else:
-        show bknt_w5 at truecenter with dissolve2
-        $ persistent.sl_m_bknt5 = True
+    call slavyana_mod__day2_bknt2
+    show screen sl_m_nb() with dissolve2
     th "Под вечер Оля послала меня дежурить на пляже (не самое интересное занятие, честно говоря)."
 
+    call slavyana_mod__day2_bknt3
     if sl_m_day2_you_win:
-        if sl_m_day2_sp_keys:
-            if sl_m_day2_find_keys:
-                show bknt_w6_1_1_1 at truecenter with dissolve2
-                $ persistent.sl_m_bknt6_1_1_1 = True
-            else:
-                show bknt_w6_1_1_2 at truecenter with dissolve2
-                $ persistent.sl_m_bknt6_1_1_2 = True
-        elif sl_m_day2_find_keys:
-            show bknt_w6_1_2 at truecenter with dissolve2
-            $ persistent.sl_m_bknt6_1_2 = True
-        else:
-            show bknt_w6_1 at truecenter with dissolve2
-            $ persistent.sl_m_bknt6_1 = True
+        call slavyana_mod__day2_bknt_win
+        show screen sl_m_nb() with dissolve2
         extend " А после ужина, на карточном турнире, я выиграла у Жени. Но отдала ей свою победу, ведь она, кажется, расстроилась из-за проигрыша."
     else:
-        if sl_m_day2_sp_keys:
-            if sl_m_day2_find_keys:
-                show bknt_w6_2_1_1 at truecenter with dissolve2
-                $ persistent.sl_m_bknt6_2_1_1 = True
-            else:
-                show bknt_w6_2_1_2 at truecenter with dissolve2
-                $ persistent.sl_m_bknt6_2_1_2 = True
-        elif sl_m_day2_find_keys:
-            show bknt_w6_2_2 at truecenter with dissolve2
-            $ persistent.sl_m_bknt6_2_2 = True
-        else:
-            show bknt_w6_2 at truecenter with dissolve2
-            $ persistent.sl_m_bknt6_2 = True
+        call slavyana_mod__day2_bknt_not_win
+        show screen sl_m_nb() with dissolve2
         extend " А после ужина, на карточном турнире, я проиграла Жене. Ну что ж, не только же мне выигрывать."
 
-    if sl_m_day2_you_win:
-        if sl_m_day2_sp_keys:
-            if sl_m_day2_find_keys:
-                show bknt_w7_1_1_1 at truecenter with dissolve2
-                $ persistent.sl_m_bknt7_1_1_1 = True
-            else:
-                show bknt_w7_1_1_2 at truecenter with dissolve2
-                $ persistent.sl_m_bknt7_1_1_2 = True
-        elif sl_m_day2_sp_keys:
-            show bknt_w7_1_2 at truecenter with dissolve2
-            $ persistent.sl_m_bknt7_1_2 = True
-        else:
-            show bknt_w7_1 at truecenter with dissolve2
-            $ persistent.sl_m_bknt7_1 = True
-    else:
-        if sl_m_day2_sp_keys:
-            if sl_m_day2_find_keys:
-                show bknt_w7_2_1_1 at truecenter with dissolve2
-                $ persistent.sl_m_bknt7_2_1_1 = True
-            else:
-                show bknt_w7_2_1_2 at truecenter with dissolve2
-                $ persistent.sl_m_bknt7_2_1_2 = True
-        elif sl_m_day2_sp_keys:
-            show bknt_w7_2_2 at truecenter with dissolve2
-            $ persistent.sl_m_bknt7_2_2 = True
-        else:
-            show bknt_w7_2 at truecenter with dissolve2
-            $ persistent.sl_m_bknt7_2 = True
+    call slavyana_mod__day2_bknt4
+    show screen sl_m_nb() with dissolve2
     th "После турнира я пошла в своё тайное место в лесу. Но... я привела с собой Семёна, который увидел... то, что не должен был. Я не знаю, что мне теперь делать и просто буду ждать."
     stop sound_loop
     
-    hide bknt_clear
-    hide bknt_w4
-    hide bknt_w4_1
-    hide bknt_w4_2_1
-    hide bknt_w4_2_2
-    hide bknt_w5
-    hide bknt_w5_1_1
-    hide bknt_w5_1_2
-    hide bknt_w5_2
-    hide bknt_w6_1
-    hide bknt_w6_1_2
-    hide bknt_w6_1_1_1
-    hide bknt_w6_1_1_2
-    hide bknt_w6_2
-    hide bknt_w6_2_1_1
-    hide bknt_w6_2_1_2
-    hide bknt_w6_2_2
-    hide bknt_w7_1
-    hide bknt_w7_1_1_1
-    hide bknt_w7_1_1_2
-    hide bknt_w7_1_2
-    hide bknt_w7_2
-    hide bknt_w7_2_1_1
-    hide bknt_w7_2_1_2
-    hide bknt_w7_2_2
+    hide screen sl_m_nb
+    show screen slavyana_mod__notebook_interface
     with dspr
     
     #сон
@@ -1371,16 +1291,43 @@ label slavyana_mod__day2_cnt3:
     hide unblink
     show blink
     pause (1)
-    scene black with dissolve
+    hide screen slavyana_mod__notebook_interface
+    scene black
+    with dissolve
     hide blink
-    pause (3)
     $ volume(1.0, "sound")
     if sl_m_Full:
         jump slavyana_mod__day3
     jump slavyana_mod__launcher0
 
 #Сделано FireBoTer'ом
-    
+
+# Блокноты
+label slavyana_mod__day2_bknt1:
+    $ sl_m_nb_addpage("Сегодня, в свой девятый день в этом замечательном лагере я почти проспала завтрак. Спасибо Жене, что разбудила. Но день всё равно не задался с самого утра. Сначала я потеряла ключи.")
+    return
+label slavyana_mod__day2_bknt_find_keys:
+    $ sl_m_nb_add(" Я искала их по всему лагерю, но так и не нашла.")
+    return
+label slavyana_mod__day2_bknt_sp_keys:
+    $ sl_m_nb_add(" Благо, Семён мне их вечером отдал.")
+    return
+label slavyana_mod__day2_bknt2:
+    $ sl_m_nb_add(" Под вечер Оля послала меня дежурить на пляже (не самое интересное занятие, честно говоря).")
+    return
+label slavyana_mod__day2_bknt3:
+    $ sl_m_nb_add(" А после ужина, на карточном турнире, я ")
+    return
+label slavyana_mod__day2_bknt_win:
+    $ sl_m_nb_add("выиграла у Жени. Но отдала ей свою победу, ведь она, кажется, расстроилась из-за проигрыша.")
+    return
+label slavyana_mod__day2_bknt_not_win:
+    $ sl_m_nb_add("проиграла Жене. Ну что ж, не только же мне выигрывать.")
+    return
+label slavyana_mod__day2_bknt4:
+    $ sl_m_nb_add(" После турнира я пошла в своё тайное место в лесу. Но... я привела с собой Семёна, который увидел... то, что не должен был. Я не знаю, что мне теперь делать и просто буду ждать.")
+    return
+
 #Быстрый выбор
 label slavyana_mod__day2_fast_choice:
 
@@ -1395,6 +1342,8 @@ label slavyana_mod__day2_fast_choice:
     "Второй день."
     window hide
 
+    call slavyana_mod__day2_bknt1
+
     $ day_time()
     $ persistent.sprite_time = "day"
 
@@ -1403,8 +1352,9 @@ label slavyana_mod__day2_fast_choice:
     menu:
         "Искать ключи":
             $ sl_m_day2_find_keys = True
+            call slavyana_mod__day2_bknt_find_keys
         "Поискать занятие в домике":
-            pass
+            call slavyana_mod__day2_bknt_sp_keys
 
 
     scene bg ext_dining_hall_near_sunset
@@ -1431,6 +1381,9 @@ label slavyana_mod__day2_fast_choice:
                 "Остаться":
                     pass
 
+    call slavyana_mod__day2_bknt2
+    call slavyana_mod__day2_bknt3
+
     $ day_time()
     scene bg int_dining_hall_sunset with dissolve
     $ persistent.sprite_time = "day"
@@ -1440,7 +1393,10 @@ label slavyana_mod__day2_fast_choice:
     menu:
         "Победить":
             $ sl_m_day2_you_win = True
+            call slavyana_mod__day2_bknt_win
         "Проиграть":
-            pass
+            call slavyana_mod__day2_bknt_not_win
+
+    call slavyana_mod__day2_bknt4
 
     jump slavyana_mod__day3_fast_choice

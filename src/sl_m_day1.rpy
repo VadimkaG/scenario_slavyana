@@ -1,4 +1,4 @@
-﻿#alpha v.0.1 (-)
+#alpha v.0.1 (-)
 #alpha v.0.3 (-)
 #beta v.0.5 (-)
 #beta v.0.7 (-)
@@ -400,17 +400,22 @@ label slavyana_mod__day1:
     window show
     "Дома меня ждала пустота.{w} Неудивительно, ведь Женя сразу помчалась в библиотеку."
     "На одной из полок шкафа меня ждал купальник. Рядом с ним лежал блокнот."
-    show bknt_clear at truecenter with dspr
+    show bknt at truecenter with dspr
     th "Пустой.{w} Может, стоит туда что-нибудь записывать?"
     play sound_loop pen_write
-    show bknt_w1 at truecenter with dissolve2
+
+    call slavyana_mod__day1_bknt1
+    show screen sl_m_nb() with dissolve2
+    hide bknt
     th "Итак, мой восьмой день пребывания в Совёнке. Погода замечательная..."
     stop sound_loop
     th "А что дальше?{w} Нет, лучше я этим займусь в конце дня."
-    hide bknt_w1
-    hide bknt_clear
+    hide screen sl_m_nb
     with dspr
-    $ persistent.sl_m_bknt1 = True
+
+    show screen slavyana_mod__notebook_interface with dissolve
+    th "Теперь я могу в любой момент перечитать блокнот.{w} В будущем будет что вспомнить!"
+
     play sound sfx_knock_door2
     "Я переоделась, и тут в дверь домика постучали."
     mt "Славя! Ты там?"
@@ -458,7 +463,7 @@ label slavyana_mod__day1:
     "Доплыв почти до самых буйков, Ольга Дмитриевна остановилась."
     show mt normal swim at center with dspr
     mt "Слушай, Славя...{w} Может, ну его, этот официоз? Называй меня просто Олей и обращайся на «ты». Но не при посторонних, конечно же."
-    $ meet('mt','Оля')
+    $ mt_name = 'Оля'
     sl "Хорошо, Ольга... Оля."
     show mt smile swim at center with dspr
     mt "Вот и замечательно!{w} Смотри, там ещё кто-то пришёл!"
@@ -642,7 +647,7 @@ label slavyana_mod__day1:
     with dissolve
     "К счастью, ждать его не пришлось. Он уже собирался сам войти в лагерь, но застыл на месте при виде меня.{w} Я подошла поближе и улыбнулась."
     sl "Привет, ты, наверное, только что приехал?"
-    $ meet('me','Новенький')
+    $ me_name = 'Новенький'
     $ sl_m_sp1 = renpy.random.choice(['talk', 'mute'])
     if sl_m_sp1 == 'mute':
         "Но он не отвечал."
@@ -713,7 +718,7 @@ label slavyana_mod__day1:
     me "А… да…"
     sl "А тебя?"
     me "А… я… да… Семён…"
-    $ meet('me','Семён')
+    $ me_name = 'Семён'
     "Казалось, что он всё время витает в облаках.{w} Либо очень шокирован чем-то, но чем? Вроде как и нечем, чего уж здесь-то может быть необычного?"
     sl "Очень приятно, Семён."
     th "Эх, ладно, как-нибудь потом постараюсь сплавать. А пока помогу Семёну, сейчас это важнее."
@@ -904,17 +909,24 @@ label slavyana_mod__day1:
     window show
     "Дом был пуст, так как Женя, вероятно, была в библиотеке."
     "Я подошла к шкафу и взяла блокнот. На первой странице красовались надписи, оставленные мною утром. Я решила продолжить:"
-    show bknt_w1 at truecenter with dspr
+    hide screen slavyana_mod__notebook_interface
+    $ sl_m_nb_lastpage()
+    show screen sl_m_nb() with dspr
     th "...Погода замечательная."
     play sound_loop pen_write
-    show bknt_w2 at truecenter with dissolve2
+
+    call slavyana_mod__day1_bknt2
+    show screen sl_m_nb() with dissolve2
     th "Сегодня к нам заехал ещё один пионер (Семён), прямо посреди смены. Странно. Да и сам он какой-то... необычный, что ли. В зимней одежде, замкнутый, хотя, видно, не дурак. Поначалу был то ли напуган, то ли шокирован чем-то, но сейчас уже вроде понял, что вне опасности."
+
+    call slavyana_mod__day1_bknt3
+    show screen sl_m_nb() with dissolve2
+
     th "Да и какая опасность может быть в пионерском лагере? Правильно, никакая. Здесь не зона военных действий, не граница с капиталистами, а всего лишь тихая глушь, затерянная среди лесов..."
     stop sound_loop
-    hide bknt_w2
-    hide bknt_w1
+    hide screen sl_m_nb
+    show screen slavyana_mod__notebook_interface
     with dspr
-    $ persistent.sl_m_bknt2 = True
     "Я посмотрела на часы."
     th "Ой, мне же ещё малышей в столовую проводить нужно, а до ужина всего 10 минут!"
     "Положив блокнот обратно, я побежала к домикам, где проживали самые младшие из пионеров."
@@ -1364,19 +1376,23 @@ label slavyana_mod__day1_forest:
     play ambience ambience_camp_center_night fadein 2
     scene bg ext_house_of_sl_night with dissolve
     "Устроившись поудобнее, я стала дописывать:"
-    show bknt_w2 at truecenter with dspr
+    hide screen slavyana_mod__notebook_interface
+    $ sl_m_nb_lastpage()
+    show screen sl_m_nb() with dspr
     th "...затерянная среди лесов."
     play sound_loop pen_write
-    show bknt_w3 at truecenter with dissolve2
+    call slavyana_mod__day1_bknt4
+    show screen sl_m_nb() with dissolve2
     th "На ужине Ульяна его разыграла (не знаю как) и Семён упал со стула, заодно разбив тарелку. Я пошла его искать, и чуть не заблудилась ночью в лесу. Хотя, там в это время так же красиво, как и днём, можно было бы ещё немного побродить..."
+    call slavyana_mod__day1_bknt5
+    show screen sl_m_nb() with dissolve2
     th "Найдя Семёна, я проводила его в столовую, лишний раз убедившись, в том, что он немного странный. Впрочем, может это только поначалу?"
     stop sound_loop
     "Я перечитала всё, что написала в блокнотике."
     th "Да, сегодняшний день прошёл просто замечательно!"
-    hide bknt_w3
-    hide bknt_w2
+    hide screen sl_m_nb
+    show screen slavyana_mod__notebook_interface
     with dspr
-    $ persistent.sl_m_bknt3 = True
     "После этого, я закрыла блокнот и отложила его в сторону. Хотелось немного посидеть, ни о чём не думая и ничего не делая."
     window hide
     pause (3)
@@ -1575,14 +1591,37 @@ label slavyana_mod__day1_other:
 
 #кодо-концовка
 label slavyana_mod__day1_end:
-    scene black with dissolve
+    hide screen slavyana_mod__notebook_interface
+    scene black
+    with dissolve
     hide blink
-    pause (3)
     if sl_m_Full:
         jump slavyana_mod__day2
     jump slavyana_mod__launcher0
 
 #Сделано FireBoTer'ом
+
+# Блокноты
+label slavyana_mod__day1_bknt1:
+    $ sl_m_nb_addpage("Итак, мой восьмой день пребывания в Совёнке. Погода замечательная.")
+    return
+label slavyana_mod__day1_bknt2:
+    $ sl_m_nb_add(" Сегодня к нам заехал\nещё один пионер (Семён), прямо посреди смены. \
+Странно. Да и сам он какой-то... необычный, хотя видно, не дурак, Поначалу был толи\nнапуган \
+то ли шокирован чем-то, но сейчас уже вроде понял, что вне опасности.")
+    return
+label slavyana_mod__day1_bknt3:
+    $ sl_m_nb_add(" Да и какая опасность \
+Может быть в пионерском лагере? Правильно, никакая. Здесь не зона военных действий, не граница \
+с капиталистами, а всего лишь тихая глушь, затерянная среди лесов...")
+    return
+label slavyana_mod__day1_bknt4:
+    $ sl_m_nb_add("\nНа ужине Ульяна его разгрызла (не знаю как) и Семён упал со стула, заодно разбив тарелку. Я пошла его искать и чуть не заблудилась ночью в лесу. Хотя, там в это время так же красиво, как и днём, можно было бы\
+ещё немного побродлить...")
+    return
+label slavyana_mod__day1_bknt5:
+    $ sl_m_nb_add("\nНайдя Семёна, я проводила его в столовую, лишний раз убедившись, в том, что он немного странный. Впрочем может это только поначалу?")
+    return
 
 #Быстрый выбор
 label slavyana_mod__day1_fast_choice:
@@ -1609,4 +1648,11 @@ label slavyana_mod__day1_fast_choice:
             $ sl_m_day1_help_od = True
         "Помочь Ульяне":
             pass
+
+    call slavyana_mod__day1_bknt1
+    call slavyana_mod__day1_bknt2
+    call slavyana_mod__day1_bknt3
+    call slavyana_mod__day1_bknt4
+    call slavyana_mod__day1_bknt5
+
     jump slavyana_mod__day2_fast_choice

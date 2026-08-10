@@ -126,29 +126,18 @@ label slavyana_mod__day5_alt:
   "Судя по часам на будильнике, время подхода приближалось к концу. Я расстелила кровать, включила свет и уселась писать дневник."
   
 # Дневник
-  show bknt_clear at truecenter with dspr
-  play sound_loop pen_write
-  show bknt_w12_2 at truecenter with dissolve2
-  $ persistent.sl_m_bknt12_2 = True
+  scene anim prolog_2
+  with fade
+  $ set_mode_nvl()
   "...На ужине в честь чудесного спасения Шурика испекли торт, из ингредиентов, которые пришлось носить Семёну."
   "Но пакостливая Ульянка сразу набросилась на него и нам ничего не досталось."
   "Затем мы пошли в поход. Поблуждав немного по уже истоптанным тропинкам в лесу, мы вышли на поляну,которую мы сегодня убирали с Леной."
   "Я отпросилась с похода, предпочтя провести время купанием в речке. Я надеюсь Леночка призналась Семёну в чувствах."
-  hide bknt_w12_2
-  if not sl_m_day1_help_od:
-    show bknt_w12_3 at truecenter with dspr
-  else:
-    show bknt_w12_4 at truecenter with dspr
   "Насчёт наказания Ульяны я не уверена. Слишком уж строго вожатая к ней отнеслась. Она хоть и заслужила это, но всё-таки остаётся ребёнком."
   if not sl_m_day1_help_od:
     "Мы весело провели с ней время и я уложила её спать."
-  stop sound_loop
-  hide bknt_clear
-  if not sl_m_day1_help_od:
-    hide bknt_w12_3
-  else:
-    hide bknt_w12_4
-  with dspr
+  nvl clear
+  $ set_mode_adv()
 # Конец дневника
   
   th "Завтра будет новый день, завтра будут новые свершения!"

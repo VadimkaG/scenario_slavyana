@@ -13,7 +13,9 @@ label slavyana_mod__day3:
 #утро
     show unblink
     play ambience ambience_int_cabin_day fadein 3
-    scene bg int_house_of_sl_day with dissolve
+    scene bg int_house_of_sl_day
+    show screen slavyana_mod__notebook_interface
+    with dissolve
     pause (3)
     window show
     "Утро наступило быстро и неожиданно."
@@ -792,16 +794,24 @@ label slavyana_mod__day3:
     "Осмотрев висящее в шкафу платье (ничуть не помялось и не повредилось), мой взгляд упал на дневник. Я открыла его, взяла ручку и продолжила писать:"
     
 #блокнот (1)
-    show bknt_clear at truecenter with dspr
+    show bknt at truecenter
+    hide screen slavyana_mod__notebook_interface
+    with dspr
+
     play sound_loop pen_write
-    show bknt_w8 at truecenter with dissolve2
-    $ persistent.sl_m_bknt8 = True
+    call slavyana_mod__day3_bknt1
+    show screen sl_m_nb() with dissolve2
+    hide bknt
     th "Десятый день в \"Совёнке\". День был трудным и насыщенным. Сначала я отнесла спирт (в виде водки – спасибо медсестре) кибернетикам, за что нас обсмеяла вездесущая Алиса. Потом руководила уборкой площади."
+    call slavyana_mod__day3_bknt2
+    show screen sl_m_nb() with dissolve2
     th "После обеда я ловила сбегавшего от наказания Семёна. Зато он здорово помог мне в библиотеке. Вот только упал на меня в самом конце, но мы остались живы. Перед ужином Оля проявила неслыханное варварство: она хотела оставить Семёна без ужина. Но узнав, что он работал вместе со мной в библиотеке, отступилась (после того, как я поручилась за него)."
+    call slavyana_mod__day3_bknt3
+    show screen sl_m_nb() with dissolve2
     th "А ещё я помогала готовить дискотеку."
     stop sound_loop
-    hide bknt_clear
-    hide bknt_w8
+    hide screen sl_m_nb
+    show screen slavyana_mod__notebook_interface
     with dspr
     
 #домик перед дискотекой (2)
@@ -1249,16 +1259,22 @@ label slavyana_mod__day3:
     "Как обычно прокравшись за дневником и положив пакет, я устроилась на крыльце и стала дописывать про события сегодняшнего дня:"
     
 #блокнот (2)
-    show bknt_w8 at truecenter with dissolve2
+    hide screen slavyana_mod__notebook_interface
+    $ sl_m_nb_lastpage()
+    show screen sl_m_nb() with dissolve2
     play sound_loop pen_write
-    show bknt_w9 at truecenter with dissolve2
-    $ persistent.sl_m_bknt9 = True
+    call slavyana_mod__day3_bknt4
+    show screen sl_m_nb() with dissolve2
     th "...А ещё я помогала готовить дискотеку. Она прошла на славу. Я танцевала с Семёном, это было... замечательно. Я ощущала себя такой счастливой..."
+    call slavyana_mod__day3_bknt5
+    show screen sl_m_nb() with dissolve
     th "Правда, потом он совершенно неучтиво убежал. Нашла я его на пляже, он был словно неживой. Говорил как робот, сделанный в кружке кибернетики. Правда, под конец он проснулся, но начал говорить что-то глупое и несвязное."
+    call slavyana_mod__day3_bknt6
+    show screen sl_m_nb() with dissolve
     th "Ох уж этот Семён... Как встретила его на уборке площади, так весь день дальше с ним и провела."
     stop sound_loop
-    hide bknt_w8
-    hide bknt_w9
+    hide screen sl_m_nb
+    show screen slavyana_mod__notebook_interface
     with dspr
     
 #около домика перед сном (2)
@@ -1284,7 +1300,27 @@ label slavyana_mod__day3:
     jump slavyana_mod__launcher0
     
 #Сделано FireBoTer'ом
-    
+
+# Блокноты
+label slavyana_mod__day3_bknt1:
+    $ sl_m_nb_addpage("Десятый день в \"Совёнке\". День был трудным и насыщенным. Сначала я отнесла спирт (в виде водки – спасибо медсестре) кибернетикам, за что нас обсмеяла вездесущая Алиса. Потом руководила уборкой площади.")
+    return
+label slavyana_mod__day3_bknt2:
+    $ sl_m_nb_add("После обеда я ловила сбегавшего от наказания Семёна. Зато он здорово помог мне в библиотеке. Вот только упал на меня в самом конце, но мы остались живы. Перед ужином Оля проявила неслыханное варварство: она хотела оставить Семёна без ужина. Но узнав, что он работал вместе со мной в библиотеке, отступилась (после того, как я поручилась за него).")
+    return
+label slavyana_mod__day3_bknt3:
+    $ sl_m_nb_add("А ещё я помогала готовить дискотеку.")
+    return
+label slavyana_mod__day3_bknt4:
+    $ sl_m_nb_add("А ещё я помогала готовить дискотеку. Она прошла на славу. Я танцевала с Семёном, это было... замечательно. Я ощущала себя такой счастливой...")
+    return
+label slavyana_mod__day3_bknt5:
+    $ sl_m_nb_add("Правда, потом он совершенно неучтиво убежал. Нашла я его на пляже, он был словно неживой. Говорил как робот, сделанный в кружке кибернетики. Правда, под конец он проснулся, но начал говорить что-то глупое и несвязное.")
+    return
+label slavyana_mod__day3_bknt6:
+    $ sl_m_nb_add2("Ох уж этот Семён... Как встретила его на уборке площади, так весь день дальше с ним и провела.")
+    return
+
 #Быстрый выбор
 label slavyana_mod__day3_fast_choice:
 
@@ -1316,5 +1352,12 @@ label slavyana_mod__day3_fast_choice:
             $ sl_m_day3_help = True
         "Остаться на месте":
             pass
+
+    call slavyana_mod__day3_bknt1
+    call slavyana_mod__day3_bknt2
+    call slavyana_mod__day3_bknt3
+    call slavyana_mod__day3_bknt4
+    call slavyana_mod__day3_bknt5
+    call slavyana_mod__day3_bknt6
 
     jump slavyana_mod__day4_fast_choice

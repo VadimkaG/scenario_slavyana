@@ -12,7 +12,9 @@ label slavyana_mod__day4:
   $ renpy.pause(3, hard=True)
 
   play ambience ambience_int_cabin_day fadein 4
-  scene bg int_house_of_sl_day with dissolve2
+  scene bg int_house_of_sl_day
+  show screen slavyana_mod__notebook_interface
+  with dissolve2
   window show
   "Это утро, как всегда, было добрым."
   "Я поднялась с кровати."
@@ -949,29 +951,54 @@ label slavyana_mod__day4_after_map_choise:
       play ambience ambience_int_cabin_day fadein 3
       window show
       "Я зашла в домик. До сна ещё было время, поэтому я заскочила, чтобы записать мысли в дневник."
+      window hide
 
       # Дневник
-      show bknt_clear at truecenter with dspr
+      show bknt at truecenter
+      hide screen slavyana_mod__notebook_interface
+      with dspr
       play sound_loop pen_write
-      show bknt_w10 at truecenter with dissolve2
-      $ persistent.sl_m_bknt10 = True
-      th "Сегодня был очень необычный день. Буквально с утра пропал наш товарищ – Шурик." 
+      call slavyana_mod__day4_bknt1
+      show screen sl_m_nb() with dissolve2
+      window show
+      th "Сегодня был очень необычный день. Буквально с утра пропал наш товарищ – Шурик."
+      window hide
+      hide bknt
+      call slavyana_mod__day4_bknt2
+      show screen sl_m_nb() with dissolve
+      window show
       th "Весь день я только и делала, что искала его. {w}Кроме меня активно в поисках участвовали и другие ребята, особенно Электроник. Ведь они вместе с Шуриком каждый день что-то конструируют в кружке кибернетики."
-
-      th "Но также мне сегодня помогал и Семён, во всяком случае, мы вместе обошли лагерь." 
-      
+      window hide
+      if slavyana_mod__day4_map_choise__mt_house:
+        call slavyana_mod__day4_bknt3
+        show screen sl_m_nb() with dissolve
+        window show
+        th "Но также мне сегодня помогал и Семён, во всяком случае, мы вместе обошли лагерь."
+        window hide
+      call slavyana_mod__day4_bknt4
+      show screen sl_m_nb() with dissolve
+      window show
       th "После ужина Алиса и Ульянка хотели взорвать памятник Генде. До сих пор не могу вспомнить, кто он такой, но ведь это не повод его взрывать!"
+      window hide
+      call slavyana_mod__day4_bknt5
+      call slavyana_mod__day4_bknt5_1
+      show screen sl_m_nb() with dissolve
+      window show
       th "Потом на площадь неожиданно забежал Электроник с ботинком Шурика в руке. По его словам, он нашёл его на дороге в старый лагерь. Не знаю, чем бы это всё кончилось, но Семён отказался идти туда в одиночку. Хотя я его понимаю. Он здесь совсем недавно, а его уже посылают на такое рискованное задание. (остановка) Может, стоило отправиться вместе с ним?"
+      window hide
+      call slavyana_mod__day4_bknt6
+      show screen sl_m_nb() with dissolve
+      window show
       th "Ольга Дмитриевна сказала, что завтра отправимся все вместе. Наверное, так даже лучше."
+      window hide
       stop sound_loop
-      hide bknt_clear
-      hide bknt_w10
+      hide screen sl_m_nb
+      show screen slavyana_mod__notebook_interface
       with dspr
       # Конец дневника
 
       $ persistent.sprite_time = "night"
       $ night_time()
-      window hide
       scene bg int_house_of_sl_night with dissolve
       play ambience ambience_int_cabin_night fadein 3
       window show
@@ -985,6 +1012,7 @@ label slavyana_mod__day4_after_map_choise:
 
     "Вызваться помочь":
       $ sl_m_lp += 2
+      $ go_to_sh = True
 
   sl "Я пойду с ним!"
 
@@ -1501,32 +1529,86 @@ label slavyana_mod__day4_after_map_choise:
   play ambience ambience_camp_center_night fadein 3
 
   # Дневник
-  show bknt_clear at truecenter with dspr
+  show bknt at truecenter
+  hide screen slavyana_mod__notebook_interface
+  with dspr
   play sound_loop pen_write
-  show bknt_w11 at truecenter with dissolve2
-  $ persistent.sl_m_bknt11 = True
+  call slavyana_mod__day4_bknt1
+  show screen sl_m_nb() with dissolve2
   window show
-  "Сегодня был очень необычный день. Буквально с утра пропал наш товарищ – Шурик."
-  "Весь день я только и делала, что искала его. {w}Кроме меня активно в поисках участвовали и другие ребята, особенно Электроник. Ведь они вместе с Шуриком каждый день что-то конструируют в кружке кибернетики."
-#Если она зашла в дом Семёна после того как сходила на склад/музклуб, иначе строчка пропускается
-  "Но также мне сегодня помогал и Семён, во всяком случае, мы вместе с ним обошли лагерь. К сожалению, мы не смогли найти Шурика." 
-  "После ужина Алиса и Ульянка хотели взорвать памятник Генде. До сих пор не могу вспомнить кто он такой, но ведь это не повод его взрывать! Я заподозрила что-то неладное ещё до ужина, когда они вместе куда-то пошли."
-  "Потом на площадь неожиданно забежал Электроник, с ботинком Шурика в руке. По его словам, он нашёл его на дороге в старый лагерь." 
-  "Семён добровольно вызвался помочь. И я не могла не вызваться пойти с ним. Хотя я до сих пор не могу понять, как Ольга Дмитриевна позволила нам отправиться ночью в такое жуткое место. Семён мог заблудиться, если бы я не пошла с ним, ведь я знаю дорогу."
-  "Придя на место, я немного струхнула уже от самого вида лагеря. Но вот Семён пошёл вперёд и я за ним. Мы зашли внутрь и осмотрели здание. Всё это время я пыталась не отходить далеко от Семёна."
-  "Потом мы нашли люк, вход к которому был расчищен. Когда мы спустились, стало ещё хуже: там был тоннель, по стенам которого тянулись провода. И в конце него находилось бомбоубежище, о котором я услышала от Ульяны."
-  hide bknt_w11
-  show bknt_w11_2 at truecenter with dspr
-  "Семён предлагал несколько раз вернуться назад, однако я смогла его убедить продолжить поиски Шурика, потому что одна вряд ли бы отважилась идти дальше."
-  "Нам пришлось спуститься в пролом в полу. Мы оказались в заброшенной шахте. К этому моменту я уже ни на минуту не отпускала руку Семёна, который неумолимо шёл вперёд. {w}Мы миновали развилки, несколько десятков минут плутали по этому лабиринту, но всё-таки нашли Шурика."
-  "Бедняге слышались голоса, и мне пришлось его успокаивать, чтобы вернуть его в «Совёнок»."
-  "Всё закончилось благополучно, и все вернулись домой. Когда Шурик ушёл, мы ещё некоторое время сидели вместе с Семёном."
-  "Там, на площади, мне так не хотелось уходить, создавалось чувство какой-то недосказанности."
-  "Семён поблагодарил меня, и почему-то мне стало неловко, поэтому я ушла, не попрощавшись, и мне до сих пор стыдно за этот поступок."
-  "Завтра мы во второй раз идём в поход. Эта скукотища мне надоела, нужно будет как-нибудь сбежать оттуда."
+  th "Сегодня был очень необычный день. Буквально с утра пропал наш товарищ – Шурик."
+  window hide
+  hide bknt
+  call slavyana_mod__day4_bknt2
+  show screen sl_m_nb() with dissolve2
+  window show
+  th "Весь день я только и делала, что искала его. {w}Кроме меня активно в поисках участвовали и другие ребята, особенно Электроник. Ведь они вместе с Шуриком каждый день что-то конструируют в кружке кибернетики."
+  window hide
+  if slavyana_mod__day4_map_choise__mt_house:
+    call slavyana_mod__day4_bknt3
+    call slavyana_mod__day4_bknt3_1
+    show screen sl_m_nb() with dissolve
+    window show
+    th "Но также мне сегодня помогал и Семён, во всяком случае, мы вместе с ним обошли лагерь. К сожалению, мы не смогли найти Шурика." 
+    window hide
+  call slavyana_mod__day4_bknt4
+  call slavyana_mod__day4_bknt4_1
+  show screen sl_m_nb() with dissolve
+  window show
+  th "После ужина Алиса и Ульянка хотели взорвать памятник Генде. До сих пор не могу вспомнить кто он такой, но ведь это не повод его взрывать! Я заподозрила что-то неладное ещё до ужина, когда они вместе куда-то пошли."
+  window hide
+  call slavyana_mod__day4_bknt5
+  show screen sl_m_nb() with dissolve
+  window show
+  th "Потом на площадь неожиданно забежал Электроник, с ботинком Шурика в руке. По его словам, он нашёл его на дороге в старый лагерь."
+  window hide
+  call slavyana_mod__day4_bknt6_1
+  show screen sl_m_nb() with dissolve
+  window show
+  th "Семён добровольно вызвался помочь. И я не могла не вызваться пойти с ним. Хотя я до сих пор не могу понять, как Ольга Дмитриевна позволила нам отправиться ночью в такое жуткое место. Семён мог заблудиться, если бы я не пошла с ним, ведь я знаю дорогу."
+  window hide
+  call slavyana_mod__day4_bknt7
+  show screen sl_m_nb() with dissolve
+  window show
+  th "Придя на место, я немного струхнула уже от самого вида лагеря. Но вот Семён пошёл вперёд и я за ним. Мы зашли внутрь и осмотрели здание. Всё это время я пыталась не отходить далеко от Семёна."
+  window hide
+  call slavyana_mod__day4_bknt8
+  show screen sl_m_nb() with dissolve
+  window show
+  th "Потом мы нашли люк, вход к которому был расчищен. Когда мы спустились, стало ещё хуже: там был тоннель, по стенам которого тянулись провода. И в конце него находилось бомбоубежище, о котором я услышала от Ульяны."
+  window hide
+  call slavyana_mod__day4_bknt9
+  show screen sl_m_nb() with dissolve
+  window show
+  th "Семён предлагал несколько раз вернуться назад, однако я смогла его убедить продолжить поиски Шурика, потому что одна вряд ли бы отважилась идти дальше."
+  window hide
+  call slavyana_mod__day4_bknt10
+  show screen sl_m_nb() with dissolve
+  window show
+  th "Нам пришлось спуститься в пролом в полу. Мы оказались в заброшенной шахте. К этому моменту я уже ни на минуту не отпускала руку Семёна, который неумолимо шёл вперёд. {w}Мы миновали развилки, несколько десятков минут плутали по этому лабиринту, но всё-таки нашли Шурика."
+  window hide
+  call slavyana_mod__day4_bknt11
+  show screen sl_m_nb() with dissolve
+  window show
+  th "Бедняге слышались голоса, и мне пришлось его успокаивать, чтобы вернуть его в «Совёнок»."
+  window hide
+  call slavyana_mod__day4_bknt12
+  show screen sl_m_nb() with dissolve
+  window show
+  th"Всё закончилось благополучно, и все вернулись домой. Когда Шурик ушёл, мы ещё некоторое время сидели вместе с Семёном.{w} Там, на площади, мне так не хотелось уходить, создавалось чувство какой-то недосказанности."
+  window hide
+  call slavyana_mod__day4_bknt13
+  show screen sl_m_nb() with dissolve
+  window show
+  th"Семён поблагодарил меня, и почему-то мне стало неловко, поэтому я ушла, не попрощавшись, и мне до сих пор стыдно за этот поступок."
+  window hide
+  call slavyana_mod__day4_bknt14
+  show screen sl_m_nb() with dissolve
+  window show
+  th "Завтра мы во второй раз идём в поход. Эта скукотища мне надоела, нужно будет как-нибудь сбежать оттуда."
   stop sound_loop
-  hide bknt_clear
-  hide bknt_w11_2
+  hide screen sl_m_nb
+  show screen slavyana_mod__notebook_interface
   with dspr
   #конец дневника
 
@@ -1543,10 +1625,10 @@ label slavyana_mod__day4_after_map_choise:
   "Я зашла в домик, переоделась и легла в кровать."
   "Усталость, вызванная поисками Шурика в экстремальной обстановке быстро дала о себе знать."
   "Силы моментально покинули меня и я уснула."
-  $ go_to_sh = True
 
 label slavyana_mod__day4__without_pi:
   stop ambience fadeout 3
+  hide screen slavyana_mod__notebook_interface
   show blink
   "..."
   window hide
@@ -1555,12 +1637,74 @@ label slavyana_mod__day4__without_pi:
     jump slavyana_mod__day5
   jump slavyana_mod__launcher0
 
+# Блокноты
+label slavyana_mod__day4_bknt1:
+  $ sl_m_nb_addpage("Сегодня был очень необычный день. Буквально с утра пропал наш товарищ – Шурик.")
+  return
+label slavyana_mod__day4_bknt2:
+  $ sl_m_nb_add("Весь день я только и делала, что искала его. Кроме меня активно в поисках участвовали и другие ребята, особенно Электроник. Ведь они вместе с Шуриком каждый день что-то конструируют в кружке кибернетики.")
+  return
+label slavyana_mod__day4_bknt3:
+  $ sl_m_nb_add("Но также мне сегодня помогал и Семён, во всяком случае, мы вместе обошли лагерь.")
+  return
+label slavyana_mod__day4_bknt3_1:
+  $ sl_m_nb_add(" К сожалению, мы не смогли найти Шурика.")
+  return
+label slavyana_mod__day4_bknt4:
+  $ sl_m_nb_add("После ужина Алиса и Ульянка хотели взорвать памятник Генде. До сих пор не могу вспомнить, кто он такой, но ведь это не повод его взрывать!")
+  return
+label slavyana_mod__day4_bknt4_1:
+  $ sl_m_nb_add(" Я заподозрила что-то неладное ещё до ужина, когда они вместе куда-то пошли.")
+  return
+label slavyana_mod__day4_bknt5:
+  $ sl_m_nb_add("Потом на площадь неожиданно забежал Электроник с ботинком Шурика в руке. По его словам, он нашёл его на дороге в старый лагерь.")
+  return
+label slavyana_mod__day4_bknt5_1:
+  $ sl_m_nb_add(" Не знаю, чем бы это всё кончилось, но Семён отказался идти туда в одиночку. Хотя я его понимаю. Он здесь совсем недавно, а его уже посылают на такое рискованное задание. (остановка) Может, стоило отправиться вместе с ним?")
+  return
+label slavyana_mod__day4_bknt6:
+  $ sl_m_nb_add("Ольга Дмитриевна сказала, что завтра отправимся все вместе. Наверное, так даже лучше.")
+  return
+label slavyana_mod__day4_bknt6_1:
+  $ sl_m_nb_add("Семён добровольно вызвался помочь. И я не могла не вызваться пойти с ним. Хотя я до сих пор не могу понять, как Ольга Дмитриевна позволила нам отправиться ночью в такое жуткое место. Семён мог заблудиться, если бы я не пошла с ним, ведь я знаю дорогу.")
+  return
+label slavyana_mod__day4_bknt7:
+  $ sl_m_nb_add(" Придя на место, я немного струхнула уже от самого вида лагеря. Но вот Семён пошёл вперёд и я за ним. Мы зашли внутрь и осмотрели здание.")
+  $ sl_m_nb_add2("Всё это время я пыталась не отходить далеко от Семёна.")
+  return
+label slavyana_mod__day4_bknt8:
+  $ sl_m_nb_add2("Потом мы нашли люк, вход к которому был расчищен. Когда мы спустились, стало ещё хуже: там был тоннель, по стенам которого тянулись провода. И в конце него находилось бомбоубежище, о котором я услышала от Ульяны.")
+  return
+label slavyana_mod__day4_bknt9:
+  $ sl_m_nb_add2("Семён предлагал несколько раз вернуться назад, однако я смогла его убедить продолжить поиски Шурика, потому что одна вряд ли бы отважилась идти дальше.")
+  return
+label slavyana_mod__day4_bknt10:
+  $ sl_m_nb_add2("Нам пришлось спуститься в пролом в полу. Мы оказались в заброшенной шахте. К этому моменту я уже ни на минуту не отпускала руку Семёна, который неумолимо шёл вперёд. Мы миновали развилки, несколько десятков минут плутали по этому лабиринту, но всё-таки нашли Шурика.")
+  return
+label slavyana_mod__day4_bknt11:
+  $ sl_m_nb_add2("Бедняге слышались голоса, и мне пришлось его успокаивать, чтобы вернуть его в «Совёнок».")
+  return
+label slavyana_mod__day4_bknt12:
+  $ sl_m_nb_addpage("Всё закончилось благополучно, и все вернулись домой. Когда Шурик ушёл, мы ещё некоторое время сидели вместе с Семёном. Там, на площади, мне так не хотелось уходить, создавалось чувство какой-то недосказанности.")
+  return
+label slavyana_mod__day4_bknt13:
+  $ sl_m_nb_add("Семён поблагодарил меня, и почему-то мне стало неловко, поэтому я ушла, не попрощавшись, и мне до сих пор стыдно за этот поступок.")
+  return
+label slavyana_mod__day4_bknt14:
+  $ sl_m_nb_add("Завтра мы во второй раз идём в поход. Эта скукотища мне надоела, нужно будет как-нибудь сбежать оттуда.")
+  return
+
+# Быстрый выбор
 label slavyana_mod__day4_fast_choice:
 
   if sl_m_l_day == 4:
     window hide
     jump slavyana_mod__day4
     return
+
+  call slavyana_mod__day4_bknt1
+  call slavyana_mod__day4_bknt2
+  call slavyana_mod__day4_bknt4
 
   scene bg ext_square_day
   show mt normal pioneer at cright
@@ -1571,7 +1715,21 @@ label slavyana_mod__day4_fast_choice:
     "Вызваться помочь":
       $ go_to_sh = True
       $ sl_m_lp += 2
+      call slavyana_mod__day4_bknt4_1
+      call slavyana_mod__day4_bknt5
+      call slavyana_mod__day4_bknt6_1
+      call slavyana_mod__day4_bknt7
+      call slavyana_mod__day4_bknt8
+      call slavyana_mod__day4_bknt9
+      call slavyana_mod__day4_bknt10
+      call slavyana_mod__day4_bknt11
+      call slavyana_mod__day4_bknt12
+      call slavyana_mod__day4_bknt13
+      call slavyana_mod__day4_bknt14
     "Не обращать внимания":
       $ go_to_sh = False
+      call slavyana_mod__day4_bknt5
+      call slavyana_mod__day4_bknt5_1
+      call slavyana_mod__day4_bknt6
   
   jump slavyana_mod__day5_fast_choice

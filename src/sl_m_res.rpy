@@ -1,4 +1,4 @@
-﻿init 6 python:
+init 6 python:
     if "sl_m_green" not in persistent.endings:
         persistent.endings["sl_m_green"] = False
     if "sl_m_red" not in persistent.endings:
@@ -57,45 +57,7 @@ init -10:
 init:
     $ pen_write = "scenario_slavyana/res/sound/pen1.mp3"
 
-    image bknt_clear = "scenario_slavyana/res/images/bknt/bknt.png"
-    image bknt_w1 = "scenario_slavyana/res/images/bknt/bknt1.png"
-    image bknt_w2 = "scenario_slavyana/res/images/bknt/bknt2.png"
-    image bknt_w3 = "scenario_slavyana/res/images/bknt/bknt3.png"
-    image bknt_w4 = "scenario_slavyana/res/images/bknt/bknt4.png"
-    image bknt_w4_1 = "scenario_slavyana/res/images/bknt/bknt4_1.png"
-    image bknt_w4_2_1 = "scenario_slavyana/res/images/bknt/bknt4_2_1.png"
-    image bknt_w4_2_2 = "scenario_slavyana/res/images/bknt/bknt4_2_2.png"
-    image bknt_w5 = "scenario_slavyana/res/images/bknt/bknt5.png"
-    image bknt_w5_1_1 = "scenario_slavyana/res/images/bknt/bknt5_1_1.png"
-    image bknt_w5_1_2 = "scenario_slavyana/res/images/bknt/bknt5_1_2.png"
-    image bknt_w5_2 = "scenario_slavyana/res/images/bknt/bknt5_2.png"
-    image bknt_w6_1 = "scenario_slavyana/res/images/bknt/bknt6_1.png"
-    image bknt_w6_1_2 = "scenario_slavyana/res/images/bknt/bknt6_1_2.png"
-    image bknt_w6_1_1_1 = "scenario_slavyana/res/images/bknt/bknt6_1_1_1.png"
-    image bknt_w6_1_1_2 = "scenario_slavyana/res/images/bknt/bknt6_1_1_2.png"
-    image bknt_w6_2 = "scenario_slavyana/res/images/bknt/bknt6_2.png"
-    image bknt_w6_2_1_1 = "scenario_slavyana/res/images/bknt/bknt6_2_1_1.png"
-    image bknt_w6_2_1_2 = "scenario_slavyana/res/images/bknt/bknt6_2_1_2.png"
-    image bknt_w6_2_2 = "scenario_slavyana/res/images/bknt/bknt6_2_2.png"
-    image bknt_w7_1 = "scenario_slavyana/res/images/bknt/bknt7_1.png"
-    image bknt_w7_1_2 = "scenario_slavyana/res/images/bknt/bknt7_1_2.png"
-    image bknt_w7_1_1_1 = "scenario_slavyana/res/images/bknt/bknt7_1_1_1.png"
-    image bknt_w7_1_1_2 = "scenario_slavyana/res/images/bknt/bknt7_1_1_2.png"
-    image bknt_w7_2 = "scenario_slavyana/res/images/bknt/bknt7_2.png"
-    image bknt_w7_2_1_1 = "scenario_slavyana/res/images/bknt/bknt7_2_1_1.png"
-    image bknt_w7_2_1_2 = "scenario_slavyana/res/images/bknt/bknt7_2_1_2.png"
-    image bknt_w7_2_2 = "scenario_slavyana/res/images/bknt/bknt7_2_2.png"
-    image bknt_w8 = "scenario_slavyana/res/images/bknt/bknt8.png"
-    image bknt_w9 = "scenario_slavyana/res/images/bknt/bknt9.png"
-
-    image bknt_w10 = "scenario_slavyana/res/images/bknt/bknt10.png"
-    image bknt_w11 = "scenario_slavyana/res/images/bknt/bknt11.jpg"
-    image bknt_w11_2 = "scenario_slavyana/res/images/bknt/bknt11_2.jpg"
-    image bknt_w12 = "scenario_slavyana/res/images/bknt/bknt12.png"
-    image bknt_w12_2 = "scenario_slavyana/res/images/bknt/bknt12_2.jpg"
-    image bknt_w12_3 = "scenario_slavyana/res/images/bknt/bknt12_3.jpg"
-    image bknt_w12_4 = "scenario_slavyana/res/images/bknt/bknt12_4.jpg"
-    image bknt_dv = "scenario_slavyana/res/images/bknt/bknt_dv.png"
+    image bknt = "scenario_slavyana/res/images/notebook/notebook.png"
     
     image bg days_day = "scenario_slavyana/res/images/menu/bg/d_day.png"
     image bg days_eve = "scenario_slavyana/res/images/menu/bg/d_eve.png"
@@ -605,7 +567,6 @@ init:
     $ style.credits_sl_m.text_align = 0.5
     $ style.credits_sl_m.xmaximum = 0.8
     image credits_sl_m = ParameterizedText(style='credits_sl_m', size=50)
-    #$ credits_sl_m_text = "{size=80}Славя-мод{/size}\n\n\nРазработчик: FireBoTer.\n\n\nПомощь в тестировании: Xent2121.\n\n\nПомощь с дизайном главного меню: Nenver Kradovich\n\n\nРесурсы: IIchan Eroge Team (ныне Moonworks и Soviet Games), сообщество игры.\n\n\nОтдельное спасибо всем, кто играет в этот мод и тем, кто помогает исправлять его!\n"
 
 init -410 python:
     store.map_zones = {
@@ -633,30 +594,3 @@ init -410 python:
                 "camp_entrance": {"position":[271,432,424,567],"default_bg":bg_tmp_image(u"Ворота в лагерь")},
                 "forest":        {"position":[550,60,697,199],"default_bg":bg_tmp_image(u"Лес")},
         }
-
-# Это я пытался имитировать картинки блокнота?
-# FIXME: Либо доделать, либо убрать, хз...
-# init python:
-#     notebooks_lines = -1;
-#     def nb_show():
-#         global notebooks_lines
-#         if notebooks_lines < 0:
-#             renpy.show("bknt_clear",at_list = [ truecenter ])
-#             notebooks_lines = 0
-#     def nb_hide():
-#         global notebooks_lines
-#         if notebooks_lines >= 0:
-#             renpy.hide("bknt_clear")
-#             notebooks_lines = -1
-#     def notebok_getLinePoition(lineNumber):
-#         if lineNumber < 25:
-#             y = 0.339 + (0.014 * lineNumber)
-#             return Position(xpos=.438, ypos=y,xmaximum=250,text_align=.0)
-#         else:
-#             y = 0.339 + (0.014 * (lineNumber-25))
-#             return Position(xpos=.56, ypos=y,xmaximum=250,text_align=.0)
-#     def nb(text, **kwargs):
-#         global notebooks_lines
-#         if notebooks_lines >= 0:
-#             renpy.show("nb_line_"+str(notebooks_lines),[notebok_getLinePoition(notebooks_lines)],what=Text("{color=#0400ff}{size=-8}{font=scenario_slavyana/res/Fonts/ofont_ru_Elzevir.ttf}"+text+"{/font}{/size}{/color}"))
-#             notebooks_lines += 1

@@ -1,4 +1,4 @@
-﻿init python:
+init python:
     mods["slavyana_mod__launcher"] = u"Славя-мод. Допил"
     try:
         mod_tags["slavyana_mod__launcher"] = ["gameplay:vn","length:days","protagonist:female","character:Семён","character:Славя","character:Алиса","character:Ульяна","character:Лена","character:Ольга Дмитриевна","character:Виола","character:Электроник","character:Шурик","character:Женя"]
@@ -15,7 +15,7 @@ init:
     default persistent.sl_m_end_count = 0
 
 screen slavyana_mod_lp_counter():
-    text "ЛП: [sl_m_lp]" xalign 0.5 yalign 0.0 size 16
+    text "ЛП: [sl_m_lp]" xalign 0.0 yalign 0.0 size 16
 
 # Главное меню мода
 screen slavyana_mod_main_menu():
@@ -25,7 +25,7 @@ screen slavyana_mod_main_menu():
     if slavyana_mod_menu_state == "main":
         add "scenario_slavyana/res/images/menu/bg/slavya-mod-title-screen.png"
 
-        text "Build: 09.08.2026":
+        text "Build: 10.08.2026":
             xpos 0.0
             ypos 1.0
             xanchor 0.0
@@ -152,9 +152,12 @@ label slavyana_mod__launcher:
 # Инициализировать главный экран
 label slavyana_mod__launcher0:
     $ reload_names()
+    hide slavyana_mod__notebook_interface
+    $ sl_m_nb_clear()
     scene black
     play music music_list["forest_maiden"] fadein 1
     show screen slavyana_mod_lp_counter
+
 # Показать главный экран
 label slavyana_mod__mainscreen1:
     call screen slavyana_mod_main_menu
@@ -240,8 +243,8 @@ label slavyana_mod__l_finish:
                 $ sl_m_Full = False
         window show
     if sl_m_l_day > 1:
-        $ meet('mt','Оля')
-        $ meet('me','Семён')
+        $ mt_name = 'Оля'
+        $ me_name = 'Семён'
     window hide
     stop music fadeout 2
     return
