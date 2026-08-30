@@ -58,6 +58,8 @@ init:
     $ pen_write = "scenario_slavyana/res/sound/pen1.mp3"
 
     image bknt = "scenario_slavyana/res/images/notebook/notebook.png"
+
+    image note = "scenario_slavyana/res/images/note.png"
     
     image bg days_day = "scenario_slavyana/res/images/menu/bg/d_day.png"
     image bg days_eve = "scenario_slavyana/res/images/menu/bg/d_eve.png"
@@ -104,6 +106,8 @@ init:
     image cg titles_sl_with_image = "scenario_slavyana/res/images/cg/titles_sl_with_image.jpg"
     image bg ext_camp_entrance_fog = "scenario_slavyana/res/images/bg/ext_camp_entrance_fog.jpg"
     image bg int_admins_day = "scenario_slavyana/res/images/bg/int_admins_day.png"
+    
+    image cg d7_feeding_trough = "scenario_slavyana/res/images/cg/d7_feeding_trough.jpg"
 
     image sl_m_green = "scenario_slavyana/res/images/misc/ach/achievement_green.png"
     image sl_m_red = "scenario_slavyana/res/images/misc/ach/achievement_red.png"

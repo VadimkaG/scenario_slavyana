@@ -63,7 +63,9 @@ label slavyana_mod__day5:
     window hide
     stop music fadeout 3
 
-  scene bg int_house_of_sl_day with dissolve
+  scene bg int_house_of_sl_day
+  show screen slavyana_mod__notebook_interface
+  with dissolve
   play ambience ambience_int_cabin_day loop fadein 3
   window show
   "Так начался двенадцатый день моего пребывания в «Совёнке»."
@@ -1637,6 +1639,7 @@ label slavyana_mod__day5_lena:
   window hide
   stop ambience fadeout 4
   show blink
+  hide screen slavyana_mod__notebook_interface
   if sl_m_Full:
       jump slavyana_mod__day6
   jump slavyana_mod__launcher0

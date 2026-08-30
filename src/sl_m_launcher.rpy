@@ -1,5 +1,5 @@
 init python:
-    mods["slavyana_mod__launcher"] = u"Славя-мод. Допил"
+    mods["slavyana_mod__launcher"] = u"Славя-мод"
     try:
         mod_tags["slavyana_mod__launcher"] = ["gameplay:vn","length:days","protagonist:female","character:Семён","character:Славя","character:Алиса","character:Ульяна","character:Лена","character:Ольга Дмитриевна","character:Виола","character:Электроник","character:Шурик","character:Женя"]
     except NameError:
