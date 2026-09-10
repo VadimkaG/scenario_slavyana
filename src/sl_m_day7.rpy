@@ -7,6 +7,8 @@ label slavyana_mod__day7:
   $ persistent.sprite_time = "day"
   $ renpy.pause(3, hard=True)
 
+  show screen slavyana_mod__notebook_interface
+
   play music music_list["forest_maiden"] fadein 3
   scene ext_polyana_day with dissolve
   "Когда я проснулась, на меня смотрел Семён."
@@ -125,17 +127,26 @@ label slavyana_mod__day7:
   window hide
 
 #Дневник:
-  scene anim prolog_2
-  with fade
-  $ set_mode_nvl()
-  "Дневник"
-  " "
-  "Четырнадцатый день в «Совёнке». Последний. Не верится, что за эти прекрасные 14 дней произошло столько всего интересного. И как жаль, что уже пора покидать это чудное место, в котором я встретила новых друзей, отдохнула от домашних забот{w}, и, что самое главное, нашла своё счастье."
-  "Но время идёт, и я надеюсь, что мы с ним обязательно встретимся снова в этом лагере, а может быть и за его пределами. А этот дневник поможет мне вспомнить почти все самые яркие моменты."
+  show bknt at truecenter
+  hide screen slavyana_mod__notebook_interface
+  with dspr
+  play sound_loop pen_write
 
-  "Конечно же, надо будет взять дневник с собой."
-  nvl clear
-  $ set_mode_adv()
+  $ sl_m_nb_addpage("Четырнадцатый день в «Совёнке». Последний. Не верится, что за эти прекрасные 14 дней произошло столько всего интересного. И как жаль, что уже пора покидать это чудное место, в котором я встретила новых друзей, отдохнула от домашних забот, и, что самое главное, нашла своё счастье.")
+  show screen sl_m_nb() with dissolve2
+  window show
+  th "Четырнадцатый день в «Совёнке». Последний. Не верится, что за эти прекрасные 14 дней произошло столько всего интересного. И как жаль, что уже пора покидать это чудное место, в котором я встретила новых друзей, отдохнула от домашних забот{w}, и, что самое главное, нашла своё счастье."
+  window hide
+  $ sl_m_nb_add("Но время идёт, и я надеюсь, что мы с ним обязательно встретимся снова в этом лагере, а может быть и за его пределами. А этот дневник поможет мне вспомнить почти все самые яркие моменты.")
+  show screen sl_m_nb() with dissolve2
+  window show
+  th "Но время идёт, и я надеюсь, что мы с ним обязательно встретимся снова в этом лагере, а может быть и за его пределами. А этот дневник поможет мне вспомнить почти все самые яркие моменты."
+  th "Конечно же, надо будет взять дневник с собой."
+  window hide
+  stop sound_loop
+  hide screen sl_m_nb
+  show screen slavyana_mod__notebook_interface
+  with dspr
 #Конец дневника
 
   play sound sfx_dinner_horn_processed
@@ -464,6 +475,6 @@ label slavyana_mod__day7:
   "…"
   window hide
 
-  if sl_m_Full:
-      jump slavyana_mod__epilogue
-  jump slavyana_mod__launcher0
+  hide screen slavyana_mod__notebook_interface
+
+  jump slavyana_mod__epilogue

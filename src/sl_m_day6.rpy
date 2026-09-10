@@ -7,6 +7,7 @@ label slavyana_mod__day6:
   $ renpy.pause(3, hard=True)
 
   call slavyana_mod__day6_end_choise
+  show screen slavyana_mod__notebook_interface
 
   if words_red:
     play ambience sfx_head_heartbeat loop fadein 2
@@ -771,9 +772,9 @@ label slavyana_mod__day6_not_worth_after:
   if (sl_m_lp < 9):
     $ setEndRed();
 
-  if sl_m_Full:
-      jump slavyana_mod__day7
-  jump slavyana_mod__launcher0
+  hide screen slavyana_mod__notebook_interface
+
+  jump slavyana_mod__day7
 
 # Выбор концовки в начале дня
 label slavyana_mod__day6_end_choise:
@@ -797,16 +798,6 @@ label slavyana_mod__day6_end_choise:
 
 # Быстрый выбор
 label slavyana_mod__day6_fast_choise:
-
-  if persistent.sl_m_end_count > 0 and sl_m_lp < 4:
-    if sl_m_l_day == 6:
-      jump slavyana_mod__day6_alt
-    elif sl_m_l_day == 7:
-      call slavyana_mod__day6_alt_chending
-      jump slavyana_mod__day7_alt
-    else:
-      jump slavyana_mod__day7_epilogue_alt
-    return
 
   if sl_m_l_day == 6:
     jump slavyana_mod__day6

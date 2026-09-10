@@ -1549,6 +1549,16 @@ label slavyana_mod__day6_alt:
     scene black with dissolve
     stop ambience fadeout 1
     pause 1
-    if sl_m_Full:
-        jump slavyana_mod__day7_alt
-    jump slavyana_mod__launcher0
+    jump slavyana_mod__day7_alt
+
+
+# Быстрый выбор
+label slavyana_mod__day6_alt_fast_choise:
+    if sl_m_l_day == 6:
+      jump slavyana_mod__day6_alt
+      return
+
+    if sl_m_l_day == 7:
+      jump slavyana_mod__day7_alt
+    else:
+      jump slavyana_mod__day7_epilogue_alt

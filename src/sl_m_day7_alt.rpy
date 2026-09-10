@@ -9,10 +9,10 @@ label slavyana_mod__day7_alt:
   $ day_time()
   $ persistent.sprite_time = "day"
   $ renpy.pause(3, hard=True)
+  $ sl_m_d7_note_play_music = True
 
   #рут Алисы
   if sl_m_end_dv:
-    # play ambience ambience_int_cabin_day fadein 5
     play music music_list["everyday_theme"] fadein 5
     scene bg int_house_of_sl_day
     show unblink
@@ -433,12 +433,7 @@ label slavyana_mod__day7_alt:
     stop music fadeout 3
     extend " Но моё внимание привлёкло что-то застрявшее в панцерной сетке."
     "Это был клочок бумаги. Немного порваный. {w}Я решила достать его."
-    play music music_list["mystery_girl_v2"] fadein 2
-  #картинка записки
-    "{i}Надеюсь, Вам понравилась эта смена в Совёнке!{/i}"
-    "{i}Обязательно сохраните все впечатления о ней, ведь другой такой же больше никогда не будет...{/i}"
-    "Оставил(а) записку некий(ая) «{b}С{/b}»"
-  #убрать картинку записки
+    call slavyana_mod__day7_note_finded
     th "Не могу не отметить, что почерк красивый, однако вероятнее всего писалось это в спешке."
     th "Надо будет и мне такой же памятник следующей смене оставить."
     th "Маленький листок никому не повредит. Зато какие приятные эмоции может доставить следующей смене."
@@ -475,61 +470,578 @@ label slavyana_mod__day7_alt:
     stop ambience fadeout 2
     scene bg ext_bus with dissolve
     play ambience ambience_camp_center_day fadein 3
-    window show
-    "Пришлось немножко постоять."
-    sl "Лен, скажи, тебе понравилось?"
-    show un normal pioneer at center with dissolve
-    un "Да, не то что я себе представляла, но тоже неплохо."
-    show un smile pioneer at center with dissolve
-    "Она улыбнулась."
-    "Я встала рядом с ней."
-    hide un with dissolve
-    "Наконец, Ольга Дмитриевна пришла вместе с Ульяной."
-    show mt normal pioneer at cleft
-    show us normal pioneer at cright
-    with dissolve
-    sl "А где же Алиса и Семён?"
-    mt "Ульяна сказала, что Алисе стало плохо и Семён останется с ней. Их заберут следующим автобусом."
-    hide mt
-    hide us
-    with dissolve
-    stop ambience fadeout 2
-    window hide
-    scene cg d7_pioneers_leaving with dissolve
-    play music music_list["memories"] fadein 2
-    window show
-    mt "Все собрались?"
-    "Начала Ольга Дмитриевна."
-    mt "Сегодня вы покидаете наш лагерь, и, на прощание, мне хотелось бы вам кое-что сказать."
-    "Она заметно нервничала и никак не могла подобрать нужные слова."
-    mt "Надеюсь, что время, проведённое здесь, вам запомнится на всю жизнь, что у вас останутся только приятные воспоминания о «Совёнке»."
-    mt "Также я надеюсь, что здесь вы стали чуточку лучше, смогли чему-то научиться, познакомились с новыми друзьями… {w} В общем, возвращайтесь в следующем году!"
-    "Вожатая отвернулась."
-    "Да, в такой момент было трудно сдержать слёзы."
-    th "Я буду очень скучать." 
-    stop music fadeout 1
-    window hide
-    scene bg int_bus_people_day with dissolve
-    play ambience ambience_medium_crowd_outdoors fadein 3
-    window show
-    "Мы взяли свои сумки и заносили их в салон, кладя их на колени или под кресла."
-    "Я заняла место рядом с Олей."
-    mt "Поездка займёт несколько часов."
-    "Сказала она мне."
-    "Я молча уставилась в окно."
-    stop ambience fadeout 2
-    window hide
-    scene bg int_bus_people_night with dissolve
-    play sound_loop sfx_bus_interior_moving fadein 3 loop
-    window show
-    "Проехав уже достаточное расстояние, автобус включил фары. В свои права вступала ночь."
-    "И меня начало клонить в сон..."
-    stop sound_loop fadeout 2
-    show blink
-    "..."
 
-  #Рут Лены
-  elif sl_m_end_un:
+  #рут Ульяны
+  #Если выбрали "Ульяна"
+  elif sl_m_end_us:
+    play ambience ambience_int_cabin_day fadein 5
+    scene bg int_house_of_sl_day
+    show unblink
+    "Я проснулась как всегда вовремя."
+    "Утро было солнечным и за окном тихо пели птички."
+    "Я собралась на пробежку, пока моя соседка спит."
+    stop ambience fadeout 1
+    play ambience ambience_camp_center_day fadein 3
+    play sound sfx_run_forest loop
+    scene bg ext_house_of_sl_day:
+        zoom 1.1
+        yalign 0.01
+        block:
+            linear 0.2 pos (0,5)
+            linear 0.2 pos (0,0)
+        repeat
+    with dissolve
+    "Я немного постояла на месте и размялась перед пробежкой."
+    "День обещал быть насыщенным."
+    window hide
+    scene bg ext_path_day:
+        zoom 1.1
+        yalign 0.01
+        block:
+            linear 0.2 pos (0,5)
+            linear 0.2 pos (0,0)
+        repeat
+    with dissolve
+    window show
+    "Я пробежалась вдоль домиков и завернула в лес."
+    "Минут десять я просто бежала вперёд, пока не оказалась достаточно глубоко в лесу, где ничто не могло нарушить природную тишину."
+    "Бегая по лесу, я свернула на неизвестную мне тропинку."
+    th "Только бы не заблудиться!"
+    stop sound fadeout 1
+    scene bg ext_polyana_day with dissolve
+    "Я бежала дальше и вышла на какую-то неизвестную мне полянку."
+    th "Странно, я почти везде в этом лесу была."
+    "Особенно моё внимание привлёк небольшой комочек, валяющийся на земле."
+    "Подойдя поближе и взяв его на руки, я поняла что это птенец какой-то птицы."
+    th "Бедняжка, вывалился из гнезда."
+    scene cg d7_feeding_trough with dissolve
+    "Подняв голову, я заметила неприметный скворечник с разноцветными верёвочками."
+    "Но даже отсюда было видно, как у него отломилась стенка, через которую видимо птенчик и выпал."
+    th "И как он только не разбился?"
+    scene bg ext_polyana_day with dissolve
+    "Я снова посмотрела на него."
+    "Он беззащитно лежал у меня в ладошках и еле дышал, постоянно подрагивая."
+    th "Я обязательно спасу тебя!"
+    scene ext_houses_day with dissolve
+    "Ещё немного поплутав по лесу, я наконец вышла к лагерю."
+    "И быстрым шагом направилась к себе."
+    stop ambience fadeout 2
+    scene bg int_house_of_sl_day with dissolve
+    play ambience ambience_int_cabin_day fadein 2
+    "Время было почти семь утра."
+    th "Скоро должна начаться линейка."
+    "Я положила птенца в небольшую коробочку с открытым верхом и поставила в шкаф."
+    th "Наверное, стоит после линейки зайти к кибернетикам поинтересоваться насчёт изоленты или чего-нибудь скрепляющего."
+    th "С молотком я не управляюсь, здесь нужны будут мальчики, а они скорее всего опять заняты своим роботом."
+    stop ambience fadeout 2
+    scene bg ext_square_day with dissolve2
+    play ambience ambience_camp_center_day fadein 2
+    "Уже через несколько минут, как по будильнику, проснулась Женя, и мы вместе отправились на линейку."
+    "Ольга Дмитриевна как раз собирала ребят."
+    show mt normal pioneer far with dissolve
+    mt "Сегодня в шесть часов вечера отъезд. Обязательно соберите свои вещи и застелите кровати заранее."
+    mt "Ужина не будет."
+    mt "Если у кого-то ещё остались дела здесь, доделайте или отпрашивайтесь."
+    mt "По уважительной причине я могу продлить."
+    mt "Линейка окончена. Строй! Разойдись!"
+    scene bg ext_clubs_day with dissolve
+    "Я сразу же направилась к кибернетикам."
+    "Дверь оказалась открытой."
+    stop ambience fadeout 2
+    play sound sfx_open_door_clubs
+    play ambience ambience_clubs_inside_day fadein 2
+    scene bg int_clubs_male_day with dissolve
+    "Оба товарища были тут."
+    sl "Доброе утро, ребята!"
+    show sh normal pioneer at left
+    show el normal pioneer at right
+    with dissolve
+    el "Доброе!"
+    sh "И тебе!"
+    sl "Я вот спросить хотела - а у вас случайно клейкой ленты нет?"
+    show sh serious pioneer at left with dspr
+    sh "Была где-то..."
+    "Задумчиво ответил Шурик."
+    el "А посмотри в кладовке!"
+    "Я подошла к двери и"
+    play sound sfx_knock_door_closed_hard1
+    pause 0.1
+    extend " не смогла её открыть."
+    sl "У вас тут заперто."
+    el "Не может такого быть - мы никогда эту комнату не закрываем!"
+    show el normal pioneer at right
+    show sh normal pioneer at left
+    with dspr
+    sh "Дай-ка я попробую."
+    play sound sfx_knock_door_closed_hard2
+    "Шурик дёрнул ручку, но дверь не поддалась."
+    sh "Похоже, заело. Помоги-ка!"
+    "Я отошла в сторону и Электроник тоже взялся за ручку."
+    th "Тянут-потянут вытащить не могут."
+    play sound sfx_open_door_strong
+    "Они дёрнули ещё раз и наконец дверь распахнулась."
+    scene black with dissolve
+    "Там было темно, я нащупала выключатель и включила свет."
+    window hide
+    $ persistent.sprite_time = "sunset"
+    scene bg int_clubs_male2_night 
+    with dissolve
+    show us shy2 pioneer far at center
+    show pi surprise pioneer far at center
+    show el surprise pioneer:
+        xcenter 0.85
+        yalign 1.0
+    show sh surprise pioneer:
+        xcenter 0.15
+        yalign 1.0
+    with dissolve
+    window show
+    play music music_list["heather"] fadein 3
+    el "Эээ... Доброе утро!"
+    us "Доброе..."
+    sh "А что вы тут делаете?"
+    show pi normal pioneer far at center with dspr
+    me "Ну, вообще... {w}Если честно, мы фильм смотрели. Ульянка принесла кассету, а ведь у вас тут магнитофон."
+    show el grin pioneer:
+        xcenter 0.85
+        yalign 1.0
+    with dspr
+    el "И что за фильм?"
+    me "Обычный самый фильм! Боевик! Новинка!"
+    show pi normal pioneer far:
+        xcenter 0.40
+        yalign 1.0
+    show us shy2 pioneer far:
+        xcenter 0.60
+        yalign 1.0
+    with move
+    "Ульяна вышла из-за его спины и показала кассету Шурику."
+    me "Если вы думаете... Да мы ничего такого!"
+    "Он на мгновение смолк."
+    me "Это всё моя вина..."
+    hide sh with dspr
+    sl "Вас никто ни в чём не обвиняет..."
+    show us normal pioneer far:
+        xcenter 0.60
+        yalign 1.0
+    with dspr
+    me "Вот хоть один разумный человек из здесь присутствующих!"
+    sl "Пока что..."
+    "Добавила я шёпотом."
+    me "Что?"
+    us "На самом деле всё так и было, как он говорит."
+    us "Мы просто смотрели кино, а потом захотели спать... Поздно ведь уже было..."
+    el "Мы ничего такого и не думали... {w}Глупая ситуация, с кем не бывает..."
+    sl "Думаю Ольга Дмитриевна во всём разберётся."
+    me "Э, нет! Подожди-ка! Зачем до вожатой доводить?!"
+    sl "А как же ещё?"
+    me "Ну, ты же видишь, что мы говорим правду!"
+    sl "Это не мне судить..."
+    me "А кому тогда, чёрт возьми?! Ты сама всё видела своими глазами!"
+    sl "Вожатая разберётся."
+    "Разговор был окончен."
+    window hide
+    $ persistent.sprite_time = "day"
+    scene bg int_clubs_male_day 
+    with dissolve
+    window show
+    me "Да подожди ты!"
+    show pi angry pioneer close at center with dissolve
+    "Семён встал между мной и дверью, не давая мне пройти."
+    me "Послушай!"
+    sl "Это не моё дело..."
+    "Я смотрела в сторону от него, давая понять что игнорирую его."
+    sl "Просто я должна..."
+    me "Кому ты должна-то? Зачем всё это нужно?"
+    sl "Потому что..."
+    "Я осеклась, ведь я и сама не знала почему ОБЯЗАНА."
+    me "Вот и не стоит никуда ходить и ничего никому рассказывать!"
+    sl "Нет..."
+    "Я подняла голову и посмотрела ему в глаза."
+    sl "Извини, Семён."
+    us "Да оставь ты её, пусть идёт."
+    show pi angry pioneer close:
+        linear 0.2 xpos -0.2
+    "Семён отвлёкся и я с лёгкостью проскочила мимо него."
+    stop ambience fadeout 2
+    scene bg ext_clubs_day with dissolve
+    me "Да подожди ты!"
+    stop music fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    "Услышала я из-за двери."
+    "Я твёрдо намеревалась дойти до вожатой."
+    window hide
+    scene bg ext_square_day with dissolve
+    pause 1
+    scene bg ext_houses_day with dissolve
+    pause 1
+    scene bg ext_house_of_mt_day with dissolve
+    window show
+    "Уже стоя на крыльце меня одолевало какое-то неприятное чувство."
+    "Какое-то чувство вины."
+    play sound sfx_knock_door2
+    "Я постучалась в дверь."
+    mt "Войдите!"
+    stop ambience fadeout 2
+    play sound sfx_open_door_1
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_mt_day with dissolve
+    show mt normal pioneer with dissolve
+    mt "Славя? Зачем пожаловала?"
+    sl "Оля... Там сейчас в клубах произошёл инцидент."
+    mt "Какой?"
+    "Спокойно спросила она."
+    sl "В общем, прошлой ночью Семён и Ульяна пробрались в клубы и заперлись в кладовке."
+    sl "Ульяна принесла кассету. Ночь провели там же."
+    sl "А на утро мальчики их там нашли. {w}Думаю ничего страшного, я видела что там ничего серьёзного не произошло."
+    mt "Спасибо что сказала, можешь идти."
+    window hide
+    stop ambience fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_house_of_mt_day with dissolve
+    pause 1
+    scene bg ext_dining_hall_away_day with dissolve
+    pause 1
+    play ambience ambience_dining_hall_full fadein 2
+    scene bg int_dining_hall_people_day with dissolve
+    window show
+    "Семён сидел за одним столиком с Ульяной, поэтому я не решилась к ним подсесть."
+    "Вместо этого я села рядом с кибернетиками."
+    show el normal pioneer with dissolve
+    el "Рассказала?"
+    sl "Да."
+    sh "Что ответила?"
+    sl "Не понятно ещё, будет разбираться."
+    sl "Я постаралась объяснить, что там ничего серьёзного."
+    sh "Понятно."
+    "Мы принялись за еду."
+    el "Ты, кажется, за клейкой лентой заходила?"
+    sl "Да."
+    el "Хорошо, мы её дадим."
+    hide el with dspr
+    "После всего произошедшего, кусок в горло не лез, поэтому я так и оставила свой поднос, даже не притронувшись к еде."
+    stop ambience fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_dining_hall_near_day with dissolve
+    "Мы вместе вышли из столовой."
+    window hide
+    scene bg ext_clubs_day with dissolve
+    pause 1
+    stop ambience fadeout 2
+    play ambience ambience_clubs_inside_day fadein 2
+    scene bg int_clubs_male_day with dissolve
+    window show
+    "И так же вместе дошли до клубов."
+    show el normal pioneer with dissolve
+    sh "Вот."
+    "Он передал мне изоленту."
+    sh "Можешь не возвращать даже, не обеднеем."
+    sl "Спасибо!"
+    stop ambience fadeout 2
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_sl_day with dissolve
+    "Я вынула птенца из коробки, в которой он просидел всё время и забрала птенчика с собой."
+    th "Надо было его накормить. Но я даже не знаю чем."
+    "Поэтому я отправилась в библиотеку."
+    stop ambience fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_square_day with dissolve
+    show mt normal pioneer with dissolve
+    "Но по пути в библиотеку меня встретила Оля."
+    mt "Славя, помоги ребятам из младшего отряда на пристани убраться, а то у меня ещё дел много."
+    sl "Хорошо, пару минут буквально и я буду."
+    show mt angry pioneer with dspr
+    mt "Это желательно прямо сейчас сделать."
+    "Повелительным тоном обратилась ко мне вожатая."
+    "У меня не было иного выбора."
+    sl "Да, Оля."
+    stop ambience fadeout 2
+    play ambience ambience_boat_station_day fadein 2
+    scene ext_beach_day with dissolve
+    th "Бедный птенчик ещё поголодает."
+    th "Надо будет поскорее убраться."
+    "Я помогала ребятам собирать и указывала куда отнести, работа продвигалась быстро."
+    show pi normal pioneer with dissolve
+    me "Убираетесь?"
+    "Неожиданно пришёл Семён."
+    sl "Да."
+    "Сказала я не оборачиваясь."
+    me "Слушай, я тут это..."
+    sl "Хотел поговорить насчёт Ульянки?"
+    me "Ну, да..."
+    sl "И что же ты хотел сказать?"
+    me "Ну, Ульянку наказали. {w}Может быть, она даже не уедет вместе со всеми."
+    sl "Неудивительно."
+    me "Просто я хотел тебе объяснить, что ничего там такого не было."
+    sl "Я не знаю, честно. Просто я должна была рассказать."
+    show pi serious pioneer with dspr
+    me "Рассказала, и кому от этого лучше стало?"
+    "Произнёс он слишком угрюмо."
+    sl "Я не уверена, конечно, что это было правильно..."
+    me "Ну, что было, того уже не вернёшь... {w}Как думаешь, что сделать, чтобы Ульянку выпустили из-под домашнего ареста?"
+    sl "Ты так за неё переживаешь."
+    "Я посмотрела на него и улыбнулась."
+    show pi shocked pioneer with dspr
+    "Семён смутился."
+    me "Не за неё... За справедливость!"
+    sl "Ты же знаешь нашу вожатую."
+    show pi serious pioneer with dspr
+    me "Знаю, это точно."
+    sl "Подожди. Со временем она отойдёт."
+    me "Да, ты права."
+    "Всё это время я продолжала подметать."
+    "Похоже, Семён хотел ещё что-то сказать, но молчал."
+    "Постояв так ещё немного, он попрощался и ушёл."
+    me "Ладно, я пойду."
+    sl "Увидимся."
+    stop ambience fadeout 2
+    scene black with dissolve
+    "..."
+    play ambience ambience_boat_station_day fadein 2
+    scene bg ext_beach_day with dissolve
+    "Мы закончили уборку на пристани."
+    play sound sfx_dinner_horn_processed
+    "Однако, вскоре прозвучал горн."
+    th "О нет, уже обед! Я уже не успею в библиотеку." 
+    th "Женю встречу в столовой, но что же делать с птенцом? Я же могу его так просто бросить..." 
+    th "Но и в столовую с ним вот так не пойдёшь. Может положить его в карман? Или всё же отнести в укромное местечко?"
+    window hide
+    
+    menu:
+        "Отнести птенца домой":
+            $ sl_m_day7_bird_in_poket = False
+            scene bg ext_dining_hall_near_day with dissolve
+            window show
+            th "Надеюсь вторая пробежка за день стоила того и в столовой будет вкусный обед."
+        "Положить в карман рубашки":
+            $ sl_m_day7_bird_in_poket = True
+            window show
+            "Я как можно аккуратнее положила птенчика в наружный карман рубашки."
+            th " Надеюсь он не наделает мне хлопот в столовой."
+            "Я спокойно и аккуратно пошла к столовой."
+            scene bg ext_dining_hall_away_day with dissolve
+            th "Ходить с птенчиком в кармане оказалось не очень то и удобно. Но ничего, это всё ради его блага."
+
+    stop ambience fadeout 2
+    play ambience ambience_dining_hall_full fadein 2
+    scene bg int_dining_hall_people_day with dissolve
+    if sl_m_day7_bird_in_poket:
+        "В скором времени я отыскала Женю среди других пионеров. Она сидела одна за столиком в глубине столовой."
+        show mz normal glasses pioneer with dissolve
+        "Я тихо подсела к Жене за столик."
+        sl "Женя, мне нужна твоя помощь."
+        mz "Да? Ну и в чём же состоит твоя просьба?"
+        sl "Женя, ты же сможешь мне помочь накормить птенца?"
+        mz "Зачем?"
+        "Я показала ей его."
+    else:
+        "Сегодня на обед давали котлеты с пюрешкой из картофеля."
+        th "Неплохо."
+        show mz normal glasses pioneer with dissolve
+        "Я подсела к Жене, с ней всё равно практически никто не садился."
+        "Я рассказала ей про мою находку."
+    show mz bukal glasses pioneer with dspr
+    mz "Ты где этого птенца откопала?"
+    sl "Не откопала, он сам из скворечника выпал."
+    mz "Какого скворечника?"
+    sl "Ну, в лесу нашла."
+    mz "И что ты собираешься дальше делать?"
+    if sl_m_day7_bird_in_poket:
+        sl "Починю скворечник."
+        mz "Ну хорошо, а я тебе зачем в этом деле?"
+        sl "Ты знаешь, чем его накормить?"
+    else:
+        sl "Накормлю, починю скворечник и верну обратно."
+    mz "А ты всё это время его голодным держала?"
+    sl "Ну, инцидент произошёл я и забыла."
+    mz "Ладно, посмотрим что в библиотеке есть. Приятного аппетита."
+    sl "Тебе тоже!"
+    stop ambience fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_dining_hall_near_day with dissolve
+
+    if sl_m_day7_bird_in_poket:
+        "На душе было приятно от совершения очередного хорошего дела."
+    else:
+        show mz bukal glasses pioneer with dspr
+        sl "Я добегу до домика, заберу птенца. Встретимся в библиотеке"
+        mz "Хорошо"
+        scene bg ext_house_of_sl_day with dissolve
+        "У меня было какое-то плохое предчувствие."
+        stop ambience fadeout 2
+        play ambience ambience_int_cabin_day fadein 2
+        scene bg int_house_of_sl_day with dissolve
+        "Я зашла внутрь."
+        "Открыв дверь, я сразу взглянула на свою кровать."
+        play music music_list["you_lost_me"] fadein 3
+        th "Этого быть не может. Там нет птенца!"
+        th "Где же я могла оставить его? Возможно я положила его где-то в другом месте?"
+        window hide
+        stop ambience fadeout 2
+        scene black with dissolve
+        pause 1
+        play ambience ambience_int_cabin_day fadein 2
+        scene bg int_house_of_sl_day with dissolve
+        window show
+        th "Без толку.{w} Обыскав весь дом, я ничего не нашла."
+        "«Птенчик пропал!» эти слова эхом повторялись в моих мыслях."
+        th "Теперь весь мой труд сегодня и весь день насмарку."
+        th "Но страшнее даже не это..."
+        th "Я не смогла защитить его и теперь он наверное потерялся."
+        th "А я... Отнесла его далеко от мамы."
+        th "Он же теперь не выживет {w}и всё из-за меня."
+        th "Он такой маленький и незаметный, его просто раздавят."
+        th "Господи, за что же это горе мне?"
+        th "Почему я такая дура и не следила за ним?! Сытый желудок того не стоил."
+        th "Я не хотела! Клянусь не хотела!"
+        play sound sfx_open_door_1
+        "Я не заметила, как отворилась дверь. Мне было абсолютно всё равно." 
+        "Вся подушка была в солёных каплях, вытекающих из моих глаз."
+        voice "Славя, что ты делаешь?"
+        "Я ничего ей не ответила."
+        show mz normal glasses pioneer with dissolve
+        mz "Выходя из столовой, ты была куда более в лучшем настроении. Что случилось?"
+        sl "П... пппп... Птенчик пропал!!"
+        "Как только я произнесла эти слова дрожащим голосом, из меня сразу хлынули слёзы с новой силой. Я не могла так просто смириться с пропажей маленького беззащитного птенца!"
+        "Женя с силой посадила меня на кровать. Я всё так же продолжала плакать без устали..."
+        mz "Чего ты ревёшь?"
+        stop music fadeout 3
+        extend " Ты его на лавке у себя не заметила?"
+        sl "Ч-что?"
+        "Наконец я взглянула на неё."
+        play music music_list["timid_girl"] fadein 2
+        "В руках у неё был тот самый птенец!"
+        "Я вмиг перестала плакать."
+        sl "Женя, спасибо тебе огромное! Я так торопилась, что даже забыла, что не зашла в домик."
+        mz "Ладно, пошли в библиотеку."
+        stop music fadeout 2
+        "..."
+
+    stop ambience fadeout 2
+    play ambience ambience_library_day fadein 2
+    scene bg int_library_day with dissolve
+    "Мы зашли в библиотеку и Женя принялась искать пособие по выведению птенцов."
+    show mz normal glasses pioneer with dissolve
+    mz "Так... {w}Насекомые, овощи... {w}Крупа!"
+    mz "Крупу будет легче всего достать, однако предпочтительнее мелкая живность."
+    sl "Схожу в столовую, думаю мне одолжат немного."
+    if sl_m_day7_bird_in_poket:
+        mz "Оставь ты своего птенца, ничего с ним не произойдёт."
+        mz "Могу даже на ключ закрыть, если не веришь."
+    else:
+        mz "Давай уж своего птенца, а то снова потеряешь."
+        mz "Посижу с ним."
+    sl "Спасибо."
+    if sl_m_day7_bird_in_poket:
+        "Я посадила птенца в коробку и поставила её на стол."
+    else:
+        "Я посадила птенца ей на столик."
+    stop ambience fadeout 2
+    play ambience ambience_dining_hall_empty fadein 2
+    scene bg int_dining_hall_day with dissolve
+    "Мне уже приходилось несколько раз обращаться к поварихе, так что меня она уже запомнила."
+    "Я вежливо попросила у неё немного манки, объяснив ситуацию."
+    stop ambience fadeout 2
+    if sl_m_day7_bird_in_poket:
+        play ambience ambience_camp_center_day fadein 2
+        scene bg ext_library_day with dissolve
+    else:
+        play ambience ambience_library_day fadein 2
+        scene bg int_library_day with dissolve
+    show mz normal glasses pioneer with dissolve
+
+    mz "Хилый он у тебя какой-то."
+    if sl_m_day7_bird_in_poket:
+        extend " Да и тем более, вот ты положишь его обратно. А дальше что?"
+        sl "Не знаю, к сожалению, я не смогу здесь остаться с ним. Меня ждут дома."
+        sl "Может быть поварихам сказать или с собой забрать. {w}Кстати, я что-то не видела его мамы."
+        th "Наверное всё же возьму его с собой."
+        play sound sfx_open_door_1
+        "Женя открыла дверь."
+        stop ambience fadeout 2
+        play ambience ambience_library_day fadein 2
+        scene bg int_library_day_box with dissolve
+        "Я с радостью зашла внутрь. {w}Но всё моё настроение вмиг улетучилось, когда я посмотрела на стол."
+        stop ambience fadeout 3
+        play music music_list["i_dont_blame_you"] fadein 3
+        "Коробка лежала перевёрнутая рядом с ним."
+        "И рядом валялся птенец. {w}Вернее... {w}Всё что от него осталось."
+        th "Кому только могло прийти к голову растерзать такое беззащитное создание?"
+        "Я не могла больше на это смотреть и бросилась на грудь Жени."
+        "Я громко разрыдалась"
+        window hide
+        pause 3
+        play ambience ambience_int_cabin_day fadein 3
+        scene bg int_house_of_sl_day with dissolve2
+        window show
+        "Я захватила изоленту из домика и отнесла её кибернетикам."
+        scene bg int_clubs_male_day with dissolve2
+        show el surprise pioneer with dissolve
+        el "Славя, что случилось?"
+        "Я не ответила."
+        scene bg int_house_of_sl_day with dissolve
+        "Все эмоции просто исчезли."
+        "Я даже не заметила как на автомате собирала свои пожитки и постельное бельё."
+        pause 1
+        "Но мое внимание привлек клочек бумаги..."
+        $ sl_m_d7_note_play_music = False
+        call slavyana_mod__day7_note_finded
+        th "Надо мной будто издеваются!"
+        "Я скомкала эту записку и выбросила в окно, чтобы никто, никогда на целом свете не нашёл эту чёртову записку!"
+        "Я села на кровать и просто просидела так несколько минут, пытаясь сдержать слёзы."
+        "Затем решила достать дневник и всё же написать в него."
+        
+      #Дневник(Ульяна)
+        "Дневник"
+        "{i}Я не справилась.{/i}"
+
+        "Я положила его в сумку и направилась к остановке."
+        stop music fadeout 2
+
+    else:
+        sl "Знаю, но, к сожалению, я не смогу здесь остаться с ним. Меня ждут дома."
+        sl "Мне придётся отнести его обратно в скворечник. {w}Кстати, пойду скорее, а то уже автобус скоро будет."
+        mz "Давай, я пока что соберу свои вещи."
+        stop ambience fadeout 2
+        play ambience ambience_camp_center_day fadein 2
+        scene bg ext_polyana_day with dissolve
+        "Я захватила с собой клейкую ленту и ножницы. Отрезав несколько кусочков, я залепила стенку и дно в несколько слоёв."
+        sl "Сюда бы Шурика и Электроника, но они заняты сейчас."
+        "Я положила птенчика обратно в скворечник, где его ждала мама."
+        th "Наверное беспокоилась сильно..."
+        play ambience ambience_int_cabin_day fadein 2
+        scene bg int_house_of_sl_day with dissolve
+        "Я побежала поскорее домой, потому что надо было успеть ещё на автобус."
+        "Я вынула подушку из наволочки. {w}Свернула простыню и положила на матрас."
+        "Затем стала сворачивать матрас. {w}Но моё внимание привлёк клочок бумаги застрявший в панцерной сетке и немного порванный."
+        stop ambience fadeout 2
+        call slavyana_mod__day7_note_finded
+        th "Не могу не отметить, что почерк красивый, однако вероятнее всего писалось это в спешке."
+        th "Надо будет и мне такой же памятник следующей смене оставить."
+        th "И я не считаю это вандализмом."
+        "Убрав записку в карман, я продолжила собираться."
+        window hide
+        scene black with dissolve
+        pause 1
+        scene bg int_house_of_sl_day with dissolve
+        window show
+        "Большинство моих вещей так и продолжали лежать в сумке, поэтому я лишь собрала то немногое, что успела вынуть."
+        "Я решила написать соответствующую записку для будущей смены."
+        window hide
+        scene black with dissolve
+        pause 1
+        scene bg int_house_of_sl_day with dissolve
+        window show
+        "Почему то было очень сложно что-нибудь придумать, поэтому я решила просто оставить эту же записку."
+        "А затем я направилась к стоянке."
+        stop music fadeout 2
+        "..."
+
+    scene bg ext_bus with dissolve
+    play ambience ambience_camp_center_day fadein 3
+
+  #Рут Лены или одиночки
+  else:
     scene black
     "Утро этого дня явно не задалось."
     "Вначале я проснулась не выспавшейся."
@@ -606,10 +1118,18 @@ label slavyana_mod__day7_alt:
     hide mz with dspr
     "А просто доела свою порцию и вышла из-за стола."
     stop ambience fadeout 2
+
+    #Рут одиночки
+    if not sl_m_end_un:
+      jump slavyana_mod__day7_alt_solo
+
+    #Рут Лены
+    window hide
     pause 2
 
     scene bg ext_house_of_sl_day with dissolve
     play ambience ambience_camp_center_day fadein 3
+    window show
     "Я решила не терять времени зря, утренняя «пробежка» быстро привела мысли в порядок."
     "Поэтому, я решила разобраться в наметившемся вопросе. {w}Касательно колонок, которые Шурик собирался разобрать."
     window hide
@@ -670,8 +1190,8 @@ label slavyana_mod__day7_alt:
     "Но судя по всему, он уже ушёл в столовую."
     window hide
     stop ambience fadeout 1
-    scene bg int_dining_hall_people_day with dissolve
     play ambience ambience_dining_hall_full fadein 2
+    scene bg int_dining_hall_people_day with dissolve
     window show
     "Обед, ровно как и завтрак, не представлял из себя ничего необычного."
     "Уже после того как я поела, я ещё некоторое время сидела, рассматривая заходящих у уходящих пионеров."
@@ -704,14 +1224,7 @@ label slavyana_mod__day7_alt:
     "Я решила собраться заранее."
     "Вынула подушку из наволочки. {w}Свернула простыню и положила на матрас."
     "Затем стала сворачивать матрас. {w}Но моё внимание привлёк клочок бумаги застрявший в панцерной сетке и немного порванный."
-    play music music_list["mystery_girl_v2"] fadein 1
-    "Я решила достать его."
-    play sound sfx_paper_bag
-    show note at truecenter with dspr
-    "{i}Надеюсь, Вам понравилась эта смена в Совёнке!{/i}"
-    "{i}Обязательно сохраните все впечатления о ней, ведь другой такой же больше никогда не будет...{/i}"
-    "Оставил(а) записку некий(ая) «{b}С{/b}»"
-    hide note
+    call slavyana_mod__day7_note_finded
     th "Не могу не отметить, что почерк красивый, однако вероятнее всего писалось это в спешке."
     th "Надо будет и мне такой же памятник следующей смене оставить."
     th "И я не считаю это вандализмом."
@@ -762,8 +1275,8 @@ label slavyana_mod__day7_alt:
     stop ambience fadeout 1
     scene black with dspr
     pause 1
-    scene bg ext_beach_day with dissolve
     play ambience ambience_boat_station_day fadein 2
+    scene bg ext_beach_day with dissolve
     window show
     "Не знаю сколько времени прошло, но я успела замёрзнуть, пока купалась и играла с малышами, которые были здесь."
     "Я вышла из воды и присела на полотенце."
@@ -869,30 +1382,347 @@ label slavyana_mod__day7_alt:
     mt "Я сейчас схожу за остальными, не разбегайтесь!"
     hide mt with dspr
     "И она зашла за ворота."
-    "Пришлось немножко постоять."
-    show dv sad pioneer with dissolve
-    sl "Алиса, чего такая грустная?"
-    dv "Да так, ничего..."
-    sl "Тоже грустно уезжать?"
-    dv "Ну и это тоже, в меньшей степени."
-    hide dv with dspr
-    "Мимо нас пробежала Ульяна."
-    sl "Стоять! Куда бежим? Скоро Ольга Дмитриевна придёт."
-    us "Да никуда я не бегу! Делать просто нечего пока ждём опаздывающих."
+  jump slavyana_mod__day7_ending
+
+#Рут одиночки
+label slavyana_mod__day7_alt_solo:
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_dining_hall_near_day with dissolve
+    "Я решила не терять времени зря и собрать свои вещи заранее."
+    scene bg ext_square_day with dissolve
+    "Но когда я уже вышла на площадь, меня остановила Оля."
     show mt normal pioneer with dissolve
-    "Наконец Ольга Дмитриевна пришла {w}одна."
-    pi "А где же «остальные»?"
-    mt "У Лены остались... дела здесь. Семён ей поможет."
-    mt "Завтра за ними приедет автобус."
-    mt "Остальные едут сейчас."
+    mt "Славя, привет, я знаю, сегодня последний день смены, но мне как нельзя кстати пригодилась бы твоя помощь в «райцентре»."
+    sl "Да ничего, а что надо сделать?"
+    mt "Просто бумажная работа."
+    show mt grin pioneer with dspr
+    mt "Но тебе по секрету скажу."
+    mt "Нам определённые преференции капают, поэтому нужно собирать побольше достижений и рекомендаций."
+    mt "И тебе, как помощнице вожатой, тоже причитается, просто отнеси некоторые документы."
+    mt "Я бы и Семёна попросила, но как подумаю, сразу представляю себе бесконечные вопросы от него, поэтому, справишься?"
+    sl "Конечно, Оля."
+    "Я улыбнулась ей и мы направились в административный корпус."
+    stop ambience fadeout 2
+    scene black with dissolve
+    "..."
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_admins_day with dissolve
+    "Когда мы пришли, Оля принялась перебирать среди бумажек и разных папок, доставать какие-то, листки и перекладывать в свою папку."
+    "Мне показалось это какой-то закулисной бюрократией, о той, которую не показывают по телевизору."
+    "Хоть я и хорошо познакомилась с Олей за эти две недели, но всё равно казалось это чем-то странным."
+    sl "А это точно законно?"
+    mt "Славя!"
+    show mt normal pioneer with dissolve
+    "Она обернулась."
+    mt "Я разве похожа на Семёна?"
+    sl "А почему именно Семёна?"
+    "Она какое-то время помолчала и, наконец, ответила."
+    mt "А он разве не такой?"
+    sl "Конечно не такой, он хороший, просто несмекалистый."
+    mt "Только не говори мне, что у вас с ним что-то намечается."
+    sl "Да нет, Оля, ты что, просто он никогда мне не казался таким."
+    mt "Это каким?"
+    "Спросила она меня, хоть и сама явно догадывалась."
+    sl "Нестабильным элементом. Вот Алиса какая-нибудь.."
+    mt "Ладно, я поняла."
+    show mt smile pioneer with dspr
+    "Она улыбнулась."
+    show mt normal pioneer with dspr
+    play sound sfx_dinner_horn_processed
+    "Прошло уже достаточно времени, работа была непыльная, но монотонная."
+    mt "Я тут почти закончила, спасибо, что помогла, беги на обед."
+    sl "Уже всё?"
+    mt "Да, уже всё."
+    stop music fadeout 2
+    scene bg int_dining_hall_people_day with dissolve
+    play ambience ambience_dining_hall_full fadein 2
+    "Обед, ровно как и завтрак, не представлял из себя ничего необычного."
+    "Больше всего меня волновал Семён."
+    "За весь прошедший день я так его ни разу и не встретила."
+    "Уже после того как я поела, я ещё некоторое время сидела, рассматривая заходящих у уходящих пионеров."
+    "Но среди них не было того, кого я искала."
+    th "Либо он успел первым войти и первым поесть, либо он всё ещё спит."
+    "Поэтому я решила вначале узнать у Ольги Дмитриевны. Очевидно он ночевал у себя в домике, просто потому что больше негде."
+    "Я встала из-за стола, но нечаянно задела стакан с почти выпитым компотом."
+    "Немного пролилось и на одежду."
+    "Я быстро сбегала за тряпочкой, чтобы протереть стол, и побежала в домик."
+    stop ambience fadeout 2
+    scene black with dissolve
+    "..."
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_sl_day with dissolve
+    "Выбирать было не из чего, поэтому я надела первое, что попалось на глаза."
+    "А первой мне попалась на глаза моя спортивная форма."
+    "Поэтому, я надела её, а грязную одежду быстро понесла к умывальникам."
+    stop ambience fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_washstand_day with dissolve
+    "У умывальников нашёлся пропавший."
+    me "Не знаю... Но мне тоже хочется в это верить."
+    stop ambience fadeout 2
+    play music music_list["afterword"] fadein 2
+    sl "Семён!"
+    show pi normal pioneer with dissolve
+    "Он обернулся."
+    sl "Ты с кем это разговариваешь?"
+    me "Да... Ни с кем... {w}Так, сам с собой."
+    th "Я не стала совать свой нос не в своё дело."
+    sl "Ты уже собрался?"
+    th "Или я тебе могу помочь?"
+    me "Собрался? Опять какой-то поход?"
+    sl "Нет же! {w}Сегодня последний день смены."
+    me "Чего?.."
+    show pi grin pioneer with dspr
+    "Он расплылся в глуповатой улыбке."
+    sl "Вечером автобус. Уезжаем."
+    me "Ах, вот так даже..."
+    me "Пока не собрался..."
+    # stop music fadeout 3
+    # play ambience ambience_camp_center_day fadein 2
+    show pi normal pioneer with dspr
+    "Я смотрела на него и слишком отвлеклась."
+    # stop ambience fadeout 2
+    # play music music_list["what_do_you_think_of_me"] fadein 3
+    me "Да у меня вещей-то особо нет."
+    sl "Ладно..."
+    "Семён смотрел на меня и мне было сложно собраться с мыслями." 
+    "Я застеснялась и отвела взгляд."
+    "Но вдруг я вспомнила, что облилась компотом, стыдно было показаться перед ним с горстью грязной одежды, поэтому поспешила ретироваться."
+    sl "Тогда увидимся ещё!"
+    me "Ага..."
+    stop music fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    th "Надо было смотреть когда руками махала, растяпа, но кто ж знал." 
+    th "Надеюсь он не подумает, что я грязнуля."
+    stop ambience fadeout 2
+    scene black with dissolve
+    "..."
+    window hide
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_houses_day with dissolve
+    pause 1
+    scene bg ext_washstand_day with dissolve
+    window show
+    "Переждав немного, я вернулась к умывальникам."
+    "Я положила грязную форму под воду и стала её замачивать."
+    "Кое-как оттерев пятно руками, я направилась в домик."
+    stop ambience fadeout 2
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_sl_day with dissolve
+    "Нужно было куда-то повесить форму, но верёвок не было."
+    "Благо капать перестала."
+    "Поэтому я перекинула через форточку и повесила сушиться там. Тем более что светило солнце."
+    "Я взглянула на часы. {w}Времени было около 2 часов дня."
+    "Я решила собраться заранее."
+    "Вынула подушку из наволочки. {w}Свернула простыню и положила на матрас."
+    "Затем стала сворачивать матрас. {w}Но моё внимание привлёк клочок бумаги застрявший в панцерной сетке и немного порванный."
+    call slavyana_mod__day7_note_finded
+    th "Не могу не отметить, что почерк красивый, однако вероятнее всего писалось это в спешке."
+    th "Надо будет и мне такой же памятник следующей смене оставить."
+    th "И я не считаю это вандализмом."
+    "Убрав записку в карман, я продолжила собираться."
+    window hide
+    stop ambience fadeout 2
+    scene black with dissolve
+    pause 1
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_sl_day with dissolve
+    window show
+    "Большинство моих вещей так и продолжали лежать в сумке, поэтому я лишь собрала то немногое, что успела вынуть."
+    stop music fadeout 2
+    "И вышла из домика."
+    stop ambience fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_houses_day with dissolve
+    "Мне нужно было найти Семёна и самым вероятным местом где он мог быть, был конечно же домик Ольги Дмитриевны."
+    scene bg ext_house_of_mt_day with dissolve
+    play sound sfx_knock_door7_polite
+    "Я постучалась, надо же было убедиться, что кто-нибудь есть."
+    show pi normal pioneer with dissolve
+    "Дверь открыл Семён."
+    me "Ты к Ольге Дмитриевне?"
+    sl "Нет…"
+    me "Входи тогда."
+    stop ambience fadeout 2
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_mt_day with dissolve
+    show pi normal pioneer with dissolve
+    "Семён оглянулся за спину, но потом снова повернулся ко мне."
+    "Я уселась на кровать слева."
+    "Семён же облокотился спиной к шкафу."
+    stop ambience fadeout 2
+    play music music_list["confession_oboe"] fadein 2
+    "И тут у меня началась паника, потому что я не знала с чего бы мне начать."
+    me "Что-то случилось?"
+    "Семён как не вовремя был сконцентрирован и не витал в облаках, как он это делает обычно."
+    th "Не знаю почему, но чувствую себя как-то обмануто."
+    sl "Нет... Просто сегодня же последний день..."
+    me "Да я уже в курсе. Лучше поздно, чем никогда."
+    "Подобрать правильные слова было очень тяжело, я решила всё же сделать первый шаг."
+    sl "Ну, я и думала...{w} В смысле...{w} Мы же больше не увидимся, наверное."
+    me "Мир тесен, как говорится."
+    "Его слова пролетели мимо."
+    sl "Может быть, ты мне свой адрес оставишь куда писать."
+    "Семён немного удивился."
+    me "Понимаешь... Давай лучше ты мне свой. Я тебе обязательно напишу по приезду."
+    th "Так вот почему, подсознание мне намекало всё это время.."
+    sl "А почему ты не хочешь?"
+    me "Ну... Мы просто переезжать совсем скоро собирались, поэтому мало ли что...{w} Лучше я тебе писать буду."
+    "Семён улыбнулся."
+    "Всё моё приподнятое настроение как рукой смахнуло."
+    th "Лучше бы не врал, а честно сказал, что не хочешь общаться, я ведь действительно бы ждала твоего письма, а ты и не напишешь…"
+    sl "А, хорошо, понятно... Тогда ладно."
+    "Я встала и направилась к двери. Уточнений не требовалось."
+    me "Подожди, а адрес?"
+    "Сказал он, наверное, больше из вежливости."
+    sl "Давай потом."
+    "Но никакого потом не будет. Семён явно ничего не испытывает ко мне."
+    scene bg ext_house_of_mt_day with dissolve
+    "В разбитых чувствах я направилась обратно."
+    "Чем занять остальной день было решительно непонятно."
+    stop music fadeout 2
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_sl_day with dissolve
+    "Я решила искупаться. В последний-то день."
+    th "А почему нет? Люблю купаться."
+    "Я надела купальник и взяла с собой полотенца."
+    window hide
+    stop ambience fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_houses_day with dissolve
+    pause 1
+    scene bg ext_square_day with dissolve
+    pause 1
+    stop ambience fadeout 2
+    play ambience ambience_boat_station_day fadein 2
+    scene bg ext_beach_day with dissolve
+    window show
+    "К моему удивлению, на пляже почти что никого не было."
+    stop ambience fadeout 2
+    play music music_list["take_me_beautifully"] fadein 2
+    th "Тем лучше."
+    "Расстелив большое полотенце на песке, я сняла форму и забежала в воду."
+    scene black with dissolve
+    "..."
+    scene bg ext_beach_day with dissolve
+    "Однако, это скоро мне наскучило."
+    "Поэтому я вышла на берег, обтёрлась и просто глядела на воду. Прошло, наверное, ещё не так много времени."
+    "Через примерно полчаса ожидания, я пошла обратно."
+    "Я буквально не находила себе места, мне нужно было себя чем-то занять, но меня постоянно погружало в размышления."
+    "При чём не самые приятные."
+    th "Почему Семён так поступил со мной?"
+    th "Он за всё это время ни разу не подметил мои намёки?"
+    "Я посмотрела на небо, первое, что мне пришло в голову, чтобы отвлечься."
+    "День начал близиться к вечеру."
+    "К этому моменту я уже полностью высохла, поэтому просто надела форму."
+    window hide
+    stop music fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_houses_day with dissolve
+    pause 1
+    stop ambience fadeout 2
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_sl_day with dissolve
+    window show
+    "До автобуса оставался примерно час времени, я решила написать соответствующую записку для будущей смены."
+    window hide
+    stop ambience fadeout 2
+    scene black with dissolve
+    pause 1
+    play ambience ambience_int_cabin_day fadein 2
+    scene bg int_house_of_sl_day with dissolve
+    window show
+    "Почему то было очень сложно что-нибудь придумать, поэтому я решила просто скопировать эту записку."
+    "..."
+    "Когда было готово, я перечитала. {w}И обнаружила что шрифты были очень похожи."
+    "Даже не так... {w}Они были идентичными!"
+    th "Я что, настолько сильно перекопировала, что даже шрифт похожий? Да нет, бред какой-то!"
+    th "Видимо просто совпадение."
+    "Я сложила бумажку и подложила её под матрас."
+    th "Её обязательно найдут!"
+    "Я в последний раз посмотрела на стены домика."
+    th "Прощай!"
+    stop ambience fadeout 2
+    play ambience ambience_camp_center_day fadein 2
+    scene bg ext_square_day with dissolve
+    "На площади собирались пионеры и их вожатая."
+    mt "Все кто собрался молодцы, а мне придётся собирать остальных. Идите, пока что, к остановке."
+    "Удивительно, но у нас удалось быстро организоваться идти колонной."
+    window hide
+    scene bg ext_clubs_day with dissolve
+    pause 1
+    scene bg ext_bus with dissolve
+    play ambience ambience_camp_center_day fadein 3
+
+label slavyana_mod__day7_ending:
+    window show
+    "Пришлось немножко постоять."
+
+    if not sl_m_end_un:
+        sl "Лен, скажи, тебе понравилось?"
+        show un normal pioneer at center with dissolve
+        un "Да, не то что я себе представляла, но тоже неплохо."
+        show un smile pioneer at center with dissolve
+        "Она улыбнулась."
+        "Я встала рядом с ней."
+        hide un with dissolve
+
+    if sl_m_end_dv:
+        show mt normal pioneer at cleft
+        show us normal pioneer at cright
+        with dissolve
+        "Наконец, Ольга Дмитриевна пришла вместе с Ульяной."
+        sl "А где же Алиса и Семён?"
+        mt "Ульяна сказала, что Алисе стало плохо и Семён останется с ней. Их заберут следующим автобусом."
+        hide mt
+        hide us
+        with dissolve
+    else:
+        show dv sad pioneer with dissolve
+        sl "Алиса, чего такая грустная?"
+        dv "Да так, ничего..."
+        sl "Тоже грустно уезжать?"
+        dv "Ну и это тоже, в меньшей степени."
+        hide dv with dspr
+
+        if not sl_m_end_us:
+            "Мимо нас пробежала Ульяна."
+            sl "Стоять! Куда бежим? Скоро Ольга Дмитриевна придёт."
+            us "Да никуда я не бегу! Делать просто нечего пока ждём опаздывающих."
+            "Последней показалась Мику со своим волоком вещей."
+            th "И зачем ей столько здесь?"
+            mi "Ой, а я рано пришла? Автобус ещё не пришёл? Я наверное зря тащила все свои вещи сюда, да?"
+
+        show mt normal pioneer with dissolve
+        "Наконец Ольга Дмитриевна пришла"
+
+        if not sl_m_end_us:
+            extend " одна."
+
+        pi "А где же «остальные»?"
+
+        if sl_m_end_un:
+            mt "У Лены остались... дела здесь. Семён ей поможет."
+            mt "Завтра за ними приедет автобус."
+            mt "Остальные едут сейчас."
+        elif sl_m_end_us:
+            "Сразу после вопроса из-за ворот вышли Ульяна и Семён с сумками наперевес."
+            "Семён быстро закинул сумки в автобус и сбегал, видимо за своими, обратно в лагерь."
+        else:
+            mt "Только Семён остался. Он через пару минут придёт."
+            "И действительно, через минуту из-за ворот показался Семён."
+    stop ambience fadeout 2
+    window hide
+
     scene cg d7_pioneers_leaving with dissolve
-    play music music_list["memories"]
+    play music music_list["memories"] fadein 3
+    window show
     mt "Все собрались?"
     "Начала Ольга Дмитриевна."
     mt "Сегодня вы покидаете наш лагерь, и на прощание мне хотелось бы вам кое-что сказать."
     "Она заметно нервничала и никак не могла подобрать нужные слова."
     mt "Надеюсь, что время, проведённое здесь, вам запомнится на всю жизнь, что у вас останутся только приятные воспоминания о «Совёнке»."
-    mt "Также я надеюсь, что здесь вы стали чуточку лучше, смогли чему-то научиться, познакомились с новыми друзьями… {w} В общем, возвращайтесь в следующем году!"
+    mt "Также я надеюсь, что здесь вы стали чуточку лучше, смогли чему-то научиться, познакомились с новыми друзьями…{w} В общем, возвращайтесь в следующем году!"
     "Вожатая отвернулась."
     "Да, в такой момент было трудно сдержать слёзы."
     th "Я буду очень скучать." 
@@ -915,790 +1745,6 @@ label slavyana_mod__day7_alt:
     "И меня начало клонить в сон..."
     stop sound_loop fadeout 2
     show blink
-    "..."
-
-  #рут Ульяны
-  #Если выбрали "Ульяна"
-  elif sl_m_end_us:
-    play ambience ambience_int_cabin_day fadein 5
-    scene bg int_house_of_sl_day
-    show unblink
-    "Я проснулась как всегда вовремя."
-    "Утро было солнечным и за окном тихо пели птички."
-    "Я собралась на пробежку, пока моя соседка спит."
-    stop ambience fadeout 1
-    play ambience ambience_camp_center_day fadein 3
-    scene bg ext_house_of_sl_day:
-        zoom 1.1
-        yalign 0.01
-        block:
-            linear 0.2 pos (0,5)
-            linear 0.2 pos (0,0)
-        repeat
-    with dissolve
-    "Я немного постояла на месте и размялась перед пробежкой."
-    "День обещал быть насыщенным."
-    window hide
-    scene bg ext_path_day:
-        zoom 1.1
-        yalign 0.01
-        block:
-            linear 0.2 pos (0,5)
-            linear 0.2 pos (0,0)
-        repeat
-    with dissolve
-    window show
-    "Я пробежалась вдоль домиков и завернула в лес."
-    "Минут десять я просто бежала вперёд, пока не оказалась достаточно глубоко в лесу, где ничто не могло нарушить природную тишину."
-    "Бегая по лесу, я свернула на неизвестную мне тропинку."
-    th "Только бы не заблудиться!"
-    scene bg ext_polyana_day with dissolve
-    "Я бежала дальше и вышла на какую-то неизвестную мне полянку."
-    th "Странно, я почти везде в этом лесу была."
-    "Особенно моё внимание привлёк небольшой комочек, валяющийся на земле."
-    "Подойдя поближе и взяв его на руки, я поняла что это птенец какой-то птицы."
-    th "Бедняжка, вывалился из гнезда."
-    scene cg d7_feeding_trough with dissolve
-    "Я подняла голову повыше и заметила неприметный скворечник с разноцветными верёвочками."
-    "У него отломилось дно."
-    scene bg ext_polyana_day with dissolve
-    th "Я обязательно спасу тебя!"
-    window hide
-    scene ext_houses_day with dissolve
-    "Ещё немного поплутав по лесу, я наконец вышла к лагерю."
-    "Быстрым шагом я направилась к себе."
-    stop ambience fadeout 1
-    scene bg int_house_of_sl_day with dissolve
-    play ambience ambience_int_cabin_day fadein 2
-    "Время было ещё раннее и линейка не скоро."
-    "Я положила птенца в небольшую коробочку и оставила в шкафу."
-    stop ambience fadeout 1
-    scene bg ext_clubs_day with dissolve
-    play ambience ambience_camp_center_day fadein 2
-    "Я решила зайти к кибернетикам поинтересоваться насчёт изоленты или чего-нибудь скрепляющего."
-    scene bg ext_square_day with dissolve
-    "На линейку я отправилась вместе с Женей."
-    "Ольга Дмитриевна как раз собирала ребят."
-    show mt normal pioneer far with dissolve
-    mt "Сегодня в 6 часов вечера отъезд. Обязательно соберите свои вещи и застелите кровати заранее."
-    mt "Ужина не будет."
-    mt "Если у кого-то ещё остались дела здесь, доделайте или отпрашивайтесь."
-    mt "По уважительной причине я могу продлить."
-    mt "Линейка окончена. Строй! Разойдись!"
-  #фон напротив клубов
-    "Я сразу же направилась к кибернетикам, появилась у меня кое-какая идея."
-    "Дверь оказалась открытой."
-  #фон внутри клуба
-    "Оба товарища были тут."
-    sl "Доброе утро, ребята!"
-    el "Доброе!"
-    sh "И тебе!"
-    sl "Я вот спросить хотела - а у вас случайно клейкой ленты нет?"
-    sh "Была где-то..."
-    "Задумчиво ответил Шурик."
-    el "А посмотри в кладовке!"
-  #звук неоткрывающейся двери посреди фразы
-    "Я подошла к двери и {w}не смогла её открыть."
-    sl "У вас тут заперто."
-    el "Не может такого быть - мы никогда эту комнату не закрываем!"
-    sh "Дай-ка я попробую."
-    "Шурик дёрнул ручку, но дверь не поддалась."
-    sh "Похоже, заело. Помоги-ка!"
-    "Я отошла в сторону и Электроник тоже взялся за ручку."
-    th "Тянут-потянут вытащить не могут."
-  #эффект удара
-    "Они дёрнули ещё раз и наконец дверь распахнулась."
-  #тёмный фон
-    "Там было темно, я нащупала выключатель и включила свет."
-  #белая вспышка
-  #фон внутри кладовки со светом
-  #спрайты Шурика и Электроника по бокам, а по центру Семён, позади которого Ульяна
-    el "Эээ... Доброе утро!"
-    us "Доброе..."
-    sh "А что вы тут делаете?"
-    me "Ну, вообще... {w}Если честно, мы фильм смотрели. Ульянка принесла кассету, а ведь у вас тут магнитофон."
-    el "И что за фильм?"
-    me "Обычный самый фильм! Боевик! Новинка!"
-  #Один из электроников отодвигается в сторону, чтобы Ульяну(которая вылезает из-за спрайта Семёна) было видно
-    "Ульяна вышла из-за его спины и показала кассету Шурику."
-    me "Если вы думаете... Да мы ничего такого!"
-    "Он на мгновение смолк."
-    me "Это всё моя вина..."
-  #пропадает спрайт Шурика
-    sl "Вас никто ни в чём не обвиняет..."
-    me "Вот хоть один разумный человек из здесь присутствующих!"
-    sl "Пока что..."
-    "Добавила я шёпотом."
-    me "Что?"
-    us "На самом деле всё так и было, как он говорит."
-    us "Мы просто смотрели кино, а потом захотели спать... Поздно ведь уже было..."
-    el "Мы ничего такого и не думали... {w}Глупая ситуация, с кем не бывает..."
-    sl "Думаю Ольга Дмитриевна во всём разберётся."
-    me "Э, нет! Подожди-ка! Зачем до вожатой доводить?!"
-    sl "А как же ещё?"
-    me "Ну, ты же видишь, что мы говорим правду!"
-    sl "Это не мне судить..."
-    me "А кому тогда, чёрт возьми?! Ты сама всё видела своими глазами!"
-    sl "Вожатая разберётся."
-    "Разговор был окончен."
-  #фон внутри клуба
-    me "Да подожди ты!"
-  #близкий спрайт злого Семёна 
-    "Семён встал между мной и дверью, не давая мне пройти."
-    me "Послушай!"
-    sl "Это не моё дело..."
-    "Я смотрела в сторону от него, давая понять что игнорирую его."
-    sl "Просто я должна..."
-    me "Кому ты должна-то? Зачем всё это нужно?"
-    sl "Потому что..."
-    "Я осеклась, ведь я и сама не знала почему ОБЯЗАНА."
-    me "Вот и не стоит никуда ходить и ничего никому рассказывать!"
-    sl "Нет..."
-    "Я подняла голову и посмотрела ему в глаза."
-    sl "Извини, Семён."
-    us "Да оставь ты её, пусть идёт."
-  #спрайт Семёна резко пролетает влево
-    "Семён отвлёкся и я с лёгкостью проскочила мимо него."
-  #фон напротив клубов
-    me "Да подожди ты!"
-    "Услышала я из-за двери."
-    "Я твёрдо намеревалась дойти до вожатой."
-  #фон площадь
-  #фон домики
-  #фон напротив домика ОД
-    "Уже стоя на крыльце меня одолевало какое-то неприятное чувство."
-    "Какое-то чувство вины."
-    "Я постучалась в дверь."
-    mt "Войдите!"
-  #фон внутри домика ОД
-    mt "Славя? Зачем пожаловала?"
-    sl "Оля... Там сейчас в клубах произошёл инцидент."
-    mt "Какой?"
-    "Спокойно спросила она."
-    sl "В общем, прошлой ночью Семён и Ульяна пробрались в клубы и заперлись в кладовке."
-    sl "Ульяна принесла кассету. Ночь провели там же."
-    sl "А на утро мальчики их там нашли. {w}Думаю ничего страшного, я видела что там ничего серьёзного не произошло."
-    mt "Спасибо что сказала, можешь идти."
-  #фон напротив домика ОД
-  #фон напротив столовой
-  #фон внутри столовой
-    "Семён сидел за одним столиком с Ульяной, поэтому я не решилась к ним подсесть."
-    "Вместо этого я села рядом с кибернетиками."
-    el "Рассказала?"
-    sl "Да."
-    sh "Что ответила?"
-    sl "Не понятно ещё, будет разбираться."
-    sl "Я постаралась объяснить, что там ничего серьёзного."
-    sh "Понятно."
-    "Мы принялись за еду."
-    el "Ты, кажется, за клейкой лентой заходила?"
-    sl "Да."
-    el "Хорошо, мы её дадим."
-    "После всего произошедшего, кусок в горло не лез, поэтому я так и оставила свой поднос, даже не притронувшись к еде."
-  #фон напротив столовой
-    "Мы вместе вышли из столовой."
-  #фон напротив клубов
-  #фон внутри клуба
-    "И так же вместе дошли до клубов."
-    sh "Вот."
-    "Он передал мне изоленту."
-    sh "Можешь не возвращать даже, не обеднеем."
-    sl "Спасибо!"
-  #фон внутри домика Слави
-    "Я вынула птенца из коробки, в которой он просидел всё время и забрала птенчика с собой."
-    th "Надо было его накормить. Но я даже не знаю чем."
-    "Поэтому я отправилась в библиотеку."
-  #фон площадь
-    "Но по пути в библиотеку меня встретила Оля."
-    mt "Славя, помоги ребятам из младшего отряда на пристани убраться, а то у меня ещё дел много."
-    sl "Хорошо, пару минут буквально и я буду."
-    mt "Это желательно прямо сейчас сделать."
-    "Повелительным тоном обратилась ко мне вожатая."
-    "У меня не было иного выбора."
-    sl "Да, Оля."
-  #фон пристань
-    th "Бедный птенчик ещё поголодает."
-    th "Надо будет поскорее убраться."
-    "Я помогала ребятам собирать и указывала куда отнести, работа продвигалась быстро."
-    me "Убираетесь?"
-    "Неожиданно пришёл Семён."
-    sl "Да."
-    "Сказала я не оборачиваясь."
-    me "Слушай, я тут это..."
-    sl "Хотел поговорить насчёт Ульянки?"
-    me "Ну, да..."
-    sl "И что же ты хотел сказать?"
-    me "Ну, Ульянку наказали. {w}Может быть, она даже не уедет вместе со всеми."
-    sl "Неудивительно."
-    me "Просто я хотел тебе объяснить, что ничего там такого не было."
-    sl "Я не знаю, честно. Просто я должна была рассказать."
-    me "Рассказала, и кому от этого лучше стало?"
-    "Произнёс он слишком угрюмо."
-    sl "Я не уверена, конечно, что это было правильно..."
-    me "Ну, что было, того уже не вернёшь... {w}Как думаешь, что сделать, чтобы Ульянку выпустили из-род домашнего ареста?"
-    sl "Ты так за неё переживаешь."
-    "Я посмотрела на него и улыбнулась."
-    "Семён смутился."
-    me "Не за неё... За справедливость!"
-    sl "Ты же знаешь нашу вожатую."
-    me "Знаю, это точно."
-    sl "Подожди. Со временем она отойдёт."
-    me "Да, ты права."
-    "Всё это время я продолжала подметать."
-    "Похоже, Семён хотел ещё что-то сказать, но молчал."
-    "Постояв так ещё немного, он попрощался и ушёл."
-    me "Ладно, я пойду."
-    sl "Увидимся."
-    "..."
-  #тёмный фон и снова фон пристань
-    "Мы закончили уборку на пристани."
-    "Однако, вскоре прозвучал горн."
-    th "О нет, уже обед! Я уже не успею в библиотеку." 
-    th "Женю встречу в столовой, но что же делать с птенцом? Я же могу его так просто бросить..." 
-    th "Но и в столовую с ним вот так не пойдёшь. Может положить его в карман? Или всё же отнести в укромное местечко?"
-    
-  #Выбор без очков(Отнести птенца домой/Положить в карман рубашки)
-
-  #Если выбрали "Отнести птенца домой"
-  #фон напротив столовой(веранда)
-    th "Надеюсь вторая пробежка за день стоила того и в столовой будет вкусный обед."
-  #фон внутри столовой
-    "Сегодня на обед давали котлеты с пюрешкой из картофеля."
-    th "Неплохо."
-    "Я подсела к Жене, с ней всё равно практически никто не садился."
-    "Я рассказала ей про мою находку."
-    mz "Ты где птенца откопала?"
-    sl "Не откопала, он сам из скворечника выпал."
-    mz "Какого скворечника?"
-    sl "Ну, в лесу нашла."
-    mz "И что ты собираешься дальше делать?"
-    sl "Починю скворечник."
-    mz "Ну хорошо, а я тебе зачем в этом деле?"
-    sl "Ты знаешь, чем его накормить?"
-    mz "А ты всё это время его голодным держала?"
-    sl "Ну, инцидент произошёл, я и забыла."
-    mz "Ладно, посмотрим что в библиотеке есть. Приятного аппетита."
-    sl "Тебе тоже!"
-  #фон напротив библиотеки
-    "Я попрощалась с Женей и побежала к домику."
-  #фон напротив домика Слави
-    "У меня было какое-то плохое предчувствие."
-  #фон внутри домика Слави
-    "Я зашла внутрь."
-    "Открыв дверь, я сразу взглянула на свою кровать."
-    th "Этого быть не может. Там нет птенца!"
-    th "Где же я могла оставить его? Возможно я положила его где-то в другом месте?"
-  #тёмный фон и снова фон внутри домика Слави
-  #посреди фразы трек Eau de vie (Я скинул, постараюсь скачать из ВК)
-    th "Без толку. {w}*трек Eau de vie*Обыскав весь дом, я ничего не нашла."
-    "«Птенчик пропал!» эти слова эхом повторялись в моих мыслях."
-    th "Теперь весь мой труд сегодня и весь день насмарку."
-    th "Но страшнее даже не это..."
-    th "Я не смогла защитить его и теперь он наверное потерялся."
-    th "А я... Отнесла его далеко от мамы."
-    th "Он же теперь не выживет {w}и всё из-за меня."
-    th "Он такой маленький и незаметный, его просто раздавят."
-    th "Господи, за что же это горе мне?"
-    th "Почему я такая дура и не следила за ним?! Сытый желудок того не стоил."
-    th "Я не хотела! Клянусь не хотела!"
-    "Я не заметила, как отворилась дверь. Мне было абсолютно всё равно." 
-    "Вся подушка была в солёных каплях, вытекающих из моих глаз."
-    voice "Славя, что ты делаешь?"
-    "Я ничего ей не ответила."
-    mz "Выходя из столовой, ты была куда более в лучшем настроении. Что случилось?"
-    sl "П... пппп... Птенчик пропал!!"
-    "Как только я произнесла эти слова дрожащим голосом, из меня сразу хлынули слёзы с новой силой. Я не могла так просто смириться с пропажей маленького беззащитного птенца!"
-    "Женя с силой посадила меня на кровать. Я всё так же продолжала плакать без устали..."
-  #конец трека
-    mz "Чего ты ревёшь? {w}Ты его на лавке у себя не заметила?"
-    sl "Ч-что?"
-    "Наконец я взглянула на неё."
-  #трек Timid girl
-    "В руках у неё был тот самый птенец!"
-    "Я вмиг перестала плакать."
-    sl "Женя, спасибо тебе огромное! Я так торопилась, что даже забыла, что не зашла в домик."
-    mz "Ладно, пошли в библиотеку."
-  #конец трека
-    "..."
-  #фон внутри библиотеки
-    "Мы зашли в библиотеку и Женя принялась искать пособие по выведению птенцов."
-    mz "Так... {w}Насекомые, овощи... {w}Крупа!"
-    mz "Крупу будет легче всего достать, однако предпочтительнее мелкая живность."
-    sl "Схожу в столовую, думаю мне одолжат немного."
-    mz "Давай уж своего птенца, а то снова потеряешь."
-    mz "Посижу с ним."
-    sl "Спасибо."
-    "Я посадила птенца ей на столик."
-  #внутри столовой
-    "Мне уже приходилось несколько раз обращаться к поварихе, так что меня она уже запомнила."
-    "Я вежливо попросила у неё немного манки, объяснив ситуацию."
-  #фон внутри библиотеки
-    mz "Хилый он у тебя какой-то."
-    sl "Знаю, но, к сожалению, я не смогу здесь остаться с ним. Меня ждут дома."
-    sl "Мне придётся отнести его обратно в скворечник. {w}Кстати, пойду скорее, а то уже автобус скоро будет."
-    mz "Давай, я пока что соберу свои вещи."
-  #фон поляна
-    "Я захватила с собой клейкую ленту и ножницы. Отрезав несколько кусочков, я залепила дно в несколько слоёв."
-    sl "Сюда бы Шурика и Электроника, но они заняты сейчас."
-    "Я положила птенчика обратно в скворечник, где его ждала мама."
-    th "Наверное беспокоилась сильно..."
-  #фон внутри домика Слави
-    "Я побежала поскорее домой, потому что надо было успеть ещё на автобус."
-    "Я вынула подушку из наволочки. {w}Свернула простыню и положила на матрас."
-    "Затем стала сворачивать матрас. {w}Но моё внимание привлёк клочок бумаги застрявший в панцерной сетке и немного порванный."
-  #трек Mystery girl
-    "Я решила достать его."
-  #картинка записки
-    "{i}Надеюсь, Вам понравилась эта смена в Совёнке!{/i}"
-    "{i}Обязательно сохраните все впечатления о ней, ведь другой такой же больше никогда не будет...{/i}"
-    "Оставил(а) записку некий(ая) «{b}С{/b}»"
-  #конец трека
-  #убрать картинку записки
-    th "Не могу не отметить, что почерк красивый, однако вероятнее всего писалось это в спешке."
-    th "Надо будет и мне такой же памятник следующей смене оставить."
-    th "И я не считаю это вандализмом."
-    "Убрав записку в карман, я продолжила собираться."
-  #тёмный фон и снова фон внутри домика слави
-    "Большинство моих вещей так и продолжали лежать в сумке, поэтому я лишь собрала то немногое, что успела вынуть."
-    "Я решила написать соответствующую записку для будущей смены."
-  #тёмный фон и снова фон внутри домика Слави
-    "Почему то было очень сложно что-нибудь придумать, поэтому я решила просто оставить эту же записку."
-    "А затем я направилась к стоянке."
-    "..."
-  #фон автобус на стоянке
-    "Пришлось немножко постоять."
-    sl "Лен, скажи, тебе понравилось?"
-    un "Да, не то что я себе представляла, но тоже неплохо."
-    "Она улыбнулась."
-    "Я встала рядом с ней."
-    sl "Алиса, чего такая грустная?"
-    dv "Да так, ничего..."
-    sl "Тоже грустно уезжать?"
-    dv "Ну и это тоже, в меньшей степени."
-    "Наконец пришла Ольга Дмитриевна."
-    pi "А где же «остальные»?"
-    "Сказал один из пионеров, как вдруг..."
-    "Из за ворот вышли Ульяна и Семён с сумками наперевес."
-    "Он быстро закинул их в автобус и сбегал, видимо за своими, обратно в лагерь."
-    "Все были в сборе."
-  #трек memories
-  #иллюстрация сборы перед отъездом
-    mt "Все собрались?"
-    "Начала Ольга Дмитриевна."
-    mt "Сегодня вы покидаете наш лагерь, и на прощание мне хотелось бы вам кое-что сказать."
-    "Она заметно нервничала и никак не могла подобрать нужные слова."
-    mt "Надеюсь, что время, проведённое здесь, вам запомнится на всю жизнь, что у вас останутся только приятные воспоминания о «Совёнке»."
-    mt "Также я надеюсь, что здесь вы стали чуточку лучше, смогли чему-то научиться, познакомились с новыми друзьями… {w} В общем, возвращайтесь в следующем году!"
-    "Вожатая отвернулась."
-    "Да, в такой момент было трудно сдержать слёзы."
-    th "Я буду очень скучать." 
-  #конец трека
-  #фон внутри автобуса с пионерами
-    "Мы взяли свои сумки и заносили их в салон, кладя их на колени или под кресла."
-    "Я заняла место рядом с Олей."
-    mt "Поездка займёт несколько часов."
-    "Сказала она мне."
-    "Я молча уставилась в окно."
-  #фон внутри ночного автобуса с пионерами
-    "Проехав уже достаточное расстояние, автобус включил фары. В свои права вступала ночь."
-    "И меня начало клонить в сон..."
-  #эффект закрывания глаз
-    "..."
-    
-  #Если выбрали "Положить в карман рубашки"
-    "Я как можно аккуратнее положила птенчика в наружный карман рубашки."
-    th " Надеюсь он не наделает мне хлопот в столовой."
-    "Я спокойно и аккуратно пошла к столовой."
-  #фон далеко от столовой    
-    th "Ходить с птенчиком в кармане оказалось не очень то и удобно. Но ничего, это всё ради его блага."
-  #фон внутри столовой
-    "В скором времени я отыскала Женю среди других пионеров. Она сидела одна за столиком в глубине столовой."
-    "Я тихо подсела к Жене за столик."
-    sl "Женя, мне нужна твоя помощь."
-    mz "Да? Ну и в чём же состоит твоя просьба?"
-    sl "Женя, ты же сможешь мне помочь накормить птенца?"
-    mz "Зачем?"
-    "Я показала ей его."
-    mz "Ты где этого птенца откопала?"
-    sl "Не откопала, он сам из скворечника выпал."
-    mz "Какого скворечника?"
-    sl "Ну, в лесу нашла."
-    mz "И что ты собираешься дальше делать?"
-    sl "Накормлю, починю скворечник и верну обратно."
-    mz "А ты всё это время его голодным держала?"
-    sl "Ну, инцидент произошёл я и забыла."
-    mz "Ладно, посмотрим что в библиотеке есть. Приятного аппетита."
-    sl "Тебе тоже!"
-  #фон напротив библиотеки
-    "На душе было приятно от совершения очередного хорошего дела."
-  #фон внутри библиотеки
-    "Мы зашли в библиотеку и Женя принялась искать пособие по выведению птенцов."
-    mz "Так... {w}Насекомые, овощи... {w}Крупа!"
-    mz "Крупу будет легче всего достать, однако предпочтительнее мелкая живность."
-    sl "Схожу в столовую, думаю мне одолжат немного."
-    mz "Оставь ты своего птенца, ничего с ним не произойдёт."
-    mz "Могу даже на ключ закрыть, если не веришь."
-    sl "Спасибо."
-    "Я посадила птенца в коробку и поставила её на стол."
-  #внутри столовой
-    "Мне уже приходилось несколько раз обращаться к поварихе, так что меня она уже запомнила."
-    "Мы вежливо попросила у неё немного манки, объяснив ситуацию."
-  #фон напротив библиотеки
-    mz "Хилый он у тебя какой-то. {w}Да и тем более, вот ты положишь его обратно. А дальше что?"
-    sl "Не знаю, к сожалению, я не смогу здесь остаться с ним. Меня ждут дома."
-    sl "Может быть поварихам сказать или с собой забрать. {w}Кстати, я что-то не видела его мамы."
-    th "Наверное всё же возьму его с собой."
-    "Женя открыла дверь."
-  #фон внутри библиотеки
-    "Я с радостью зашла внутрь. {w}Но всё моё настроение вмиг улетучилось, когда я посмотрела на стол."
-  #трек Meet me there
-    "Коробка лежала перевёрнутая рядом с ним."
-    "И рядом валялся птенец. {w}Вернее... {w}Всё что от него осталось."
-    th "Кому только могло прийти к голову растерзать такое беззащитное создание?"
-    "Я не могла больше на этом смотреть и бросилась на грудь Жени."
-    "Я громко разрыдалась"
-  #пауза 3 секунды, очень плавный переход на следующий фон
-  #фон внутри домика Слави
-    "Я захватила изоленту из домика и отнесла её кибернетикам."
-  #фон внутри клуба
-  #спрайт удивлённого Электроника
-    el "Славя, что случилось?"
-    "Я не ответила."
-  #фон внутри домика Слави
-    "Все эмоции просто исчезли."
-    "Я даже не заметила как на автомате собирала свои пожитки и постельное бельё."
-  #очень плавное выключение трека
-    "Но что-то всё же притянуло мой взгляд..."
-    th "Записка."
-  #картинка записки
-    "{i}Надеюсь, Вам понравилась эта смена в Совёнке!{/i}"
-    "{i}Обязательно сохраните все впечатления о ней, ведь другой такой же больше никогда не будет...{/i}"
-    th "Оставил(а) записку некий(ая) «{b}С{/b}»"
-  #убрать картинку записки
-    "Я ещё некоторое время вглядывалась в неё, пытаясь понять суть."
-    th "Надо мной будто издеваются!"
-    "Я скомкала её. Я скомкала эту записку и выбросила в окно, чтобы никто, никогда на целом свете не нашёл эту чёртову записку!"
-    "Я села на кровать и просто просидела так несколько минут, пытаясь сдержать слёзы."
-    "Затем решила достать дневник и всё же написать в него."
-    
-  #Дневник(Ульяна)
-    "{i}Я не справилась.{/i}"
-
-    "Я положила его в сумку и направилась к остановке."
-  #фон остановка
-    "Пришлось немного постоять."
-    "Наконец пришла Ольга Дмитриевна."
-    pi "А где же «остальные»?"
-    "Сказал один из пионеров, как вдруг..."
-    "Из за ворот вышли Ульяна и Семён с сумками наперевес."
-    "Он быстро закинул их в автобус и сбегал, видимо за своими, обратно в лагерь."
-    "Все были в сборе."
-  #трек memories
-  #иллюстрация сборы перед отъездом
-    mt "Все собрались?"
-    "Начала Ольга Дмитриевна."
-    mt "Сегодня вы покидаете наш лагерь, и на прощание мне хотелось бы вам кое-что сказать."
-    "Она заметно нервничала и никак не могла подобрать нужные слова."
-    mt "Надеюсь, что время, проведённое здесь, вам запомнится на всю жизнь, что у вас останутся только приятные воспоминания о «Совёнке»."
-    mt "Также я надеюсь, что здесь вы стали чуточку лучше, смогли чему-то научиться, познакомились с новыми друзьями… {w} В общем, возвращайтесь в следующем году!"
-    "Вожатая отвернулась."
-    "Да, в такой момент было трудно сдержать слёзы."
-    th "Прости меня птенчик..."
-  #конец трека
-  #фон внутри автобуса с пионерами
-    "Мы взяли свои сумки и заносили их в салон, кладя их на колени или под кресла."
-    "Я заняла место рядом с Олей."
-    mt "Поездка займёт несколько часов."
-    "Сказала она мне."
-    "Я молча уставилась в окно."
-  #фон внутри ночного автобуса с пионерами
-    "Проехав уже достаточное расстояние, автобус включил фары. В свои права вступала ночь."
-    "И меня начало клонить в сон..."
-  #эффект закрывания глаз
-    "..."
-
-  #Рут одиночки
-  #Если выбрали "Одиночка"
-  else:
-    "Утро этого дня явно не задалось."
-    "Вначале я проснулась не выспавшейся."
-  #посреди фразы эффект удара и трек Awakening power
-    "А во вторых я проспала... {w}ЛИНЕЙКУ!!!"
-    th "Этого не может быть! Время уже без десяти одиннадцать, а я только проснулась!"
-    "Я мигом собрала все силы в кулак, вскочила с постели и надела форму."
-  #фон домики
-  #эффект бега
-    "На ходу я застёгивала нижние пуговицы и завязывала галстук."
-  #фон площадь
-  #фон далеко от столовой
-  #фон напротив столовой
-  #конец эффекта
-  #конец трека
-    "Когда я добежала, площадь была {w}конечно же пуста."
-    "С чувством вины я направилась в столовую."
-  #фон внутри столовой
-    "Столовая всё ещё была заполнена пионерами."
-    "Я встала в очередь за своей порцией, издалека заприметив свободное место."
-    "Получив порцию и дойдя до него, ко мне подсела Женя."
-    mz "Что-то ты сегодня поздно. Ольга Дмитриевна была недовольна."
-    sl "Странно что она не подняла весь лагерь на уши в моих поисках, я ведь никогда не пропускаю линейки."
-    mz "Она всё списала на то, что у тебя была какая-то уважительная причина."
-    sl "Надо будет извиниться перед ней."
-    mz "Да не стоит, лишний раз ей напоминать, лишняя болтовня. Разве тебе не хочется провести последний день с пользой или что-то вроде того?"
-    mz "Ты хочешь чтобы он тебе запомнился ссорой с вожатой?"
-    sl "Нет конечно."
-    mz "Так что просто забудь. {w}Ладно, я пойду в библиотеку."
-    "Я решила не напоминать ей про случай с Электроником."
-    "А просто доела свою порцию и вышла из-за стола."
-  #фон напротив домика Слави
-    "Я решила не терять времени зря и собрать свои вещи заранее."
-  #фон площадь
-    "Но когда я уже вышла на площадь, меня остановила Оля."
-    mt "Славя, привет, я знаю, сегодня последний день смены, но мне как нельзя кстати пригодилась бы твоя помощь в «райцентре»."
-    sl "Да ничего, а что надо сделать?"
-    mt "Просто бумажная работа."
-    #спрайт улыбающейся ОД
-    mt "Но тебе по секрету скажу."
-    mt "Нам определённые преференции капают, поэтому нужно собирать побольше достижений и рекомендаций."
-    mt "И тебе, как помощнице вожатой, тоже причитается, просто отнеси некоторые документы."
-    mt "Я бы и Семёна попросила, но как подумаю, сразу представляю себе бесконечные вопросы от него, поэтому, справишься?"
-    sl "Конечно, Оля."
-    "Я улыбнулась ей и мы направились в административный корпус."
-    #тёмный экран
-    "..."
-    #фон внутри административного корпуса
-    "Когда мы пришли, Оля принялась перебирать среди бумажек и разных папок, доставать какие-то, листки и перекладывать в свою папку."
-    "Мне показалось это какой-то закулисной бюрократией, о той, которую не показывают по телевизору."
-    "Хоть я и хорошо познакомилась с Олей за эти две недели, но всё равно казалось это чем-то странным."
-    sl "А это точно законно?"
-    mt "Славя!"
-    #спрайт ОД
-    "Она обернулась."
-    mt "Я разве похожа на Семёна?"
-    sl "А почему именно Семёна?"
-    "Она какое-то время помолчала и, наконец, ответила."
-    mt "А он разве не такой?"
-    sl "Конечно не такой, он хороший, просто несмекалистый."
-    mt "Только не говори мне, что у вас с ним что-то намечается."
-    sl "Да нет, Оля, ты что, просто он никогда мне не казался таким."
-    mt "Это каким?"
-    "Спросила она меня, хоть и сама явно догадывалась."
-    sl "Нестабильным элементом. Вот Алиса какая-нибудь.."
-    mt "Ладно, я поняла."
-    "Она улыбнулась."
-    #звук горна
-    "Прошло уже достаточно времени, работа была непыльная, но монотонная."
-    mt "Я тут почти закончила, спасибо, что помогла, беги на обед."
-    sl "Уже всё?"
-    mt "Да, уже всё."
-  #фон внутри столовой
-    "Обед, ровно как и завтрак, не представлял из себя ничего необычного."
-    "Больше всего меня волновал Семён."
-    "За весь прошедший день я так его ни разу и не встретила."
-    "Уже после того как я поела, я ещё некоторое время сидела, рассматривая заходящих у уходящих пионеров."
-    "Но среди них не было того, кого я искала."
-    th "Либо он успел первым войти и первым поесть, либо он всё ещё спит."
-    "Поэтому я решила вначале узнать у Ольги Дмитриевны. Очевидно он ночевал у себя в домике, просто потому что больше негде."
-    "Я встала из-за стола, но нечаянно задела стакан с почти выпитым компотом."
-    "Немного пролилось и на одежду."
-    "Я быстро сбегала за тряпочкой, чтобы протереть стол, и побежала в домик."
-  #фон тёмный экран
-    "..."
-  #фон внутри домика Слави
-    "Выбирать было не из чего, поэтому я надела первое, что попалось на глаза."
-    "А первой мне попалась на глаза моя спортивная форма."
-    "Поэтому, я надела её, а грязную одежду быстро понесла к умывальникам."
-  #фон умывальники
-    "У умывальников нашёлся пропавший."
-    me "Не знаю... Но мне тоже хочется в это верить."
-  #трек Afterword
-    sl "Семён!"
-    "Он обернулся."
-    sl "Ты с кем это разговариваешь?"
-    me "Да... Ни с кем... {w}Так, сам с собой."
-    th "Я не стала совать свой нос не в своё дело."
-    sl "Ты уже собрался?"
-    th "Или я тебе могу помочь?"
-    me "Собрался? Опять какой-то поход?"
-    sl "Нет же! {w}Сегодня последний день смены."
-    me "Чего?.."
-    "Он расплылся в глуповатой улыбке."
-    sl "Вечером автобус. Уезжаем."
-    me "Ах, вот так даже..."
-    me "Пока не собрался..."
-  #конец трека
-    "Я смотрела на него и слишком отвлеклась."
-  #трек What do you think of me?
-    me "Да у меня вещей-то особо нет."
-    sl "Ладно..."
-    "Семён смотрел на меня и мне было сложно собраться с мыслями." 
-    "Я застеснялась и отвела взгляд."
-    "Но вдруг я вспомнила, что облилась компотом, стыдно было показаться перед ним с горстью грязной одежды, поэтому поспешила ретироваться."
-    sl "Тогда увидимся ещё!"
-    me "Ага..."
-  #конец трека
-    th "Надо было смотреть когда руками махала, растяпа, но кто ж знал." 
-    th "Надеюсь он не подумает, что я грязнуля."
-  #фон тёмный экран
-    "..."
-  #фон домики
-  #фон умывальники
-    "Переждав немного, я вернулась к умывальникам."
-    "Я положила грязную форму под воду и стала её замачивать."
-    "Кое-как оттерев пятно руками, я направилась в домик."
-  #фон внутри домика Слави
-    "Нужно было куда-то повесить форму, но верёвок не было."
-    "Благо капать перестала."
-    "Поэтому я перекинула через форточку и повесила сушиться там. Тем более что светило солнце."
-    "Я взглянула на часы. {w}Времени было около 2 часов дня."
-    "Я решила собраться заранее."
-    "Вынула подушку из наволочки. {w}Свернула простыню и положила на матрас."
-    "Затем стала сворачивать матрас. {w}Но моё внимание привлёк клочок бумаги застрявший в панцерной сетке и немного порванный."
-  #трек Mystery girl
-    "Я решила достать его."
-  #картинка записки
-    "{i}Надеюсь, Вам понравилась эта смена в Совёнке!{/i}"
-    "{i}Обязательно сохраните все впечатления о ней, ведь другой такой же больше никогда не будет...{/i}"
-    "Оставил(а) записку некий(ая) «{b}С{/b}»"
-  #конец трека
-  #убрать картинку записки
-    th "Не могу не отметить, что почерк красивый, однако вероятнее всего писалось это в спешке."
-    th "Надо будет и мне такой же памятник следующей смене оставить."
-    th "И я не считаю это вандализмом."
-    "Убрав записку в карман, я продолжила собираться."
-  #тёмный фон и снова фон внутри домика слави
-    "Большинство моих вещей так и продолжали лежать в сумке, поэтому я лишь собрала то немногое, что успела вынуть."
-    "И вышла из домика."
-  #фон домики
-    "Мне нужно было найти Семёна и самым вероятным местом где он мог быть, был конечно же домик Ольги Дмитриевны."
-  #фон напротив Домика ОД
-    "Я постучалась, надо же было убедиться, что кто-нибудь есть."
-    "Дверь открыл Семён."
-  #фон внутри домика ОД
-    me "Ты к Ольге Дмитриевне?"
-    sl "Нет..."
-    me "Входи тогда."
-    "Семён оглянулся за спину, но потом снова повернулся ко мне."
-    "Я уселась на кровать слева."
-    "Семён же облокотился спиной к шкафу."
-  #трек Confession
-    "И тут у меня началась паника, потому что я не знала с чего бы мне начать."
-    me "Что-то случилось?"
-    "Семён как не вовремя был сконцентрирован и не витал в облаках, как он это делает обычно."
-    th "Не знаю почему, но чувствую себя как-то обмануто."
-    sl "Нет... Просто сегодня же последний день..."
-    me "Да я уже в курсе. Лучше поздно, чем никогда."
-    "Подобрать правильные слова было очень тяжело, я решила всё же сделать первый шаг."
-    sl "Ну, я и думала... {w}В смысле... {w}Мы же больше не увидимся, наверное."
-    me "Мир тесен, как говорится."
-    "Его слова пролетели мимо."
-    sl "Может быть, ты мне свой адрес оставишь куда писать."
-  #конец трека
-  #трек из ссылки с которой я скинул файл, ес чо называется трек Mind The Gap TRAIN TRACKS 2014
-    "Семён немного удивился."
-    me "Понимаешь... Давай лучше ты мне свой. Я тебе обязательно напишу по приезду."
-    th "Так вот почему, подсознание мне намекало всё это время.."
-    sl "А почему ты не хочешь?"
-    me "Ну... Мы просто переезжать совсем скоро собирались, поэтому мало ли что... {w}Лучше я тебе писать буду."
-    "Семён улыбнулся."
-    "Всё моё приподнятое настроение как рукой смахнуло."
-    th "Лучше бы не врал, а честно сказал, что не хочешь общаться, я ведь действительно бы ждала твоего письма, а ты и не напишешь…"
-    "Но вместо всего этого, я просто сказала:"
-    sl "А, хорошо, понятно... Тогда ладно."
-    "Я встала и направилась к двери. Уточнений не требовалось."
-    me "Подожди, а адрес?"
-    "Сказал он, наверное, больше из вежливости."
-    sl "Давай потом."
-    "Но никакого потом не будет. Семён явно ничего не испытывает ко мне."
-  #фон напротив домика ОД
-    "В разбитых чувствах я направилась обратно."
-    "Чем занять остальной день было решительно непонятно."
-  #конец трека
-  #фон внутри домика Слави
-    "Я решила искупаться. В последний-то день."
-    th "А почему нет? Люблю купаться."
-    "Я надела купальник и взяла с собой полотенца."
-  #фон домики
-  #фон площадь
-  #фон пляж
-    "К моему удивлению, на пляже почти что никого не было."
-  #трек Take me beautifully
-    th "Тем лучше."
-    "Расстелив большое полотенце на песке, я сняла форму и забежала в воду."
-    "..."
-  #снова фон пляж
-    "Однако, это скоро мне наскучило."
-    "Поэтому я вышла на берег, обтёрлась и просто глядела на воду. Прошло, наверное, ещё не так много времени."
-    "Через примерно полчаса ожидания, я пошла обратно."
-  #конец трека
-    "Я буквально не находила себе места, мне нужно было себя чем-то занять, но меня постоянно погружало в размышления."
-    "При чём не самые приятные."
-    th "Почему Семён так поступил со мной?"
-    th "Он за всё это время ни разу не подметил мои намёки?"
-    "Я посмотрела на небо, первое, что мне пришло в голову, чтобы отвлечься."
-    "День начал близиться к вечеру."
-    "К этому моменту я уже полностью высохла, поэтому просто надела форму."
-  #фон домики
-  #фон внутри домика Слави
-    "До автобуса оставался примерно час времени, я решила написать соответствующую записку для будущей смены."
-  #снова фон внутри домика Слави
-    "Почему то было очень сложно что-нибудь придумать, поэтому я решила просто скопировать эту записку."
-    "..."
-    "Когда было готово, я перечитала. {w}И обнаружила что шрифты были очень похожи."
-    "Даже не так... {w}Они были идентичными!"
-    th "Я что, настолько сильно перекопировала, что даже шрифт похожий? Да нет, бред какой-то!"
-    th "Видимо просто совпадение."
-    "Я сложила бумажку и подложила её под матрас."
-    th "Её обязательно найдут!"
-    "Я в последний раз посмотрела на стены домика."
-    th "Прощай!"
-  #фон площадь
-    "На площади собирались пионеры и их вожатая."
-    mt "Все кто собрался молодцы, а мне придётся собирать остальных. Идите, пока что, к остановке."
-    "Удивительно, но у нас удалось быстро организоваться идти колонной."
-  #фон напротив клубов
-  #фон остановка
-    "Пришлось немножко постоять."
-    sl "Лен, скажи, тебе понравилось?"
-    un "Да, не то, что я себе представляла, но тоже неплохо."
-    "Она улыбнулась."
-    "Я встала рядом с ней."
-    sl "Алиса, чего такая грустная?"
-    dv "Да так, ничего..."
-    sl "Тоже грустно уезжать?"
-    dv "Ну и это тоже, в меньшей степени."
-    "Мимо нас пробежала Ульяна."
-    sl "Стоять! Куда бежим? Скоро Ольга Дмитриевна придёт."
-    us "Да никуда я не бегу! Делать просто нечего пока ждём опаздывающих."
-    "Последней показалась Мику со своим волоком вещей."
-    th "И зачей ей столько здесь?"
-    mi "Ой, а я рано пришла? Автобус ещё не пришёл? Я наверное зря тащила все свои вещи сюда, да?"
-    "Наконец Ольга Дмитриевна пришла {w}одна."
-    pi "А где же «остальные»?"
-    mt "Только Семён остался. Он через пару минут придёт."
-    "И действительно, через минуту из-за ворот показался Семён."
-  #трек memories
-  #иллюстрация сборы перед отъездом
-    mt "Все собрались?"
-    "Начала Ольга Дмитриевна."
-    mt "Сегодня вы покидаете наш лагерь, и на прощание мне хотелось бы вам кое-что сказать."
-    "Она заметно нервничала и никак не могла подобрать нужные слова."
-    mt "Надеюсь, что время, проведённое здесь, вам запомнится на всю жизнь, что у вас останутся только приятные воспоминания о «Совёнке»."
-    mt "Также я надеюсь, что здесь вы стали чуточку лучше, смогли чему-то научиться, познакомились с новыми друзьями… {w} В общем, возвращайтесь в следующем году!"
-    "Вожатая отвернулась."
-    "Да, в такой момент было трудно сдержать слёзы."
-    th "Я буду очень скучать." 
-  #конец трека
-  #фон внутри автобуса с пионерами
-    "Мы взяли свои сумки и заносили их в салон, кладя их на колени или под кресла."
-    "Я заняла место рядом с Олей."
-    mt "Поездка займёт несколько часов."
-    "Сказала она мне."
-    "Я молча уставилась в окно."
-  #фон внутри ночного автобуса с пионерами
-    "Проехав уже достаточное расстояние, автобус включил фары. В свои права вступала ночь."
-    "И меня начало клонить в сон..."
-  #эффект закрывания глаз
     "..."
 
 label slavyana_mod__day7_epilogue_alt:
@@ -1736,7 +1782,11 @@ label slavyana_mod__day7_epilogue_alt:
   pause 2
   scene black with dissolve2
 
-  # TODO: ачивка "Сохранить девственность"
+  # Ачивка "Сохранить девственность"
+  if not persistent.endings["sl_m_solo"]:
+      $ persistent.endings["sl_m_solo"] = True
+      if persistent.show_achievements:
+          $ renpy.notify("Достижение: Сохранить девственность")
 
   $ words_red = True
   call slavyana_mod__ending
@@ -1744,3 +1794,16 @@ label slavyana_mod__day7_epilogue_alt:
   pause 1
   scene cg titles_sl_with_image with dissolve
   jump slavyana_mod__credits
+
+label slavyana_mod__day7_note_finded:
+  "Я решила достать его."
+  if sl_m_d7_note_play_music:
+    play music music_list["mystery_girl_v2"] fadein 1
+  th "Записка..."
+  play sound sfx_paper_bag
+  show note at truecenter with dspr
+  "{i}Надеюсь, Вам понравилась эта смена в Совёнке!{/i}"
+  "{i}Обязательно сохраните все впечатления о ней, ведь другой такой же больше никогда не будет...{/i}"
+  "Оставил(а) записку некий(ая) «{b}С{/b}»"
+  hide note
+  return

@@ -6,8 +6,6 @@ init python:
         pass
 
 init:
-    $ sl_m_Full = True
-    $ sl_m_l_day = 0
     $ slavyana_mod_menu_state = "main"
     $ sl_m_lp = 0
 
@@ -25,7 +23,7 @@ screen slavyana_mod_main_menu():
     if slavyana_mod_menu_state == "main":
         add "scenario_slavyana/res/images/menu/bg/slavya-mod-title-screen.png"
 
-        text "Build: 10.08.2026":
+        text "Build: 10.09.2026":
             xpos 0.0
             ypos 1.0
             xanchor 0.0
@@ -148,18 +146,14 @@ screen slavyana_mod_main_menu():
 # Точка входа в мод
 label slavyana_mod__launcher:
     $ new_chapter(0, u"Славя-мод")
-
-# Инициализировать главный экран
-label slavyana_mod__launcher0:
     $ reload_names()
-    hide slavyana_mod__notebook_interface
     $ sl_m_nb_clear()
     scene black
     play music music_list["forest_maiden"] fadein 1
     show screen slavyana_mod_lp_counter
 
-# Показать главный экран
-label slavyana_mod__mainscreen1:
+# Главный экран мода
+label slavyana_mod__mainscreen:
     call screen slavyana_mod_main_menu
 
     # Новая игра
@@ -188,63 +182,52 @@ label slavyana_mod__mainscreen1:
                 $ persistent.endings["sl_m_green"] = False
                 $ persistent.endings["sl_m_red"] = False
                 $ persistent.endings["sl_m_blue"] = False
+                $ persistent.endings["sl_m_solo"] = False
                 $ persistent.sl_m_end_count = 0
                 $ sl_m_lp = 0
             "Нет, постойте!":
                 pass
-        jump slavyana_mod__mainscreen1
+        jump slavyana_mod__mainscreen
     # Быстрый старт дней
     elif _return == "day1":
         $ sl_m_l_day = 1
-        call slavyana_mod__l_finish
+        call slavyana_mod__fast_choice_init
         jump slavyana_mod__day1
     elif _return == "day2":
         $ sl_m_l_day = 2
-        call slavyana_mod__l_finish
+        call slavyana_mod__fast_choice_init
         jump slavyana_mod__day1_fast_choice
     elif _return == "day3":
         $ sl_m_l_day = 3
-        call slavyana_mod__l_finish
+        call slavyana_mod__fast_choice_init
         jump slavyana_mod__day1_fast_choice
     elif _return == "day4":
         $ sl_m_l_day = 4
-        call slavyana_mod__l_finish
+        call slavyana_mod__fast_choice_init
         jump slavyana_mod__day1_fast_choice
     elif _return == "day5":
         $ sl_m_l_day = 5
-        call slavyana_mod__l_finish
+        call slavyana_mod__fast_choice_init
         jump slavyana_mod__day1_fast_choice
     elif _return == "day6":
         $ sl_m_l_day = 6
-        call slavyana_mod__l_finish
+        call slavyana_mod__fast_choice_init
         jump slavyana_mod__day1_fast_choice
     elif _return == "day7":
         $ sl_m_l_day = 7
-        call slavyana_mod__l_finish
+        call slavyana_mod__fast_choice_init
         jump slavyana_mod__day1_fast_choice
     elif _return == "epilogue":
         $ sl_m_l_day = 8
-        call slavyana_mod__l_finish
+        call slavyana_mod__fast_choice_init
         jump slavyana_mod__day1_fast_choice
     else:
-        jump slavyana_mod__mainscreen1
+        jump slavyana_mod__mainscreen
     return
 
-label slavyana_mod__l_finish:
-    scene bg days_eve
-    window show
-    if sl_m_l_day <= 7:
-        "Вернуться в меню по окончанию дня?"
-        window hide
-        menu:
-            "Играть до конца":
-                $ sl_m_Full = True
-            "После дня вернуться в меню":
-                $ sl_m_Full = False
-        window show
+label slavyana_mod__fast_choice_init:
     if sl_m_l_day > 1:
         $ mt_name = 'Оля'
         $ me_name = 'Семён'
-    window hide
     stop music fadeout 2
     return

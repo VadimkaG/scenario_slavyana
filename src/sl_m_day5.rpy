@@ -944,19 +944,40 @@ label slavyana_mod__day5_lena:
   scene bg int_house_of_sl_day with dissolve
 
 # Дневник
-  scene anim prolog_2
-  with fade
-  $ set_mode_nvl()
-  "Дневник"
-  " "
-  "Двенадцатый день в Совёнке. Сегодня не произошло чего-то столь же масштабного, как поиски Шурика."
-  
-  "В честь его чудесного спасения Ольга Дмитриевна решила испечь торт (не сама, конечно же), для этого пришлось собрать земляники на острове Ближний, куда нас с Леной отвёз Семён. Остальные ингредиенты так же таскал Семён."
-  "Ещё нам на линейке объявили об очередном костре. Я уже была на этом мероприятии в прошлый раз и ничего удивительного он из себя не представлял: пешая прогулка по лесу и остановка на заранее подготовленной поляне." 
-  "Однако, каждый раз Оля говорила о взаимовыручке и о том, чему мы научимся в этом походе. В этот раз я постараюсь отпроситься, ну или, в крайнем случае, по-тихому исчезнуть. Осталось только собрать сумку."
-  "Также в лесу случился очень странный разговор с Леной. Как я поняла, она нашла во мне соперницу в отношениях с Семёном. Надеюсь, она не слишком обиделась. Её реакция поистине напугала меня."
-  nvl clear
-  $ set_mode_adv()
+  show bknt at truecenter
+  hide screen slavyana_mod__notebook_interface
+  with dspr
+  play sound_loop pen_write
+
+  call slavyana_mod__day5_bknt1
+  show screen sl_m_nb() with dissolve2
+  window show
+  th "Двенадцатый день в Совёнке. Сегодня не произошло чего-то столь же масштабного, как поиски Шурика."
+  window hide
+  call slavyana_mod__day5_bknt2
+  show screen sl_m_nb() with dissolve2
+  window show
+  th "В честь его чудесного спасения Ольга Дмитриевна решила испечь торт (не сама, конечно же), для этого пришлось собрать земляники на острове Ближний, куда нас с Леной отвёз Семён. Остальные ингредиенты так же таскал Семён."
+  window hide
+  call slavyana_mod__day5_bknt3
+  show screen sl_m_nb() with dissolve2
+  window show
+  th "Ещё нам на линейке объявили об очередном костре. Я уже была на этом мероприятии в прошлый раз и ничего удивительного он из себя не представлял: пешая прогулка по лесу и остановка на заранее подготовленной поляне." 
+  window hide
+  call slavyana_mod__day5_bknt4
+  show screen sl_m_nb() with dissolve2
+  window show
+  th "Однако, каждый раз Оля говорила о взаимовыручке и о том, чему мы научимся в этом походе. В этот раз я постараюсь отпроситься, ну или, в крайнем случае, по-тихому исчезнуть. Осталось только собрать сумку."
+  window hide
+  call slavyana_mod__day5_bknt5
+  show screen sl_m_nb() with dissolve2
+  window show
+  th "Также в лесу случился очень странный разговор с Леной. Как я поняла, она нашла во мне соперницу в отношениях с Семёном. Надеюсь, она не слишком обиделась. Её реакция поистине напугала меня."
+  window hide
+  stop sound_loop
+  hide screen sl_m_nb
+  show screen slavyana_mod__notebook_interface
+  with dspr
 #*Конец дневника*
 
   window show
@@ -1640,19 +1661,39 @@ label slavyana_mod__day5_lena:
   stop ambience fadeout 4
   show blink
   hide screen slavyana_mod__notebook_interface
-  if sl_m_Full:
-      jump slavyana_mod__day6
-  jump slavyana_mod__launcher0
+  jump slavyana_mod__day6
 
 
-#При втором прохождении выбор «Соврать»(в выборе с Леной на поляне) даёт выход на альтернативную концовку, но очков для её получения должно быть >=9 на 7 дне, иначе плохая
+# Блокноты
+label slavyana_mod__day5_bknt1:
+  $ sl_m_nb_addpage("Двенадцатый день в Совёнке. Сегодня не произошло чего-то столь же масштабного, как поиски Шурика.")
+  return
+label slavyana_mod__day5_bknt2:
+  $ sl_m_nb_add("В честь его чудесного спасения Ольга Дмитриевна решила испечь торт (не сама, конечно же), для этого пришлось собрать земляники на острове Ближний, куда нас с Леной отвёз Семён. Остальные ингредиенты так же таскал Семён.")
+  return
+label slavyana_mod__day5_bknt3:
+  $ sl_m_nb_add("Ещё нам на линейке объявили об очередном костре. Я уже была на этом мероприятии в прошлый раз и ничего удивительного он из себя не представлял: пешая прогулка по лесу и остановка на заранее подготовленной поляне.")
+  return
+label slavyana_mod__day5_bknt4:
+  $ sl_m_nb_add("Однако, каждый раз Оля говорила о взаимовыручке и о том, чему мы научимся в этом походе. В этот раз я постараюсь отпроситься, ну или, в крайнем случае, по-тихому исчезнуть. Осталось только собрать сумку.")
+  return
+label slavyana_mod__day5_bknt5:
+  $ sl_m_nb_add("Также в лесу случился очень странный разговор с Леной. Как я поняла, она нашла во мне соперницу в отношениях с Семёном. Надеюсь, она не слишком обиделась. Её реакция поистине напугала меня.")
+  return
 
+# Быстрый выбор дня
 label slavyana_mod__day5_fast_choice:
 
   if sl_m_l_day == 5:
     window hide
     jump slavyana_mod__day5
     return
+
+  call slavyana_mod__day5_bknt1
+  call slavyana_mod__day5_bknt2
+  call slavyana_mod__day5_bknt3
+  call slavyana_mod__day5_bknt4
+  call slavyana_mod__day5_bknt5
 
   $ day_time()
   $ persistent.sprite_time = "day"
@@ -1686,9 +1727,9 @@ label slavyana_mod__day5_fast_choice:
         $ sl_m_day5_cleaning_told_truth = True
 
   if persistent.sl_m_end_count > 0 and sl_m_lp < 4:
-    jump slavyana_mod__day6_fast_choise
-
-  if sl_m_lp >= 4:
+    jump slavyana_mod__day5_alt_fast_choice
+    return
+  else:
     $ night_time()
     $ persistent.sprite_time = "night"
 

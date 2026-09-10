@@ -1633,9 +1633,7 @@ label slavyana_mod__day4__without_pi:
   "..."
   window hide
 
-  if sl_m_Full:
-    jump slavyana_mod__day5
-  jump slavyana_mod__launcher0
+  jump slavyana_mod__day5
 
 # Блокноты
 label slavyana_mod__day4_bknt1:

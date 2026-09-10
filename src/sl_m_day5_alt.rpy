@@ -11,7 +11,7 @@ label slavyana_mod__day5_alt:
 # Рут Алисы: sl_m_day6_alt_dv
 # Одиночный рут: sl_m_day1_help_od and not sl_m_day5_berries_go_with and not sl_m_day6_alt_dv
 
-  call slavyana_mod__day6_alt_chending
+  call slavyana_mod__day5_alt_chending
 
   "Я вынула ключ из рубашки и отправилась к домику."
   stop ambience fadeout 1
@@ -88,10 +88,10 @@ label slavyana_mod__day5_alt:
     us "Я тогда сразу лягу спать, чтобы не напридумывать себе ничего."
     sl "Ну... Хорошо, ложись тогда."
     "Я укрыла её одеялом и села на стул рядом."
+    window hide
     stop music fadeout 2
     hide us with dspr
     $ set_mode_nvl()
-    window show
     pause 2
     play music music_list["memories"] fadein 5
     "Как то раз в лагерь приехал один мальчик."
@@ -110,6 +110,7 @@ label slavyana_mod__day5_alt:
     nvl clear
     $ set_mode_adv()
     stop music fadeout 3
+    window show
     "Ульяна не дослушала истории до конца и уже дремала."
     play ambience ambience_camp_center_night fadein 2
     $ persistent.sprite_time = "night"
@@ -124,20 +125,50 @@ label slavyana_mod__day5_alt:
   play ambience ambience_int_cabin_night fadein 3
   scene bg int_house_of_sl_night_light with dissolve
   "Судя по часам на будильнике, время похода приближалось к концу. Я расстелила кровать, включила свет и уселась писать дневник."
+  window hide
   
 # Дневник
-  scene anim prolog_2
-  with fade
-  $ set_mode_nvl()
+  hide screen slavyana_mod__notebook_interface
+  $ sl_m_nb_lastpage()
+  show screen sl_m_nb()
+  with dspr
+
+  play sound_loop pen_write
+  call slavyana_mod__day5_alt_bknt1
+  show screen sl_m_nb() with dissolve2
+  window show
   "...На ужине в честь чудесного спасения Шурика испекли торт, из ингредиентов, которые пришлось носить Семёну."
+  window hide
+  call slavyana_mod__day5_alt_bknt2
+  show screen sl_m_nb() with dissolve2
+  window show
   "Но пакостливая Ульянка сразу набросилась на него и нам ничего не досталось."
+  window hide
+  call slavyana_mod__day5_alt_bknt3
+  show screen sl_m_nb() with dissolve2
+  window show
   "Затем мы пошли в поход. Поблуждав немного по уже истоптанным тропинкам в лесу, мы вышли на поляну, которую мы сегодня убирали с Леной."
+  window hide
+  call slavyana_mod__day5_alt_bknt4
+  show screen sl_m_nb() with dissolve2
+  window show
   "Я отпросилась с похода, предпочтя провести время купанием в речке. Я надеюсь Леночка призналась Семёну в чувствах."
+  window hide
+  call slavyana_mod__day5_alt_bknt5
+  show screen sl_m_nb() with dissolve2
+  window show
   "Насчёт наказания Ульяны я не уверена. Слишком уж строго вожатая к ней отнеслась. Она хоть и заслужила это, но всё-таки остаётся ребёнком."
   if not sl_m_day1_help_od:
+    window hide
+    call slavyana_mod__day5_alt_bknt6
+    show screen sl_m_nb() with dissolve2
+    window show
     "Мы весело провели с ней время и я уложила её спать."
-  nvl clear
-  $ set_mode_adv()
+  window hide
+  stop sound_loop
+  hide screen sl_m_nb
+  show screen slavyana_mod__notebook_interface
+  with dspr
 # Конец дневника
   
   th "Завтра будет новый день, завтра будут новые свершения!"
@@ -149,7 +180,7 @@ label slavyana_mod__day5_alt:
   play music music_list["door_to_nightmare"] fadein 3
   scene anim prolog_2 with dissolve
   us "Как долго нам осталось?"
-  dv "Мы все умрём."
+
   un "Я не знаю."
   sl "Почему всё так?"
   mt "Я не знаю, но похоже оно движется."
@@ -159,20 +190,54 @@ label slavyana_mod__day5_alt:
   with dissolve
   pause 2
   stop music fadeout 2
+  hide screen slavyana_mod__notebook_interface
   scene black with dissolve
 
-  if sl_m_Full:
-    jump slavyana_mod__day6_alt
-  jump slavyana_mod__launcher0
+  jump slavyana_mod__day6_alt
+
+
+label slavyana_mod__day5_alt_bknt1:
+  $ sl_m_nb_add2("На ужине в честь чудесного спасения Шурика испекли торт, из ингредиентов, которые пришлось носить Семёну.")
+  return
+label slavyana_mod__day5_alt_bknt2:
+  $ sl_m_nb_add2("Но пакостливая Ульянка сразу набросилась на него и нам ничего не досталось.")
+  return
+label slavyana_mod__day5_alt_bknt3:
+  $ sl_m_nb_add2("Затем мы пошли в поход. Поблуждав немного по уже истоптанным тропинкам в лесу, мы вышли на поляну, которую мы сегодня убирали с Леной.")
+  return
+label slavyana_mod__day5_alt_bknt4:
+  $ sl_m_nb_add2("Я отпросилась с похода, предпочтя провести время купанием в речке. Я надеюсь Леночка призналась Семёну в чувствах.")
+  return
+label slavyana_mod__day5_alt_bknt5:
+  $ sl_m_nb_add2("Насчёт наказания Ульяны я не уверена. Слишком уж строго вожатая к ней отнеслась. Она хоть и заслужила это, но всё-таки остаётся ребёнком.")
+  return
+label slavyana_mod__day5_alt_bknt6:
+  $ sl_m_nb_add2("Мы весело провели с ней время и я уложила её спать.")
+  return
 
 # Выбор концовки
-label slavyana_mod__day6_alt_chending:
-    if sl_m_day2_you_win:
-        $ sl_m_end_dv = True
-    elif not sl_m_day5_berries_go_with:
-        $ sl_m_end_un = True
-    elif sl_m_day1_help_od:
-        $ sl_m_end_us = True
-    else:
-        $ sl_m_end_sl = True
-    return
+label slavyana_mod__day5_alt_chending:
+  if sl_m_day2_you_win:
+    $ sl_m_end_dv = True
+  elif not sl_m_day5_berries_go_with:
+    $ sl_m_end_un = True
+  elif sl_m_day1_help_od:
+    $ sl_m_end_us = True
+  else:
+    $ sl_m_end_sl = True
+  return
+
+
+# Быстрый выбор дня
+label slavyana_mod__day5_alt_fast_choice:
+  call slavyana_mod__day5_alt_chending
+
+  call slavyana_mod__day5_alt_bknt1
+  call slavyana_mod__day5_alt_bknt2
+  call slavyana_mod__day5_alt_bknt3
+  call slavyana_mod__day5_alt_bknt4
+  call slavyana_mod__day5_alt_bknt5
+  if not sl_m_day1_help_od:
+    call slavyana_mod__day5_alt_bknt6
+
+  jump slavyana_mod__day6_alt_fast_choise

@@ -1296,9 +1296,7 @@ label slavyana_mod__day2_cnt3:
     with dissolve
     hide blink
     $ volume(1.0, "sound")
-    if sl_m_Full:
-        jump slavyana_mod__day3
-    jump slavyana_mod__launcher0
+    jump slavyana_mod__day3
 
 #Сделано FireBoTer'ом
 

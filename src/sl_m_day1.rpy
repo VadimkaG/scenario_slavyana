@@ -1595,9 +1595,7 @@ label slavyana_mod__day1_end:
     scene black
     with dissolve
     hide blink
-    if sl_m_Full:
-        jump slavyana_mod__day2
-    jump slavyana_mod__launcher0
+    jump slavyana_mod__day2
 
 #Сделано FireBoTer'ом
 

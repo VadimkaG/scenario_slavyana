@@ -5,6 +5,8 @@ init 6 python:
         persistent.endings["sl_m_red"] = False
     if "sl_m_blue" not in persistent.endings:
         persistent.endings["sl_m_blue"] = False
+    if "sl_m_solo" not in persistent.endings:
+        persistent.endings["sl_m_solo"] = False
 
     achievments["ACH_SL_M_GREEN"] = persistent.endings["sl_m_green"]
     achievments["ACH_SL_M_RED"] = persistent.endings["sl_m_red"]
@@ -37,28 +39,10 @@ init 6 python:
         "latvian" : "sl_m_blue",
         }
 
-init -10:
-    python:
-        try:
-            if not config_session:
-                p = "scenario_slavyana/res/images/avatars/mz/sl_m_mz-"
-                sl_m_mz_avatar_set = {
-                            'body':p+"body.png",
-                            -2    :p+"emo01.png",
-                            -1    :p+"emo01.png",
-                            0     :p+"emo03.png",
-                            1     :p+"emo03.png",
-                            2     :p+"emo05.png",
-                        }
-        except NameError:
-            p = 'scenario_slavyana/res/images/avatars/mz/sl_m_mz-'
-            sl_m_mz_avatar_set = {'body':(p) + ('body.png'), -2:(p) + ('emo01.png'), -1:(p) + ('emo01.png'), 0:(p) + ('emo03.png'), 1:(p) + ('emo03.png'), 2:(p) + ('emo05.png')}
-
 init:
     $ pen_write = "scenario_slavyana/res/sound/pen1.mp3"
 
     image bknt = "scenario_slavyana/res/images/notebook/notebook.png"
-
     image note = "scenario_slavyana/res/images/note.png"
     
     image bg days_day = "scenario_slavyana/res/images/menu/bg/d_day.png"
@@ -78,6 +62,7 @@ init:
     image bg int_house_of_sl_night = "scenario_slavyana/res/images/bg/int_house_of_sl_night.jpg"
     image bg int_house_of_sl_sunset = "scenario_slavyana/res/images/bg/int_house_of_sl_sunset.jpg"
     # image bg int_library_sunset = "scenario_slavyana/res/images/bg/int_library_sunset.png"
+    image bg int_library_day_box = "scenario_slavyana/res/images/bg/int_library_day_box.jpg"
     
     image cg d2_lineup_an = "scenario_slavyana/res/images/cg/d2_lineup.jpg"
     image cg d3_sl_library_an = "scenario_slavyana/res/images/cg/d3_sl_library.jpg"

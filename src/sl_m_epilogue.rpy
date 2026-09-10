@@ -474,4 +474,4 @@ label slavyana_mod__credits:
     scene black with dissolve2
     pause 4
 
-    jump slavyana_mod__launcher0
+    jump slavyana_mod__launcher
