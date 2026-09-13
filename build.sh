@@ -51,7 +51,7 @@ if command -v tar &> /dev/null; then
 	tar -zcf ../scenario_slavyana.tar.gz scenario_slavyana README.txt
 fi
 if command -v zip &> /dev/null; then
-	zip ../scenario_slavyana.zip scenario_slavyana README.txt
+	zip -r ../scenario_slavyana.zip scenario_slavyana README.txt
 fi
 rm README.txt
 
