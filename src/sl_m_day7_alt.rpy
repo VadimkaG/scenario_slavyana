@@ -1,18 +1,16 @@
 label slavyana_mod__day7_alt:
-  $ renpy.pause(2, hard=True)
-  stop music
-  stop sound
-  stop ambience
-  $ backdrop = "days"
-  $ new_chapter(7, u"Славя. День седьмой")
-  $ save_name = (u'Славя. День седьмой')
-  $ day_time()
-  $ persistent.sprite_time = "day"
-  $ renpy.pause(3, hard=True)
-  $ sl_m_d7_note_play_music = True
+  python:
+      backdrop = "days"
+      new_chapter(7, u"Славя. День седьмой")
+      save_name = (u'Славя. День седьмой')
+      day_time()
+      persistent.sprite_time = "day"
+      d7_note_play_music = True
+
+  show screen slavyana_mod__notebook_interface
 
   #рут Алисы
-  if sl_m_end_dv:
+  if current_route == Routes.SoloDV:
     play music music_list["everyday_theme"] fadein 5
     scene bg int_house_of_sl_day
     show unblink
@@ -473,7 +471,7 @@ label slavyana_mod__day7_alt:
 
   #рут Ульяны
   #Если выбрали "Ульяна"
-  elif sl_m_end_us:
+  elif current_route == Routes.SoloUS:
     play ambience ambience_int_cabin_day fadein 5
     scene bg int_house_of_sl_day
     show unblink
@@ -984,7 +982,7 @@ label slavyana_mod__day7_alt:
         "Я даже не заметила как на автомате собирала свои пожитки и постельное бельё."
         pause 1
         "Но мое внимание привлек клочек бумаги..."
-        $ sl_m_d7_note_play_music = False
+        $ d7_note_play_music = False
         call slavyana_mod__day7_note_finded
         th "Надо мной будто издеваются!"
         "Я скомкала эту записку и выбросила в окно, чтобы никто, никогда на целом свете не нашёл эту чёртову записку!"
@@ -992,8 +990,19 @@ label slavyana_mod__day7_alt:
         "Затем решила достать дневник и всё же написать в него."
         
       #Дневник(Ульяна)
-        "Дневник"
-        "{i}Я не справилась.{/i}"
+        show bknt at truecenter
+        hide screen slavyana_mod__notebook_interface
+        with dspr
+        play sound_loop pen_write
+        $ sl_m_nb_addpage("Я не справилась.")
+        show screen sl_m_nb() with dissolve2
+        window show
+        th "Я не справилась."
+        window hide
+        stop sound_loop
+        hide screen sl_m_nb
+        show screen slavyana_mod__notebook_interface
+        with dspr
 
         "Я положила его в сумку и направилась к остановке."
         stop music fadeout 2
@@ -1120,7 +1129,7 @@ label slavyana_mod__day7_alt:
     stop ambience fadeout 2
 
     #Рут одиночки
-    if not sl_m_end_un:
+    if current_route != Routes.SoloUN:
       jump slavyana_mod__day7_alt_solo
 
     #Рут Лены
@@ -1655,10 +1664,11 @@ label slavyana_mod__day7_alt_solo:
     play ambience ambience_camp_center_day fadein 3
 
 label slavyana_mod__day7_ending:
+    hide screen slavyana_mod__notebook_interface
     window show
     "Пришлось немножко постоять."
 
-    if not sl_m_end_un:
+    if current_route != Routes.SoloUN:
         sl "Лен, скажи, тебе понравилось?"
         show un normal pioneer at center with dissolve
         un "Да, не то что я себе представляла, но тоже неплохо."
@@ -1667,7 +1677,7 @@ label slavyana_mod__day7_ending:
         "Я встала рядом с ней."
         hide un with dissolve
 
-    if sl_m_end_dv:
+    if current_route == Routes.SoloDV:
         show mt normal pioneer at cleft
         show us normal pioneer at cright
         with dissolve
@@ -1685,7 +1695,7 @@ label slavyana_mod__day7_ending:
         dv "Ну и это тоже, в меньшей степени."
         hide dv with dspr
 
-        if not sl_m_end_us:
+        if current_route != Routes.SoloUS:
             "Мимо нас пробежала Ульяна."
             sl "Стоять! Куда бежим? Скоро Ольга Дмитриевна придёт."
             us "Да никуда я не бегу! Делать просто нечего пока ждём опаздывающих."
@@ -1696,16 +1706,16 @@ label slavyana_mod__day7_ending:
         show mt normal pioneer with dissolve
         "Наконец Ольга Дмитриевна пришла"
 
-        if not sl_m_end_us:
+        if current_route != Routes.SoloUS:
             extend " одна."
 
         pi "А где же «остальные»?"
 
-        if sl_m_end_un:
+        if current_route == Routes.SoloUN:
             mt "У Лены остались... дела здесь. Семён ей поможет."
             mt "Завтра за ними приедет автобус."
             mt "Остальные едут сейчас."
-        elif sl_m_end_us:
+        elif current_route == Routes.SoloUS:
             "Сразу после вопроса из-за ворот вышли Ульяна и Семён с сумками наперевес."
             "Семён быстро закинул сумки в автобус и сбегал, видимо за своими, обратно в лагерь."
         else:
@@ -1782,13 +1792,16 @@ label slavyana_mod__day7_epilogue_alt:
   pause 2
   scene black with dissolve2
 
-  # Ачивка "Сохранить девственность"
-  if not persistent.endings["sl_m_solo"]:
-      $ persistent.endings["sl_m_solo"] = True
-      if persistent.show_achievements:
-          $ renpy.notify("Достижение: Сохранить девственность")
+  # Ачивка одиночки
+  if current_route == Routes.SoloDV:
+    $ sl_m_ach_solo_dv()
+  elif current_route == Routes.SoloUN:
+    $ sl_m_ach_solo_un()
+  elif current_route == Routes.SoloUS:
+    $ sl_m_ach_solo_us()
+  else:
+    $ sl_m_ach_solo()
 
-  $ words_red = True
   call slavyana_mod__ending
   play music music_list["memories"]
   pause 1
@@ -1797,7 +1810,7 @@ label slavyana_mod__day7_epilogue_alt:
 
 label slavyana_mod__day7_note_finded:
   "Я решила достать его."
-  if sl_m_d7_note_play_music:
+  if d7_note_play_music:
     play music music_list["mystery_girl_v2"] fadein 1
   th "Записка..."
   play sound sfx_paper_bag

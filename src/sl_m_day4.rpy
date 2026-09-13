@@ -1,15 +1,10 @@
-init python:
-  # Условие, если славя ходила за шуриком
-  go_to_sh = False
-
 label slavyana_mod__day4:
-  $ renpy.pause(2, hard=True)
-  $ backdrop = "days"
-  $ new_chapter(4, u"Славя. День четвертый")
-  $ save_name = (u'Славя. День четвертый')
-  $ day_time()
-  $ persistent.sprite_time = "day"
-  $ renpy.pause(3, hard=True)
+  python:
+    backdrop = "days"
+    new_chapter(4, u"Славя. День четвертый")
+    save_name = (u'Славя. День четвертый')
+    day_time()
+    persistent.sprite_time = "day"
 
   play ambience ambience_int_cabin_day fadein 4
   scene bg int_house_of_sl_day
@@ -194,7 +189,7 @@ label slavyana_mod__day4:
   show mt normal pioneer with dspr
   mt "И ещё, Славя, на складе бардак - сходи заодно туда и приберись."
 
-  if not sl_m_day2_sp_keys:
+  if not d2_sp_keys:
     sl "Я бы с радостью, но я так и не нашла свои ключи."
     show mt surprise pioneer with dspr
     play sound sfx_keys_rattle
@@ -375,7 +370,7 @@ label slavyana_mod__day4_store:
     scene bg ext_dining_hall_near_day with dissolve
   window show
   "Мне всё ещё надо было сходить на склад и прибраться там." 
-  if not sl_m_day2_sp_keys:
+  if not d2_sp_keys:
     "Благо, Оля дала мне свои ключи."
   window hide
   scene bg ext_shed_day with dissolve
@@ -591,7 +586,7 @@ label slavyana_mod__day4_after_map_choise:
   mt "Ну как поиски?"
   sl "Всё так же…"
 
-  if not sl_m_day2_sp_keys:
+  if not d2_sp_keys:
     play sound sfx_keys_rattle
     "Я отдала ей ключи."
 
@@ -776,7 +771,7 @@ label slavyana_mod__day4_after_map_choise:
   me "Что?"
   "Семён, похоже, заметил мои колебания."
 
-  if sl_m_day2_go_with_sp:
+  if d2_go_with_sp:
     "Я решила временно отвести разговор в сторону, пока не придумаю выход из этой ситуации."
     sl "Кстати, Семён…"
     me "Что?"
@@ -938,6 +933,7 @@ label slavyana_mod__day4_after_map_choise:
 
   menu:
     "Не обращать внимания":
+      $ d4_go_to_sh = False
       "Семён не маленький, и сам сможет."
       me "Я же не пойду туда один?!"
       th "И впрямь как маленький! Чего там бояться-то?"
@@ -1012,12 +1008,12 @@ label slavyana_mod__day4_after_map_choise:
 
     "Вызваться помочь":
       $ sl_m_lp += 2
-      $ go_to_sh = True
+      $ d4_go_to_sh = True
 
   sl "Я пойду с ним!"
 
   th "Сегодня он помог мне осмотреть лагерь."
-  if not sl_m_day2_sp_keys:
+  if not d2_sp_keys:
     th "Он нашёл мои ключи, кто знает, что бы могло произойти, если бы они попали в плохие руки? Так он хотя бы вернул их."
   else:
     th "Сегодня он помог мне осмотреть лагерь."
@@ -1711,7 +1707,7 @@ label slavyana_mod__day4_fast_choice:
   "Четвертый день.{w} Поиски шурика"
   menu:
     "Вызваться помочь":
-      $ go_to_sh = True
+      $ d4_go_to_sh = True
       $ sl_m_lp += 2
       call slavyana_mod__day4_bknt4_1
       call slavyana_mod__day4_bknt5
@@ -1725,7 +1721,7 @@ label slavyana_mod__day4_fast_choice:
       call slavyana_mod__day4_bknt13
       call slavyana_mod__day4_bknt14
     "Не обращать внимания":
-      $ go_to_sh = False
+      $ d4_go_to_sh = False
       call slavyana_mod__day4_bknt5
       call slavyana_mod__day4_bknt5_1
       call slavyana_mod__day4_bknt6

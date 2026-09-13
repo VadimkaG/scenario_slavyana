@@ -1,22 +1,24 @@
-﻿init python:
-  # Славя сказала правду лене, когда они очищали костер
-  sl_m_day5_cleaning_told_truth = False
-  # В медпункте свалить вину на семена
-  sl_m_day5_make_semen_guilty = False
-  # Если пошли с семёном
-  sl_m_day5_berries_go_with = False 
+﻿label slavyana_mod__day5_init:
+  python:
+    # Славя сказала правду лене, когда они очищали костер
+    d5_cleaning_told_truth = False
+    # В медпункте свалить вину на семена
+    d5_make_semen_guilty = False
+    # Если пошли с семёном
+    d5_berries_go_with = False
+  return
 
 label slavyana_mod__day5:
-  $ renpy.pause(2, hard=True)
-  $ backdrop = "days"
-  $ new_chapter(5, u"Славя. День пятый")
-  $ save_name = (u'Славя. День пятый')
-  $ day_time()
-  $ persistent.sprite_time = "day"
-  $ renpy.pause(3, hard=True)
+  call slavyana_mod__day5_init
+  python:
+    backdrop = "days"
+    new_chapter(5, u"Славя. День пятый")
+    save_name = (u'Славя. День пятый')
+    day_time()
+    persistent.sprite_time = "day"
   
   scene black
-  if go_to_sh:
+  if d4_go_to_sh:
     scene bg int_mine
     show prologue_dream
     with dissolve
@@ -70,7 +72,7 @@ label slavyana_mod__day5:
   window show
   "Так начался двенадцатый день моего пребывания в «Совёнке»."
   
-  if go_to_sh:
+  if d4_go_to_sh:
     "Часы показывали половину восьмого."
     "Даже если бы я прямо сейчас вышла на пробежку, я бы, скорее всего, опоздала на линейку."
     "Поэтому я оделась в пионерскую в форму, завязала галстук на воротнике и пошла на площадь."
@@ -120,7 +122,7 @@ label slavyana_mod__day5:
   "Бо́льшая часть пионеров уже собралась, пока остальные ещё подтягивались."
   "И вот, когда все собрались, я окинула взглядом пришедших."
 
-  if go_to_sh:
+  if d4_go_to_sh:
     "Пришла даже Двачевская! {w} Но нигде не было Семёна."
   else:
     "Пришла даже Двачевская и Шурик! {w} Но нигде не было Семёна."
@@ -132,7 +134,7 @@ label slavyana_mod__day5:
   "Сегодняшний план включал в себя: уборку помещений, дежурство Мику в столовой и уборку на поляне перед вечерним костром."
   "В прошлый четверг тоже был костёр и ничего выдающегося он из себя не представлял: небольшая прогулка по лесу с остановкой на поляне."
   "Также Ольга Дмитриевна упомянула в своей речи пропажу Шурика и то, как Семён храбро отправился на его поиски."
-  if go_to_sh:
+  if d4_go_to_sh:
     "Я, конечно, тоже участвовала, но решила не напоминать ей об этом, тем более в присутствии других пионеров."
   mt "Линейка окончена."
   scene bg ext_square_day with dissolve
@@ -211,7 +213,7 @@ label slavyana_mod__day5:
   scene bg ext_dining_hall_near_day with dissolve
   play ambience ambience_camp_center_day loop fadein 3
 
-  if go_to_sh:
+  if d4_go_to_sh:
     window show
     "Раз я не успела побегать до линейки, то займусь этим прямо сейчас."
     "По плану сейчас уборка в клубах, но если побегу сейчас, то не успею. Но если сократить маршрут, то успею помочь Мику."
@@ -470,7 +472,7 @@ label slavyana_mod__day5:
   show un normal pioneer far
   with dissolve
   window show
-  if go_to_sh:
+  if d4_go_to_sh:
     "Я подошла к Лене, и мы вместе направились в столовую."
   else:
     "На площади, как мы и условились, я встретила Лену."
@@ -578,7 +580,7 @@ label slavyana_mod__day5:
 
   menu:
     "Пойти с Семёном":
-      $ sl_m_day5_berries_go_with = True
+      $ d5_berries_go_with = True
       $ sl_m_lp += 1
       me "Одна корзинка у меня, одна - у вас; всё очевидно."
       sl "Нет, давай я с тобой пойду!"
@@ -663,6 +665,7 @@ label slavyana_mod__day5:
       sl "Отлично! {w} Теперь можно отправляться назад."
 
     "Я и сама могу":
+      $ d5_berries_go_with = False
       me "Давай я пойду с тобой."
       "Он обратился к Лене."
       un "Давай…"
@@ -871,7 +874,7 @@ label slavyana_mod__day5_change_clothes_after:
       pass
 
 label slavyana_mod__day5_lena_true:
-  $ sl_m_day5_cleaning_told_truth = True
+  $ d5_cleaning_told_truth = True
   sl "Я ещё точно не знаю, не уверена, но… наверное. А почему ты интересуешься?"
   show un shy pioneer with dspr
   un "Да нет, просто…"
@@ -1081,7 +1084,7 @@ label slavyana_mod__day5_lena:
   scene bg int_house_of_sl_sunset with dissolve
   "Собирать было ничего не нужно, но я оставила у себя в домике заранее заготовленную сумку с полотенцем, тапочками и прочим."
   
-  if not sl_m_day2_go_with_sp and not sl_m_day2_sp_keys:
+  if not d2_go_with_sp and not d2_sp_keys:
     "Когда я собиралась закрыть домик, то взглянула на стол,{w} где лежали мои вожатские ключи."
     "Откуда они здесь взялись? Видимо принёс кто-то."
   
@@ -1236,7 +1239,7 @@ label slavyana_mod__day5_lena:
   window show
   "Когда я начала замерзать, пришлось выйти из воды."
   th "Кажется, я забыла взять из домика сумку, в которой лежало полотенце."
-  if persistent.sl_m_end_count > 0 and sl_m_lp < 4:
+  if sl_m_ach_main_has() and sl_m_lp < 4:
     jump slavyana_mod__day5_alt
   "Прошло не больше 15 минут."
   th "Стоит ли ждать Семёна? Наверное, он остался там."
@@ -1640,10 +1643,10 @@ label slavyana_mod__day5_lena:
 
   menu:
     "Свалить вину на Семёна":
-      $ sl_m_day5_make_semen_guilty = True
+      $ d5_make_semen_guilty = True
       $ sl_m_lp -= 3
     "Сказать правду":
-      $ sl_m_day5_make_semen_guilty = False
+      $ d5_make_semen_guilty = False
       $ sl_m_lp += 2
   window hide
 
@@ -1683,6 +1686,7 @@ label slavyana_mod__day5_bknt5:
 
 # Быстрый выбор дня
 label slavyana_mod__day5_fast_choice:
+  call slavyana_mod__day5_init
 
   if sl_m_l_day == 5:
     window hide
@@ -1708,46 +1712,47 @@ label slavyana_mod__day5_fast_choice:
   "Корзинки оказалось две и встал выбор как разбиться на группы."
   menu:
     "Пойти с Семёном":
-      $ sl_m_day5_berries_go_with = True
+      $ d5_berries_go_with = True
       $ sl_m_lp += 1
     "Я и сама могу":
-      pass
+      $ d5_berries_go_with = False
 
   scene bg ext_polyana_day
   show un evil_smile pioneer far
   with dissolve
   "Во время уборки поляны перед костром, Лена заговорила об отношениях"
   if sl_m_lp < 4:
-    $ sl_m_day5_cleaning_told_truth = False
+    $ d5_cleaning_told_truth = False
+
+    # Соло концовки
+    if sl_m_ach_main_has():
+      jump slavyana_mod__day5_alt_fast_choice
+      return
   else:
     menu:
       "Соврать":
-        $ sl_m_day5_cleaning_told_truth = False
+        $ d5_cleaning_told_truth = False
       "Сказать правду":
-        $ sl_m_day5_cleaning_told_truth = True
+        $ d5_cleaning_told_truth = True
 
-  if persistent.sl_m_end_count > 0 and sl_m_lp < 4:
-    jump slavyana_mod__day5_alt_fast_choice
-    return
-  else:
-    $ night_time()
-    $ persistent.sprite_time = "night"
+  $ night_time()
+  $ persistent.sprite_time = "night"
 
-    scene bg ext_beach_night with dissolve
-    "После костра, Славя ушла купаться и забыла сумку. Славя Ждала Семёна, но он не появлялся."
-    menu:
-      "Подождать ещё":
-        $ sl_m_lp += 1
-      "Сходить за сумкой":
-        pass
+  scene bg ext_beach_night with dissolve
+  "После костра, Славя ушла купаться и забыла сумку. Славя Ждала Семёна, но он не появлялся."
+  menu:
+    "Подождать ещё":
+      $ sl_m_lp += 1
+    "Сходить за сумкой":
+      pass
 
-    scene bg int_aidpost_night with dissolve
-    "В конце дня после того, как Ольга увела Семёна Славя решила придумать оправдание"
-    menu:
-      "Свалить вину на Семёна":
-        $ sl_m_day5_make_semen_guilty = True
-        $ sl_m_lp -= 3
-      "Сказать правду":
-        $ sl_m_day5_make_semen_guilty = False
-        $ sl_m_lp += 2
+  scene bg int_aidpost_night with dissolve
+  "В конце дня после того, как Ольга увела Семёна Славя решила придумать оправдание"
+  menu:
+    "Свалить вину на Семёна":
+      $ d5_make_semen_guilty = True
+      $ sl_m_lp -= 3
+    "Сказать правду":
+      $ d5_make_semen_guilty = False
+      $ sl_m_lp += 2
   jump slavyana_mod__day6_fast_choise

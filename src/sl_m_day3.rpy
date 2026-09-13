@@ -1,15 +1,16 @@
-﻿init:
-    $ sl_m_day3_help = False
-    
+﻿# Оригинальный автор: FireBoTer
+# Отредактировал: VadimkaG
+
 label slavyana_mod__day3:
-    $ renpy.pause(2, hard=True)
-    $ backdrop = "days"
-    $ new_chapter(3, u"Славя. День третий")
-    $ save_name = (u'Славя. День третий')
-    $ day_time()
-    $ persistent.sprite_time = "day"
-    $ renpy.pause(3, hard=True)
-    
+    python:
+        backdrop = "days"
+        new_chapter(3, u"Славя. День третий")
+        save_name = (u'Славя. День третий')
+        day_time()
+        persistent.sprite_time = "day"
+
+        d3_help = False
+
 #утро
     show unblink
     play ambience ambience_int_cabin_day fadein 3
@@ -428,7 +429,7 @@ label slavyana_mod__day3:
     menu:
         "Пойти за Семёном":
             $ sl_m_lp += 2
-            $ sl_m_day3_help = True
+            $ d3_help = True
             window show
             th "Нужно ему помочь."
             "Я встала из-за стола и, в обход Ольги Дмитриевны и Ульяны, дошла до выхода."
@@ -474,7 +475,7 @@ label slavyana_mod__day3:
     sl "Тебя ищу."
     show pi surprise pioneer at center with dspr
     me "Меня? Зачем?"
-    if sl_m_day3_help:
+    if d3_help:
         th "А действительно, зачем?.."
         th "Точно, он поможет мне в библиотеке!"
     else:
@@ -706,7 +707,7 @@ label slavyana_mod__day3:
     mt "Ну что, Славя, как день?"
     sl "Нормально, а после дискотеки станет ещё лучше!"
     th "Высказывать вожатой всё, что я о ней за сегодня подумала, совершенно не хочется... Не то место и не то время, как в таких случаях говорят."
-    if sl_m_day1_help_od:
+    if d1_help_od:
         show mt sad pioneer at center with dspr
         mt "Я вот тут спросить всё хотела... Почему ты всё время с Семёном рядом оказываешься?"
         "Я сильно удивилась таким вопросам."
@@ -729,7 +730,7 @@ label slavyana_mod__day3:
     mt "Славя, будь добра, принеси их со склада."
     sl "Иду!"
     hide mt with dissolve
-    if sl_m_day2_sp_keys:
+    if d2_sp_keys:
         "Я вскочила и направилась в сторону сарая, гордо именуемого «складом»."
         window hide
         scene black with dissolve
@@ -941,7 +942,7 @@ label slavyana_mod__day3:
     "Оля подошла к диджейскому пульту и что-то там покрутила."
     th "Видимо, кибернетики тоже ушли танцевать."
     mt "Следующая песня – дамы приглашают кавалеров!"
-    if sl_m_day1_help_od:
+    if d1_help_od:
         "Я заметила, что она подмигнула кому-то в толпе.{w} Не мне ли часом?{w} Вспоминая наш разговор, может статься, что это действительно так."
     
 #танец
@@ -1246,7 +1247,7 @@ label slavyana_mod__day3:
     scene bg ext_house_of_sl_night with dissolve
     window show
     "Когда я дошла до домика, то поняла, насколько устала за этот день."
-    if sl_m_day1_help_od:
+    if d1_help_od:
         "Уборка в лагере, подготовка к дискотеке, философские (а порой весьма странные) разговоры с Семёном, странности Оли... Всё это очень сильно вымотало меня.{w} Но нужно было ещё закончить дневник."
     else:
         "Уборка в лагере, подготовка к дискотеке, философские (а порой весьма странные) разговоры с Семёном... Всё это очень сильно вымотало меня.{w} Но нужно было ещё закончить дневник."
@@ -1296,8 +1297,6 @@ label slavyana_mod__day3:
     $ volume(1.0, "sound")
     pause (3)
     jump slavyana_mod__day4
-    
-#Сделано FireBoTer'ом
 
 # Блокноты
 label slavyana_mod__day3_bknt1:
@@ -1347,7 +1346,6 @@ label slavyana_mod__day3_fast_choice:
     menu:
         "Пойти за Семёном":
             $ sl_m_lp += 2
-            $ sl_m_day3_help = True
         "Остаться на месте":
             pass
 

@@ -1,11 +1,10 @@
 label slavyana_mod__day7:
-  $ renpy.pause(2, hard=True)
-  $ backdrop = "days"
-  $ new_chapter(7, u"Славя. День седьмой")
-  $ save_name = (u'Славя. День седьмой')
-  $ day_time()
-  $ persistent.sprite_time = "day"
-  $ renpy.pause(3, hard=True)
+  python:
+    backdrop = "days"
+    new_chapter(7, u"Славя. День седьмой")
+    save_name = (u'Славя. День седьмой')
+    day_time()
+    persistent.sprite_time = "day"
 
   show screen slavyana_mod__notebook_interface
 
@@ -14,7 +13,7 @@ label slavyana_mod__day7:
   "Когда я проснулась, на меня смотрел Семён."
   "Перед глазами пронеслись события прошлой но…"
   th "Так, стоп! Это было днём."
-  if persistent.sl_m_hen_txt:
+  if sl_m_hentai:
     scene cg d7_sl_morning_2 with dissolve
   else:
     show pi normal pioneer close at center with dissolve
@@ -281,7 +280,7 @@ label slavyana_mod__day7:
   me "Когда попозже? У нас осталось пару часов до отъезда."
   "Я ничего не ответила и продолжала собирать вещи."
 
-  if words_red:
+  if current_route == Routes.Red:
     show pi normal pioneer at cright with dspr
     me "Слушай, я всё-таки не понимаю."
     sl "Чего?"
@@ -336,7 +335,7 @@ label slavyana_mod__day7:
     scene black with dissolve
     "…"
 
-  if words_green or words_blue:
+  if current_route == Routes.Green or current_route == Routes.Blue:
     me "Ты думаешь, только для тебя это всё сложно!"
     sl "Думаю, что и для тебя непросто, но ты так почему-то не считаешь."
     me "А если я тебе скажу, что мне совсем некуда возвращаться, что у меня, начиная с прошедшего понедельника, больше нет никакой жизни, и мне всё равно придётся начинать всё с начала?"
@@ -347,7 +346,7 @@ label slavyana_mod__day7:
     me "Из начала XXI века."
     me "И лет мне несколько больше, чем кажется."
     me "Я совершенно не знаю, как здесь оказался."
-    if words_blue:
+    if current_route == Routes.Blue:
       th "А ведь это всё может быть правдой. Но всё настолько бредово, что поверить в это почти невозможно, особенно без доказательств."
       th "Хотя окажись я в такой же ситуации, как говорит Семён, первым делом я бы пыталась выяснить у окружающих, что происходит и как я сюда попала."
     th "Мне кажется Семён пытается придумать такие обстоятельства, решение которых будет невозможно для нормальной жизни."
@@ -373,7 +372,7 @@ label slavyana_mod__day7:
     stop music fadeout 3
     play ambience ambience_int_cabin_day loop fadein 3
 
-  if words_green:
+  if current_route == Routes.Green:
     th "Семён ведёт себя как маленький ребёнок."
     "Да, мне тоже не хочется расставаться, и мне очень грустно, что смена заканчивается, но нельзя же в погоне за мной увязываться в другой город."
     "Тем более как он говорит, в родном городе его никто не ждёт . Ну как такое может быть?"
@@ -381,7 +380,7 @@ label slavyana_mod__day7:
     "Но это же абсурдно! Просто глупо!"
     "Я ему не позволю. Пусть думает, что я пока что на него обиделась."
 
-  if words_blue:
+  if current_route == Routes.Blue:
     th "Он поступает очень необдуманно и эгоистично."
     "В погоне за счастьем, он готов отречься от прошлого. {w} И всё ради… {i}меня{/i}?"
     th "Это очень мило с его стороны. Но нельзя так поступать! Даже ради меня."
@@ -409,7 +408,7 @@ label slavyana_mod__day7:
   "Я буду очень скучать."
   stop music fadeout 3
 
-  if words_green or words_blue:
+  if current_route == Routes.Green or current_route == Routes.Blue:
     scene ext_bus
     show pi normal pioneer at cright
     with dissolve
@@ -421,7 +420,7 @@ label slavyana_mod__day7:
   scene bg int_bus_people_night with dissolve
   "Автобус мчался вперёд. Пейзажи сменяли друг друга."
 
-  if words_green:
+  if current_route == Routes.Green:
     "Уже несколько часов мы сидели рядом, а попытки завязать разговор заканчивались односложными фразами."
     stop ambience
     play music music_list["a_promise_from_distant_days"] fadein 2
@@ -434,13 +433,13 @@ label slavyana_mod__day7:
     th "Помирились."
     "Я поцеловала его в щёчку и положила голову ему на плечо."
 
-  if words_red or words_blue:
+  if current_route == Routes.Red or current_route == Routes.Blue:
     "И всё у нас было хорошо."
     "От яркого лунного света было светло, как днём. Деревья принарядились в серые цвета."
     "Мы с Семёном сидели на последнем ряду и разглядывали впереди сидящих пионеров."
     "Ульянка бегала по салону и громко кричала. {w} Лена читала книжку, а Алиса спала."
 
-  if words_red:
+  if current_route == Routes.Red:
     "Я решила прервать наше с Семёном молчание."
     stop ambience
     play music music_list["farewell_to_the_past_edit"] fadein 2
@@ -455,7 +454,7 @@ label slavyana_mod__day7:
     me "Да, конечно!"
     "Я положила голову ему на плечо."
   
-  if words_blue:
+  if current_route == Routes.Blue:
     stop ambience
     play music music_list["a_promise_from_distant_days"] fadein 2
     me "Не бери в голову то, что я тогда сказал! Я не хочу оправдываться или говорить, что это неправда. {w} Просто для меня сейчас самое главное - это ты."

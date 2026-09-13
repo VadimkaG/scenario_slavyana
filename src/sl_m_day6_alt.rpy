@@ -1,13 +1,13 @@
 label slavyana_mod__day6_alt:
-    $ renpy.pause(2, hard=True)
-    $ backdrop = "days"
-    $ new_chapter(6, u"Славя. День шестой")
-    $ day_time()
-    $ persistent.sprite_time = "day"
-    $ renpy.pause(3, hard=True)
+    python:
+        backdrop = "days"
+        new_chapter(6, u"Славя. День шестой")
+        day_time()
+        persistent.sprite_time = "day"
 
     play ambience ambience_int_cabin_night fadein 3
     scene bg int_house_of_sl_day
+    show screen slavyana_mod__notebook_interface
     show unblink
     window show
     "Я открыла глаза и увидела... {w}Потолок своего домика."
@@ -30,7 +30,7 @@ label slavyana_mod__day6_alt:
     pause 2
 
     #Алиса
-    if sl_m_end_dv:
+    if current_route == Routes.SoloDV:
         scene bg ext_washstand_day with dissolve
         window show
         "Я пробежалась до умывальников, умылась, и выбежала в лес."
@@ -100,7 +100,7 @@ label slavyana_mod__day6_alt:
         scene bg ext_square_day with dissolve
 
     #Лена
-    elif sl_m_end_un:
+    elif current_route == Routes.SoloUN:
         stop ambience fadeout 2
         scene black with dissolve
         pause 2
@@ -275,7 +275,7 @@ label slavyana_mod__day6_alt:
     "Пионеры разбрелись кто куда. {w}Но в основном конечно же в столовую."
 
     #Алиса
-    if sl_m_end_dv:
+    if current_route == Routes.SoloDV:
         show el normal pioneer with dissolve
         el "Славя!"
         "Меня окликнул Электроник."
@@ -296,7 +296,7 @@ label slavyana_mod__day6_alt:
         "Отбросив эти мысли, я направилась в столовую."
 
     #Ульяна
-    elif sl_m_end_us:
+    elif current_route == Routes.SoloUS:
         "И я как-то внезапно осознала, что Семёна с нами нет!"
 
     stop music fadeout 2
@@ -304,7 +304,7 @@ label slavyana_mod__day6_alt:
     play ambience ambience_dining_hall_full fadein 3
 
     #Алиса
-    if sl_m_end_dv:
+    if current_route == Routes.SoloDV:
         show un normal pioneer with dissolve
         "На завтраке ко мне подсела Лена."
         sl "Привет!"
@@ -609,19 +609,55 @@ label slavyana_mod__day6_alt:
         "Перед сном у меня ещё было время. Я решила сделать запись в своём дневнике."
         
     # Дневник
-        scene anim prolog_2
-        with fade
-        $ set_mode_nvl()
+        show bknt at truecenter
+        hide screen slavyana_mod__notebook_interface
+        with dspr
+        play sound_loop pen_write
+        call slavyana_mod__day6_alt_bknt1
+        show screen sl_m_nb() with dissolve2
+        window show
         "Сегодня предпоследний день в «Совёнке», как жаль что смена вот-вот подойдёт к концу. Но я рада, что попала сюда, здесь я встретила много интересных людей."
+        window hide
+        hide bknt
+        call slavyana_mod__day6_alt_bknt2
+        show screen sl_m_nb() with dissolve
+        window show
         "Сегодня Электроник попросил меня сказать Семёну, чтобы доставил какую-то посылку."
+        window hide
+        call slavyana_mod__day6_alt_bknt3
+        show screen sl_m_nb() with dissolve
+        window show
         "Не знаю какую, но когда я сегодня пришла к Виоле, она мне сказала что именно у неё пропало."
+        window hide
+        call slavyana_mod__day6_alt_bknt4
+        show screen sl_m_nb() with dissolve
+        window show
         "Подозрения конечно сразу же пали на Семёна. Однако, по его словам, у него ничего нет." 
+        window hide
+        call slavyana_mod__day6_alt_bknt5
+        show screen sl_m_nb() with dissolve
+        window show
         "Далее я решила проверить Алису, которая вполне могла это сделать. Но и тут меня ждала неудача."
+        window hide
+        call slavyana_mod__day6_alt_bknt6
+        show screen sl_m_nb() with dissolve
+        window show
         "В итоге мне пришлось доложить об этом Оле. Похоже, завтра нам придётся разобраться с этим."
+        window hide
+        call slavyana_mod__day6_alt_bknt7
+        show screen sl_m_nb() with dissolve
+        window show
         "Пожалуй, завтрашний день проведу с отдыхом от всего. Я хочу запомнить каждое дерево, каждый камушек этого прекрасного места. Взглянуть на всё это в последний раз."
+        window hide
+        call slavyana_mod__day6_alt_bknt8
+        show screen sl_m_nb() with dissolve
+        window show
         "Мы ещё увидимся, дорогой дневник."
-        nvl clear
-        $ set_mode_adv()
+        window hide
+        stop sound_loop
+        hide screen sl_m_nb
+        show screen slavyana_mod__notebook_interface
+        with dspr
     # Конец дневника
 
         scene bg int_house_of_sl_night
@@ -631,7 +667,7 @@ label slavyana_mod__day6_alt:
         window hide
 
     #Лена
-    elif sl_m_end_un:
+    elif current_route == Routes.SoloUN:
         "Заходя в столовую, я обнаружила Семёна, который редко успевает на завтрак."
         "Лицо у него было очень напряжённое и задумчивое."
         "Я решила подойти к нему."
@@ -670,7 +706,7 @@ label slavyana_mod__day6_alt:
         window hide
 
     #Ульяна
-    elif sl_m_end_us:
+    elif current_route == Routes.SoloUS:
         "Зайдя в столовую, я тоже не нашла его."
         "Поэтому..."
         "Компанию за завтраком мне составили {w=0.5}{nw}"
@@ -911,12 +947,12 @@ label slavyana_mod__day6_alt:
         window hide
 
     #Лена или одиночка
-    if sl_m_end_un or sl_m_end_sl:
+    if current_route == Routes.SoloUN or current_route == Routes.Solo:
         scene bg int_library_day with dissolve
         play ambience ambience_int_cabin_day fadein 3
         show mz angry pioneer glasses with dissolve
         window show
-        if sl_m_end_un:
+        if current_route == Routes.SoloUN:
           "Я решила заглянуть в библиотеку к своей соседке."
         else:
           sl "Привет, я пришла к тебе подмести."
@@ -972,7 +1008,7 @@ label slavyana_mod__day6_alt:
         scene bg ext_library_day with dissolve
 
     #Одиночка
-    if sl_m_end_sl:
+    if current_route == Routes.Solo:
         th "Это было грустно. Неразделённая любовь, неужели и со мной такое может случиться?"
         window hide
         scene black with dissolve
@@ -984,15 +1020,50 @@ label slavyana_mod__day6_alt:
         th "Напишу дневник, пока время есть."
         
     # Дневник
-        $ set_mode_nvl()
+        show bknt at truecenter
+        hide screen slavyana_mod__notebook_interface
+        with dspr
+        play sound_loop pen_write
+        call slavyana_mod__day6_alt_bknt1
+        show screen sl_m_nb() with dissolve2
+        window show
         "Сегодня предпоследний день в «Совёнке», как жаль что смена вот-вот подойдёт к концу. Но я рада, что попала сюда, здесь я встретила много интересных людей."
+        window hide
+        hide bknt
+        call slavyana_mod__day6_alt_bknt2_2
+        show screen sl_m_nb() with dissolve
+        window show
         "С некоторыми даже подружилась."
+        window hide
+        call slavyana_mod__day6_alt_bknt3_2
+        show screen sl_m_nb() with dissolve
+        window show
         "Например с такими замечательными ребятами, как Серёжа и Саша."
+        window hide
+        call slavyana_mod__day6_alt_bknt4_2
+        show screen sl_m_nb() with dissolve
+        window show
         "На благо лагеря стараются, хотят сделать последний день смены незабываемым. Полдня с ними безрезультатно провозилась, правда, но надеюсь у них получится."
+        window hide
+        call slavyana_mod__day6_alt_bknt5_2
+        show screen sl_m_nb() with dissolve
+        window show
         "Ещё, Семён вдруг оживился: он встретил какого-то пионера и теперь везде его ищет. И как он его найдёт, если даже не может сказать как он выглядел."
+        window hide
+        call slavyana_mod__day6_alt_bknt6_2
+        show screen sl_m_nb() with dissolve
+        window show
         "Из полезных дел сегодня была только уборка на площади." 
+        window hide
+        call slavyana_mod__day6_alt_bknt7_2
+        show screen sl_m_nb() with dissolve
+        window show
         "Завтрашний день будет последним, и я хочу, чтобы он навсегда остался в моей памяти."
-        $ set_mode_adv()
+        window hide
+        stop sound_loop
+        hide screen sl_m_nb
+        show screen slavyana_mod__notebook_interface
+        with dspr
     # Конец дневника
 
         play sound sfx_dinner_horn_processed
@@ -1048,14 +1119,27 @@ label slavyana_mod__day6_alt:
         "Я взяла свой дневник и дописала в него несколько строк..."
         
     # Дневник
-        $ set_mode_nvl()
+        play sound_loop pen_write
+        call slavyana_mod__day6_alt_bknt8_2
+        show screen sl_m_nb() with dissolve2
+        hide screen slavyana_mod__notebook_interface
+        with dspr
+        window show
         "...Сегодня случилась неприятная сценка в библиотеке: Серёжа решил признаться в любви своей даме сердца, но Женя ясно дала ему понять больше не приближаться к ней."
+        window hide
+        call slavyana_mod__day6_alt_bknt9_2
+        show screen sl_m_nb() with dissolve
+        window show
         "А жаль, из них вышла бы отличная пара. Возможно, я тоже в скором времени встречу своего кавалера."
-        $ set_mode_adv()
+        window hide
+        stop sound_loop
+        hide screen sl_m_nb
+        show screen slavyana_mod__notebook_interface
+        with dspr
     # Конец дневника
 
     #Лена
-    if sl_m_end_un:
+    if current_route == Routes.SoloUN:
         th "Это было грустное зрелище."
         "..."
         play ambience ambience_camp_center_day fadein 3
@@ -1082,13 +1166,13 @@ label slavyana_mod__day6_alt:
         play ambience ambience_camp_center_day fadein 3 
 
     #Лена или ульяна
-    if sl_m_end_un or sl_m_end_us:
+    if current_route == Routes.SoloUN or current_route == Routes.SoloUS:
         scene bg ext_admins_day with dissolve
         "Рядом со входом уже стояли Ольга Дмитриевна и Мику."
         show mt normal pioneer at left
         show mi normal pioneer at right
         with dissolve
-        if sl_m_end_us:
+        if current_route == Routes.SoloUS:
             mt "Славя, я встретила Мику по дороге, но не успела сказать тебе."
             sl "Да ничего страшного."
         mt "Девочки, значит я сейчас буду заниматься бумагами, а вы пока вымойте пол и протрите пыль."
@@ -1103,7 +1187,7 @@ label slavyana_mod__day6_alt:
         "Пока Оля убиралась в одном кабинете, мы с Мику протирали пыль и мыли полы в другой."
 
     #Лена
-    if sl_m_end_un:
+    if current_route == Routes.SoloUN:
         show mi normal pioneer with dissolve
         "Мику много и часто рассказывала про Японию и то, как к ней пришла в голову мысль написать ту песню, которую она пела Лене."
         "Слушать это всё было очень интересно, но она постоянно скакала с темы на тему."
@@ -1180,7 +1264,7 @@ label slavyana_mod__day6_alt:
         sl "Ты это о чём?"
         show sh serious pioner with dspr
         sh "Я про старый лагерь."
-        if go_to_sh:
+        if d4_go_to_sh:
             sh "Когда вы с Семёном помогли мне и вывели наружу."
         else:
             sh "Семён нашёл меня там, в шахте, я заблудился пока ходил по этому чёртовому лабиринту."
@@ -1292,13 +1376,40 @@ label slavyana_mod__day6_alt:
         window hide
 
     # Дневник
-        $ set_mode_nvl()
+        show bknt at truecenter
+        hide screen slavyana_mod__notebook_interface
+        with dspr
+        play sound_loop pen_write
+        call slavyana_mod__day6_alt_bknt1
+        show screen sl_m_nb() with dissolve2
+        window show
         "Сегодня предпоследний день в «Совёнке», как жаль что смена вот-вот подойдёт к концу. Но я рада, что попала сюда, здесь я встретила много интересных людей."
+        window hide
+        hide bknt
+        call slavyana_mod__day6_alt_bknt2_2
+        show screen sl_m_nb() with dissolve
+        window show
         "С некоторыми даже подружилась."
+        window hide
+        call slavyana_mod__day6_alt_bknt3_3
+        show screen sl_m_nb() with dissolve
+        window show
         "Однако сегодня весь день не было Лены. В начале дня она куда-то ушла, не предупредив даже свою соседку. Всё это очень странно..."
+        window hide
+        call slavyana_mod__day6_alt_bknt4_3
+        show screen sl_m_nb() with dissolve
+        window show
         "Остальной день я была занята, помогая Оле и занимаясь уборкой по лагерю."
+        window hide
+        call slavyana_mod__day6_alt_bknt5_3
+        show screen sl_m_nb() with dissolve
+        window show
         "А обо всём что произойдёт завтра, дорогой дневник, я {s}расскажу{/s} напишу завтра."
-        $ set_mode_adv()
+        window hide
+        stop sound_loop
+        hide screen sl_m_nb
+        show screen slavyana_mod__notebook_interface
+        with dspr
     # Конец дневника
 
         window show
@@ -1308,7 +1419,7 @@ label slavyana_mod__day6_alt:
         "..."
 
     #Ульяна
-    if sl_m_end_us:
+    if current_route == Routes.SoloUS:
         "Еще какое-то время Мику рассказывала о новой песне, что она придумала. Но она говорила так быстро, что я успевала понимать лишь отрывками."
         play sound sfx_dinner_horn_processed
         show mi normal pioneer with dissolve
@@ -1510,16 +1621,43 @@ label slavyana_mod__day6_alt:
         window hide
 
     # Дневник
-        $ set_mode_nvl()
+        show bknt at truecenter
+        hide screen slavyana_mod__notebook_interface
+        with dspr
+        play sound_loop pen_write
+        call slavyana_mod__day6_alt_bknt1
+        show screen sl_m_nb() with dissolve2
+        window show
         "Сегодня предпоследний день в «Совёнке», как жаль, что смена вот-вот подойдёт к концу. Но я рада, что попала сюда, здесь я встретила много интересных людей."
+        window hide
+        hide bknt
+        call slavyana_mod__day6_alt_bknt2_2
+        show screen sl_m_nb() with dissolve
+        window show
         "С некоторыми даже подружилась."
+        window hide
+        call slavyana_mod__day6_alt_bknt3_2
+        show screen sl_m_nb() with dissolve
+        window show
         "Например с такими замечательными ребятами, как Серёжа и Саша."
+        window hide
+        call slavyana_mod__day6_alt_bknt4_4
+        show screen sl_m_nb() with dissolve
+        window show
         "Я надеюсь, они обязательно помирятся, ведь они друзья не разлей вода."
+        window hide
+        call slavyana_mod__day6_alt_bknt5_4
+        show screen sl_m_nb() with dissolve
+        window show
         "Весь остальной день я заняла полезной работой по лагерю. Пожалуй, завтра я проведу весь день в отдыхе, если не появится каких-нибудь новых поручений."
-        $ set_mode_adv()
+        window hide
+        stop sound_loop
+        hide screen sl_m_nb
+        show screen slavyana_mod__notebook_interface
+        with dspr
     # Конец дневника
 
-    if sl_m_end_us or sl_m_end_sl:
+    if current_route == Routes.SoloUS or current_route == Routes.Solo:
         play sound sfx_open_door_1
         show mz normal pioneer glasses with dissolve
         window show
@@ -1546,19 +1684,117 @@ label slavyana_mod__day6_alt:
     voice "Время пришло."
     window hide
     pause 1
+    hide screen slavyana_mod__notebook_interface
     scene black with dissolve
     stop ambience fadeout 1
     pause 1
     jump slavyana_mod__day7_alt
 
 
+# Блокноты
+label slavyana_mod__day6_alt_bknt1:
+  $ sl_m_nb_addpage("Сегодня предпоследний день в «Совёнке», как жаль что смена вот-вот подойдёт к концу. Но я рада, что попала сюда, здесь я встретила много интересных людей.")
+  return
+label slavyana_mod__day6_alt_bknt2:
+  $ sl_m_nb_add("Сегодня Электроник попросил меня сказать Семёну, чтобы доставил какую-то посылку.")
+  return
+label slavyana_mod__day6_alt_bknt3:
+  $ sl_m_nb_add("Не знаю какую, но когда я сегодня пришла к Виоле, она мне сказала что именно у неё пропало.")
+  return
+label slavyana_mod__day6_alt_bknt4:
+  $ sl_m_nb_add("Подозрения конечно сразу же пали на Семёна. Однако, по его словам, у него ничего нет.")
+  return
+label slavyana_mod__day6_alt_bknt5:
+  $ sl_m_nb_add("Далее я решила проверить Алису, которая вполне могла это сделать. Но и тут меня ждала неудача.")
+  return
+label slavyana_mod__day6_alt_bknt6:
+  $ sl_m_nb_add("В итоге мне пришлось доложить об этом Оле. Похоже, завтра нам придётся разобраться с этим.")
+  return
+label slavyana_mod__day6_alt_bknt7:
+  $ sl_m_nb_add("Пожалуй, завтрашний день проведу с отдыхом от всего. Я хочу запомнить каждое дерево, каждый камушек этого прекрасного места. Взглянуть на всё это в последний раз.")
+  return
+label slavyana_mod__day6_alt_bknt8:
+  $ sl_m_nb_add("Мы ещё увидимся, дорогой дневник.")
+  return
+
+label slavyana_mod__day6_alt_bknt2_2:
+  $ sl_m_nb_add("С некоторыми даже подружилась.")
+  return
+label slavyana_mod__day6_alt_bknt3_2:
+  $ sl_m_nb_add("Например с такими замечательными ребятами, как Серёжа и Саша.")
+  return
+label slavyana_mod__day6_alt_bknt4_2:
+  $ sl_m_nb_add("На благо лагеря стараются, хотят сделать последний день смены незабываемым. Полдня с ними безрезультатно провозилась, правда, но надеюсь у них получится.")
+  return
+label slavyana_mod__day6_alt_bknt5_2:
+  $ sl_m_nb_add("Ещё, Семён вдруг оживился: он встретил какого-то пионера и теперь везде его ищет. И как он его найдёт, если даже не может сказать как он выглядел.")
+  return
+label slavyana_mod__day6_alt_bknt6_2:
+  $ sl_m_nb_add("Из полезных дел сегодня была только уборка на площади.")
+  return
+label slavyana_mod__day6_alt_bknt7_2:
+  $ sl_m_nb_add("Завтрашний день будет последним, и я хочу, чтобы он навсегда остался в моей памяти.")
+  return
+
+label slavyana_mod__day6_alt_bknt8_2:
+  $ sl_m_nb_add("...Сегодня случилась неприятная сценка в библиотеке: Серёжа решил признаться в любви своей даме сердца, но Женя ясно дала ему понять больше не приближаться к ней.")
+  return
+label slavyana_mod__day6_alt_bknt9_2:
+  $ sl_m_nb_add("А жаль, из них вышла бы отличная пара. Возможно, я тоже в скором времени встречу своего кавалера.")
+  return
+
+label slavyana_mod__day6_alt_bknt3_3:
+  $ sl_m_nb_add("Однако сегодня весь день не было Лены. В начале дня она куда-то ушла, не предупредив даже свою соседку. Всё это очень странно...")
+  return
+label slavyana_mod__day6_alt_bknt4_3:
+  $ sl_m_nb_add("Остальной день я была занята, помогая Оле и занимаясь уборкой по лагерю.")
+  return
+label slavyana_mod__day6_alt_bknt5_3:
+  $ sl_m_nb_add("А обо всём что произойдёт завтра, дорогой дневник, я {s}расскажу{/s} напишу завтра.")
+  return
+
+label slavyana_mod__day6_alt_bknt4_4:
+  $ sl_m_nb_add("Я надеюсь, они обязательно помирятся, ведь они друзья не разлей вода.")
+  return
+label slavyana_mod__day6_alt_bknt5_4:
+  $ sl_m_nb_add("Весь остальной день я заняла полезной работой по лагерю. Пожалуй, завтра я проведу весь день в отдыхе, если не появится каких-нибудь новых поручений.")
+  return
+
 # Быстрый выбор
 label slavyana_mod__day6_alt_fast_choise:
-    if sl_m_l_day == 6:
-      jump slavyana_mod__day6_alt
-      return
+  if sl_m_l_day == 6:
+    jump slavyana_mod__day6_alt
+    return
 
-    if sl_m_l_day == 7:
-      jump slavyana_mod__day7_alt
-    else:
-      jump slavyana_mod__day7_epilogue_alt
+  call slavyana_mod__day6_alt_bknt1
+  if current_route == Routes.SoloDV:
+    call slavyana_mod__day6_alt_bknt2
+    call slavyana_mod__day6_alt_bknt3
+    call slavyana_mod__day6_alt_bknt4
+    call slavyana_mod__day6_alt_bknt5
+    call slavyana_mod__day6_alt_bknt6
+    call slavyana_mod__day6_alt_bknt7
+    call slavyana_mod__day6_alt_bknt8
+  else:
+    call slavyana_mod__day6_alt_bknt2_2
+    if current_route != Routes.SoloUN:
+      call slavyana_mod__day6_alt_bknt3_2
+    if current_route == Routes.Solo:
+      call slavyana_mod__day6_alt_bknt4_2
+      call slavyana_mod__day6_alt_bknt5_2
+      call slavyana_mod__day6_alt_bknt6_2
+      call slavyana_mod__day6_alt_bknt7_2
+      call slavyana_mod__day6_alt_bknt8_2
+      call slavyana_mod__day6_alt_bknt9_2
+    elif current_route == Routes.SoloUN:
+      call slavyana_mod__day6_alt_bknt3_3
+      call slavyana_mod__day6_alt_bknt4_3
+      call slavyana_mod__day6_alt_bknt5_3
+    elif current_route == Routes.SoloUS:
+      call slavyana_mod__day6_alt_bknt4_4
+      call slavyana_mod__day6_alt_bknt5_4
+
+  if sl_m_l_day == 7:
+    jump slavyana_mod__day7_alt
+  else:
+    jump slavyana_mod__day7_epilogue_alt

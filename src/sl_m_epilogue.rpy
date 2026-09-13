@@ -1,34 +1,10 @@
-init python:
-  words_red = False
-  words_green = False
-  words_blue = False
-  # Плохая концовка
-  def setEndRed():
-    global words_red, words_green, words_blue
-    words_red = True
-    words_green = False
-    words_blue = False
-  # Альтернативная концовка
-  def setEndBlue():
-    global words_red, words_green, words_blue
-    words_red = False
-    words_green = False
-    words_blue = True
-  # Хорошая концовка
-  def setEndGreen():
-    global words_red, words_green, words_blue
-    words_red = False
-    words_green = True
-    words_blue = False
-
 label slavyana_mod__epilogue:
-  $ renpy.pause(2, hard=True)
-  $ backdrop = "epilogue"
-  $ new_chapter(7, u"Славя. Эпилог")
-  $ save_name = (u'Славя. "Эпилог"')
-  $ day_time()
-  $ persistent.sprite_time = "day"
-  $ renpy.pause(3, hard=True)
+  python:
+    backdrop = "epilogue"
+    new_chapter(7, u"Славя. Эпилог")
+    save_name = (u'Славя. "Эпилог"')
+    day_time()
+    persistent.sprite_time = "day"
 
   play music music_list["farewell_to_the_past_edit"] fadein 3
   show anim prolog_1 with dissolve
@@ -37,16 +13,11 @@ label slavyana_mod__epilogue:
   "Два пионера встретили друг друга в лагере и полюбили друг друга. Но вот, настал момент расставания, и им придётся что-то решать."
   "И какие бы препятствия не встретились на их пути, они всё преодолеют."
 
-  if words_blue:
+  if current_route == Routes.Blue:
     call slavyana_mod__epilogue_alt
 
     #*Ачивка «Лучший Новый Год в жизни»*
-    if not persistent.endings["sl_m_blue"]:
-        $ persistent.endings["sl_m_blue"] = True
-        if persistent.show_achievements:
-            $ show_achievement("sl_m_blue")
-            $ achievement.grant("ACH_SL_M_BLUE")
-    #$ renpy.notify("Лучший Новый Год в жизни")
+    $ sl_m_ach_blue()
     window hide
 
     pause 2
@@ -59,7 +30,7 @@ label slavyana_mod__epilogue:
     jump slavyana_mod__credits
 
   window show
-  if words_red:
+  if current_route == Routes.Red:
     "Кроме одного…"
 
   #*Фон внутри зимнего автобуса*
@@ -72,7 +43,7 @@ label slavyana_mod__epilogue:
   th "Хорошо, что остановку не проспала."
   "Я стала вспоминать свой сон."
 
-  if words_red:
+  if current_route == Routes.Red:
     window hide
     #*Фон поляна с Семёном*
     scene bg ext_polyana_day
@@ -125,7 +96,7 @@ label slavyana_mod__epilogue:
     "Ну точно! Пионерлагерь «Совёнок»!"
     "А я там была помощницей вожатой."
 
-  if words_green:
+  if current_route == Routes.Green:
     "Всплывали отдельные образы, не формирующие общей картины."
     window hide
     #*Фон площадь с Леной с помехами*
@@ -168,7 +139,7 @@ label slavyana_mod__epilogue:
   "На улице шёл снег. Недавно все дружно отметили Новый Год."
   "По улице практически не ходили люди. Было уже очень позднее время."
   
-  if words_red:
+  if current_route == Routes.Red:
     "Но получается, что это всё было не больше чем сном?"
     "Целых 14 дней уместились в 20 минутах? Такого не может быть!"
     "Всё, что я ощущала, было реальным. Да, тело было 17-летней пионерки. Но это точно была я, потому что всё помню. Откуда то же я должна это помнить!"
@@ -176,14 +147,14 @@ label slavyana_mod__epilogue:
     "Может быть, он тоже сейчас проснулся и где-нибудь мечтает наяву?.."
     "…"
   
-  if words_green:
+  if current_route == Routes.Green:
     "Надо было добраться до дома как можно скорее и я поторопилась."
 
   "Ветер усиливался, начиналась метель."
 
   #*Фон остановка*
   scene bg bus_stop with dissolve
-  if words_red:
+  if current_route == Routes.Red:
     "Когда я дошла до остановки, с неё уже уходил кто-то в тёмном пальто."
     th "Не дождался."
     "Я взглянула на расписание."
@@ -208,11 +179,7 @@ label slavyana_mod__epilogue:
     $ renpy.pause(2, hard=True)
 
     #*Ачивка «Домой!»*
-    if not persistent.endings["sl_m_red"]:
-      $ persistent.endings["sl_m_red"] = True
-      if persistent.show_achievements:
-        $ show_achievement("sl_m_red")
-        $ achievement.grant("ACH_SL_M_RED")
+    $ sl_m_ach_red()
 
     pause 2
 
@@ -223,7 +190,7 @@ label slavyana_mod__epilogue:
     scene bg ext_camp_entrance_night with dissolve2
     jump slavyana_mod__credits
 
-  if words_green:
+  if current_route == Routes.Green:
     "Я дошла до остановки. На ней стоял мужчина в тёмном пальто."
     sl "А вы не знаете, последний автобус уже ушёл?"
     voice "Вроде бы после двенадцати должен быть ещё один."
@@ -370,11 +337,7 @@ label slavyana_mod__epilogue:
     $ renpy.pause(2, hard=True)
 
     #*Ачивка «Ты меня не потеряешь…»*
-    if not persistent.endings["sl_m_green"]:
-        $ persistent.endings["sl_m_green"] = True
-        if persistent.show_achievements:
-            $ show_achievement("sl_m_green")
-            $ achievement.grant("ACH_SL_M_GREEN")
+    $ sl_m_ach_green()
 
     pause 2
     call slavyana_mod__ending
@@ -385,14 +348,12 @@ label slavyana_mod__epilogue:
     jump slavyana_mod__credits
 
 label slavyana_mod__ending:
-  if persistent.sl_m_end_count < 1:
-    $ persistent.sl_m_end_count = 1
   window show
   "У каждой истории есть начало и конец."
   "У каждой истории есть своя канва, синопсис, содержание, ключевые моменты, прологи и эпилоги."
   "И нет такой книги, в которой при каждом новом прочтении не открывались бы вещи, на которые раньше не обращал внимания."
   "У каждой истории есть начало и конец."
-  if words_red:
+  if current_route != Routes.Green and current_route != Routes.Blue:
     "Почти у каждой…"
   else:
     "И даже у этой."

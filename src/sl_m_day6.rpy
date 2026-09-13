@@ -1,15 +1,16 @@
 label slavyana_mod__day6:
-  $ renpy.pause(2, hard=True)
-  $ backdrop = "days"
-  $ new_chapter(6, u"Славя. День шестой")
-  $ day_time()
-  $ persistent.sprite_time = "day"
-  $ renpy.pause(3, hard=True)
+  python:
+    backdrop = "days"
+    new_chapter(6, u"Славя. День шестой")
+    day_time()
+    persistent.sprite_time = "day"
 
-  call slavyana_mod__day6_end_choise
   show screen slavyana_mod__notebook_interface
 
-  if words_red:
+  # Предварительно выберем рут, чтобы показывать фразы
+  call slavyana_mod__day6_end_choise
+
+  if current_route == Routes.Red:
     play ambience sfx_head_heartbeat loop fadein 2
     scene bg ext_polyana_mere_day
     show prologue_dream
@@ -37,7 +38,7 @@ label slavyana_mod__day6:
     "Я стала задыхаться."
     "И в последний момент я взглянула наверх{w} и увидела лицо Виолы!"
 
-  elif words_green:
+  elif current_route == Routes.Green:
     play music music_list["sparkles"] fadein 1
     scene cg d6_sl_forest
     show prologue_dream
@@ -64,7 +65,7 @@ label slavyana_mod__day6:
     "И он ушёл."
     "А потом…"
 
-  elif words_blue:
+  elif current_route == Routes.Blue:
     play music music_list["sparkles"] fadein 1
     #*Иллюстрация с 2 девками сидящими в комнате вечером с помехами* из альтернативной концовки надо пикчу вынуть
     # TODO: Заменить на правильное изображение
@@ -268,14 +269,14 @@ label slavyana_mod__day6:
   me "Ладно, ты сиди здесь, я скоро вернусь."
   sl "Куда ты?"
 
-  if words_green:
+  if current_route == Routes.Green:
     th "Сказал же, что вернусь. А если нет... {i}Ты меня не потеряешь{/i}."
 
   me "За едой я!"
   sl "Может, вместе пойдём?"
   me "Не стоит… Я мигом!"
   hide pi
-  if words_green:
+  if current_route == Routes.Green:
     th "Никогда не верила в вещие сны."
   scene bg ext_polyana_day with dissolve
   "Семён встал и уверенным шагом ушёл с поляны, оставив меня одну."
@@ -283,7 +284,7 @@ label slavyana_mod__day6:
   th "Может быть он просто за справедливость? Или я ему не безразлична."
   th "Всё, что сделал Семён очень мило. Но что же всё-таки думаю о нём я? Он симпатичный мальчик, смелый{w}, добрый{w}, заботливый."
   th "Но абсолютно некомпетентный!"
-  if words_red:
+  if current_route == Routes.Red:
     th "А я, дура, доверилась ему."
 
   if sl_m_lp < 8:
@@ -294,14 +295,15 @@ label slavyana_mod__day6:
       pass
     "Он милый, но не смекалистый":
       $ sl_m_lp += 1
+      call slavyana_mod__day6_end_choise
       "Но всё-таки он хороший. И я не жалею ни о чём."
       "Всё что он делает сейчас, это ради меня."
       stop ambience fadeout 2
       play music music_list["forest_maiden"] fadein 3
       "Я готова идти с ним, потому что я верю ему... {w}И... {w}Я... {w}Да{w}, я люблю его. {w}Очень сильно. Я наконец-то это поняла."
-      if go_to_sh:
+      if d4_go_to_sh:
         "Именно поэтому я пошла с ним в старый лагерь."
-      if not sl_m_day5_make_semen_guilty:
+      if not d5_make_semen_guilty:
         "Именно поэтому я не прогнала его в медпункте."
       "Именно {b}поэтому{/b} я сейчас нахожусь здесь и жду его. Ведь я не могу иначе. И он тоже не может."
       stop music fadeout 3
@@ -317,7 +319,7 @@ label slavyana_mod__day6_not_worth_after:
 
   scene bg black with dissolve
 
-  if words_blue:
+  if current_route == Routes.Blue:
     "История, достойная фильма, или хотя бы книги. О любви двух пионеров, слишком поздно понявших это."
     window hide
   else:
@@ -339,7 +341,7 @@ label slavyana_mod__day6_not_worth_after:
   sl "Что теперь будем делать?"
   me "Может, у тебя есть какие-то предложения?"
 
-  if words_red:
+  if current_route == Routes.Red:
     th "Придётся всё самой придумывать и устраивать."
     
   "Я решила уточнить."
@@ -369,13 +371,13 @@ label slavyana_mod__day6_not_worth_after:
   sl "И у принцесс обычно не бывает выбора в таких ситуациях."
   th "И она выходит замуж за своего похитителя."
 
-  if words_green:
+  if current_route == Routes.Green:
     "Хотела сказать я, но посчитала это слишком странным."
 
-  elif words_red:
+  elif current_route == Routes.Red:
     "Хотела сказать я, но посчитала это слишком глупым."
 
-  elif words_blue:
+  elif current_route == Routes.Blue:
     "Хотела сказать я, но посчитала это слишком криповым."
     th "Криповым? Какое-то странное, выдуманное мной слово."
   
@@ -405,24 +407,10 @@ label slavyana_mod__day6_not_worth_after:
   "Обратилась она к Семёну"
   show pi serious pioneer at cright with dspr
 
-  # Если ЛП больше или равно 9 и не свалили вину на семена
-  if sl_m_lp >= 9 and not sl_m_day5_make_semen_guilty:
-    # Если сказали лене правду
-    if sl_m_day5_cleaning_told_truth:
-      $ setEndGreen();
-      me "Мне не в чем оправдываться."
-    # Если солгали лене и плохая концовка получена
-    elif persistent.endings["sl_m_red"]:
-      $ setEndBlue();
-      me "Мне не в чем оправдываться."
-    # Если солгали лене, но плохая концовка не получена
-    else:
-      $ setEndRed();
-      me "Мы ничего такого не делали, чтобы перед вами оправдываться!"
-  # Если очков меньше 9 или свалили вину на семена
+  if current_route == Routes.Green or current_route == Routes.Blue:
+    me "Мне не в чем оправдываться."
   else:
     me "Мы ничего такого не делали, чтобы перед вами оправдываться!"
-    $ setEndRed();
 
   show mt surprise pioneer at cleft with dspr
   mt "Да? {w}Ну ладно. То есть ты считаешь это всё нормальным? Хорошо..."
@@ -606,7 +594,7 @@ label slavyana_mod__day6_not_worth_after:
   me "Ну... эээ..."
   "К этому времени я уже стянула с себя всю одежду и запрыгнула в воду, зазывая Семёна."
 
-  if persistent.sl_m_hen_txt:
+  if sl_m_hentai:
     scene cg d6_sl_swim_alt with dissolve
   else:
     scene bg black with dissolve
@@ -637,7 +625,7 @@ label slavyana_mod__day6_not_worth_after:
   "Пока я купалась, Семён уже успел развести огонь, как я поняла по характерному трескающемуся звуку."
 
   "Я поспешила к нему."
-  if persistent.sl_m_hen_txt:
+  if sl_m_hentai:
     scene cg d6_sl_after_swim with dissolve
   else:
     scene bg ext_polyana_day with dissolve
@@ -686,7 +674,7 @@ label slavyana_mod__day6_not_worth_after:
   stop sound_loop2 fadeout 2
   pause 2
   play music music_list["i_dont_blame_you"] fadein 1
-  if persistent.sl_m_hen_txt:
+  if sl_m_hentai:
     scene cg d6_sl_hentai_2 with dissolve
 
   window show
@@ -700,7 +688,7 @@ label slavyana_mod__day6_not_worth_after:
   "Он смотрел на меня, а я улыбалась, прикрыв глаза. Ясно давая понять, что теперь я его."
   "Он жадно впился в мои губы."
 
-  if persistent.sl_m_hen_txt:
+  if sl_m_hentai:
     "Я не умела целоваться, но в этот момент просунула язык в его рот."
     "Его хватка резко ослабла. И он принялся трогать меня за грудь."
     "Ток прошёлся по моей спине, и я прижалась к нему ещё сильнее."
@@ -718,7 +706,7 @@ label slavyana_mod__day6_not_worth_after:
   sl "Можно…"
   "С трудом произнесла я."
 
-  if persistent.sl_m_hen_txt:
+  if sl_m_hentai:
     scene cg d6_sl_hentai_1_alt with dissolve
     "И вот, рыцарь уже готов проникнуть в принцессу…"
   else:
@@ -727,7 +715,7 @@ label slavyana_mod__day6_not_worth_after:
   me "Наверное, будет немножко больно…"
   sl "Ничего…"
 
-  if persistent.sl_m_hen_txt:
+  if sl_m_hentai:
     "Он вздохнул, схватил меня за плечи и глубоко вошёл внутрь."
     "Этот главный момент был непередаваем. Длился всего секунду{w}, но за этот миг я успела испытать и боль и блаженство одновременно."
     "Его член оборвал меня."
@@ -769,31 +757,28 @@ label slavyana_mod__day6_not_worth_after:
   "..."
   window hide
 
-  if (sl_m_lp < 9):
-    $ setEndRed();
-
   hide screen slavyana_mod__notebook_interface
 
   jump slavyana_mod__day7
 
-# Выбор концовки в начале дня
+# Выбор концовки
 label slavyana_mod__day6_end_choise:
-  # Если ЛП больше или рано 8 и в медпункте сказали правду
-  if sl_m_lp >= 8 and not sl_m_day5_make_semen_guilty:
-    # Если лене сказали правду
-    if sl_m_day5_cleaning_told_truth:
-      $ setEndGreen()
 
-    # Если соврали, и уже получили плохую концовку
-    elif persistent.endings["sl_m_red"]:
-      $ setEndBlue();
+  if sl_m_lp < 9:
+    $ current_route = Routes.Red
+    return
 
-    # Если лене соврали или не получали плохую концовку
-    else:
-      $ setEndRed()
-  # Если ЛП меньше 8 или в медпункте солгали
+  # Если лене сказали правду
+  if d5_cleaning_told_truth:
+    $ current_route = Routes.Green
+
+  # Если соврали, и уже получили плохую концовку
+  elif sl_m_ach_red_has():
+    $ current_route = Routes.Blue
+
+  # Если лене соврали или не получали плохую концовку
   else:
-    $ setEndRed()
+    $ current_route = Routes.Red
   return
 
 # Быстрый выбор
@@ -803,7 +788,6 @@ label slavyana_mod__day6_fast_choise:
     jump slavyana_mod__day6
     return
 
-  call slavyana_mod__day6_end_choise
   if sl_m_lp >= 8:
     $ day_time()
     $ persistent.sprite_time = "day"
@@ -815,9 +799,7 @@ label slavyana_mod__day6_fast_choise:
         pass
       "Он милый, но не смекалистый":
         $ sl_m_lp += 1
-
-  if (sl_m_lp < 9):
-    $ setEndRed();
+  call slavyana_mod__day6_end_choise
   
   if sl_m_l_day == 7:
     jump slavyana_mod__day7

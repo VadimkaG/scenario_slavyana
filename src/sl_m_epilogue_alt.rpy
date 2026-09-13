@@ -1,36 +1,3 @@
-init:
-  python:
-    colors['alis'] = {'night': "#fd7c6e", 'sunset': "#fd7c6e", 'day': "#fd7c6e", 'prolog': "#fd7c6e"}
-    names['alis'] = u"Алиса"
-    store.names_list.append('alis')
-
-    colors['krist'] = {'night': "#a3505c", 'sunset': "#a3505c", 'day': "#a3505c", 'prolog': "#a3505c"}
-    names['krist'] = u"Кристина"
-    store.names_list.append('krist')
-  image SlaviaRoom = "scenario_slavyana/res/slavy_alt/image/int_sl_room.jpg"
-  image Hallway = "scenario_slavyana/res/slavy_alt/image/int_hallway.jpg"
-  image Podz01 = "scenario_slavyana/res/slavy_alt/image/int_podz_01.jpg"
-  image Podz02 = "scenario_slavyana/res/slavy_alt/image/int_podz_02.jpg"
-  image Podz03 = "scenario_slavyana/res/slavy_alt/image/int_podz_03.jpg"
-  image Street01 = "scenario_slavyana/res/slavy_alt/image/int_str_01.jpg"
-  image Street02 = "scenario_slavyana/res/slavy_alt/image/int_str_02.jpg"
-  image Street03 = "scenario_slavyana/res/slavy_alt/image/int_str_03.jpg"
-  image Street04 = "scenario_slavyana/res/slavy_alt/image/int_str_04.jpg"
-  image Street05 = "scenario_slavyana/res/slavy_alt/image/int_str_05.jpg"
-  image Street06 = "scenario_slavyana/res/slavy_alt/image/int_str_06.jpg"
-  image SlaviaRoomFocus = "scenario_slavyana/res/slavy_alt/image/int_sl_roomfoc1.jpg"
-  image SlaviaRoomFocus2 = "scenario_slavyana/res/slavy_alt/image/int_sl_roomfoc2.jpg"
-  image SlaviaRoomFocusKrist = "scenario_slavyana/res/slavy_alt/image/int_sl_roomfocusonkrist.jpg"
-  image SlaviaRoomFocusAlisa = "scenario_slavyana/res/slavy_alt/image/int_sl_roomfocusonalis.jpg"
-  image SemenUnknown = "scenario_slavyana/res/slavy_alt/image/sem_unk.jpg"
-
-  $ Sound01 = "scenario_slavyana/res/slavy_alt/sound/Soundtrack_01.ogg"
-  $ Sound02 = "scenario_slavyana/res/slavy_alt/sound/Soundtrack_02.ogg"
-  $ DressFall = "scenario_slavyana/res/slavy_alt/sound/Sound_dressfall.ogg"
-  $ Sound03 = "scenario_slavyana/res/slavy_alt/sound/Soundtrack03.ogg"
-  $ Sound04 = "scenario_slavyana/res/slavy_alt/sound/Soundtrack04.ogg"
-  $ Sound05 = "scenario_slavyana/res/slavy_alt/sound/Soundtrack05.ogg"
-
 label slavyana_mod__epilogue_alt:
   window show
   $ renpy.pause (1)

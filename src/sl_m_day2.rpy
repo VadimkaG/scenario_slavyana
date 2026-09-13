@@ -1,17 +1,22 @@
-﻿init:
-    $ sl_m_day2_find_keys = False
-    $ sl_m_day2_sp_keys = False
-    $ sl_m_day2_go_with_sp = False
-    $ sl_m_day2_you_win = False
+﻿# Оригинальный автор: FireBoTer
+# Отредактировал: VadimkaG
+
+label slavyana_mod__day2_init:
+    python:
+        d2_find_keys = False
+        d2_sp_keys = False
+        d2_go_with_sp = False
+        d2_you_win = False
+    return
     
 label slavyana_mod__day2:
-    $ renpy.pause(2, hard=True)
-    $ backdrop = "days"
-    $ new_chapter(2, u"Славя. День второй")
-    $ save_name = (u'Славя. День второй')
-    $ day_time()
-    $ persistent.sprite_time = "day"
-    $ renpy.pause(3, hard=True)
+    call slavyana_mod__day2_init
+    python:
+        backdrop = "days"
+        new_chapter(2, u"Славя. День второй")
+        save_name = (u'Славя. День второй')
+        day_time()
+        persistent.sprite_time = "day"
     
     #сон
     play music music_list["sparkles"] fadein 3
@@ -206,7 +211,7 @@ label slavyana_mod__day2:
     window hide
     menu:
         "Искать ключи":
-            $ sl_m_day2_find_keys = True
+            $ d2_find_keys = True
             window show
             "Ответ пришёл сам собой. Нужно искать ключи."
             th "Пойду поброжу по лагерю, может найду где-нибудь..."
@@ -244,7 +249,7 @@ label slavyana_mod__day2:
 label slavyana_mod__day2_cnt1:
     "Часы показывали ровно 10 часов утра."
     th "В самый раз, как раз успею и побегать и переодеться, чтобы пойти на линейку."
-    if sl_m_day2_find_keys:
+    if d2_find_keys:
         "Бегать я решила даже несмотря на то, что уже исходила весь лагерь вдоль и поперёк."
         th "Думаю, нет ничего плохо в ещё одной прогулке по лагерю, только уже в более быстром темпе.{w} Да и я совсем не устала после предыдущего раза."
     play ambience ambience_camp_center_day fadein 2
@@ -688,13 +693,13 @@ label slavyana_mod__day2_cnt1:
     menu:
         "Пойти с Семёном":
             $ sl_m_lp += 2
-            $ sl_m_day2_go_with_sp = True
-            jump slavyana_mod__day2_go_with_sp
+            $ d2_go_with_sp = True
+            jump slavyana_mod__d2_go_with_sp
         "Остаться":
             jump slavyana_mod__day2_stay
 
     #поиск с Семёном
-label slavyana_mod__day2_go_with_sp:
+label slavyana_mod__d2_go_with_sp:
     window show
     th "Всё-таки он новенький, надо ему помочь ориентироваться.{w} Да и не уверена я, что карты у Оли в домике..."
     me "Если ты не против…"
@@ -787,7 +792,7 @@ label slavyana_mod__day2_stay:
     menu:
         "Пойти за Семёном":
             $ sl_m_lp += 1
-            $ sl_m_day2_sp_keys = True
+            $ d2_sp_keys = True
             jump slavyana_mod__day2_go_for_sp
         "Остаться":
             jump slavyana_mod__day2_only_stay
@@ -996,7 +1001,7 @@ label slavyana_mod__cards_mz_win:
     scene bg int_dining_hall_sunset
     show mz bukal glasses pioneer at center 
     with dissolve
-    $ sl_m_day2_you_win = True
+    $ d2_you_win = True
     window show
     "Это оказалось даже проще, чем я думала.{w} А вот Женя выглядела слегка... расстроенной?"
     sl "Жень, ты что расстроилась?"
@@ -1051,7 +1056,7 @@ label slavyana_mod__day2_cnt3:
     scene bg ext_dining_hall_away_night with dissolve
     "Снаружи уже было темно. Ночь вступила в свои права, принося с собой прохладу, которой так не хватает долгими летними днями. И, хотя летнее солнцестояние уже прошло, не было заметно, чтобы дни существенно сокращались."
     "В домик в такую замечательную летнюю ночь идти совершенно не хотелось, и я решила посидеть на площади, на скамейке."
-    if sl_m_day2_go_with_sp:
+    if d2_go_with_sp:
         "Но для начала нужно было пойти и снять уже бесполезный купальник."
         window hide
         scene black with dissolve
@@ -1075,7 +1080,7 @@ label slavyana_mod__day2_cnt3:
     window show
     "Через несколько минут я вспомнила о небольшом озере в лесу, моём тайном месте, где меня никто не мог найти или случайно заметить."
     th "Такая чудесная ночь! Сейчас там должно быть просто замечательно!"
-    if sl_m_day2_go_with_sp:
+    if d2_go_with_sp:
         th "Только зря я, получается, купальник снимала... Но ничего, меня же никто не увидит."
     else:
         th "Правда купаться там придётся вот так, без всего... Но ничего, меня же никто не увидит."
@@ -1117,7 +1122,7 @@ label slavyana_mod__day2_cnt3:
     show dv shy pioneer at center with dissolve
     dv "Да так…"
     dv "Слушай, ты это, не видела Семёна?"
-    if sl_m_day1_al_que:
+    if d1_al_que:
         "Я быстро улыбнулась."
         th "И вчера вечером она спрашивала про Семёна...{w} Кажется, она им заинтересовалась."
     else:
@@ -1241,12 +1246,12 @@ label slavyana_mod__day2_cnt3:
 
     hide bknt
 
-    if sl_m_day2_find_keys:
+    if d2_find_keys:
         call slavyana_mod__day2_bknt_find_keys
         show screen sl_m_nb() with dissolve2
         extend " Я искала их по всему лагерю, но так и не нашла."
 
-    if sl_m_day2_sp_keys:
+    if d2_sp_keys:
         call slavyana_mod__day2_bknt_sp_keys
         show screen sl_m_nb() with dissolve2
         extend " Благо, Семён мне их вечером отдал."
@@ -1256,7 +1261,7 @@ label slavyana_mod__day2_cnt3:
     th "Под вечер Оля послала меня дежурить на пляже (не самое интересное занятие, честно говоря)."
 
     call slavyana_mod__day2_bknt3
-    if sl_m_day2_you_win:
+    if d2_you_win:
         call slavyana_mod__day2_bknt_win
         show screen sl_m_nb() with dissolve2
         extend " А после ужина, на карточном турнире, я выиграла у Жени. Но отдала ей свою победу, ведь она, кажется, расстроилась из-за проигрыша."
@@ -1298,8 +1303,6 @@ label slavyana_mod__day2_cnt3:
     $ volume(1.0, "sound")
     jump slavyana_mod__day3
 
-#Сделано FireBoTer'ом
-
 # Блокноты
 label slavyana_mod__day2_bknt1:
     $ sl_m_nb_addpage("Сегодня, в свой девятый день в этом замечательном лагере я почти проспала завтрак. Спасибо Жене, что разбудила. Но день всё равно не задался с самого утра. Сначала я потеряла ключи.")
@@ -1328,6 +1331,7 @@ label slavyana_mod__day2_bknt4:
 
 #Быстрый выбор
 label slavyana_mod__day2_fast_choice:
+    call slavyana_mod__day2_init
 
     if sl_m_l_day == 2:
         window hide
@@ -1349,7 +1353,7 @@ label slavyana_mod__day2_fast_choice:
     "После завтрака у слави осталось пол часа"
     menu:
         "Искать ключи":
-            $ sl_m_day2_find_keys = True
+            $ d2_find_keys = True
             call slavyana_mod__day2_bknt_find_keys
         "Поискать занятие в домике":
             call slavyana_mod__day2_bknt_sp_keys
@@ -1366,7 +1370,7 @@ label slavyana_mod__day2_fast_choice:
     menu:
         "Пойти с Семёном":
             $ sl_m_lp += 2
-            $ sl_m_day2_go_with_sp = True
+            $ d2_go_with_sp = True
         "Остаться":
             scene bg ext_dining_hall_near_sunset with dissolve
             window show
@@ -1375,7 +1379,7 @@ label slavyana_mod__day2_fast_choice:
             menu:
                 "Пойти за Семёном":
                     $ sl_m_lp += 1
-                    $ sl_m_day2_sp_keys = True
+                    $ d2_sp_keys = True
                 "Остаться":
                     pass
 
@@ -1390,7 +1394,7 @@ label slavyana_mod__day2_fast_choice:
     $ day_time()
     menu:
         "Победить":
-            $ sl_m_day2_you_win = True
+            $ d2_you_win = True
             call slavyana_mod__day2_bknt_win
         "Проиграть":
             call slavyana_mod__day2_bknt_not_win

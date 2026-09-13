@@ -1,15 +1,4 @@
-init:
-    $ sl_m_end_dv = False
-    $ sl_m_end_un = False
-    $ sl_m_end_us = False
-    $ sl_m_end_sl = False
-
 label slavyana_mod__day5_alt:
-
-# Рут Ульяны: sl_m_day1_help_od
-# Рут Лены: sl_m_day5_berries_go_with
-# Рут Алисы: sl_m_day6_alt_dv
-# Одиночный рут: sl_m_day1_help_od and not sl_m_day5_berries_go_with and not sl_m_day6_alt_dv
 
   call slavyana_mod__day5_alt_chending
 
@@ -43,7 +32,7 @@ label slavyana_mod__day5_alt:
   scene bg ext_house_of_dv_night with dissolve
 
   play sound sfx_knock_door7_polite
-  if sl_m_end_us:
+  if current_route == Routes.SoloUS:
     "Я несколько раз постучалась."
     "Но никто не ответил."
     th "Наверное спит уже."
@@ -158,7 +147,7 @@ label slavyana_mod__day5_alt:
   show screen sl_m_nb() with dissolve2
   window show
   "Насчёт наказания Ульяны я не уверена. Слишком уж строго вожатая к ней отнеслась. Она хоть и заслужила это, но всё-таки остаётся ребёнком."
-  if not sl_m_day1_help_od:
+  if not d1_help_od:
     window hide
     call slavyana_mod__day5_alt_bknt6
     show screen sl_m_nb() with dissolve2
@@ -217,16 +206,22 @@ label slavyana_mod__day5_alt_bknt6:
 
 # Выбор концовки
 label slavyana_mod__day5_alt_chending:
-  if sl_m_day2_you_win:
-    $ sl_m_end_dv = True
-  elif not sl_m_day5_berries_go_with:
-    $ sl_m_end_un = True
-  elif sl_m_day1_help_od:
-    $ sl_m_end_us = True
-  else:
-    $ sl_m_end_sl = True
-  return
+  # Рут алисы
+  if d2_you_win:
+    $ current_route = Routes.SoloDV
 
+  # Рут лены
+  elif not d5_berries_go_with:
+    $ current_route = Routes.SoloUN
+
+  # Рут ульяны
+  elif d1_help_od:
+    $ current_route = Routes.SoloUS
+
+  # Одиночный рут
+  else:
+    $ current_route = Routes.Solo
+  return
 
 # Быстрый выбор дня
 label slavyana_mod__day5_alt_fast_choice:
@@ -237,7 +232,7 @@ label slavyana_mod__day5_alt_fast_choice:
   call slavyana_mod__day5_alt_bknt3
   call slavyana_mod__day5_alt_bknt4
   call slavyana_mod__day5_alt_bknt5
-  if not sl_m_day1_help_od:
+  if not d1_help_od:
     call slavyana_mod__day5_alt_bknt6
 
   jump slavyana_mod__day6_alt_fast_choise

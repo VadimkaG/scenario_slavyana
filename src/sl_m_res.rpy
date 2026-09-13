@@ -1,46 +1,11 @@
-init 6 python:
-    if "sl_m_green" not in persistent.endings:
-        persistent.endings["sl_m_green"] = False
-    if "sl_m_red" not in persistent.endings:
-        persistent.endings["sl_m_red"] = False
-    if "sl_m_blue" not in persistent.endings:
-        persistent.endings["sl_m_blue"] = False
-    if "sl_m_solo" not in persistent.endings:
-        persistent.endings["sl_m_solo"] = False
-
-    achievments["ACH_SL_M_GREEN"] = persistent.endings["sl_m_green"]
-    achievments["ACH_SL_M_RED"] = persistent.endings["sl_m_red"]
-    achievments["ACH_SL_M_BLUE"] = persistent.endings["sl_m_blue"]
-
-    ach_table["sl_m_green"] = {
-        None : "sl_m_green",
-        "english" : "sl_m_green",
-        "spanish" : "sl_m_green",
-        "italian" : "sl_m_green",
-        "chinese" : "sl_m_green",
-        "latvian" : "sl_m_green",
-        }
-
-    ach_table["sl_m_red"] = {
-        None : "sl_m_red",
-        "english" : "sl_m_red",
-        "spanish" : "sl_m_red",
-        "italian" : "sl_m_red",
-        "chinese" : "sl_m_red",
-        "latvian" : "sl_m_red",
-        }
-
-    ach_table["sl_m_blue"] = {
-        None : "sl_m_blue",
-        "english" : "sl_m_blue",
-        "spanish" : "sl_m_blue",
-        "italian" : "sl_m_blue",
-        "chinese" : "sl_m_blue",
-        "latvian" : "sl_m_blue",
-        }
-
 init:
-    $ pen_write = "scenario_slavyana/res/sound/pen1.mp3"
+
+    python:
+        pen_write = "scenario_slavyana/res/sound/pen1.mp3"
+
+        # Сандтрек альтернативной концовки
+        DressFall = "scenario_slavyana/res/slavy_alt/sound/Sound_dressfall.ogg"
+        Sound05 = "scenario_slavyana/res/slavy_alt/sound/Soundtrack05.ogg"
 
     image bknt = "scenario_slavyana/res/images/notebook/notebook.png"
     image note = "scenario_slavyana/res/images/note.png"
@@ -98,22 +63,48 @@ init:
     image sl_m_red = "scenario_slavyana/res/images/misc/ach/achievement_red.png"
     image sl_m_blue = "scenario_slavyana/res/images/misc/ach/achievement_blue.png"
 
+    # Альтернативная концовка
+    image SlaviaRoom = "scenario_slavyana/res/slavy_alt/image/int_sl_room.jpg"
+    image Hallway = "scenario_slavyana/res/slavy_alt/image/int_hallway.jpg"
+    image Podz01 = "scenario_slavyana/res/slavy_alt/image/int_podz_01.jpg"
+    image Podz02 = "scenario_slavyana/res/slavy_alt/image/int_podz_02.jpg"
+    image Street01 = "scenario_slavyana/res/slavy_alt/image/int_str_01.jpg"
+    image Street02 = "scenario_slavyana/res/slavy_alt/image/int_str_02.jpg"
+    image Street03 = "scenario_slavyana/res/slavy_alt/image/int_str_03.jpg"
+    image Street04 = "scenario_slavyana/res/slavy_alt/image/int_str_04.jpg"
+    image Street06 = "scenario_slavyana/res/slavy_alt/image/int_str_06.jpg"
+    image SlaviaRoomFocus = "scenario_slavyana/res/slavy_alt/image/int_sl_roomfoc1.jpg"
+    image SlaviaRoomFocus2 = "scenario_slavyana/res/slavy_alt/image/int_sl_roomfoc2.jpg"
+    image SlaviaRoomFocusKrist = "scenario_slavyana/res/slavy_alt/image/int_sl_roomfocusonkrist.jpg"
+    image SlaviaRoomFocusAlisa = "scenario_slavyana/res/slavy_alt/image/int_sl_roomfocusonalis.jpg"
+
     #спрайты
 
+    python:
     #Толик
-    $ colors['tl'] = {'night': (173, 173, 173, 255), 'sunset': (173, 173, 173, 255), 'day': (173, 173, 173, 255), 'prolog': (173, 173, 173, 255)}
-    $ names['tl'] = u"Толик"
-    $ store.names_list.append('tl')
+        colors['tl'] = {'night': (173, 173, 173, 255), 'sunset': (173, 173, 173, 255), 'day': (173, 173, 173, 255), 'prolog': (173, 173, 173, 255)}
+        names['tl'] = u"Толик"
+        store.names_list.append('tl')
 
-    #Борис
-    $ colors['bor'] = {'night': "#33ccff", 'sunset': "#33ccff", 'day': "#33ccff", 'prolog': "#33ccff"}
-    $ names['bor'] = u"Борис"
-    $ store.names_list.append('bor')
+        #Борис
+        colors['bor'] = {'night': "#33ccff", 'sunset': "#33ccff", 'day': "#33ccff", 'prolog': "#33ccff"}
+        names['bor'] = u"Борис"
+        store.names_list.append('bor')
 
-    #Незнакомец
-    $ colors['stranger'] = {'night': "#950036", 'sunset': "#950036", 'day': "#950036", 'prolog': "#950036"}
-    $ names['stranger'] = u"Незнакомец"
-    $ store.names_list.append('stranger')
+        #Незнакомец
+        colors['stranger'] = {'night': "#950036", 'sunset': "#950036", 'day': "#950036", 'prolog': "#950036"}
+        names['stranger'] = u"Незнакомец"
+        store.names_list.append('stranger')
+
+        # Алиса альтернативная концовка
+        colors['alis'] = {'night': "#fd7c6e", 'sunset': "#fd7c6e", 'day': "#fd7c6e", 'prolog': "#fd7c6e"}
+        names['alis'] = u"Алиса"
+        store.names_list.append('alis')
+
+        # Кристина альтернативная концовка
+        colors['krist'] = {'night': "#a3505c", 'sunset': "#a3505c", 'day': "#a3505c", 'prolog': "#a3505c"}
+        names['krist'] = u"Кристина"
+        store.names_list.append('krist')
 
     #Толик
     image tl pioneer normal = "scenario_slavyana/res/images/sprites/normal/tl/tl_1_pioneer.png"
@@ -121,6 +112,9 @@ init:
 
     image bor normal close = im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/bor/bor_1_body.png")
     image bor serious close = im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/bor/bor_2_body.png")
+
+    # Семен альтернативная концовка
+    image SemenUnknown = "scenario_slavyana/res/slavy_alt/image/sem_unk.jpg"
 
     #Семён, close
     image pi angry pioneer close = ConditionSwitch(
@@ -546,15 +540,16 @@ init:
     "persistent.sprite_time=='night'",im.MatrixColor( im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/pi/pi_2_coat.png", (0,0), "scenario_slavyana/res/images/sprites/close/pi/pi_2_smile.png"), im.matrix.tint(0.63, 0.78, 0.82) ),
     True,im.Composite((1050,1080), (0,0), "scenario_slavyana/res/images/sprites/close/pi/pi_2_coat.png", (0,0), "scenario_slavyana/res/images/sprites/close/pi/pi_2_smile.png") )
     
-    $ style.credits_sl_m = Style(style.default)
-    $ style.credits_sl_m.font = 'fonts/corbelb.ttf'
-    $ style.credits_sl_m.color = '#fff'
-    $ style.credits_sl_m.drop_shadow = [(1, 1), (1, 1), (1, 1), (1, 1)]
-    $ style.credits_sl_m.drop_shadow_color = '#000'
-    $ style.credits_sl_m.italic = False
-    $ style.credits_sl_m.bold = False
-    $ style.credits_sl_m.text_align = 0.5
-    $ style.credits_sl_m.xmaximum = 0.8
+    python:
+        style.credits_sl_m = Style(style.default)
+        style.credits_sl_m.font = 'fonts/corbelb.ttf'
+        style.credits_sl_m.color = '#fff'
+        style.credits_sl_m.drop_shadow = [(1, 1), (1, 1), (1, 1), (1, 1)]
+        style.credits_sl_m.drop_shadow_color = '#000'
+        style.credits_sl_m.italic = False
+        style.credits_sl_m.bold = False
+        style.credits_sl_m.text_align = 0.5
+        style.credits_sl_m.xmaximum = 0.8
     image credits_sl_m = ParameterizedText(style='credits_sl_m', size=50)
 
 init -410 python:

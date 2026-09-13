@@ -1,30 +1,25 @@
-#alpha v.0.1 (-)
-#alpha v.0.3 (-)
-#beta v.0.5 (-)
-#beta v.0.7 (-)
-#beta v.0.9 (-)
-#release v.1.0
+# Оригинальный автор: FireBoTer
+# Отредактировал: VadimkaG
 
-init:
-    $ sl_m_day1_help_od = False
-    $ sl_m_sp1 = None
-    $ sl_m_al1 = None
-    $ sl_m_mpr1 = None
-    $ sl_m_day1_not_now = False
-    $ sl_m_day1_map_od = False
-    $ sl_m_day1_map_mh = False
-    $ sl_m_day1_map_ul = False
-    $ sl_m_day1_other = False
-    $ sl_m_day1_al_que = False
+label slavyana_mod__day1_init:
+    python:
+        d1_help_od = False
+        d1_not_now = False
+        d1_map_od = False
+        d1_map_mh = False
+        d1_map_ul = False
+        d1_other = False
+        d1_al_que = False
+    return
 
 label slavyana_mod__day1:
-    $ renpy.pause(2, hard=True)
-    $ backdrop = "days"
-    $ new_chapter(1, u"Славя. День первый")
-    $ save_name = (u'Славя. День первый')
-    $ day_time()
-    $ persistent.sprite_time = "day"
-    $ renpy.pause(3, hard=True)
+    call slavyana_mod__day1_init
+    python:
+        backdrop = "days"
+        new_chapter(1, u"Славя. День первый")
+        save_name = (u'Славя. День первый')
+        day_time()
+        persistent.sprite_time = "day"
 
 #часть 1
     #домик
@@ -214,7 +209,7 @@ label slavyana_mod__day1:
     scene bg ext_washstand_day
     menu:
         "Помочь Ольге Дмитриевне":
-            $ sl_m_day1_help_od = True
+            $ d1_help_od = True
             sl "Ольга Дмитриевна, вам не больно? Вы не ушиблись? Давайте я вам помогу!"
             show mt angry pioneer:
                 xalign 0.5 ypos 1.0
@@ -237,12 +232,12 @@ label slavyana_mod__day1:
     mt "Тебя разве не учили смотреть по сторонам когда бежишь?{w} Не видишь что-ли, что человек идет?!"
     stop music fadeout 3
     play ambience ambience_camp_center_day fadein 2
-    if not sl_m_day1_help_od:
+    if not d1_help_od:
         show us shy2 sport:
             xalign 0.28 ypos 1.0 yalign 0.5
         with dspr
     us "Простите... Я так больше не буду..."
-    if not sl_m_day1_help_od:
+    if not d1_help_od:
         show mt normal pioneer:
             xalign 0.72 ypos 1.0 yalign 0.5
         with dspr
@@ -251,7 +246,7 @@ label slavyana_mod__day1:
             xalign 0.5 ypos 1.0 yalign 0.5
         with dspr
     mt "Ладно, так и быть, прощаю."
-    if sl_m_day1_help_od:
+    if d1_help_od:
         show us shy sport:
             xalign 0.28 ypos 1.0
             linear 2.0 yalign 0.5
@@ -475,7 +470,7 @@ label slavyana_mod__day1:
     mt "Ну, это само собой разумеется. Да и с тобой я буду советоваться, как же без этого?"
     sl "Судя по всему, никак!"
     "Я рассмеялась."
-    if sl_m_day1_help_od:
+    if d1_help_od:
         mt "Слушай...{w} Вообще, хорошо, что ты здесь! Мне есть с кем посоветоваться, всегда есть та, которая поможет мне..."
     else:
         mt "Слушай...{w} Вообще, хорошо, что ты здесь! Мне всегда есть с кем посоветоваться..."
@@ -648,8 +643,8 @@ label slavyana_mod__day1:
     "К счастью, ждать его не пришлось. Он уже собирался сам войти в лагерь, но застыл на месте при виде меня.{w} Я подошла поближе и улыбнулась."
     sl "Привет, ты, наверное, только что приехал?"
     $ me_name = 'Новенький'
-    $ sl_m_sp1 = renpy.random.choice(['talk', 'mute'])
-    if sl_m_sp1 == 'mute':
+    $ rnd_choice = renpy.random.choice(['talk', 'mute'])
+    if rnd_choice == 'mute':
         "Но он не отвечал."
         sl "Я что-то не то сказала?"
         "Он продолжал стоять и смотреть на меня, как будто онемел, но наконец заговорил:"
@@ -658,7 +653,7 @@ label slavyana_mod__day1:
         show pi normal coat at center with dspr
         me "А, нет, я в смысле, что {i}только что приехал{/i}."
         "Теперь же он говорил очень быстро, словно стараясь наверстать упущенное."
-    elif sl_m_sp1 == 'talk':
+    elif rnd_choice == 'talk':
         me "Ну… да…"
     sl "Что же, добро пожаловать!"
     th "Интересно, почему он в пальто и зимних ботинках? Может, тоже с севера?"
@@ -1030,9 +1025,9 @@ label slavyana_mod__day1:
     sl "Хороший парень, наверняка не виноват. От Ульяны не спасёшься."
     dv "Он что, с Северного полюса? В шубе тут ходил."
     sl "Может быть."
-    $ sl_m_al1 = renpy.random.choice(['more', 'that_s_all'])
-    if sl_m_al1 == 'more':
-        $ sl_m_day1_al_que = True
+    $ rnd_choice = renpy.random.choice(['more', 'that_s_all'])
+    if rnd_choice == 'more':
+        $ d1_al_que = True
         dv "А почему он так поздно?"
         sl "Не знаю, я не спрашивала."
         dv "А как он добрался сюда?"
@@ -1042,7 +1037,7 @@ label slavyana_mod__day1:
         sl "Это как Ольга Дмитриевна решит."
         "Алиса смерила меня презрительным взглядом и вернулась к еде."
         th "Фух, кажется, она не догадалась."
-    elif sl_m_al1 == 'that_s_all':
+    elif rnd_choice == 'that_s_all':
         "На этом поток вопросов у Алисы иссяк, и она вернулась к еде."
     window hide
     hide dv with dissolve
@@ -1086,15 +1081,15 @@ label slavyana_mod__day1:
     
     $ set_zone("old_house","slavyana_mod__day1_oh")
     
-    $ set_zone("camp_entrance","slavyana_mod__day1_other")
-    $ set_zone("library","slavyana_mod__day1_other")
-    $ set_zone("estrade","slavyana_mod__day1_other")
-    $ set_zone("clubs","slavyana_mod__day1_other")
-    $ set_zone("boat_station","slavyana_mod__day1_other")
-    $ set_zone("beach","slavyana_mod__day1_other")
-    $ set_zone("music_club","slavyana_mod__day1_other")
-    $ set_zone("sport_area","slavyana_mod__day1_other")
-    $ set_zone("valleyball","slavyana_mod__day1_other")
+    $ set_zone("camp_entrance","slavyana_mod__d1_other")
+    $ set_zone("library","slavyana_mod__d1_other")
+    $ set_zone("estrade","slavyana_mod__d1_other")
+    $ set_zone("clubs","slavyana_mod__d1_other")
+    $ set_zone("boat_station","slavyana_mod__d1_other")
+    $ set_zone("beach","slavyana_mod__d1_other")
+    $ set_zone("music_club","slavyana_mod__d1_other")
+    $ set_zone("sport_area","slavyana_mod__d1_other")
+    $ set_zone("valleyball","slavyana_mod__d1_other")
 
 label slavyana_mod__day1_map:
     $ show_map()
@@ -1104,15 +1099,15 @@ label slavyana_mod__day1_forest:
     stop music fadeout 2
     $ persistent.sprite_time = "night"
 
-    if sl_m_day1_map_od:
+    if d1_map_od:
         scene bg ext_houses_sunset with dissolve
-    elif sl_m_day1_map_mh:
-        if not sl_m_day1_other:
+    elif d1_map_mh:
+        if not d1_other:
             stop ambience fadeout 2
             play ambience ambience_camp_center_evening fadein 2
         scene bg ext_aidpost_sunset with dissolve
-    elif sl_m_day1_map_ul:
-        if not sl_m_day1_other:
+    elif d1_map_ul:
+        if not d1_other:
             stop ambience fadeout 2
             play ambience ambience_camp_center_evening fadein 2
         scene bg ext_house_of_dv_day with dissolve
@@ -1424,18 +1419,18 @@ label slavyana_mod__day1_forest:
 #опять_ОД
 label slavyana_mod__day1_od:
     stop music fadeout 2
-    $ sl_m_day1_not_now = True
-    $ sl_m_day1_map_od = True
+    $ d1_not_now = True
+    $ d1_map_od = True
     
     $ persistent.sprite_time = "sunset"
     
-    if not sl_m_day1_other:
+    if not d1_other:
         stop ambience fadeout 2
         play ambience ambience_camp_center_evening fadein 2
 
-    if sl_m_day1_map_mh:
+    if d1_map_mh:
         scene bg ext_aidpost_sunset with dissolve
-    elif sl_m_day1_map_ul:
+    elif d1_map_ul:
         scene bg ext_house_of_dv_day with dissolve
     else:
         scene bg ext_square_sunset with dissolve
@@ -1462,20 +1457,20 @@ label slavyana_mod__day1_od:
     th "Куда же теперь?.."
     window hide
     $ disable_current_zone()
-    $ sl_m_day1_map_mh = False
-    $ sl_m_day1_map_ul = False
-    $ sl_m_day1_other = False
+    $ d1_map_mh = False
+    $ d1_map_ul = False
+    $ d1_other = False
     jump slavyana_mod__day1_map
 
 #медпункт
 label slavyana_mod__day1_mh:
     stop music fadeout 2
-    $ sl_m_day1_not_now = True
-    $ sl_m_day1_map_mh = True
-    if sl_m_day1_map_od:
+    $ d1_not_now = True
+    $ d1_map_mh = True
+    if d1_map_od:
         scene bg ext_houses_sunset with dissolve
-    elif sl_m_day1_map_ul:
-        if not sl_m_day1_other:
+    elif d1_map_ul:
+        if not d1_other:
             stop ambience fadeout 2
             play ambience ambience_camp_center_evening fadein 2
         scene bg ext_house_of_dv_day with dissolve
@@ -1496,20 +1491,20 @@ label slavyana_mod__day1_mh:
     th "А мне нужно поискать в другом месте."
     window hide
     $ disable_current_zone()
-    $ sl_m_day1_map_od = False
-    $ sl_m_day1_map_ul = False
-    $ sl_m_day1_other = False
+    $ d1_map_od = False
+    $ d1_map_ul = False
+    $ d1_other = False
     jump slavyana_mod__day1_map
 
 #поиски_Ульяны
 label slavyana_mod__day1_ul:
     stop music fadeout 2
-    $ sl_m_day1_not_now = True
-    $ sl_m_day1_map_ul = True
-    if sl_m_day1_map_od:
+    $ d1_not_now = True
+    $ d1_map_ul = True
+    if d1_map_od:
         scene bg ext_houses_sunset with dissolve
-    elif sl_m_day1_map_mh:
-        if not sl_m_day1_other:
+    elif d1_map_mh:
+        if not d1_other:
             stop ambience fadeout 2
             play ambience ambience_camp_center_evening fadein 2
         scene bg ext_aidpost_sunset with dissolve
@@ -1534,22 +1529,22 @@ label slavyana_mod__day1_ul:
     th "Нет, здесь никто не прячется.{w} Тогда пойду искать Семёна.{w} Но где?.."
     window hide
     $ disable_current_zone()
-    $ sl_m_day1_map_od = False
-    $ sl_m_day1_map_mh = False
-    $ sl_m_day1_other = False
+    $ d1_map_od = False
+    $ d1_map_mh = False
+    $ d1_other = False
     jump slavyana_mod__day1_map
     
 #старый_корпус
 label slavyana_mod__day1_oh:
-    if sl_m_day1_map_od:
+    if d1_map_od:
         scene bg ext_houses_sunset with dissolve
-    elif sl_m_day1_map_mh:
-        $ sl_m_day1_other = True
+    elif d1_map_mh:
+        $ d1_other = True
         stop ambience fadeout 2
         play ambience ambience_camp_center_evening fadein 2
         scene bg ext_aidpost_sunset with dissolve
-    elif sl_m_day1_map_ul:
-        $ sl_m_day1_other = True
+    elif d1_map_ul:
+        $ d1_other = True
         stop ambience fadeout 2
         play ambience ambience_camp_center_evening fadein 2
         scene bg ext_house_of_dv_day with dissolve
@@ -1562,28 +1557,28 @@ label slavyana_mod__day1_oh:
     jump slavyana_mod__day1_map
 
 #остальные_места
-label slavyana_mod__day1_other:
-    if sl_m_day1_map_od:
+label slavyana_mod__d1_other:
+    if d1_map_od:
         scene bg ext_houses_sunset with dissolve
-    elif sl_m_day1_map_mh:
-        $ sl_m_day1_other = True
+    elif d1_map_mh:
+        $ d1_other = True
         stop ambience fadeout 2
         play ambience ambience_camp_center_evening fadein 2
         scene bg ext_aidpost_sunset with dissolve
-    elif sl_m_day1_map_ul:
-        $ sl_m_day1_other = True
+    elif d1_map_ul:
+        $ d1_other = True
         stop ambience fadeout 2
         play ambience ambience_camp_center_evening fadein 2
         scene bg ext_house_of_dv_day with dissolve
     else:
         scene bg ext_square_sunset with dissolve
-    $ sl_m_mpr1 = renpy.random.choice(['d1_mr1', 'd1_mr2', 'd1_mr3'])
+    $ rnd_choice = renpy.random.choice(['d1_mr1', 'd1_mr2', 'd1_mr3'])
     window show
-    if sl_m_mpr1 == 'd1_mr1':
+    if rnd_choice == 'd1_mr1':
         "Там его быть не может."
-    elif sl_m_mpr1 == 'd1_mr2':
+    elif rnd_choice == 'd1_mr2':
         "Откуда ему там взяться?"
-    elif sl_m_mpr1 == 'd1_mr3':
+    elif rnd_choice == 'd1_mr3':
         "Не думаю, что найду его там."
     window hide
     $ disable_current_zone()
@@ -1596,8 +1591,6 @@ label slavyana_mod__day1_end:
     with dissolve
     hide blink
     jump slavyana_mod__day2
-
-#Сделано FireBoTer'ом
 
 # Блокноты
 label slavyana_mod__day1_bknt1:
@@ -1623,6 +1616,7 @@ label slavyana_mod__day1_bknt5:
 
 #Быстрый выбор
 label slavyana_mod__day1_fast_choice:
+    call slavyana_mod__day1_init
     "Проставьте выборы предыдущих дней."
     window hide
     scene cg d1_sl_dinner_0 with dspr
@@ -1643,7 +1637,7 @@ label slavyana_mod__day1_fast_choice:
     $ day_time()
     menu:
         "Помочь Ольге Дмитриевне":
-            $ sl_m_day1_help_od = True
+            $ d1_help_od = True
         "Помочь Ульяне":
             pass
 
