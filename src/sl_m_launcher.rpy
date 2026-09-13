@@ -127,7 +127,7 @@ label slavyana_mod:
     python:
         new_chapter(0, u"Славя-мод")
         reload_names()
-        sl_m_nb_clear()
+        sl_m_nb_init()
 
         # Концовки мода
         Routes = object()
@@ -141,6 +141,8 @@ label slavyana_mod:
 
         # Текущая концовка
         current_route = 0
+
+    
 
     scene black
     play music music_list["forest_maiden"] fadein 1

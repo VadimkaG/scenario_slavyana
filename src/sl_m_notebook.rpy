@@ -114,24 +114,18 @@ screen slavyana_mod__notebook_interface():
     action [ Play("sound", "sound/sfx/cardgame/new/choose_card_1.ogg"), ShowMenu("slavyana_mod__notebook_history_sc") ]
 
 init python:
-  # Левый текущий текст в журнале
-  sl_m_notebook_history_left = ""
-  # Правый текущий текст в журнале
-  sl_m_notebook_history_right = ""
-  # Все страницы журнала
-  sl_m_notebook_history = []
-  # Текущая страница журнала
-  sl_m_notebook_history_page = 0
-  # Последняя страница журнала
-  sl_m_notebook_history_count = 0
-
-  # Очистить блокнот
-  def sl_m_nb_clear():
+  # Инициализировать переменные блокнота
+  def sl_m_nb_init():
     global sl_m_notebook_history_page, sl_m_notebook_history_left, sl_m_notebook_history_right, sl_m_notebook_history, sl_m_notebook_history_count
+    # Левый текущий текст в журнале
     sl_m_notebook_history_left = ""
+    # Правый текущий текст в журнале
     sl_m_notebook_history_right = ""
+    # Все страницы журнала
     sl_m_notebook_history = []
+    # Текущая страница журнала
     sl_m_notebook_history_page = 0
+    # Последняя страница журнала
     sl_m_notebook_history_count = 0
 
   # Принудительно установить последнюю страницу
