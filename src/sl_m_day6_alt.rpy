@@ -56,6 +56,8 @@ label slavyana_mod__day6_alt:
                 linear 0.2 pos (0,0)
             repeat
         "Пробежав между плотными кустами, я обнаружила, что выбежала прямо перед медпунктом."
+        play sound sfx_bush_leaves
+        pause 1
         scene bg ext_aidpost_day:
             zoom 1.1
             yalign 0.01
@@ -105,7 +107,7 @@ label slavyana_mod__day6_alt:
         scene black with dissolve
         pause 2
         play ambience ambience_camp_center_evening fadein 3
-        scene bg ext_square_sunset:
+        scene bg ext_square_day:
             zoom 1.1
             yalign 0.01
             block:
@@ -114,22 +116,22 @@ label slavyana_mod__day6_alt:
             repeat
         window show
         "Я уже оббежала почти весь лагерь по периметру и возвращалась обратно."
-        scene bg ext_square_sunset
+        scene bg ext_square_day with dissolve
         "Но не смогла не заметить, что площадь абсолютна не убрана!"
         th "Нужно будет сегодня обязательно подмести!"
         "Я побежала к своему домику."
-        scene bg ext_house_of_sl_sunset with dissolve
+        scene bg ext_house_of_sl_day with dissolve
         "Уже стоя на пороге, я заглянула в домик."
         stop ambience fadeout 1
         scene bg int_house_of_sl_day with dissolve
         play ambience ambience_int_cabin_night fadein 3
         "Женя ещё спала."
         stop ambience fadeout 1
-        scene bg ext_house_of_sl_sunset with dissolve
+        scene bg ext_house_of_sl_day with dissolve
         play ambience ambience_camp_center_evening fadein 3
         "Я решила не тревожить её и решила чуть-чуть подождать."
         "Поэтому, чтобы не терять времени я решила умыться."
-        scene bg ext_houses_sunset with dissolve
+        scene bg ext_houses_day with dissolve
         "Я шла пешком, в обычном темпе, торопиться мне не нужно было."
         "По пути к умывальникам, я поднялась на более северную «улицу»."
         play sound sfx_open_door_2 volume 0.1
@@ -140,7 +142,11 @@ label slavyana_mod__day6_alt:
         "Несмотря на это происшествие, я заверила себя в том, что Лена вернётся."
         th "Не станет же она там голодать в самом деле!"
         scene bg ext_washstand2_day with dissolve
+        play sound_loop sfx_water_sink_stream
+        play sound sfx_water_splash
         "Вода была как всегда закаляюще-холодной. Но неподготовленный организм мог с лёгкостью простудиться."
+        stop sound_loop fadeout 1
+        play sound sfx_close_water_sink
         "Я умылась, но поняла что не захватила полотенце, поэтому пришлось вытираться руками."
         window hide
         stop ambience fadeout 1
@@ -493,10 +499,10 @@ label slavyana_mod__day6_alt:
         window hide
         pause 2
 
-        $ persistent.sprite_time = "night"
-        $ night_time()
-        play ambience ambience_camp_center_night fadein 3
-        scene bg ext_square_night with dissolve
+        $ persistent.sprite_time = "sunset"
+        $ sunset_time()
+        play ambience ambience_camp_center_evening fadein 3
+        scene bg ext_square_sunset with dissolve
         show dv normal pioneer with dissolve
         window show
         "Но не дойдя до них, я встретила Алису, которая сидела на лавке с закрытыми глазами."
@@ -520,7 +526,7 @@ label slavyana_mod__day6_alt:
         "Она ушла."
         th "Надо будет и у ребят тоже спросить."
 
-        scene bg ext_dining_hall_away_night with dissolve
+        scene bg ext_dining_hall_away_sunset with dissolve
         "У столовой я заметила их обоих и пошла с ними."
         window hide
         stop ambience fadeout 1
@@ -553,10 +559,10 @@ label slavyana_mod__day6_alt:
         window hide
         stop ambience fadeout 1
 
-        $ persistent.sprite_time = "night"
-        $ night_time()
-        scene bg ext_dining_hall_away_night with dissolve
-        play ambience ambience_camp_center_night fadein 3
+        $ persistent.sprite_time = "sunset"
+        $ sunset_time()
+        scene bg ext_dining_hall_away_sunset with dissolve
+        play ambience ambience_camp_center_evening fadein 3
         window show
         "Я ждала Семёна."
         "Но он не заходил и не выходил."
@@ -568,8 +574,8 @@ label slavyana_mod__day6_alt:
         "Походив по лагерю, заглянув на пляж и пристань, я пришла к выводу, что он пропустил ужин, потому что скорее всего спит."
         "Я скорее побежала к нему."
 
-        scene bg ext_house_of_mt_night with dissolve
-        play ambience ambience_camp_center_night fadein 3
+        scene bg ext_house_of_mt_sunset with dissolve
+        play ambience ambience_camp_center_sunset fadein 3
         "Я подходила к его домику, когда он вышел из него."
         "Я подбежала к нему."
         show pi normal pioneer with dissolve
@@ -588,7 +594,12 @@ label slavyana_mod__day6_alt:
         th "Это серьёзная потеря, о которой придётся сообщить Оле."
         "Но для начала мне стоило её найти."
 
+        $ persistent.sprite_time = "night"
+        $ night_time()
+
+        stop ambience fadeout 2
         scene bg ext_square_and_houses with dissolve
+        play ambience ambience_camp_center_night fadein 2
         show mt normal pioneer with dissolve
         "Смеркалось. Начали зажигаться ночные фонари лагеря."
         "Чуть выйдя на площадь, я встретила вожатую, направляющуюся в домик."
@@ -997,6 +1008,7 @@ label slavyana_mod__day6_alt:
         el "В общем мне кажется... Всмысле, я точно ощущаю чувства к тебе, и ты мне очень нравишься, и я думал, что, может ты хочешь встречаться со мной?"
         stop music
         play music music_list["awakening_power"]
+        play sound sfx_close_door_1
         "А потом он резко выбежал из библиотеки и хлопнул дверьми."
         "Я выглянула."
         "За ним увязалась Женя и тоже хлопнула дверью."

@@ -139,8 +139,9 @@ label slavyana_mod__day7_alt:
     scene bg int_dining_hall_people_day with dissolve
     window show
     "Как всегда, столики были забиты пионерами."
+    show us normal pioneer with dissolve
     "Я села в компанию Лены и Ульяны."
-    show us smile pioneer with dissolve
+    show us smile pioneer with dspr
     us "Присаживайся!"
     sl "Спасибо!"
     sl "Не знала, что вы с Леной уже помирились."
@@ -242,7 +243,7 @@ label slavyana_mod__day7_alt:
     stop ambience fadeout 2
 
     play sound sfx_close_door_1
-    scene bg ext_clubs_day with dissolve
+    scene bg ext_musclub_day with dissolve
     play ambience ambience_camp_center_day fadein 3
     window show
     th "Как же прекрасна музыка!"
@@ -320,7 +321,7 @@ label slavyana_mod__day7_alt:
     scene bg int_aidpost_day with dissolve
     play ambience ambience_medstation_inside_day fadein 3
     window show
-    show cs normal pioneer at center
+    show cs normal at center
     cs "Привет Славя, Ульяна сказала, что ты её сюда направила."
     sl "Да, я. Она диких ягод объелась."
     cs "А ты видела где-то в округе дикие ягоды?"
