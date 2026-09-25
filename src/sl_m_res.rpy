@@ -56,6 +56,7 @@ init:
     image cg titles_sl_with_image = "scenario_slavyana/res/images/cg/titles_sl_with_image.jpg"
     image bg ext_camp_entrance_fog = "scenario_slavyana/res/images/bg/ext_camp_entrance_fog.jpg"
     image bg int_admins_day = "scenario_slavyana/res/images/bg/int_admins_day.png"
+    image bg ext_pier_day = "scenario_slavyana/res/images/bg/ext_pier_day.jpg"
     
     image cg d7_feeding_trough = "scenario_slavyana/res/images/cg/d7_feeding_trough.jpg"
 

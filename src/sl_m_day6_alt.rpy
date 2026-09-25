@@ -575,7 +575,7 @@ label slavyana_mod__day6_alt:
         "Я скорее побежала к нему."
 
         scene bg ext_house_of_mt_sunset with dissolve
-        play ambience ambience_camp_center_sunset fadein 3
+        play ambience ambience_camp_center_evening fadein 3
         "Я подходила к его домику, когда он вышел из него."
         "Я подбежала к нему."
         show pi normal pioneer with dissolve
@@ -724,7 +724,7 @@ label slavyana_mod__day6_alt:
         show mi laugh pioneer at left with dspr
         extend "Мику{w=0.5}{nw}"
         show us laugh pioneer at right with dspr
-        extend "и Ульяна."
+        extend " и Ульяна."
         play music music_list["eat_some_trouble"] fadein 3
         "Эти двое что-то весело обсуждали, да и настроение у обоих было приподнятое."
         sl "Какой-то праздник без меня?"
@@ -1244,22 +1244,27 @@ label slavyana_mod__day6_alt:
         stop ambience fadeout 2
         scene black with dissolve
         pause 2
+        window show
         "Но поиски ни к чему не привели."
         "Более того, он словно испарился вместе с Леной."
-        "До ужина ещё было далеко {w}, и у меня впервые появилось свободное время."
-        th "Никаких поручений {w}, никаких срочных дел{w}, ничего, что могло бы занять меня на весь солнечный день."
+        play ambience ambience_camp_center_day fadein 2
+        scene bg ext_square_day with dissolve
+        "До ужина ещё было далеко{w}, и у меня впервые появилось свободное время."
+        th "Никаких поручений{w}, никаких срочных дел{w}, ничего, что могло бы занять меня на весь солнечный день."
         th "Впервые я себя так почувствовала, наверное, с момента приезда в лагерь."
         th "Как я скучаю по родному дому, и как хорошо, что скоро увижусь со своими родственниками."
         window hide
+        stop ambience fadeout 2
         scene black with dissolve
         pause 2
         
         scene bg ext_boathouse_day with dissolve
-        play ambience ambience_camp_center_day fadein 3 
+        play ambience ambience_boat_station_day fadein 3 
         "Я решила прогуляться вдоль воды и насладиться последним деньком в лагере."
-        "Находясь рядом с лодочной станцией, тихая обстановка навевает приятные ощущения единения с природой."
+        "Находясь рядом с лодочной станцией, тихая обстановка навевала приятные ощущения единения с природой."
         "А звук постоянно колышашихся лодок от мимолётных колебаний воды словно уносит в тот момент, когда дедушка взял меня на рыбалку."
         th "Как странно, у меня остались воспоминания, но я не могу в точности воспроизвести как это всё было."
+        scene bg ext_pier_day with dissolve
         "Я взошла на понтон, мой взгляд устремился вдаль, где над водной гладью возвышались два забавно названных острова."
         "Я разулась и спустила ноги с дебаркадера, краем ступней касаясь воды."
         "Приятная прохлада привела мысли в порядок."
@@ -1267,20 +1272,22 @@ label slavyana_mod__day6_alt:
         th "Конечно, у каждого свои тараканы в голове. Но уверена, что у них всё будет хорошо."
         th "А зная Лену, у них сложится прекрасный брак, если только не начнёт ревновать ко всем подряд."
         "Я хихикнула своей собственной мысли и уже собиралась уходить, как вдруг увидела, что в мою сторону направляется Шурик."
-        show sh surprise pioner with dissolve
-        sh "Славя {w}, ты что здесь делаешь?"
+        scene bg ext_boathouse_day
+        show sh surprise pioneer
+        with dissolve
+        sh "Славя{w}, ты что здесь делаешь?"
         sl "А я как раз собиралась уходить."
         "Он подошёл поближе и присел."
         sh "Что же это там всё-таки было в пещерах."
         "Я не сразу поняла про что он."
         sl "Ты это о чём?"
-        show sh serious pioner with dspr
+        show sh serious pioneer with dspr
         sh "Я про старый лагерь."
         if d4_go_to_sh:
             sh "Когда вы с Семёном помогли мне и вывели наружу."
         else:
             sh "Семён нашёл меня там, в шахте, я заблудился пока ходил по этому чёртовому лабиринту."
-        show sh cry pioner with dspr
+        show sh cry pioneer with dspr
         sh "Я очень благодарен."
         sh "Если бы он тогда не пришёл..."
         "Он рефлекторно опустился лицом мне на плечо и я приобняла его."
@@ -1291,12 +1298,12 @@ label slavyana_mod__day6_alt:
         th "Я насторожилась."
         sh "Ну да. {w}Ими всё равно никто не пользуется."
         "Но в этот момент, видимо, он понял, что что-то сказал не то."
-        show sh upset pioner with dspr
+        show sh upset pioneer with dspr
         sh "Забудь, что я сказал, мы всё равно ничего не успели."
         stop ambience fadeout 2
         play music music_list["awakening_power"] fadein 4
         sl "Так ты ещё и Серёжу в эту авантюру втянул?"
-        show sh scared pioner with dspr
+        show sh scared pioneer with dspr
         sh "З-знаешь, я вспомнил, что у меня тут дела ещё есть какие."
         "Я резко остановила его."
         "Но он вдруг резко вскочил и куда-то побежал."
@@ -1565,7 +1572,7 @@ label slavyana_mod__day6_alt:
         sl "Не хочешь говорить?"
         show dv sad pioneer at right with dspr
         dv "Не хочу."
-        "Остаток обеда мы провели безмолвно, и даже Мику."
+        "Остаток ужина мы провели безмолвно, и даже Мику."
         window hide
         pause 1
         stop ambience fadeout 2

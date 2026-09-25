@@ -16,7 +16,7 @@ screen slavyana_mod_main_menu():
     if slavyana_mod_menu_state == "main":
         add "scenario_slavyana/res/images/menu/bg/slavya-mod-title-screen.png"
 
-        text "Build: 13.09.2026":
+        text "Build: 25.09.2026":
             xpos 0.0
             ypos 1.0
             xanchor 0.0
@@ -105,6 +105,8 @@ screen slavyana_mod_main_menu():
             ]):
                 if name == False:
                     null
+                elif i == 7 and ((persistent.slavyana_mod_progress or 0) & (1 << 6)):
+                    add "scenario_slavyana/res/images/achievement/achievement_" + name + ".png"
                 elif (persistent.slavyana_mod_progress or 0) & (1 << i):
                     add "scenario_slavyana/res/images/achievement/achievement_" + name + ".png"
                 else:
