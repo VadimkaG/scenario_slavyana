@@ -5,9 +5,6 @@ init python:
     except NameError:
         pass
 
-screen slavyana_mod_lp_counter():
-    text "ЛП: [sl_m_lp]" xalign 0.0 yalign 0.0 size 16
-
 # Главное меню мода
 screen slavyana_mod_main_menu():
     tag menu
@@ -16,7 +13,7 @@ screen slavyana_mod_main_menu():
     if slavyana_mod_menu_state == "main":
         add "scenario_slavyana/res/images/menu/bg/slavya-mod-title-screen.png"
 
-        text "Build: 25.09.2026":
+        text "Build: 26.09.2026":
             xpos 0.0
             ypos 1.0
             xanchor 0.0
@@ -144,11 +141,8 @@ label slavyana_mod:
         # Текущая концовка
         current_route = 0
 
-    
-
     scene black
     play music music_list["forest_maiden"] fadein 1
-    show screen slavyana_mod_lp_counter
 
 # Главный экран мода
 label slavyana_mod__mainscreen:
