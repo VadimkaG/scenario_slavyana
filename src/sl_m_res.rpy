@@ -1,3 +1,20 @@
+init -10:
+    python:
+        try:
+            if not config_session:
+                p = "scenario_slavyana/res/images/avatars/mz/sl_m_mz-"
+                sl_m_mz_avatar_set = {
+                            'body':p+"body.png",
+                            -2    :p+"emo01.png",
+                            -1    :p+"emo01.png",
+                            0     :p+"emo03.png",
+                            1     :p+"emo03.png",
+                            2     :p+"emo05.png",
+                        }
+        except NameError:
+            p = 'scenario_slavyana/res/images/avatars/mz/sl_m_mz-'
+            sl_m_mz_avatar_set = {'body':(p) + ('body.png'), -2:(p) + ('emo01.png'), -1:(p) + ('emo01.png'), 0:(p) + ('emo03.png'), 1:(p) + ('emo03.png'), 2:(p) + ('emo05.png')}
+
 init:
 
     python:
@@ -553,29 +570,76 @@ init:
         style.credits_sl_m.xmaximum = 0.8
     image credits_sl_m = ParameterizedText(style='credits_sl_m', size=50)
 
+    default sl_m_tooltip_text = ""
+
 init -410 python:
-    store.map_zones = {
-                "un_mi_house":   {"position":[804,146,853,203],"default_bg":bg_tmp_image(u"Лена и Мику")},
-                "me_mt_house":   {"position":[957,173,1007,231],"default_bg":bg_tmp_image(u"Я и ОД")},
-                "sl_mz_house":   {"position":[1020,243,1079,309],"default_bg":bg_tmp_image(u"Славя и Женя")},
-                "estrade":       {"position":[1061, 49,1157,145],"default_bg":bg_tmp_image(u"Сцена")},
-                "sy_sh_house":   {"position":[843,283,891,340],"default_bg":bg_tmp_image(u"Электроник и Шурик")},
-                "music_club":    {"position":[622,250,701,342],"default_bg":bg_tmp_image(u"Муз. клуб")},
-                "admin_house":   {"position":[772,352,880,448],"default_bg":bg_tmp_image(u"Админ. корпус")},
-                "wash_house":    {"position":[694,438,791,527],"default_bg":bg_tmp_image(u"Банно-прачечная")},
-                "square":        {"position":[885,352,1003,545],"default_bg":bg_tmp_image(u"Площадь")},
-                "dining_hall":   {"position":[1010,449,1145,585],"default_bg":bg_tmp_image(u"Столовая")},
-                "dv_us_house":   {"position":[711,615,768,674],"default_bg":bg_tmp_image(u"Алиса и Ульяна")},
-                "store_house":   {"position":[1148,489,1215,583],"default_bg":bg_tmp_image(u"Склад")},
-                "valleyball":    {"position":[1222,488,1320,602],"default_bg":bg_tmp_image(u"Воллейбол")},
-                "sport_area":    {"position":[1321,478,1579,658],"default_bg":bg_tmp_image(u"Спорткомплекс")},
-                "beach":         {"position":[1185,666,1492,831],"default_bg":bg_tmp_image(u"Пляж")},
-                "boat_station":  {"position":[831,771,962,856],"default_bg":bg_tmp_image(u"Лодочный причал")},
-                "old_house":     {"position":[228,993,347,1080],"default_bg":bg_tmp_image(u"Старый корпус")},
-                "clubs":         {"position":[430,440,651,603],"default_bg":bg_tmp_image(u"Клубы")},
-                "library":       {"position":[1160,273,1286,363],"default_bg":bg_tmp_image(u"Библиотека")},
-                "badminton":     {"position":[1343,378,1448,475],"default_bg":bg_tmp_image(u"Бадминтон")},
-                "medic_house":   {"position":[1037,357,1137,450],"default_bg":bg_tmp_image(u"Медпункт")},
-                "camp_entrance": {"position":[271,432,424,567],"default_bg":bg_tmp_image(u"Ворота в лагерь")},
-                "forest":        {"position":[550,60,697,199],"default_bg":bg_tmp_image(u"Лес")},
+    store.slavyana_mod_map_zones = {
+                "un_mi_house":   {"position":[804,146,853,203],"title":"Лена и Мику"},
+                "me_mt_house":   {"position":[957,173,1007,231],"title":"Семён и Ольга"},
+                "sl_mz_house":   {"position":[1020,243,1079,309],"title":"Славя и Женя"},
+                "estrade":       {"position":[1061, 49,1157,145],"title":"Сцена"},
+                "sy_sh_house":   {"position":[843,283,891,340],"title":"Электроник и Шурик"},
+                "music_club":    {"position":[622,250,701,342],"title":"Муз. клуб"},
+                "admin_house":   {"position":[772,352,880,448],"title":"Админ. корпус"},
+                "wash_house":    {"position":[694,438,791,527],"title":"Банно-прачечная"},
+                "square":        {"position":[885,352,1003,545],"title":"Площадь"},
+                "dining_hall":   {"position":[1010,449,1145,585],"title":"Столовая"},
+                "dv_us_house":   {"position":[711,615,768,674],"title":"Алиса и Ульяна"},
+                "store_house":   {"position":[1148,489,1215,583],"title":"Склад"},
+                "valleyball":    {"position":[1222,488,1320,602],"title":"Воллейбол"},
+                "sport_area":    {"position":[1321,478,1579,658],"title":"Спорткомплекс"},
+                "beach":         {"position":[1185,666,1492,831],"title":"Пляж"},
+                "boat_station":  {"position":[831,771,962,856],"title":"Лодочный причал"},
+                "old_house":     {"position":[228,993,347,1080],"title":"Старый корпус"},
+                "clubs":         {"position":[430,440,651,603],"title":"Клубы"},
+                "library":       {"position":[1160,273,1286,363],"title":"Библиотека"},
+                "badminton":     {"position":[1343,378,1448,475],"title":"Бадминтон"},
+                "medic_house":   {"position":[1037,357,1137,450],"title":"Медпункт"},
+                "camp_entrance": {"position":[271,432,424,567],"title":"Ворота в лагерь"},
+                "forest":        {"position":[550,60,697,199],"title":"Лес"},
         }
+    def slavyana_mod_map_reset():
+        store.slavyana_mod_map_selection = {}
+    def slavyana_mod_map_add(name,label):
+        store.slavyana_mod_map_selection[name] = label
+    def slavyana_mod_map_del_current():
+        del store.slavyana_mod_map_selection[store.slavyana_mod_map_current]
+    def slavyana_mod_map_set(items):
+        store.slavyana_mod_map_selection = items
+    def slavyana_mod_map_show():
+        zone = renpy.call_screen("slavyana_mod_map")
+        store.slavyana_mod_map_current = zone["name"]
+        renpy.jump(zone["label"])
+
+screen slavyana_mod_map():
+    modal True
+
+    add "scenario_slavyana/res/maps/map.jpg"
+
+    for zone_name, zone_label in store.slavyana_mod_map_selection.items():
+        $ pos = store.slavyana_mod_map_zones[zone_name]["position"]
+
+        $ available = "scenario_slavyana/res/maps/map_available.jpg"
+        $ selected = "scenario_slavyana/res/maps/map_selected.jpg"
+
+        imagebutton:
+            idle LiveCrop((pos[0], pos[1], pos[2] - pos[0], pos[3] - pos[1]), available)
+            hover LiveCrop((pos[0], pos[1], pos[2] - pos[0], pos[3] - pos[1]), selected)
+
+            xpos pos[0]
+            ypos pos[1]
+
+            hovered SetScreenVariable("sl_m_tooltip_text", store.slavyana_mod_map_zones[zone_name]["title"])
+            unhovered SetScreenVariable("sl_m_tooltip_text", "")
+            action Return({ "label": zone_label, "name": zone_name })
+
+    if sl_m_tooltip_text:
+        frame:
+            background None 
+            xpos 40
+            ypos 945
+            
+            text sl_m_tooltip_text:
+                size 32
+                color "#ed9c28"
+                outlines [ (1, "#000", 0, 0) ]

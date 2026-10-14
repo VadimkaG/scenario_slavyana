@@ -13,7 +13,7 @@ screen slavyana_mod_main_menu():
     if slavyana_mod_menu_state == "main":
         add "scenario_slavyana/res/images/menu/bg/slavya-mod-title-screen.png"
 
-        text "Build: 26.09.2026":
+        text "Build: 14.10.2026":
             xpos 0.0
             ypos 1.0
             xanchor 0.0

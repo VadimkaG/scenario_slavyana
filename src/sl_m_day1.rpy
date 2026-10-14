@@ -1073,26 +1073,25 @@ label slavyana_mod__day1:
     window hide
     
     #карта
-    $ disable_all_zones()
-    $ set_zone("forest","slavyana_mod__day1_forest")
-    $ set_zone("me_mt_house","slavyana_mod__day1_od")
-    $ set_zone("medic_house","slavyana_mod__day1_mh")
-    $ set_zone("dv_us_house","slavyana_mod__day1_ul")
-    
-    $ set_zone("old_house","slavyana_mod__day1_oh")
-    
-    $ set_zone("camp_entrance","slavyana_mod__d1_other")
-    $ set_zone("library","slavyana_mod__d1_other")
-    $ set_zone("estrade","slavyana_mod__d1_other")
-    $ set_zone("clubs","slavyana_mod__d1_other")
-    $ set_zone("boat_station","slavyana_mod__d1_other")
-    $ set_zone("beach","slavyana_mod__d1_other")
-    $ set_zone("music_club","slavyana_mod__d1_other")
-    $ set_zone("sport_area","slavyana_mod__d1_other")
-    $ set_zone("valleyball","slavyana_mod__d1_other")
+    $ slavyana_mod_map_set({
+        "forest": "slavyana_mod__day1_forest",
+        "me_mt_house": "slavyana_mod__day1_od",
+        "medic_house": "slavyana_mod__day1_mh",
+        "dv_us_house": "slavyana_mod__day1_ul",
+        "old_house": "slavyana_mod__day1_oh",
+        "camp_entrance": "slavyana_mod__d1_other",
+        "library": "slavyana_mod__d1_other",
+        "estrade": "slavyana_mod__d1_other",
+        "clubs": "slavyana_mod__d1_other",
+        "boat_station": "slavyana_mod__d1_other",
+        "beach": "slavyana_mod__d1_other",
+        "music_club": "slavyana_mod__d1_other",
+        "sport_area": "slavyana_mod__d1_other",
+        "valleyball": "slavyana_mod__d1_other"
+    });
 
 label slavyana_mod__day1_map:
-    $ show_map()
+    $ slavyana_mod_map_show()
 
 #лесочек
 label slavyana_mod__day1_forest:
@@ -1456,7 +1455,7 @@ label slavyana_mod__day1_od:
     hide mt with dissolve
     th "Куда же теперь?.."
     window hide
-    $ disable_current_zone()
+    $ slavyana_mod_map_del_current()
     $ d1_map_mh = False
     $ d1_map_ul = False
     $ d1_other = False
@@ -1490,7 +1489,7 @@ label slavyana_mod__day1_mh:
     th "Значит, Виола опять куда-то ушла, не закрыв дверь.{w} Ну как так можно!"
     th "А мне нужно поискать в другом месте."
     window hide
-    $ disable_current_zone()
+    $ slavyana_mod_map_del_current()
     $ d1_map_od = False
     $ d1_map_ul = False
     $ d1_other = False
@@ -1528,7 +1527,7 @@ label slavyana_mod__day1_ul:
     "В домике было пусто."
     th "Нет, здесь никто не прячется.{w} Тогда пойду искать Семёна.{w} Но где?.."
     window hide
-    $ disable_current_zone()
+    $ slavyana_mod_map_del_current()
     $ d1_map_od = False
     $ d1_map_mh = False
     $ d1_other = False
@@ -1553,7 +1552,7 @@ label slavyana_mod__day1_oh:
     window show
     "Туда я не пойду."
     window hide
-    $ disable_current_zone()
+    $ slavyana_mod_map_del_current()
     jump slavyana_mod__day1_map
 
 #остальные_места
@@ -1581,7 +1580,7 @@ label slavyana_mod__d1_other:
     elif rnd_choice == 'd1_mr3':
         "Не думаю, что найду его там."
     window hide
-    $ disable_current_zone()
+    $ slavyana_mod_map_del_current()
     jump slavyana_mod__day1_map
 
 #кодо-концовка

@@ -348,17 +348,17 @@ label slavyana_mod__day4:
   $ slavyana_mod__day4_map_choise__store = False
   $ slavyana_mod__day4_map_choise__music_club = False
 label slavyana_mod__day4_map_choise:
-  $ disable_all_zones()
+  $ slavyana_mod_map_reset();
   if ( not slavyana_mod__day4_map_choise__mt_house and ( slavyana_mod__day4_map_choise__store or slavyana_mod__day4_map_choise__music_club ) ):
-    $ set_zone("me_mt_house","slavyana_mod__day4_mt_house")
+    $ slavyana_mod_map_add("me_mt_house","slavyana_mod__day4_mt_house")
   if not slavyana_mod__day4_map_choise__music_club:
-    $ set_zone("music_club","slavyana_mod__day4_music_club")
+    $ slavyana_mod_map_add("music_club","slavyana_mod__day4_music_club")
   if not slavyana_mod__day4_map_choise__store:
-    $ set_zone("store_house","slavyana_mod__day4_store")
+    $ slavyana_mod_map_add("store_house","slavyana_mod__day4_store")
   if slavyana_mod__day4_map_choise__mt_house and slavyana_mod__day4_map_choise__store and slavyana_mod__day4_map_choise__music_club:
     jump slavyana_mod__day4_after_map_choise
   else:
-    $ show_map()
+    $ slavyana_mod_map_show()
 
 label slavyana_mod__day4_store:
   if slavyana_mod__day4_map_choise__mt_house:
